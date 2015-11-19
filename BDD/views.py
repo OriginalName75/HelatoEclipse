@@ -182,7 +182,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
             frm[0].fields[frm[3]].queryset = frm[4].objects.all().exclude(id__in=llll)
             Formset = formset_factory(frm[0], int(nbajout))
             
-    #lol
+    #lo lollololo
     if (first and request.method == 'POST' and int(what) == 0 and int(nbajout) > 0):
         
         form = data.form(table, 0, request.POST) 
