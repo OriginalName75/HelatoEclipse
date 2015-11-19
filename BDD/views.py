@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+
+# ta mère
+
 from datetime import datetime
 
 from django import http
