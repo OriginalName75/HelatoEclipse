@@ -1,0 +1,63 @@
+{% load watchTag %}	
+<p><a href="/">Back to Site</a></p>
+<p><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back</a></p>
+<p><a href="/administration">Back to Administration</a></p>
+<p><a href="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/0">Modifier</a></p>
+
+{% for l in links %}
+	<a href="{{ l.0 }}">{{ l.1 }}</a> &nbsp;&nbsp;&nbsp;
+{% endfor %}
+<br/><br/>
+<table border="1">
+<tr>
+	{% for l in listetab %}
+		<td>
+			<b>{{ l.0 }} </b>
+		</td>
+	{% endfor %}
+</tr><tr>
+{% for dd in listeliste %}
+	<td>
+		{% if dd.0 == 0 %}
+			{{ obj|getS:dd.1 }}
+		{% elif dd.0 == 2 %}
+			{{ obj|getSD:dd.1 }}
+		{% else %}
+			{{ obj|getS:dd.1|getS:dd.2 }}
+		{% endif %}
+	</td>
+{% endfor %}
+</tr></table>
+
+<br/><br/>
+{% for dd in titrest %}
+	<table border="1">
+		<tr>
+			<td>
+				<b>{{ dd.1 }}</b>
+			</td>
+		</tr>
+		
+		{% for ddd in dd.2 %}
+			<tr>
+				<td>
+					{% if dd.0 == 0 %}
+						{{ ddd|getS:dd.3 }}
+					{% else %}
+						{{ ddd }}
+					{% endif %}
+				</td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td>
+					Pas de {{ dd.1 }}
+				</td>
+			</tr>
+		{% endfor %}
+		
+	</table>
+{% endfor %}
+
+
+

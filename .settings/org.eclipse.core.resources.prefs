@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//BDD/forms.py=UTF-8
+encoding//BDD/models.py=UTF-8
+encoding//BDD/static/BDD/javascripts/jquery-1.10.2.js=UTF-8
+encoding//BDD/static/BDD/javascripts/jquery-ui.js=UTF-8
+encoding//BDD/static/BDD/javascripts/perso.js=UTF-8
+encoding//BDD/templates/BDD/ADMIN/admin.html=UTF-8
+encoding//BDD/templates/BDD/ADMIN/ajouter.html=UTF-8
+encoding//BDD/templates/BDD/ADMIN/delete.html=UTF-8
+encoding//BDD/templates/BDD/conn.html=UTF-8
+encoding//BDD/views.py=utf-8
+encoding//Functions/data.py=UTF-8

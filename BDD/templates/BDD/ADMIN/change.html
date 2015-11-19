@@ -1,0 +1,139 @@
+{% load watchTag %}	
+{% load staticfiles %}
+<html>
+<head>
+<title>Helato</title>
+<script src="{% static "BDD/javascripts/jquery-1.10.2.js" %}"></script>
+<script src="{% static "BDD/javascripts/jquery-ui.js" %}"></script>
+<link rel="stylesheet"  href="{% static "BDD/CSS/js.css" %}">
+<script src="{% static "BDD/javascripts/perso.js" %}"></script>
+<script>
+
+{% for dd in titrest %}
+  $(function() {
+
+    $( "#{{ dd.0.1 }}" ).combobox();
+
+    $( "#toggle" ).click(function() {
+
+      $( "#{{  dd.0.1 }}" ).toggle();
+
+    });
+
+  });
+  {% endfor %}
+</script>
+
+<style>
+
+  .custom-combobox {
+
+    position: relative;
+
+    display: inline-block;
+
+  }
+
+  .custom-combobox-toggle {
+
+    position: absolute;
+
+    top: 0;
+
+    bottom: 0;
+
+    margin-left: -1px;
+
+    padding: 0;
+
+  }
+
+  .custom-combobox-input {
+
+    margin: 0;
+
+    padding: 5px 10px;
+
+  }
+
+  </style>
+
+
+</head>
+<body>
+<p><a href="/">Back to Site</a>
+<a href="/administration">Back to administration</a>
+<a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back</a>
+</p>
+
+<form action="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/0" method="post">
+	{% csrf_token %}
+	{{ form}}
+	<input type="submit" value="Change"/>
+</form>
+{% if changed %}
+changed
+{% endif %}
+
+{% for l in links %}
+	<a href="{{ l.0 }}">{{ l.1 }}</a> &nbsp;&nbsp;&nbsp;
+{% endfor %}
+<br/><br/>
+{% for dd in titrest %}
+	<table border="1">
+		<tr>
+			<td>
+				<b>{{ dd.2 }}</b>
+			</td>
+		</tr>
+		
+		{% for ddd in dd.3.0 %}
+			<tr>
+				<td>
+					
+					{% if dd.1 == 0 %}
+						{{ ddd|getS:dd.3.1 }}
+					{% else %}
+						{{ ddd }}
+					{% endif %}
+					&nbsp;&nbsp;&nbsp;
+					<a href="/areusure/{{ table }}/{{ idP }}/{{ ddd.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/0/{{ dd.0.2 }}/">x</a>
+				</td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td>
+					Pas de {{ dd.2 }}
+				</td>
+			</tr>
+		{% endfor %}
+		<tr>
+			<td>
+				
+				
+				<form action="/change/{{ table }}/{{ idP }}/{{ dd.0.2 }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/{% if nbajout > 0 %}{{ nbajout }}{% else %}{{ dd.4 }}{% endif %}" method="post">
+				{% csrf_token %}
+				<table>
+				{% if dd.4 > 0 or nbajout > 0 %}
+
+					{{ dd.0.0 }}
+					
+				{% else %}
+					
+					{{ nbajoutf }}
+					
+				{% endif %}
+				</table>
+					
+					<input type="submit" value="Ajouter"/>
+				</form>
+				
+
+
+			</td>
+		</tr>
+	</table>
+{% endfor %}
+
+</body>
+</html>

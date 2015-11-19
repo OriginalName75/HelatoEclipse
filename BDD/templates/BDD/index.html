@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Helato</title>
+</head>
+<body>
+<p>Salut {{user.username}}</p>
+<p><a href="/deconnexion">Deco</a></p>
+
+{% if user.is_superuser %}
+<p><a href="/administration">Admninistration</a></p>
+{% endif %}
+
+</body>
+</html>

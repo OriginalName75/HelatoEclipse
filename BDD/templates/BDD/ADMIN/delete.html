@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Helato</title>
+</head>
+<body>
+<p><a href="/">Back to Site</a>
+<a href="/administration">Back to administration</a>
+<a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back to personne</a>
+</p>
+<p>
+{% if not supr %}
+Voulez-vous supprimer {{ p.user.last_name }} {{ p.user.first_name }} ?</br>
+<a href="/delete/{{ table }}/{{ idP }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/1">oui</a> <a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">non</a>
+{% else %}
+Suprimé
+{% endif %}
+</p>
+</body>
+</html>
