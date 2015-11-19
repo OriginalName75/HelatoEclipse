@@ -49,7 +49,7 @@ def quiry(t):
 def formsoustable(table, y=None, n=None):
     l = []
     if table == 1:
-        l.append([addPersonne, 'id_personnes', 1,'personnes',Personne,'personnes'])
+        l.append([forms.addPersonne, 'personnes', 1,'personnes',Personne,'personnes'])
     elif table == 2:
         l.append([0, 'Modules', 'module_set', 'nom'])
     elif table == 3:

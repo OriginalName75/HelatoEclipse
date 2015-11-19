@@ -9,19 +9,21 @@
 <script src="{% static "BDD/javascripts/perso.js" %}"></script>
 <script>
 
-{% for dd in titrest %}
-  $(function() {
+	{% for dd in titrest %}
+		{% for i in formseti %}
+			$(function() {
 
-    $( "#{{ dd.0.1 }}" ).combobox();
+			$( "#id_form-{{ i }}-{{ dd.0.1 }}" ).combobox();
 
-    $( "#toggle" ).click(function() {
+			$( "#toggle" ).click(function() {
 
-      $( "#{{  dd.0.1 }}" ).toggle();
+			  $( "#{{  dd.0.1 }}" ).toggle();
 
-    });
+			});
 
-  });
-  {% endfor %}
+			});
+		{% endfor %}
+	{% endfor %}
 </script>
 
 <style>
@@ -72,7 +74,7 @@
 	<input type="submit" value="Change"/>
 </form>
 {% if changed %}
-changed
+	changed
 {% endif %}
 
 {% for l in links %}
@@ -115,9 +117,9 @@ changed
 				{% csrf_token %}
 				<table>
 				{% if dd.4 > 0 or nbajout > 0 %}
-
-					{{ dd.0.0 }}
-					
+					{% for fo in dd.0.0 %}
+						{{ fo }}
+					{% endfor %}
 				{% else %}
 					
 					{{ nbajoutf }}

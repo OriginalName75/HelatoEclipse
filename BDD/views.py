@@ -134,7 +134,7 @@ def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plu
         for ll in l:
             gr = getattr(obj, ll[3]).get(id=int(what))
             getattr(obj, ll[3]).remove(gr)
-        return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins,0)
+        return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0)
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nbajout, first=True):
@@ -144,6 +144,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
     obj = TABBLE.objects.get(id=int(idP))
     links = data.links(table)
     titrest = []
+    formseti=None
     ii = 0
     changed = False
     if (first and request.method == 'POST'  and int(nbajout) == 0):
@@ -152,7 +153,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
     
         if nbajoutf.is_valid():
             nbajout = int(nbajoutf.cleaned_data['nb'])
-            first=False
+            first = False
             
             
             
@@ -164,7 +165,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         stforms = data.formsoustable(table, request.POST, int(what))
         
         for frm in stforms:
-            llll=[o.id for o in getattr(obj, frm[5]).all()]
+            llll = [o.id for o in getattr(obj, frm[5]).all()]
             frm[0].fields[frm[3]].queryset = frm[4].objects.all().exclude(id__in=llll)
         for frm in stforms:
             
@@ -178,11 +179,21 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         
         
         for frm in stforms:
-            llll=[o.id for o in getattr(obj, frm[5]).all()]
-            frm[0].fields[frm[3]].queryset = frm[4].objects.all().exclude(id__in=llll)
-            Formset = formset_factory(frm[0], int(nbajout))
             
-    #lo lollololo
+            
+            llll = [o.id for o in getattr(obj, frm[5]).all()]
+           
+            
+            Formset = formset_factory(frm[0], extra=int(nbajout))
+            formset = Formset()
+            q=frm[4].objects.all().exclude(id__in=llll)
+            l=0
+            for f in formset:
+                l=l+1
+                f.fields[frm[3]].queryset = q
+            formseti=range(0,l)
+            frm[0]=formset
+            
     if (first and request.method == 'POST' and int(what) == 0 and int(nbajout) > 0):
         
         form = data.form(table, 0, request.POST) 
