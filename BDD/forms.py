@@ -5,19 +5,17 @@ Created on 23 oct. 2015
 '''
 from asyncio.tasks import Task
 
+from ajax_select.fields import AutoCompleteField, AutoCompleteSelectField, \
+    AutoCompleteSelectMultipleField
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ValidationError
-from django.forms.models import ModelForm, BaseModelFormSet, \
-    modelformset_factory
+from django.forms.models import ModelForm
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB
 from BDD.models import UV, Personne, Module, Groupe
 from Functions import addData, modiData
-from ajax_select.fields import AutoCompleteSelectMultipleField, \
-    AutoCompleteSelectField
-from ajax_select.helpers import make_ajax_field
 
 
 class nbAjout(forms.Form):
@@ -32,24 +30,27 @@ class fitrerCour(forms.Form):
         nom = data['nom']
         isExam = data['isExam']
         modiData.modCour(idP, nom, isExam)
-class addGroupe(forms.Form):
-    groupes = forms.ModelChoiceField(required=True, queryset=None)
-    def save(self, personne):
-        groupes = self.cleaned_data['groupes']
-        groupes.personnes.add(personne)
-
-class addPersonne(ModelForm):
+class addGroupe(forms.ModelForm):
     class Meta:
         model = Personne
-        exclude = []
+        fields = ['groupes']
 
-#     personnes = forms.ModelChoiceField(required=True, queryset=None)
-#     
-#     def save(self, obj):
-#         personnes = self.cleaned_data['personnes']
-#         personnes.groupe_set.add(obj)
-    personnes = make_ajax_field(Personne, 'user', 'personnes', show_help_text=True)
-      
+    groupes = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)
+    def savePerso(self, idP):
+        groupes = self.cleaned_data['groupes']
+        
+        modiData.modPersonne(idP, groupes=groupes)
+
+class addPersonne(forms.ModelForm):
+    class Meta:
+        model = Personne
+        fields = ['personnes']
+
+    personnes = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)
+    def savePerso(self, idP):
+        personnes = self.cleaned_data['personnes']
+        modiData.modGroupe(idP, personnes=personnes)
+        
 class fitrerGroupe(forms.Form):
 
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))

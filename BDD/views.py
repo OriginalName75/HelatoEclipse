@@ -2,15 +2,18 @@
 
 from datetime import datetime
 
-from django import http
+from django import http, forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models.query_utils import Q
 from django.forms.formsets import formset_factory
+from django.forms.models import modelformset_factory
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
+from django.template.context import RequestContext
 
-from BDD.forms import nbAjout
+from ajax_select.fields import AutoCompleteField
+from BDD.forms import nbAjout, addPersonne
 from BDD.models import Personne
 from Functions import  data
 from Functions import generator
@@ -77,7 +80,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                 
                 if not ficheAfter:
                     
-                    return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0, False)
+                    return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
             form = nbAjout()
                        
         else:
@@ -135,66 +138,41 @@ def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plu
             gr = getattr(obj, ll[3]).get(id=int(what))
             getattr(obj, ll[3]).remove(gr)
         return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0)
+    
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
-def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nbajout, first=True):
+def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, first=True):
     table = int(table)
     soustable = data.soustable(table)
     TABBLE = data.table(table)
     obj = TABBLE.objects.get(id=int(idP))
     links = data.links(table)
     titrest = []
-    formseti=None
+    formseti = None
     ii = 0
     changed = False
-    if (first and request.method == 'POST'  and int(nbajout) == 0):
-        
-        nbajoutf = nbAjout(request.POST)
-    
-        if nbajoutf.is_valid():
-            nbajout = int(nbajoutf.cleaned_data['nb'])
-            first = False
-            
-            
-            
-    else:
-        nbajoutf = nbAjout()
-    
-    if (first and request.method == 'POST' and int(what) > 0 and int(nbajout) > 0):
-        
-        stforms = data.formsoustable(table, request.POST, int(what))
-        
+    stforms = data.formsoustable(table)
+    if (first and request.method == 'POST' and int(what) > 0):
         for frm in stforms:
-            llll = [o.id for o in getattr(obj, frm[5]).all()]
-            frm[0].fields[frm[3]].queryset = frm[4].objects.all().exclude(id__in=llll)
+            instance = TABBLE.objects.get(id=int(idP))
+            frm[0] = frm[0](request.POST, instance=instance)
         for frm in stforms:
             
             if frm[0].is_valid():
-                frm[0].save(obj)
+                frm[0].savePerso(int(idP))
                 changed = True
-                return http.HttpResponseRedirect('')
+        return http.HttpResponseRedirect('')
     else:
         
         stforms = data.formsoustable(table)
         
         
+    
         for frm in stforms:
+            instance = TABBLE.objects.get(id=int(idP))
+            frm[0] = frm[0](instance=instance)
             
-            
-            llll = [o.id for o in getattr(obj, frm[5]).all()]
-           
-            
-            Formset = formset_factory(frm[0], extra=int(nbajout))
-            formset = Formset()
-            q=frm[4].objects.all().exclude(id__in=llll)
-            l=0
-            for f in formset:
-                l=l+1
-                f.fields[frm[3]].queryset = q
-            formseti=range(0,l)
-            frm[0]=formset
-            
-    if (first and request.method == 'POST' and int(what) == 0 and int(nbajout) > 0):
+    if (first and request.method == 'POST' and int(what) == 0):
         
         form = data.form(table, 0, request.POST) 
         if form.is_valid():
@@ -236,7 +214,7 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     filtre = int(filtre)
     listAffich = data.listTable(table)
     listeliste = data.listinside(table)
-    addmulti = data.mulipleajout(table)
+    
     if page == None:
         page = 1
     else:

@@ -13,9 +13,15 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from ajax_select import urls as ajax_select_urls
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
+
+admin.autodiscover()
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^connexion$', auth_views.login, {'template_name':'BDD/conn.html'}),
@@ -26,11 +32,11 @@ urlpatterns = [
     url(r'^watch/(?P<table>\d+)/(?P<filtre>\d+)$', 'BDD.views.watch'),
     url(r'^ajouter/(?P<table>\d+)/(?P<nbajout>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.ajouter'),
     url(r'^fiche/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.fiche'),
-    url(r'^change/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<nbajout>\d+)$', 'BDD.views.change'),
+    url(r'^change/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.change'),
     url(r'^areusure/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<nor>\d+)/(?P<which>\d+)/$', 'BDD.views.areusure'),
-
+    url(r'^ajax_select/', include(ajax_select_urls)),
     url(r'^delete/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<supri>\d+)$', 'BDD.views.delete'),
     url(r'^randomP$', 'BDD.views.randomP'),
     url(r'$', 'BDD.views.index'),
     
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

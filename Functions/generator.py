@@ -7,10 +7,10 @@ from datetime import date
 import random
 
 from BDD import models
+from BDD.models import Personne
 from Functions import addData
 
 
-          
 def telgene():
     stri = str(0) + str(1)
     i = 0
@@ -20,11 +20,14 @@ def telgene():
         
         
     return stri
-def personnes(n):
+def personnes(n, clear=False):
     prenoms =  ['Tyrion', 'Cersei', 'Jon', 'Sensae', 'Arya', 'Jorah', 'Jaime', 'Samwell', 'Petyr', 'Theon', 'Tywin', 'Sandor', 'Jofrey']
     noms = ['Lannister', 'Clarke', 'Harington', 'Snow', 'Slark', 'Turner', 'Williams', 'Glen', 'Bradley', 'Hill', 'Baratheon']
     villes = ['Paris', 'Brest', 'New York', 'Trouville', 'Pekin']
     i = 0
+    if (clear):
+        for p in Personne.objects.all():
+            p.delete()
     while i < n:
         prenom = prenoms[random.randint(0, len(prenoms) - 1)]
         nom = noms[random.randint(0, len(noms) - 1)]

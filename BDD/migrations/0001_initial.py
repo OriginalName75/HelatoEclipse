@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import django.utils.datetime_safe
 from django.conf import settings
+import django.utils.datetime_safe
 
 
 class Migration(migrations.Migration):
@@ -16,14 +16,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Annee',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('annee', models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
             name='Cour',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('isExam', models.BooleanField()),
                 ('uploadDate', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Groupe',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('uploadDate', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
             ],
@@ -40,14 +40,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Module',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
             ],
         ),
         migrations.CreateModel(
             name='Moi',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('nbMoi', models.IntegerField()),
                 ('annee', models.ForeignKey(to='BDD.Annee')),
@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Note',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('note', models.IntegerField()),
                 ('uploadDate', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
                 ('module', models.ForeignKey(to='BDD.Module')),
@@ -65,31 +65,32 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Personne',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
-                ('sexe', models.IntegerField(default=0, choices=[(0, 'Sexe Inconnu'), (1, 'Homme'), (2, 'Femme')])),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('sexe', models.IntegerField(choices=[(0, 'Sexe Inconnu'), (1, 'Homme'), (2, 'Femme')], default=0)),
                 ('adresse', models.CharField(max_length=200, null=True)),
                 ('promotion', models.IntegerField(null=True)),
-                ('type', models.IntegerField(default=4, choices=[(4, 'Statut Inconnu'), (0, 'Prof/Chercheur'), (1, 'Eleve'), (2, 'Administration'), (3, 'Administrateur Du Site')])),
+                ('type', models.IntegerField(choices=[(4, 'Statut Inconnu'), (0, 'Prof/Chercheur'), (1, 'Eleve'), (2, 'Administration'), (3, 'Administrateur Du Site')], default=4)),
                 ('dateDeNaissance', models.DateField(null=True)),
                 ('lieuDeNaissance', models.CharField(max_length=200, null=True)),
                 ('numeroDeTel', models.CharField(max_length=40, null=True)),
                 ('uploadDate', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
+                ('filter', models.CharField(max_length=200)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Salle',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('capacite', models.IntegerField(null=True)),
-                ('type', models.CharField(default=0, choices=[(0, 'Type inconnu'), (1, 'Classe'), (2, 'Labo'), (3, 'Info')], max_length=30)),
+                ('type', models.CharField(max_length=30, choices=[(0, 'Type inconnu'), (1, 'Classe'), (2, 'Labo'), (3, 'Info')], default=0)),
             ],
         ),
         migrations.CreateModel(
             name='Semaine',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('semaine', models.IntegerField()),
                 ('moi', models.ForeignKey(to='BDD.Moi')),
             ],
@@ -97,7 +98,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UV',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
             ],
         ),
