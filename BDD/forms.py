@@ -3,9 +3,15 @@ Created on 23 oct. 2015
 
 @author: Moran
 '''
+from asyncio.tasks import Task
+
+from ajax_select.fields import AutoCompleteField, AutoCompleteSelectField, \
+    AutoCompleteSelectMultipleField
 from django import forms
 from django.contrib.auth.models import User
+from django.db.models.fields.related import ManyToManyField
 from django.forms import ValidationError
+from django.forms.models import ModelForm
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB
@@ -25,16 +31,43 @@ class fitrerCour(forms.Form):
         nom = data['nom']
         isExam = data['isExam']
         modiData.modCour(idP, nom, isExam)
-class addGroupe(forms.Form):
-    groupes = forms.ModelChoiceField(required=True, queryset=None)
-    def save(self, personne):
+class addGroupe(forms.ModelForm):
+    class Meta:
+        model = Personne
+        fields = ['groupes']
+
+    groupes = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)
+    def __init__(self, *args, **kwargs):
+        
+        # Only in case we build the form from an instance
+        # (otherwise, 'toppings' list should be empty)
+        if 'instance' in kwargs:
+            # We get the 'initial' keyword argument or initialize it
+            # as a dict if it didn't exist.                
+            initial = kwargs.setdefault('initial', {})
+            # The widget for a ModelMultipleChoiceField expects
+            # a list of primary key for the selected data.
+            initial['groupes'] = [t.pk for t in kwargs['instance'].groupe_set.all()]
+        super(addGroupe, self).__init__(*args, **kwargs)
+
+    def savePerso(self, idP):
         groupes = self.cleaned_data['groupes']
-        groupes.personnes.add(personne)
-class addPersonne(forms.Form):
-    personnes = forms.ModelChoiceField(required=True, queryset=None)
-    def save(self, obj):
+        modiData.modPersonne(idP, groupes=groupes)
+
+class addPersonne(forms.ModelForm):
+    class Meta:
+        model = Personne
+        fields = ['personnes']
+    
+    personnes = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)
+    
+    
+
+    def savePerso(self, idP):
         personnes = self.cleaned_data['personnes']
-        personnes.groupe_set.add(obj)
+        
+        modiData.modGroupe(idP, personnes=personnes)
+        
 class fitrerGroupe(forms.Form):
 
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))

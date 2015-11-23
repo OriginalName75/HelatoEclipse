@@ -6,8 +6,9 @@ Created on 30 oct. 2015
 from BDD import forms
 from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_TYPE, \
     INCONNU_STATUT_SALLE
-from BDD.forms import fitrerP, AjouterP, fitrerGroupe, addGroupe, addPersonne
+from BDD.forms import fitrerP, AjouterP, fitrerGroupe, addGroupe
 from BDD.models import Personne, Cour, Groupe, UV, Module, Annee, Salle, Note
+
 
 
 def ficheAfter(t):
@@ -15,12 +16,6 @@ def ficheAfter(t):
     if t==1:
         reponse=False
     return reponse
-def mulipleajout(t):
-    reponse=True
-    if t==1:
-        reponse=False
-    return reponse
-
 def quiry(t):
     l = []
     
@@ -46,10 +41,10 @@ def quiry(t):
         l.append(['dateDeNaissance', "if (!isValidDate(parseInt(VAL.split('/')[2]), parseInt(VAL.split('/')[0]), parseInt(VAL.split('/')[1]))) return false; else return true;"  , 'Ce n\'est pas une date valide'])
 
     return l
-def formsoustable(table, y=None, n=None):
+def formsoustable(table):
     l = []
     if table == 1:
-        l.append([addPersonne, 'id_personnes', 1,'personnes',Personne,'personnes'])
+        l.append([forms.addPersonne, 'personnes', 1,'personnes',Personne,'personnes'])
     elif table == 2:
         l.append([0, 'Modules', 'module_set', 'nom'])
     elif table == 3:
@@ -65,14 +60,7 @@ def formsoustable(table, y=None, n=None):
         l.append([0, 'Salle', 'salles', 'nom'])
         l.append([1, 'Profs', 'personnes', 'user', 'last_name'])
     elif table == 0:
-        if y == None or n == None:
-            li=addGroupe()
-        else:
-            if n == 1:
-                li=addGroupe(y)
-            else:
-                li=addGroupe()
-        l.append([li, 'id_groupes', 1,'groupes',Groupe,'groupe_set'])
+        l.append([forms.addGroupe, 'id_groupes', 1,'groupes',Groupe,'groupe_set'])
     return l
 def links(table):
     l=[]

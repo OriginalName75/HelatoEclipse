@@ -17,10 +17,10 @@ class Personne(models.Model):
     numeroDeTel = models.CharField(null=True, max_length=40)  # son 06
     user = models.OneToOneField(User)  # l'authentification est gérée pas django
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
-    
+    filter= models.CharField(max_length=200)  # adresse de le personne
        
     def __str__ (self):
-        return "{0} {1}".format(self.user.last_name, self.user.first_name)
+        return self.filter
 class Groupe(models.Model):
     nom = models.CharField(max_length=30)  # nom du groupe
     personnes = models.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
