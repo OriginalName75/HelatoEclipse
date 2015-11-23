@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-# ta mère
-
 from datetime import datetime
 
 from django import http
@@ -18,7 +16,7 @@ from BDD.models import Personne
 from Functions import  data
 from Functions import generator
 from Functions.selectData import select
-
+from Functions import save as s
 
 @login_required(login_url='/connexion')
 def index(request):
@@ -123,6 +121,15 @@ def randomP(request):
     generator.personnes(300)
     text = """done"""
     return HttpResponse(text)
+
+@login_required(login_url='/connexion')
+@user_passes_test(lambda u: u.is_superuser)
+def save(request):
+    
+    s.save()
+    text = """Sauvegarde effectué avec succès"""
+    return HttpResponse(text)
+
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nor, which):

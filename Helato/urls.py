@@ -30,7 +30,8 @@ urlpatterns = [
     url(r'^areusure/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<nor>\d+)/(?P<which>\d+)/$', 'BDD.views.areusure'),
 
     url(r'^delete/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<supri>\d+)$', 'BDD.views.delete'),
-    url(r'^randomP$', 'BDD.views.randomP'),
+    url(r'^randomP/$', 'BDD.views.randomP'),
+    url(r'^save/$', 'BDD.views.save'),
     url(r'$', 'BDD.views.index'),
     
 ]
