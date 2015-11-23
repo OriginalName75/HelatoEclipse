@@ -156,6 +156,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         for frm in stforms:
             instance = TABBLE.objects.get(id=int(idP))
             frm[0] = frm[0](request.POST, instance=instance)
+            
         for frm in stforms:
             
             if frm[0].is_valid():
@@ -171,6 +172,8 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         for frm in stforms:
             instance = TABBLE.objects.get(id=int(idP))
             frm[0] = frm[0](instance=instance)
+            
+            
             
     if (first and request.method == 'POST' and int(what) == 0):
         

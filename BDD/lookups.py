@@ -15,6 +15,7 @@ class PersonLookup(LookupChannel):
     model = Personne
 
     def get_query(self, q, request):
+        
         return self.model.objects.filter(filter__icontains=q).order_by('filter')[:50]
 
     def format_item_display(self, item):

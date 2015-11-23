@@ -57,8 +57,7 @@ def modUV(idP, nom=None):
 def modPersonne(idP, nom=None, prenom=None, login=None, mdp=None, sexe=None, typeP=None, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None, groupes=None):
     p = models.Personne.objects.filter(id=idP)[0]
     if groupes != None:
-        print(groupes)
-        p.groupes = groupes
+        p.groupe_set = groupes
     if login != None:
         p.user.username = login
     if mdp != None:
