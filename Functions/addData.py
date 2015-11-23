@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from BDD import models
+from BDD.models import Personne
 
 
 def checkNaddPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None, errors=None):
@@ -41,7 +42,20 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
         p.lieuDeNaissance = lieuDeNaissance
     if numeroDeTel != None:
         p.numeroDeTel = numeroDeTel
-    
+    stri = "{0} {1}".format(p.user.last_name, p.user.first_name)
+    if Personne.objects.filter(filter=stri).count() > 0:
+        stri = stri + " de " + lieuDeNaissance
+    if Personne.objects.filter(filter=stri).count() > 0:
+        stri = stri + " du " + p.dateDeNaissance.strftime("%d/%m/%y")
+    i = 1
+    strbase = stri
+    while (Personne.objects.filter(filter=stri).count() > 0):
+        stri = strbase + i
+        i = i + 1
+        
+        
+        
+    p.filter = stri
     p.uploadDate = timezone.now()
     p.save()
             
