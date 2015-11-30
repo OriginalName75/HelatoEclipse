@@ -11,11 +11,12 @@ from django import forms
 from django.contrib.auth.models import User
 from django.db.models.fields.related import ManyToManyField
 from django.forms import ValidationError
+from django.forms.formsets import BaseFormSet
 from django.forms.models import ModelForm
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB
-from BDD.models import UV, Personne, Module, Groupe
+from BDD.models import UV, Personne, Module, Groupe, Annee
 from Functions import addData, modiData
 
 
@@ -31,6 +32,45 @@ class fitrerCour(forms.Form):
         nom = data['nom']
         isExam = data['isExam']
         modiData.modCour(idP, nom, isExam)
+class BaseNoteFormSet(BaseFormSet):
+    def __init__(self, *args, **kwargs):
+        super(BaseNoteFormSet, self).__init__(*args, **kwargs)
+        for form in self.forms:
+            form.empty_permitted = False
+    def clean(self):
+        
+        if any(self.errors):
+            # Don't bother validating the formset unless each form is valid on its own
+            return
+#         titles = []
+#         for form in self.forms:
+#             title = form.cleaned_data['title']
+#             if title in titles:
+#                 raise forms.ValidationError("Articles in a set must have distinct titles.")
+#             titles.append(title)
+
+class notes(forms.Form):
+    note = forms.FloatField(required=False, label="")
+    nepasnoter=forms.BooleanField(required=False, label="Ne pas noter")
+    def clean(self):
+        if (self.cleaned_data.get('note') == None and (not self.cleaned_data.get('nepasnoter'))):
+
+            raise ValidationError(
+                "Veuillez ajouter une note ou cocher la case ne pas noter"
+            )
+        
+        return self.cleaned_data  
+    def save(self, solo, multi):
+        if (not self.cleaned_data['nepasnoter']):
+            
+            addData.addNote(self.cleaned_data['note'], multi[0][0], solo[0])
+class chooseGroupe(forms.ModelForm):
+    class Meta:
+        model = Personne
+        fields = ['groupes']
+
+    groupes = AutoCompleteSelectMultipleField('groupes', required=True, help_text=None)
+    module = AutoCompleteSelectField('module', required=True, help_text=None)
 class addGroupe(forms.ModelForm):
     class Meta:
         model = Personne
@@ -60,7 +100,7 @@ class addPersonne(forms.ModelForm):
         fields = ['personnes']
     
     personnes = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)
-    
+  
     
 
     def savePerso(self, idP):
@@ -85,7 +125,7 @@ class fitrerUV(forms.Form):
 class fitrerNote(forms.Form):
     
     note = forms.IntegerField(label="", required=True, widget=forms.TextInput(attrs={'placeholder': 'Note', 'class':'form-control input-perso'}))
-    personne = forms.ModelChoiceField(queryset=Personne.objects.all(), label="Personne notée")
+    personne = AutoCompleteSelectField('personnes', required=False, help_text=None, label="Personne notée")
     module = forms.ModelChoiceField(queryset=Module.objects.all(), label="Module")
     def modif(self, idP):
         data = self.cleaned_data
@@ -96,6 +136,7 @@ class fitrerNote(forms.Form):
 class fitrerSalle(forms.Form):
 
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
+    
     capacite = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'Capacite', 'class':'form-control input-perso'}))
     type = forms.ChoiceField(label="", choices=SALLES, initial=INCONNU_STATUT_SALLE)
 
@@ -113,9 +154,9 @@ class fitrerAnnee(forms.Form):
         annee = data['annee']
         modiData.modAnnee(idP, annee)
 class fitrerModule(forms.Form):
-
+    
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = forms.ModelChoiceField(queryset=UV.objects.all(), label="UV")
+    uv = AutoCompleteSelectField('uv', required=False, help_text=None)
     def modif(self, idP):
         data = self.cleaned_data
         nom = data['nom']
@@ -226,6 +267,13 @@ class AjouterCour(forms.Form):
         addData.addCour(nom, isExam)
 class AjouterAnnee(forms.Form):
     annee = forms.IntegerField(label="", required=True, widget=forms.TextInput(attrs={'placeholder': 'Année', 'class':'form-control input-perso'}))
+    def clean(self):
+
+        if Annee.objects.filter(annee=self.cleaned_data.get('annee')).exists():
+            raise ValidationError(
+                "L'année a déjà été ajouté"
+            )
+        return self.cleaned_data
     def save(self):
         data = self.cleaned_data
         annee = data['annee']
@@ -245,11 +293,25 @@ class AjouterUV(forms.Form):
     def save(self):
         data = self.cleaned_data
         nom = data['nom']
-        addData.addUV(nom)
+        return addData.addUV(nom)
+    def clean(self):
+
+        if UV.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+            raise ValidationError(
+                "Cet UV est déjà créé"
+            )
+        return self.cleaned_data   
 class AjouterModule(forms.Form):
-    nom = forms.CharField(label="", required=True, max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = forms.ModelChoiceField(required=True, queryset=UV.objects.all(), label="UV")
     
+    nom = forms.CharField(label="", required=True, max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
+    uv = AutoCompleteSelectField('uv', required=True, help_text=None)
+    def clean(self):
+
+        if Module.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+            raise ValidationError(
+                "Ce module est déjà créé"
+            )
+        return self.cleaned_data   
     def save(self):
         data = self.cleaned_data
         nom = data['nom']

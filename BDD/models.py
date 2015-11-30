@@ -38,7 +38,8 @@ class Module(models.Model):
     nom = models.CharField(max_length=30)  # nom du module    
     uv = models.ForeignKey(UV)
     def __str__ (self):
-        return self.nom
+        
+        return "%s - %s" % (self.nom, self.uv.nom)
     
 
 
@@ -63,7 +64,7 @@ class Semaine(models.Model):
 class Salle(models.Model):
     nom = models.CharField(max_length=30)
     capacite = models.IntegerField(null=True)
-    type = models.CharField(max_length=30, choices=SALLES, default=INCONNU_STATUT_SALLE)  # si c'est type info ou bien 
+    type = models.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE) 
     def __str__ (self):
         return self.nom  
 class Note(models.Model):

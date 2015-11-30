@@ -6,11 +6,79 @@ Created on 26 oct. 2015
 from datetime import date
 import random
 
-from BDD import models
-from BDD.models import Personne
+from django.utils import timezone
+
+from BDD.choices import SALLES
+from BDD.models import Personne, Groupe, UV, Module, Salle
 from Functions import addData
+import random as r
 
 
+def salles(n, m, clear=False):
+    lets = 'ABCDEFGHIJKLMN'
+    if (clear):
+        for p in Salle.objects.all():
+            p.delete()
+    for i in lets:
+        for j in range(0,n):
+            for k in range(0,m):
+                sal=Salle()
+                nom=i + str(j*100 + k)
+                sal.nom=nom
+                sal.capacite=r.choice(range(20,50))
+                sal.type=r.choice(SALLES)[0]
+                sal.save()
+        
+def module(n, clear=False):
+    FIRST = ['Théorie', "Entropologie", "Théorème", "Supercherie", "Science", "Modélisation", "Formation", "Innutilisté", "Problème", "Problème non résolu", "Solution", "Complexe", "Paradoxe"]
+    DEUZE = ['de Gauss', 'de Gauss-Wei[..]ass', 'de Pythagore', 'd\'Al Kachi', 'de Thalès', 'des éléments fini', "des elements infini", " de rien", "de tout", "de l'impossible", "du n'importe quoi", " de Hearthstone"]
+    
+    if (clear):
+        for p in Module.objects.all():
+            p.delete()
+            
+    uvs = UV.objects.all()
+    for u in uvs:
+        for i in range(0, n):
+            mod = Module()
+            f = r.choice(FIRST)
+            d = r.choice(DEUZE)
+            nom = f + ' ' + d
+            mod.nom = nom
+            mod.uv=u
+            mod.save()
+            
+            
+def uvs(n , m , clear=False):
+    if (clear):
+        for p in UV.objects.all():
+            p.delete()
+    for i in range(1, n + 1):
+        for j in range(1, 1 + m):
+            uv = UV()
+            uv.nom = str(i) + "." + str(j)
+            uv.save()
+def groupe(n, clear=False):
+    if (clear):
+        for p in Groupe.objects.all():
+            p.delete()
+    lets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    pers = Personne.objects.all()
+    grps = []
+    for i in range(0, n):
+        grp = Groupe()
+        nom = ''
+        n = r.choice(range(3, 10))
+        for ii in range(0, n):
+            nom += r.choice(lets)
+        grp.nom = nom
+        grp.uploadDate = timezone.now()
+        grp.save()
+        grps.append(grp)
+    for p in pers:
+        g = r.choice(grps)
+        g.personnes.add(p)
+        
 def telgene():
     stri = str(0) + str(1)
     i = 0
@@ -21,7 +89,7 @@ def telgene():
         
     return stri
 def personnes(n, clear=False):
-    prenoms =  ['Tyrion', 'Cersei', 'Jon', 'Sensae', 'Arya', 'Jorah', 'Jaime', 'Samwell', 'Petyr', 'Theon', 'Tywin', 'Sandor', 'Jofrey']
+    prenoms = ['Tyrion', 'Cersei', 'Jon', 'Sensae', 'Arya', 'Jorah', 'Jaime', 'Samwell', 'Petyr', 'Theon', 'Tywin', 'Sandor', 'Jofrey']
     noms = ['Lannister', 'Clarke', 'Harington', 'Snow', 'Slark', 'Turner', 'Williams', 'Glen', 'Bradley', 'Hill', 'Baratheon']
     villes = ['Paris', 'Brest', 'New York', 'Trouville', 'Pekin']
     i = 0

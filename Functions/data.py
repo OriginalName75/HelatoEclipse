@@ -6,15 +6,20 @@ Created on 30 oct. 2015
 from BDD import forms
 from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_TYPE, \
     INCONNU_STATUT_SALLE
-from BDD.forms import fitrerP, AjouterP, fitrerGroupe, addGroupe
+from BDD.forms import fitrerP, AjouterP, fitrerGroupe
 from BDD.models import Personne, Cour, Groupe, UV, Module, Annee, Salle, Note
 
 
-
+def ajouterA(t):
+    reponse = None
+    if t == 6:
+        reponse = [forms.chooseGroupe, [["groupes", 0, Personne,'groupe__in', forms.notes,forms.BaseNoteFormSet], ["module", 1, Module]]]
+    return reponse
 def ficheAfter(t):
-    reponse=True
-    if t==1:
-        reponse=False
+    reponse = True
+    if t == 1:
+        reponse = False
+    
     return reponse
 def quiry(t):
     l = []
@@ -24,9 +29,16 @@ def quiry(t):
         l.append(['capacite', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
     elif t == 1:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+    elif t == 2:
+        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])    
     elif t == 3:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['uv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'])
+    elif t == 4:
+        l.append(['annee', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+    elif t == 5:
+        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        l.append(['capacite', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
     elif t == 0:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['prenom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
@@ -44,9 +56,9 @@ def quiry(t):
 def formsoustable(table):
     l = []
     if table == 1:
-        l.append([forms.addPersonne, 'personnes', 1,'personnes',Personne,'personnes'])
+        l.append([forms.addPersonne, 'personnes', 1, 'personnes', Personne, 'personnes'])
     elif table == 2:
-        l.append([0, 'Modules', 'module_set', 'nom'])
+        pass
     elif table == 3:
         pass
     elif table == 4:
@@ -60,20 +72,22 @@ def formsoustable(table):
         l.append([0, 'Salle', 'salles', 'nom'])
         l.append([1, 'Profs', 'personnes', 'user', 'last_name'])
     elif table == 0:
-        l.append([forms.addGroupe, 'id_groupes', 1,'groupes',Groupe,'groupe_set'])
+        l.append([forms.addGroupe, 'id_groupes', 1, 'groupes', Groupe, 'groupe_set'])
     return l
 def links(table):
-    l=[]
-    if table==0:
-        l.append(['/watch/6/0','Lui ajouter des notes'])
-        l.append(['/watch/7/0','Lui ajouter des cours'])
+    l = []
+    if table == 0:
+        l.append(['/watch/6/0', 'Lui ajouter des notes'])
+        l.append(['/watch/7/0', 'Lui ajouter des cours'])
+    elif table == 2:
+        l.append(['/watch/3/0', 'Lui ajouter des modules'])
     return l  
 def soustable(table):
     l = []
     if table == 1:
-        l.append([1,0, 'Personnes', 'personnes'])
+        l.append([1, 0, 'Personnes', 'personnes'])
     elif table == 2:
-        l.append([0, 'Modules', 'module_set', 'nom'])
+        l.append([0, 1, 'Modules', 'module_set', 'nom'])
     elif table == 3:
         pass
     elif table == 4:
@@ -88,7 +102,7 @@ def soustable(table):
         l.append([1, 'Profs', 'personnes'])
     elif table == 0:
         
-        l.append([0, 1,'Groupes', 'groupe_set', 'nom'])
+        l.append([0, 1, 'Groupes', 'groupe_set', 'nom'])
         
     
     return l
@@ -234,9 +248,8 @@ def changecond(table, cond, conditions, obj):
         cond.append(('nom', 0))
         conditions.append(obj.nom)
         cond.append(('uv', 0))
-        conditions.append(obj.uv)
-        cond.append(('uv', 0))
-        conditions.append(obj.uv)
+        conditions.append(obj.uv.id)
+        
     elif table == 0:
         cond.append(('nom', 0))
         conditions.append(obj.user.last_name)
@@ -343,10 +356,10 @@ def filtre(t):
         l.append(['annee', 'annee', "", 'annee', 0])
     elif t == 3:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
-        l.append(['uv', 'uv', "", 'uv__nom__icontains', 0])
+        l.append(['uv', 'uv', "", 'uv__nom', 3])
     elif t == 6:
         l.append(['note', 'note', "", 'note', 0])
-        l.append(['personne', 'personne', "", 'personne__user__last_name__icontains', 0])
+        l.append(['personne', 'personne', "", 'personne_id', 0])
         l.append(['module', 'module', "", 'module__nom__icontains', 0])
     elif t == 7:
         l.append(['nom', 'nom', "", 'nom', 0])

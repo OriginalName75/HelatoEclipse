@@ -2,15 +2,22 @@
 <html>
 <head>
 <title>Helato</title>
+{% if filtre != 0 %}
+	<link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
+
+<script src="/static/BDD/js/jquery.min.js"></script>
+<script src="/static/BDD/js/jquery-ui.js"></script>
+<link rel="stylesheet"  href="/static/BDD/CSS/jquery-ui.css" type="text/css" media="all">
+<!-- Custom styles for this template -->
+<script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
+{% endif %}
 </head>
 <body>
 <p><a href="/">Back to Site</a>
 <a href="/administration">Back to administration</a></p>
-{% if addmulti %}
+
 <p><a href="/ajouter/{{ table }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Ajouter</a> 
-{% else %}
-<p><a href="/ajouter/{{ table }}/1/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Ajouter</a> 
-{% endif %}
+
 {% if filtre == 0 %}
 <a href="/watch/{{ table }}/1/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Filtre</a>
 {% else %}

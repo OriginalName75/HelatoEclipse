@@ -42,6 +42,8 @@ def fiche(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins)
     entier = 0
     soustable = data.soustable(table)
     titrest = []
+    
+    
     for st in soustable:
     
         if st[0] == 0:
@@ -59,45 +61,112 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
     
     nbajout = int(nbajout)
     table = int(table)
+    ajj = data.ajouterA(table)
     ficheAfter = data.ficheAfter(table)
-    if nbajout > 0:
+    if nbajout > 0 and nbajout != 100:
         
         listeform = range(0, nbajout)
         lquery = data.quiry(table)
         table = int(table)
         envoi = False
-        Formset = formset_factory(data.form(table, 1), extra=nbajout)
-        if request.method == 'POST' and first:
-            
-            formset = Formset(request.POST, request.FILES)
-            if formset.is_valid():
-                nbajout = 0  
-                envoi = True
+        if nbajout < 100:
+            Formset = formset_factory(data.form(table, 1), extra=nbajout)
+            if request.method == 'POST' and first:
                 
-                for form in formset:
+                formset = Formset(request.POST, request.FILES)
+                if formset.is_valid():
+                    nbajout = 0  
+                    envoi = True
                     
-                    idP = form.save()
-                
-                if not ficheAfter:
                     
-                    return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
-            form = nbAjout()
-                       
+                    for form in formset:
+                        
+                        idP = form.save()
+                    
+                    if not ficheAfter:
+                        
+                        return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
+                form = nbAjout()
+                           
+            else:
+                formset = Formset() 
         else:
-            formset = Formset() 
+            stock = request.session['stock']
+            solo = []
+            multi = []
+            i = 0
+            
+            
+            for x in ajj[1]:
+                if x[1] == 0:
+                    kwargs = {
+                        x[3]: stock[i]
+                        
+                    }
+                    a = x[2].objects.filter(**kwargs)
+                    nb = a.count()
+                    Formset = formset_factory(x[4], extra=nb, formset=x[5])
+                    
+                    if request.method == 'POST' and first:
+                       
+                        formset = Formset(request.POST, request.FILES)
+                    
+                            
+                    else:
+                        formset = Formset()
+                    b=[]
+                    ii=0
+                    for aa in a:
+                        b.append([aa,formset[ii]])
+                        ii+=1
+                        
+                    multi.append(b)
+                    
+                    
+                else:
+                    solo.append(x[2].objects.get(id=stock[i]))
+                i += 1
+            if request.method == 'POST' and first:
+                if formset.is_valid():
+                    jj=0
+                    for f in formset:
+                        f.save(solo,[x[jj] for x in multi])
+                        jj+=1
+                    nbajout = 0  
+                    return http.HttpResponseRedirect('/watch/'+str(table)+'/'+str(filtre))
+                
+    
+                
             
             
     else:
         if request.method == 'POST':
-            
-            form = nbAjout(request.POST)  
-            if form.is_valid():
-                nb = form.cleaned_data['nb']
+            if ajj == None or nbajout < 100:
                 
-                return ajouter(request, table, nb, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
-
+                form = nbAjout(request.POST)
+                
+                if form.is_valid():
+                    nb = form.cleaned_data['nb']
+                    
+                    return ajouter(request, table, nb, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
+                else:
+                    if ajj != None:
+                        formAjj = ajj[0]()
+            else:
+                formAjj = ajj[0](request.POST)
+                stock = []
+                if formAjj.is_valid():
+                    for x in ajj[1]:
+                        if x[1] == 0:
+                            stock.append(formAjj.cleaned_data[x[0]])
+                        else:
+                            stock.append(formAjj.cleaned_data[x[0]].id)
+                
+                    request.session['stock'] = stock
+                    return ajouter(request, table, 101, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
         else:
-            
+            if ajj != None:
+                formAjj = ajj[0]()
             form = nbAjout() 
             
     return render(request, 'BDD/ADMIN/ajouter.html', locals())
@@ -120,7 +189,11 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
 @user_passes_test(lambda u: u.is_superuser)
 def randomP(request):
     
-    generator.personnes(300)
+    # generator.personnes(300)
+    # generator.groupe(30, True)
+    # generator.uvs(3,12, True)
+    # generator.module(4, True)
+    generator.salles(2, 10, True)
     text = """done"""
     return HttpResponse(text)
 @login_required(login_url='/connexion')
@@ -199,14 +272,15 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
             else:   
                 form.fields[cond[entier][0]].initial = l
             entier = entier + 1 
-    
+    taille = len(stforms)
     for st in soustable:
-        
-        if st[0] == 0:
-            titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3]).all(), st[4]], st[1]])
+        if ii < taille:
+            if st[0] == 0:
+                titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3]).all(), st[4]], st[1]])
+            else:
+                titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3], st[1]).all()], st[1]])
         else:
-            titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3], st[1]).all()], st[1]])
-            
+            break        
         ii = ii + 1  
     return render(request, 'BDD/ADMIN/change.html', locals())       
 @login_required(login_url='/connexion')
@@ -260,6 +334,8 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
                         
                         if f[4] == 2:
                             cleanf = clean.strftime('%Y-%m-%d')
+                        elif f[4] == 3:
+                            cleanf = str(clean)
                         else:
                             cleanf = clean
                         

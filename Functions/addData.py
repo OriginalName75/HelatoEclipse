@@ -82,6 +82,7 @@ def addUV(nom):
     c = models.UV()
     c.nom = nom
     c.save()
+    return c.id
 def addModule(nom, uv=None):
    
     c = models.Module()
