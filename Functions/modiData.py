@@ -14,10 +14,7 @@ def modGroupe(idP, nom=None, personnes=None):
     if personnes != None:
         c.personnes = personnes
     c.save()
-def modAnnee(idP, ann):
-    c = models.Annee.objects.filter(id=idP)[0]
-    c.annee = ann
-    c.save()
+
 def modModule(idP, nom=None, uv=None):
     c = models.Module.objects.filter(id=idP)[0]
     if nom != None:
@@ -33,21 +30,21 @@ def modNote(idP, note=None, personne=None, module=None):
         c.module = module
     c.save()
 def modCour(idP, nom=None, isExam=None):
-    c = models.Module.objects.filter(id=idP)[0]
+    c = models.TypeCour.objects.filter(id=idP)[0]
     if nom != None:
         c.nom = nom
     if isExam != None:
         c.isExam = isExam
     c.save()
-def modSalle(idP, nom=None, capacite=None, type=None):
+def modSalle(idP, nom=None, capacite=None, typee=None):
     c = models.Salle.objects.filter(id=idP)[0]
     if nom != None:
         c.nom = nom
     if capacite != None:
         c.capacite = capacite
-    if type != INCONNU_STATUT_SALLE:
+    if typee != INCONNU_STATUT_SALLE:
         
-        c.type = type
+        c.type = typee
     c.save()
 def modUV(idP, nom=None):
     c = models.UV.objects.filter(id=idP)[0]

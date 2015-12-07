@@ -8,11 +8,36 @@ import random
 
 from django.utils import timezone
 
-from BDD.choices import SALLES
-from BDD.models import Personne, Groupe, UV, Module, Salle
+from BDD.choices import SALLES, PROF_STATUT
+from BDD.models import Personne, Groupe, UV, Module, Salle, TypeCour
 from Functions import addData
 import random as r
+FIRST = ['Théorie', "Entropologie", "Théorème", "Supercherie", "Science", "Modélisation", "Formation", "Innutilisté", "Problème", "Problème non résolu", "Solution", "Complexe", "Paradoxe"]
+DEUZE = ['de Gauss', 'de Gauss-Wei[..]ass', 'de Pythagore', 'd\'Al Kachi', 'de Thalès', 'des éléments fini', "des elements infini", " de rien", "de tout", "de l'impossible", "du n'importe quoi", " de Hearthstone"]
+    
 
+def courType(n):
+    profs = Personne.objects.filter(type=PROF_STATUT)
+    groupes = Groupe.objects.all()
+    for i in range(0, n):
+        c = TypeCour()
+        c.isExam = False
+        f = r.choice(FIRST)
+        d = r.choice(DEUZE)
+        nom = f + ' ' + d
+        c.nom = nom
+        rand = r.choice(range(0, 7))
+        if rand == 0:
+            nbprof = 4
+        elif rand == 1:
+            nbprof = 2
+        else:
+            nbprof = 1
+        for i in range(0, nbprof):
+            c.profs.add(r.choice(profs))
+        
+        c.groupe.add(r.choice(groupes))
+        c.save()
 
 def salles(n, m, clear=False):
     lets = 'ABCDEFGHIJKLMN'
@@ -20,19 +45,17 @@ def salles(n, m, clear=False):
         for p in Salle.objects.all():
             p.delete()
     for i in lets:
-        for j in range(0,n):
-            for k in range(0,m):
-                sal=Salle()
-                nom=i + str(j*100 + k)
-                sal.nom=nom
-                sal.capacite=r.choice(range(20,50))
-                sal.type=r.choice(SALLES)[0]
+        for j in range(0, n):
+            for k in range(0, m):
+                sal = Salle()
+                nom = i + str(j * 100 + k)
+                sal.nom = nom
+                sal.capacite = r.choice(range(20, 50))
+                sal.type = r.choice(SALLES)[0]
                 sal.save()
         
 def module(n, clear=False):
-    FIRST = ['Théorie', "Entropologie", "Théorème", "Supercherie", "Science", "Modélisation", "Formation", "Innutilisté", "Problème", "Problème non résolu", "Solution", "Complexe", "Paradoxe"]
-    DEUZE = ['de Gauss', 'de Gauss-Wei[..]ass', 'de Pythagore', 'd\'Al Kachi', 'de Thalès', 'des éléments fini', "des elements infini", " de rien", "de tout", "de l'impossible", "du n'importe quoi", " de Hearthstone"]
-    
+   
     if (clear):
         for p in Module.objects.all():
             p.delete()
@@ -45,7 +68,7 @@ def module(n, clear=False):
             d = r.choice(DEUZE)
             nom = f + ' ' + d
             mod.nom = nom
-            mod.uv=u
+            mod.uv = u
             mod.save()
             
             
@@ -75,7 +98,32 @@ def groupe(n, clear=False):
         grp.uploadDate = timezone.now()
         grp.save()
         grps.append(grp)
+    
+    grptiers1 = Groupe()
+    grptiers1.nom = 'tier 1'
+    grptiers1.uploadDate = timezone.now()
+    grptiers1.save()
+    grptiers2 = Groupe()
+    grptiers2.nom = 'tier 2'
+    grptiers2.uploadDate = timezone.now()
+    grptiers2.save()
+    grptiers3 = Groupe()
+    grptiers3.nom = 'tier 3'
+    grptiers3.uploadDate = timezone.now()
+    grptiers3.save()
+    grptous = Groupe()
+    grptous.nom = 'tous'
+    grptous.uploadDate = timezone.now()
+    grptous.save()
     for p in pers:
+        ra = r.choice(range(0, 3))
+        if ra == 1:
+            grptiers1.personnes.add(p)
+        elif ra == 0:
+            grptiers2.personnes.add(p)
+        else:
+            grptiers3.personnes.add(p)
+        grptous.personnes.add(p)
         g = r.choice(grps)
         g.personnes.add(p)
         
@@ -118,5 +166,8 @@ def personnes(n, clear=False):
         lieuDeNaissance = villes[random.randint(0, len(villes) - 1)]
         numeroDeTel = telgene()
         mail = nom + prenom + '@enstabretagne.org'
+        
+        
+        
         addData.addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, mail)
         i = i + 1

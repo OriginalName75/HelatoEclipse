@@ -2,6 +2,7 @@
 
 from datetime import datetime
 
+from ajax_select.fields import AutoCompleteField
 from django import http, forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
@@ -12,11 +13,11 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, render_to_response
 from django.template.context import RequestContext
 
-from ajax_select.fields import AutoCompleteField
 from BDD.forms import nbAjout, addPersonne
 from BDD.models import Personne
 from Functions import  data
 from Functions import generator
+
 from Functions.selectData import select
 
 
@@ -188,12 +189,12 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def randomP(request):
-    
-    # generator.personnes(300)
-    # generator.groupe(30, True)
-    # generator.uvs(3,12, True)
-    # generator.module(4, True)
-    generator.salles(2, 10, True)
+    generator.TypeCour()
+    #generator.personnes(300, True)
+    #generator.groupe(10, True)
+    #generator.uvs(3,12, True)
+    #generator.module(4, True)
+    #generator.salles(2, 10, True)
     text = """done"""
     return HttpResponse(text)
 @login_required(login_url='/connexion')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations, models
+from django.db import models, migrations
 from django.conf import settings
 import django.utils.datetime_safe
 
@@ -14,49 +14,47 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Annee',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('annee', models.IntegerField()),
-            ],
-        ),
-        migrations.CreateModel(
             name='Cour',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('nom', models.CharField(max_length=30)),
-                ('isExam', models.BooleanField()),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('uploadDate', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
+                ('semaineMin', models.IntegerField()),
+                ('semaineMax', models.IntegerField()),
+                ('jour', models.IntegerField()),
+                ('hmin', models.IntegerField()),
+                ('hmax', models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
             name='Groupe',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('uploadDate', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
             ],
         ),
         migrations.CreateModel(
-            name='Module',
+            name='horaireProf',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('nom', models.CharField(max_length=30)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('jdelaSemaine', models.IntegerField(choices=[(0, 'Lundi'), (1, 'Mardi'), (2, 'Mecredi'), (3, 'Jeudi'), (4, 'Vendredi'), (5, 'Samedi'), (6, 'Dimanche')])),
+                ('hminMatin', models.IntegerField()),
+                ('hmaxMatin', models.IntegerField()),
+                ('hminApresMidi', models.IntegerField()),
+                ('hmaxApresMidi', models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='Moi',
+            name='Module',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nom', models.CharField(max_length=30)),
-                ('nbMoi', models.IntegerField()),
-                ('annee', models.ForeignKey(to='BDD.Annee')),
             ],
         ),
         migrations.CreateModel(
             name='Note',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('note', models.IntegerField()),
                 ('uploadDate', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
                 ('module', models.ForeignKey(to='BDD.Module')),
@@ -65,7 +63,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Personne',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('sexe', models.IntegerField(choices=[(0, 'Sexe Inconnu'), (1, 'Homme'), (2, 'Femme')], default=0)),
                 ('adresse', models.CharField(max_length=200, null=True)),
                 ('promotion', models.IntegerField(null=True)),
@@ -81,24 +79,26 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Salle',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('capacite', models.IntegerField(null=True)),
                 ('type', models.IntegerField(choices=[(0, 'Type inconnu'), (1, 'Classe'), (2, 'Labo'), (3, 'Info')], default=0)),
             ],
         ),
         migrations.CreateModel(
-            name='Semaine',
+            name='TypeCour',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('semaine', models.IntegerField()),
-                ('moi', models.ForeignKey(to='BDD.Moi')),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('nom', models.CharField(max_length=30)),
+                ('isExam', models.BooleanField()),
+                ('groupe', models.ManyToManyField(blank=True, to='BDD.Groupe')),
+                ('profs', models.ManyToManyField(blank=True, to='BDD.Personne')),
             ],
         ),
         migrations.CreateModel(
             name='UV',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('nom', models.CharField(max_length=30)),
             ],
         ),
@@ -113,28 +113,23 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='BDD.UV'),
         ),
         migrations.AddField(
+            model_name='horaireprof',
+            name='prof',
+            field=models.ForeignKey(to='BDD.Personne'),
+        ),
+        migrations.AddField(
             model_name='groupe',
             name='personnes',
-            field=models.ManyToManyField(to='BDD.Personne', blank=True),
-        ),
-        migrations.AddField(
-            model_name='cour',
-            name='groupe',
-            field=models.ManyToManyField(to='BDD.Groupe', blank=True),
-        ),
-        migrations.AddField(
-            model_name='cour',
-            name='personnes',
-            field=models.ManyToManyField(to='BDD.Personne', blank=True),
+            field=models.ManyToManyField(blank=True, to='BDD.Personne'),
         ),
         migrations.AddField(
             model_name='cour',
             name='salles',
-            field=models.ManyToManyField(to='BDD.Salle', blank=True),
+            field=models.ManyToManyField(blank=True, to='BDD.Salle'),
         ),
         migrations.AddField(
             model_name='cour',
-            name='semaine',
-            field=models.ForeignKey(to='BDD.Semaine', null=True),
+            name='typeCour',
+            field=models.ForeignKey(to='BDD.TypeCour'),
         ),
     ]

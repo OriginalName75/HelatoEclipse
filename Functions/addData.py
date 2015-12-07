@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from BDD import models
-from BDD.models import Personne
+from BDD.choices import PROF_STATUT
+from BDD.models import Personne, horaireProf
 
 
 def checkNaddPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None, errors=None):
@@ -17,7 +18,7 @@ def checkNaddPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
         addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, email)
    
 def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None):
-   
+    
     user = User.objects.create_user(username=login , password=mdp)
     user.first_name = prenom
     user.last_name = nom
@@ -30,6 +31,7 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
     p.user = user
     p.type = typeP
     
+            
     p.sexe = sexe
    
     if adresse != None:
@@ -58,7 +60,19 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
     p.filter = stri
     p.uploadDate = timezone.now()
     p.save()
+    
+    if typeP == PROF_STATUT:
+        
+        for ii in range(0, 5):
             
+            h = horaireProf()
+            h.prof = p
+            h.jdelaSemaine = ii
+            h.hminApresMidi = 5
+            h.hmaxApresMidi = 8
+            h.hminMatin = 1
+            h.hmaxMatin = 3
+            h.save()        
         
 def addGroupe(nomm):
    
@@ -72,10 +86,9 @@ def addGroupe(nomm):
     return c.id
 def addCour(nom, isExam=False):
    
-    c = models.Cour()
+    c = models.TypeCour()
     c.nom = nom
     c.isExam = isExam
-    c.uploadDate = timezone.now()
     c.save()            
 def addUV(nom):
    
@@ -97,33 +110,17 @@ def addNote(note, personne, module):
     c.module = module
     c.uploadDate = timezone.now()
     c.save()
-def addSalle(nom, capacite=None, type=None):
+def addSalle(nom, capacite=None, typee=None):
    
     c = models.Salle()
     c.nom = nom
-    if type != None:
-        c.type = type
+    if typee != None:
+        c.type = typee
     if capacite != None:
         c.capacite = capacite
-    c.save()           
-def newYear(an):
-    a = models.Annee()
-    a.annee = an
-    a.save()
-    MOIS = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"]
-    j = 1
-    for i in range(1, 13):
-        m = models.Moi()
-        m.nom = MOIS[i - 1]
-        m.nbMoi = i
-        m.annee = a
-        m.save()
-        for k in range(1, 5):
-            s = models.Semaine()
-            s.semaine = j
-            s.moi = m
-            s.save()
-            j = j + 1
+    c.save()    
+     
             
+             
          
         

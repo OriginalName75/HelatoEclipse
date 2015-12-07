@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BDD',
+    'GeneEDT',
     'ajax_select', 
     'BDD.templatetags',
 )

@@ -16,7 +16,7 @@ from django.forms.models import ModelForm
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB
-from BDD.models import UV, Personne, Module, Groupe, Annee
+from BDD.models import UV, Personne, Module, Groupe, horaireProf
 from Functions import addData, modiData
 
 
@@ -94,6 +94,8 @@ class addGroupe(forms.ModelForm):
         groupes = self.cleaned_data['groupes']
         modiData.modPersonne(idP, groupes=groupes)
 
+    
+    
 class addPersonne(forms.ModelForm):
     class Meta:
         model = Personne
@@ -265,19 +267,6 @@ class AjouterCour(forms.Form):
         nom = data['nom']
         isExam = data['isExam']
         addData.addCour(nom, isExam)
-class AjouterAnnee(forms.Form):
-    annee = forms.IntegerField(label="", required=True, widget=forms.TextInput(attrs={'placeholder': 'Année', 'class':'form-control input-perso'}))
-    def clean(self):
-
-        if Annee.objects.filter(annee=self.cleaned_data.get('annee')).exists():
-            raise ValidationError(
-                "L'année a déjà été ajouté"
-            )
-        return self.cleaned_data
-    def save(self):
-        data = self.cleaned_data
-        annee = data['annee']
-        addData.newYear(annee)
 class AjouterSalle(forms.Form):
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     capacite = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'Capacite', 'class':'form-control input-perso'}))

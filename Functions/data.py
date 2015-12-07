@@ -7,13 +7,14 @@ from BDD import forms
 from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_TYPE, \
     INCONNU_STATUT_SALLE
 from BDD.forms import fitrerP, AjouterP, fitrerGroupe
-from BDD.models import Personne, Cour, Groupe, UV, Module, Annee, Salle, Note
+from BDD.models import Personne, Cour, Groupe, UV, Module, Salle, Note, \
+    horaireProf, TypeCour
 
 
 def ajouterA(t):
     reponse = None
     if t == 6:
-        reponse = [forms.chooseGroupe, [["groupes", 0, Personne,'groupe__in', forms.notes,forms.BaseNoteFormSet], ["module", 1, Module]]]
+        reponse = [forms.chooseGroupe, [["groupes", 0, Personne, 'groupe__in', forms.notes, forms.BaseNoteFormSet], ["module", 1, Module]]]
     return reponse
 def ficheAfter(t):
     reponse = True
@@ -36,9 +37,6 @@ def quiry(t):
         l.append(['uv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'])
     elif t == 4:
         l.append(['annee', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-    elif t == 5:
-        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['capacite', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
     elif t == 0:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['prenom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
@@ -68,11 +66,12 @@ def formsoustable(table):
     elif table == 6:
         pass
     elif table == 7:
-        l.append([0, 'Groupes', 'groupe', 'nom'])
-        l.append([0, 'Salle', 'salles', 'nom'])
-        l.append([1, 'Profs', 'personnes', 'user', 'last_name'])
+        pass
     elif table == 0:
         l.append([forms.addGroupe, 'id_groupes', 1, 'groupes', Groupe, 'groupe_set'])
+        
+        
+        
     return l
 def links(table):
     l = []
@@ -97,13 +96,12 @@ def soustable(table):
     elif table == 6:
         pass
     elif table == 7:
-        l.append([0, 'Groupes', 'groupe', 'nom'])
-        l.append([0, 'Salle', 'salles', 'nom'])
-        l.append([1, 'Profs', 'personnes'])
+        l.append([0, 1, 'Groupes', 'groupe', 'nom'])
+        l.append([1, 1, 'Profs', 'profs'])
     elif table == 0:
         
         l.append([0, 1, 'Groupes', 'groupe_set', 'nom'])
-        
+        l.append([1, 1, 'Horaires', 'horaireprof_set']) 
     
     return l
 def listinside(t):
@@ -126,7 +124,7 @@ def listinside(t):
     elif t == 7:
         listeliste.append([0, 'nom'])
         listeliste.append([0, 'isExam'])
-        listeliste.append([0, 'uploadDate'])
+        
         
     elif t == 5:
         listeliste.append([0, 'nom'])
@@ -172,7 +170,7 @@ def listTable(t):
     elif t == 7:
         l.append(['Nom', 1])
         l.append(['Exam', 2])
-        l.append(['Ajout', 3])
+        
     elif t == 0:
         l.append(['Nom', 1])
         l.append(['Prenom', 2])
@@ -200,13 +198,13 @@ def table(t):
     elif t == 3:
         return Module
     elif t == 4:
-        return Annee
+        pass
     elif t == 5:
         return Salle
     elif t == 6:
         return Note
     elif t == 7:
-        return Cour
+        return TypeCour
     else:
         return Personne
 def changecond(table, cond, conditions, obj):
@@ -233,8 +231,7 @@ def changecond(table, cond, conditions, obj):
         conditions.append(obj.nom)
         cond.append(('isExam', 0))
         conditions.append(obj.isExam)
-        cond.append(('uploadDate', 0))
-        conditions.append(obj.uploadDate)
+        
     elif table == 5:
         cond.append(('nom', 0))
         conditions.append(obj.nom)
@@ -315,8 +312,6 @@ def classer(t, nomClasser):
     elif t == 7:
         if nomClasser == 1:
             column = 'nom'
-        elif nomClasser == 2:
-            column = 'isExam'
         else:
             column = 'uploadDate'
     elif t == 0:
@@ -418,16 +413,7 @@ def form(t, n, post=None):
             else:
                 return forms.AjouterModule(post)
     elif t == 4:
-        if n == 0:
-            if post == None:
-                return forms.fitrerAnnee()
-            else:
-                return forms.fitrerAnnee(post)
-        else:
-            if post == None: 
-                return forms.AjouterAnnee
-            else:
-                return forms.AjouterAnnee(post) 
+        pass
     elif t == 6:
         if n == 0:
             if post == None:
