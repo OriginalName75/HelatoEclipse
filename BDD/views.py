@@ -2,19 +2,18 @@
 
 from datetime import datetime
 
-from ajax_select.fields import AutoCompleteField
-from django import http, forms
+from django import http
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-from django.db.models.query_utils import Q
-from django.forms.formsets import formset_factory
-from django.forms.models import modelformset_factory
-from django.http import HttpResponse
-from django.shortcuts import render, redirect, render_to_response
-from django.template.context import RequestContext
 
-from BDD.forms import nbAjout, addPersonne
-from BDD.models import Personne
+from django.forms.formsets import formset_factory
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+
+from BDD.forms import nbAjout
+
 from Functions import  data
 from Functions import generator
 
@@ -69,13 +68,18 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
         listeform = range(0, nbajout)
         lquery = data.quiry(table)
         table = int(table)
-        envoi = False
+        envoi =  False
         if nbajout < 100:
-            Formset = formset_factory(data.form(table, 1), extra=nbajout)
-            if request.method == 'POST' and first:
+            if data.form(table, 3) == None:
+                Formset = formset_factory(data.form(table, 1), extra=nbajout)
+            else:
                 
+                Formset = formset_factory(data.form(table, 1), extra=nbajout, formset=data.form(table, 3))
+            if request.method == 'POST' and first:
+                print("1")
                 formset = Formset(request.POST, request.FILES)
                 if formset.is_valid():
+                    
                     nbajout = 0  
                     envoi = True
                     
@@ -115,11 +119,11 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                             
                     else:
                         formset = Formset()
-                    b=[]
-                    ii=0
+                    b = []
+                    ii = 0
                     for aa in a:
-                        b.append([aa,formset[ii]])
-                        ii+=1
+                        b.append([aa, formset[ii]])
+                        ii += 1
                         
                     multi.append(b)
                     
@@ -129,12 +133,12 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                 i += 1
             if request.method == 'POST' and first:
                 if formset.is_valid():
-                    jj=0
+                    jj = 0
                     for f in formset:
-                        f.save(solo,[x[jj] for x in multi])
-                        jj+=1
+                        f.save(solo, [x[jj] for x in multi])
+                        jj += 1
                     nbajout = 0  
-                    return http.HttpResponseRedirect('/watch/'+str(table)+'/'+str(filtre))
+                    return http.HttpResponseRedirect('/watch/' + str(table) + '/' + str(filtre))
                 
     
                 
@@ -189,12 +193,12 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def randomP(request):
-    generator.TypeCour()
-    #generator.personnes(300, True)
-    #generator.groupe(10, True)
-    #generator.uvs(3,12, True)
-    #generator.module(4, True)
-    #generator.salles(2, 10, True)
+    generator.courType(40, True)
+    # generator.personnes(300, True)
+    # generator.groupe(10, True)
+    # generator.uvs(3,12, True)
+    # generator.module(4, True)
+    # generator.salles(2, 10, True)
     text = """done"""
     return HttpResponse(text)
 @login_required(login_url='/connexion')
@@ -230,18 +234,17 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         for frm in stforms:
             instance = TABBLE.objects.get(id=int(idP))
             frm[0] = frm[0](request.POST, instance=instance)
-            
+        j = 1  
         for frm in stforms:
             
-            if frm[0].is_valid():
+            if j == int(what) and frm[0].is_valid():
                 frm[0].savePerso(int(idP))
                 changed = True
+            j += 1
         return http.HttpResponseRedirect('')
     else:
         
         stforms = data.formsoustable(table)
-        
-        
     
         for frm in stforms:
             instance = TABBLE.objects.get(id=int(idP))
@@ -251,7 +254,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
             
     if (first and request.method == 'POST' and int(what) == 0):
         
-        form = data.form(table, 0, request.POST) 
+        form = data.form(table, 2, request.POST) 
         if form.is_valid():
             form.modif(idP)    
             changed = True
@@ -262,7 +265,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         cond = []
         conditions = []
         
-        form = data.form(table, 0)
+        form = data.form(table, 2)
         
         data.changecond(table, cond, conditions, obj)
          

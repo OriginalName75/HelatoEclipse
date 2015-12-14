@@ -75,9 +75,6 @@ class TypeCour(models.Model):
     profs = models.ManyToManyField(Personne, blank=True)
     groupe = models.ManyToManyField(Groupe, blank=True)
     isExam = models.BooleanField()
-    semaineMin = models.IntegerField()
-    semaineMax = models.IntegerField()
-    nbhpparsemaine = models.IntegerField()
     
 class Cour(models.Model):
     typeCour = models.ForeignKey(TypeCour)

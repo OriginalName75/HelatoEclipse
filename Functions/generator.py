@@ -16,7 +16,10 @@ FIRST = ['Théorie', "Entropologie", "Théorème", "Supercherie", "Science", "Mo
 DEUZE = ['de Gauss', 'de Gauss-Wei[..]ass', 'de Pythagore', 'd\'Al Kachi', 'de Thalès', 'des éléments fini', "des elements infini", " de rien", "de tout", "de l'impossible", "du n'importe quoi", " de Hearthstone"]
     
 
-def courType(n):
+def courType(n, clear=False):
+    if (clear):
+        for p in TypeCour.objects.all():
+            p.delete()
     profs = Personne.objects.filter(type=PROF_STATUT)
     groupes = Groupe.objects.all()
     for i in range(0, n):
@@ -26,6 +29,7 @@ def courType(n):
         d = r.choice(DEUZE)
         nom = f + ' ' + d
         c.nom = nom
+        c.save()
         rand = r.choice(range(0, 7))
         if rand == 0:
             nbprof = 4
@@ -35,9 +39,9 @@ def courType(n):
             nbprof = 1
         for i in range(0, nbprof):
             c.profs.add(r.choice(profs))
-        
+            
         c.groupe.add(r.choice(groupes))
-        c.save()
+        
 
 def salles(n, m, clear=False):
     lets = 'ABCDEFGHIJKLMN'

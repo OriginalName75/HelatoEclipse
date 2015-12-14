@@ -29,12 +29,16 @@ def modNote(idP, note=None, personne=None, module=None):
     if module != None:
         c.module = module
     c.save()
-def modCour(idP, nom=None, isExam=None):
+def modCour(idP, nom=None, isExam=None, groupes=None, profs=None):
     c = models.TypeCour.objects.filter(id=idP)[0]
     if nom != None:
         c.nom = nom
     if isExam != None:
         c.isExam = isExam
+    if groupes != None:
+        c.groupe = groupes
+    if profs != None:
+        c.profs = profs
     c.save()
 def modSalle(idP, nom=None, capacite=None, typee=None):
     c = models.Salle.objects.filter(id=idP)[0]

@@ -74,14 +74,15 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
             h.hmaxMatin = 3
             h.save()        
         
-def addGroupe(nomm):
+def addGroupe(nomm, personnes=None):
    
     c = models.Groupe()
     c.nom = nomm
-   
     
     c.uploadDate = timezone.now()
     c.save()
+    if (personnes!=None):
+        c.personnes=personnes
     
     return c.id
 def addCour(nom, isExam=False):

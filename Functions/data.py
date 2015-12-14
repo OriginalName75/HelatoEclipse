@@ -12,17 +12,19 @@ from BDD.models import Personne, Cour, Groupe, UV, Module, Salle, Note, \
 
 
 def ajouterA(t):
+    """ Pour un ajout par ManytoMany"""
     reponse = None
     if t == 6:
         reponse = [forms.chooseGroupe, [["groupes", 0, Personne, 'groupe__in', forms.notes, forms.BaseNoteFormSet], ["module", 1, Module]]]
     return reponse
 def ficheAfter(t):
+    """ Afficher une fiche après ajout """
     reponse = True
-    if t == 1:
-        reponse = False
+    
     
     return reponse
 def quiry(t):
+    """ gestion de correction automatique des forms """
     l = []
     
     if t == 5:
@@ -36,13 +38,20 @@ def quiry(t):
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['uv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'])
     elif t == 4:
-        l.append(['annee', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        l.append(['typeCour', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        l.append(['salles', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        
+    elif t == 7:
+        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+    elif t == 6:
+        l.append(['note', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        l.append(['note', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
+        l.append(['personne', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        l.append(['module', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
     elif t == 0:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['prenom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['login', "if (VAL.length > 3 && VAL) return true; else return false;"  , 'Ce champ doit avoir au moins 4 caractères'])
-        
-        
         l.append(['numeroDeTel', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
         l.append(['promotion', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
         l.append(['mdp', "if (VAL.length > 5 && VAL) return true; else return false;"  , 'Au moins 6 caractere plz'])
@@ -52,6 +61,7 @@ def quiry(t):
 
     return l
 def formsoustable(table):
+    """ Pour les ManytoMany dans modifier"""
     l = []
     if table == 1:
         l.append([forms.addPersonne, 'personnes', 1, 'personnes', Personne, 'personnes'])
@@ -66,7 +76,8 @@ def formsoustable(table):
     elif table == 6:
         pass
     elif table == 7:
-        pass
+        l.append([forms.addTypeCour, 'groupe', 1, 'groupe', Groupe, 'groupe'])
+        l.append([forms.addPersonnetypeCour, 'personnes', 2, 'personnes', Personne, 'personnes'])
     elif table == 0:
         l.append([forms.addGroupe, 'id_groupes', 1, 'groupes', Groupe, 'groupe_set'])
         
@@ -74,6 +85,7 @@ def formsoustable(table):
         
     return l
 def links(table):
+    """ Afficher des liens """
     l = []
     if table == 0:
         l.append(['/watch/6/0', 'Lui ajouter des notes'])
@@ -82,6 +94,7 @@ def links(table):
         l.append(['/watch/3/0', 'Lui ajouter des modules'])
     return l  
 def soustable(table):
+    """ pour les manytomany dans la fiche """
     l = []
     if table == 1:
         l.append([1, 0, 'Personnes', 'personnes'])
@@ -105,6 +118,7 @@ def soustable(table):
     
     return l
 def listinside(t):
+    """ Affichage des tables """
     listeliste = []
     if t == 1:
         listeliste.append([0, 'nom'])
@@ -147,6 +161,7 @@ def listinside(t):
     return listeliste
 
 def listTable(t):
+    """ Nom des caract """
     l = []
     if t == 1:
         l.append(['Nom', 1])
@@ -191,6 +206,7 @@ def listTable(t):
         
     return l
 def table(t):
+    """ nom de la table """
     if t == 1:
         return Groupe
     elif t == 2:
@@ -208,6 +224,7 @@ def table(t):
     else:
         return Personne
 def changecond(table, cond, conditions, obj):
+    """ Changer les conditions initiales"""
     if table == 1:
         cond.append(('nom', 0))
         conditions.append(obj.nom)
@@ -279,6 +296,7 @@ def changecond(table, cond, conditions, obj):
             conditions.append(obj.numeroDeTel)
             cond.append(('numeroDeTel', 0)) 
 def classer(t, nomClasser):
+    """ Pour classer """
     if t == 1:
         if nomClasser == 1:
             column = 'nom'
@@ -342,6 +360,7 @@ def classer(t, nomClasser):
     
     return column
 def filtre(t):
+    """ Comment filter """
     l = []
     if t == 1:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
@@ -353,15 +372,15 @@ def filtre(t):
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
         l.append(['uv', 'uv', "", 'uv__nom', 3])
     elif t == 6:
-        l.append(['note', 'note', "", 'note', 0])
-        l.append(['personne', 'personne', "", 'personne_id', 0])
+        l.append(['note', 'note', None, 'note', 0])
+        l.append(['personne', 'personne', "", 'personne__filter__icontains', 0])
         l.append(['module', 'module', "", 'module__nom__icontains', 0])
     elif t == 7:
-        l.append(['nom', 'nom', "", 'nom', 0])
+        l.append(['nom', 'nom', "", 'nom__icontains', 0])
         l.append(['isExam', 'isExam', "", 'isExam', 0])
     elif t == 5:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
-        l.append(['capacite', 'capacite', "", 'capacite', 0])
+        l.append(['capacite', 'capacite', None, 'capacite', 0])
         l.append(['type', 'type', INCONNU_STATUT_SALLE, 'type', 1])
     elif t == 0:    
         
@@ -379,12 +398,20 @@ def filtre(t):
         
     return l
 def form(t, n, post=None):
+    """ LEs formulaires """
     if t == 1:
         if n == 0:
             if post == None:
                 return fitrerGroupe()
             else:
                 return fitrerGroupe(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeGroupe()
+            else:
+                return forms.changeGroupe(post)
+        elif n == 3:
+            return None
         else:
             if post == None:
                 return forms.AjouterGroupe
@@ -396,6 +423,13 @@ def form(t, n, post=None):
                 return forms.fitrerUV()
             else:
                 return forms.fitrerUV(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeUV()
+            else:
+                return forms.changeUV(post)
+        elif n == 3:
+            return None
         else:
             if post == None:
                 return forms.AjouterUV
@@ -407,19 +441,49 @@ def form(t, n, post=None):
                 return forms.fitrerModule()
             else:
                 return forms.fitrerModule(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeModule()
+            else:
+                return forms.changeModule(post)
+        elif n == 3:
+            return None
         else:
             if post == None: 
                 return forms.AjouterModule
             else:
                 return forms.AjouterModule(post)
     elif t == 4:
-        pass
+        if n == 0:
+            if post == None:
+                return forms.fitrerCalendrier()
+            else:
+                return forms.fitrerCalendrier(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeCalendrier()
+            else:
+                return forms.changeCalendrier(post)
+        elif n == 3:
+            return None
+        else:
+            if post == None: 
+                return forms.AjouterCalendrier
+            else:
+                return forms.AjouterCalendrier(post) 
     elif t == 6:
         if n == 0:
             if post == None:
                 return forms.fitrerNote()
             else:
                 return forms.fitrerNote(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeNote()
+            else:
+                return forms.changeNote(post)
+        elif n == 3:
+            return None
         else:
             if post == None: 
                 return forms.AjouterNote
@@ -431,6 +495,13 @@ def form(t, n, post=None):
                 return forms.fitrerSalle()
             else:
                 return forms.fitrerSalle(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeSalle()
+            else:
+                return forms.changeSalle(post)
+        elif n == 3:
+            return None
         else:
             if post == None: 
                 return forms.AjouterSalle
@@ -442,6 +513,13 @@ def form(t, n, post=None):
                 return forms.fitrerCour()
             else:
                 return forms.fitrerCour(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeCour()
+            else:
+                return forms.changeCour(post)
+        elif n == 3:
+            return None
         else:
             if post == None: 
                 return forms.AjouterCour
@@ -453,8 +531,16 @@ def form(t, n, post=None):
                 return fitrerP()
             else:
                 return fitrerP(post)
+        elif n == 2:
+            if post == None:
+                return forms.changeP()
+            else:
+                return forms.changeP(post)
+        elif n == 3:
+            return forms.PersonneFormSet
         else:
             if post == None:
                 return AjouterP
             else:
                 return AjouterP(post)
+            
