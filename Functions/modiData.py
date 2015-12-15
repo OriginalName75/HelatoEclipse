@@ -6,19 +6,32 @@ Created on 30 oct. 2015
 from BDD import models
 from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_SALLE
 
-
-def modGroupe(idP, nom=None, personnes=None):
+######################## mod ,""""""""""""""""""""""
+def modGroupe(idP, nom=None, personnes=None, modules=None):
+    ######################## fin mod ,""""""""""""""""""""""
     c = models.Groupe.objects.filter(id=idP)[0]
+    ######################## mod ,""""""""""""""""""""""
+    if modules != None:
+        c.modules = modules
+    ########################finmod ,""""""""""""""""""""""
     if nom != None:
         c.nom = nom
     if personnes != None:
         c.personnes = personnes
     c.save()
-
-def modModule(idP, nom=None, uv=None):
+####################### modifié module #############################
+def modModule(idP, nom=None, uv=None, groupes=None):
+####################### modifié module #############################
     c = models.Module.objects.filter(id=idP)[0]
     if nom != None:
         c.nom = nom
+    ####################### modifié module #############################
+    if uv != None:
+        c.uv = uv
+    if groupes != None:
+        
+        c.groupe_set = groupes
+    ####################### modifié module #############################    
     c.save()
 def modNote(idP, note=None, personne=None, module=None):
     c = models.Note.objects.filter(id=idP)[0]

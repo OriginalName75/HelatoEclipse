@@ -38,7 +38,11 @@ class Groupe(models.Model):
     nom = models.CharField(max_length=30)  # nom du groupe
     personnes = models.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
+    #########"   modif momo #########################
     
+    modules=models.ManyToManyField('Module', blank=True)
+    
+    #########"   fin modif momo #########################
     def __str__ (self):
         return self.nom
 class UV(models.Model):

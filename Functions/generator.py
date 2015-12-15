@@ -92,6 +92,7 @@ def groupe(n, clear=False):
     lets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     pers = Personne.objects.all()
     grps = []
+    uvs=UV.objects.all()
     for i in range(0, n):
         grp = Groupe()
         nom = ''
@@ -101,6 +102,12 @@ def groupe(n, clear=False):
         grp.nom = nom
         grp.uploadDate = timezone.now()
         grp.save()
+        rando = r.choice(range(1,4))
+        for uv in uvs:
+            if (uv.nom)[0]==str(rando):
+                modules=uv.module_set.all()
+                for mod in modules:
+                    grp.modules.add(mod)
         grps.append(grp)
     
     grptiers1 = Groupe()

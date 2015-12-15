@@ -65,10 +65,11 @@ def formsoustable(table):
     l = []
     if table == 1:
         l.append([forms.addPersonne, 'personnes', 1, 'personnes', Personne, 'personnes'])
+        l.append([forms.addModule, 'modules', 2, 'modules', Module, 'modules'])
     elif table == 2:
         pass
     elif table == 3:
-        pass
+        l.append([forms.addGroupeModule, 'groupes', 1, 'groupes', Groupe, 'groupes'])
     elif table == 4:
         pass
     elif table == 5:
@@ -98,10 +99,11 @@ def soustable(table):
     l = []
     if table == 1:
         l.append([1, 0, 'Personnes', 'personnes'])
+        l.append([1, 0, 'Modules', 'modules'])
     elif table == 2:
         l.append([0, 1, 'Modules', 'module_set', 'nom'])
     elif table == 3:
-        pass
+        l.append([0, 1, 'Groupes', 'groupe_set', 'nom'])
     elif table == 4:
         pass
     elif table == 5:

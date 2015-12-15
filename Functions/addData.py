@@ -73,14 +73,19 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
             h.hminMatin = 1
             h.hmaxMatin = 3
             h.save()        
-        
-def addGroupe(nomm, personnes=None):
-   
+############################# modifié ######################        
+def addGroupe(nomm, personnes=None, modules=None):
+############################# fin modifié ######################  
     c = models.Groupe()
     c.nom = nomm
-    
     c.uploadDate = timezone.now()
     c.save()
+    ############################# modifié ######################   
+    if (modules!=None):
+        c.modules=modules
+    ############################# fin modifié ######################   
+    
+    
     if (personnes!=None):
         c.personnes=personnes
     

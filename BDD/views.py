@@ -193,9 +193,9 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def randomP(request):
-    generator.courType(40, True)
+    #generator.courType(40, True)
     # generator.personnes(300, True)
-    # generator.groupe(10, True)
+    generator.groupe(10, True)
     # generator.uvs(3,12, True)
     # generator.module(4, True)
     # generator.salles(2, 10, True)
