@@ -238,11 +238,10 @@ def changecond(table, cond, conditions, obj):
         cond.append(('note', 0))
         conditions.append(obj.note)
         cond.append(('personne', 0))
-        conditions.append(obj.personne)
+        conditions.append(obj.personne.id)
         cond.append(('module', 0))
-        conditions.append(obj.module)
-        cond.append(('uploadDate', 0))
-        conditions.append(obj.uploadDate)
+        conditions.append(obj.module.id)
+        
     elif table == 7:
         cond.append(('nom', 0))
         conditions.append(obj.nom)
@@ -256,7 +255,7 @@ def changecond(table, cond, conditions, obj):
             cond.append(('capacite', 0))
             conditions.append(obj.capacite)
         if int(obj.type) != INCONNU_STATUT_SALLE:
-            conditions.append(obj.sexe)
+            conditions.append(obj.type)
             cond.append(('type', 0))
     elif table == 3:
         cond.append(('nom', 0))
@@ -411,7 +410,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeGroupe(post)
         elif n == 3:
-            return None
+            return forms.NomFormSet
         else:
             if post == None:
                 return forms.AjouterGroupe
@@ -429,7 +428,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeUV(post)
         elif n == 3:
-            return None
+            return forms.NomFormSet
         else:
             if post == None:
                 return forms.AjouterUV
@@ -447,7 +446,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeModule(post)
         elif n == 3:
-            return None
+            return forms.moduleFormSet
         else:
             if post == None: 
                 return forms.AjouterModule
@@ -465,7 +464,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeCalendrier(post)
         elif n == 3:
-            return None
+            return forms.NomFormSet
         else:
             if post == None: 
                 return forms.AjouterCalendrier
@@ -483,7 +482,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeNote(post)
         elif n == 3:
-            return None
+            return forms.NomFormSet
         else:
             if post == None: 
                 return forms.AjouterNote
@@ -501,7 +500,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeSalle(post)
         elif n == 3:
-            return None
+            return forms.NomFormSet
         else:
             if post == None: 
                 return forms.AjouterSalle

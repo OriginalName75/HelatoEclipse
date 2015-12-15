@@ -94,6 +94,7 @@
 			</form> 
 		{% endfor %}
 	{% else %}
+	{{ formset.non_form_errors }}
 		<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 			{{ formset.management_form }}
 			{% for form in formset %}

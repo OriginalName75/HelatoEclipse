@@ -8,14 +8,12 @@ from ajax_select.fields import AutoCompleteSelectField, \
     AutoCompleteSelectMultipleField
 from django import forms
 from django.contrib.auth.models import User
-
 from django.forms import ValidationError
 from django.forms.formsets import BaseFormSet
 
-
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB
-from BDD.models import UV, Personne, Module, Groupe, TypeCour
+from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
 from Functions import addData, modiData
 
 
@@ -71,9 +69,46 @@ class PersonneFormSet(BaseFormSet):
         logins = []
         for form in self.forms:
             login = form.cleaned_data['login']
-            if login in login:
+            if login in logins:
                 raise forms.ValidationError("Les logins doivent être deux à deux distinct")
             logins.append(login)
+class NomFormSet(BaseFormSet):
+    def __init__(self, *args, **kwargs):
+        super(NomFormSet, self).__init__(*args, **kwargs)
+#         for form in self.forms:
+#             form.empty_permitted = False
+    def clean(self):
+        
+        if any(self.errors):
+            # Don't bother validating the formset unless each form is valid on its own
+            return
+        logins = []
+        for form in self.forms:
+            login = form.cleaned_data['nom']
+            if login in logins:
+                raise forms.ValidationError("Les noms doivent être deux à deux distinct")
+            logins.append(login)
+class moduleFormSet(BaseFormSet):
+    def __init__(self, *args, **kwargs):
+        super(moduleFormSet, self).__init__(*args, **kwargs)
+#         for form in self.forms:
+#             form.empty_permitted = False
+    def clean(self):
+        
+        if any(self.errors):
+            # Don't bother validating the formset unless each form is valid on its own
+            return
+        l = []
+        for form in self.forms:
+            nom = form.cleaned_data['nom']
+            uv = form.cleaned_data['uv']
+            for i in l:
+                if i[0] == nom and uv == i[1]:
+                    raise forms.ValidationError("Les modules doivent être deux à deux distinct par uv")
+                    break
+            
+            l.append([nom, uv])
+
 class notes(forms.Form):
     note = forms.FloatField(required=False, label="")
     nepasnoter = forms.BooleanField(required=False, label="Ne pas noter")
@@ -347,6 +382,13 @@ class AjouterSalle(forms.Form):
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     capacite = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'Capacite', 'class':'form-control input-perso'}))
     type = forms.ChoiceField(label="", choices=SALLES, initial=INCONNU_STATUT_SALLE)
+    def clean(self):
+
+        if Salle.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+            raise ValidationError(
+                "Le nom de la salle est déjà utlisé"
+            )
+        return self.cleaned_data
     def save(self):
         data = self.cleaned_data 
         nom = data['nom']
@@ -372,9 +414,9 @@ class AjouterModule(forms.Form):
     uv = AutoCompleteSelectField('uv', required=True, help_text=None)
     def clean(self):
 
-        if Module.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+        if Module.objects.filter(nom=self.cleaned_data.get('nom'),uv=self.cleaned_data.get('uv')).exists():
             raise ValidationError(
-                "Ce module est déjà créé"
+                "Ce module est déjà créé pour cet uv"
             )
         return self.cleaned_data   
     def save(self):
