@@ -12,7 +12,8 @@ from django.forms import ValidationError
 from django.forms.formsets import BaseFormSet
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
-    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB
+    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB, SEMAINE, LUNDI, \
+    SEMAINEAAVECINCO, SEMAINEINCONNU
 from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
 from Functions import addData, modiData
 
@@ -34,11 +35,32 @@ class fitrerCour(forms.Form):
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     isExam = forms.BooleanField(required=False, label="C'est un exam ?")
 class fitrerCalendrier(forms.Form):
-    pass
+    typeCour = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom du type de cour', 'class':'form-control input-perso'}))
+    salles = AutoCompleteSelectField('salles', required=False, help_text=None)
+    jour = forms.ChoiceField(choices=SEMAINEAAVECINCO, initial=SEMAINEINCONNU)
+    semaineMin = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'Semaine Min', 'class':'form-control input-perso'}))
+    semaineMax = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'Semaine Max', 'class':'form-control input-perso'}))
+    hmin = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'H Min', 'class':'form-control input-perso'}))
+    hmax = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'H Max', 'class':'form-control input-perso'}))
+    
 class AjouterCalendrier(forms.Form):
     pass
 class changeCalendrier(forms.Form):
-    pass
+    typeCour = AutoCompleteSelectField('typeCour', required=True, label="Type de cour", help_text=None)    
+    jour = forms.ChoiceField(choices=SEMAINEAAVECINCO, initial=SEMAINEINCONNU)
+    semaineMin = forms.IntegerField(required=False, label="Semaine Min", widget=forms.TextInput(attrs={'placeholder': 'Semaine Min', 'class':'form-control input-perso'}))
+    semaineMax = forms.IntegerField(required=False, label="Semaine Max", widget=forms.TextInput(attrs={'placeholder': 'Semaine Max', 'class':'form-control input-perso'}))
+    hmin = forms.IntegerField(required=False, label="H Min", widget=forms.TextInput(attrs={'placeholder': 'H Min', 'class':'form-control input-perso'}))
+    hmax = forms.IntegerField(required=False, label="H max", widget=forms.TextInput(attrs={'placeholder': 'H Max', 'class':'form-control input-perso'}))
+    def modif(self, idP):
+        data = self.cleaned_data
+        typeCour = data['typeCour']
+        jour = data['jour']
+        semaineMin = data['semaineMin']
+        semaineMax = data['semaineMax']
+        hmin = data['hmin']
+        hmax = data['hmax']
+        modiData.modCourLive(idP, typeCour=typeCour, jour=jour, semaineMin=semaineMin, semaineMax=semaineMax, hmin=hmin, hmax=hmax)
 class BaseNoteFormSet(BaseFormSet):
     def __init__(self, *args, **kwargs):
         super(BaseNoteFormSet, self).__init__(*args, **kwargs)
@@ -164,6 +186,18 @@ class addModule(forms.ModelForm):
     def savePerso(self, idP):
         modules = self.cleaned_data['modules']
         modiData.modGroupe(idP, modules=modules)
+class addSalle(forms.ModelForm):
+    class Meta:
+        model = Salle
+        fields = ['salles']
+
+    salles = AutoCompleteSelectMultipleField('salles', required=False, help_text=None)
+
+
+    def savePerso(self, idP):
+        salles = self.cleaned_data['salles']
+        modiData.modCourLive(idP, salles=salles)
+        
 class addGroupeModule(forms.ModelForm):
     class Meta:
         model = Module
@@ -447,7 +481,7 @@ class AjouterModule(forms.Form):
     uv = AutoCompleteSelectField('uv', required=True, help_text=None)
     def clean(self):
 
-        if Module.objects.filter(nom=self.cleaned_data.get('nom'),uv=self.cleaned_data.get('uv')).exists():
+        if Module.objects.filter(nom=self.cleaned_data.get('nom'), uv=self.cleaned_data.get('uv')).exists():
             raise ValidationError(
                 "Ce module est déjà créé pour cet uv"
             )

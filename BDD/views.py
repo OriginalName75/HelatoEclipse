@@ -32,8 +32,9 @@ def administration(request):
 
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
-def fiche(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins):
+def fiche(request, table, idP, filtre=None, page=None, nbparpage=None, nomClasser=None, plusOuMoins=None):
     table = int(table)
+    allllll = 'all'
     TABBLE = data.table(table)
     obj = TABBLE.objects.get(id=int(idP))
     listeliste = data.listinside(table)
@@ -47,9 +48,9 @@ def fiche(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins)
     for st in soustable:
     
         if st[0] == 0:
-            titrest.append([st[0], st[2], getattr(obj, st[3]).all(), st[4]])
-        else:
-            titrest.append([st[0], st[2], getattr(obj, st[3]).all()])
+            titrest.append([st[0], st[2], getattr(obj, st[3][0]).all(), st[3][1], st[4]])
+        elif st[0] == 1:
+            titrest.append([st[0], st[2], getattr(obj, st[3][0]).all(), st[4]])
     
     return render(request, 'BDD/ADMIN/fiche.html', locals())    
 
@@ -68,7 +69,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
         listeform = range(0, nbajout)
         lquery = data.quiry(table)
         table = int(table)
-        envoi =  False
+        envoi = False
         if nbajout < 100:
             if data.form(table, 3) == None:
                 Formset = formset_factory(data.form(table, 1), extra=nbajout)
@@ -193,9 +194,11 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def randomP(request):
-    #generator.courType(40, True)
+    # generator.courType(200, True)
+    generator.generEmploiedutemp()
+    
     # generator.personnes(300, True)
-    generator.groupe(10, True)
+    # generator.groupe(10, True)
     # generator.uvs(3,12, True)
     # generator.module(4, True)
     # generator.salles(2, 10, True)
@@ -277,11 +280,16 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
                 form.fields[cond[entier][0]].initial = l
             entier = entier + 1 
     taille = len(stforms)
+    print(taille)
     for st in soustable:
+        
         if ii < taille:
+            
             if st[0] == 0:
+                
                 titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3]).all(), st[4]], st[1]])
             else:
+                
                 titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3], st[1]).all()], st[1]])
         else:
             break        
@@ -295,7 +303,7 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     filtre = int(filtre)
     listAffich = data.listTable(table)
     listeliste = data.listinside(table)
-    
+    allllll = 'all'
     if page == None:
         page = 1
     else:
@@ -340,6 +348,8 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
                             cleanf = clean.strftime('%Y-%m-%d')
                         elif f[4] == 3:
                             cleanf = str(clean)
+                        elif f[4] == 4:
+                            cleanf = clean.id
                         else:
                             cleanf = clean
                         
@@ -368,23 +378,23 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     if nomClasser != 100:
         column = data.classer(table, nomClasser)
         if allP:
-            if filtre == 2:
+            if filtre == 2 and conditions != []:
                 rep = select(data.table(table), plus, column, listFiltre=conditions)
             else:
                 rep = select(data.table(table), plus, column)   
         else:
-            if filtre == 2:
+            if filtre == 2 and conditions != [] :
                 rep = select(data.table(table), plus, column, page, nbparpage, listFiltre=conditions)
             else:    
                 rep = select(data.table(table), plus, column, page, nbparpage)
     else:    
         if allP:
-            if filtre == 2:
+            if filtre == 2 and conditions != []:
                 rep = select(data.table(table), listFiltre=conditions)
             else:
                 rep = select(data.table(table))
         else :      
-            if filtre == 2:     
+            if filtre == 2 and conditions != []:     
                 rep = select(data.table(table), page=page, nbparpage=nbparpage, listFiltre=conditions)
             else:
                 rep = select(data.table(table), page=page, nbparpage=nbparpage)

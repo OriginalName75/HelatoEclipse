@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^watch/(?P<table>\d+)/(?P<filtre>\d+)$', 'BDD.views.watch'),
     url(r'^ajouter/(?P<table>\d+)/(?P<nbajout>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.ajouter'),
     url(r'^fiche/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.fiche'),
+    url(r'^fiche/(?P<table>\d+)/(?P<idP>\d+)$', 'BDD.views.fiche'),
+
     url(r'^change/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.change'),
     url(r'^areusure/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<nor>\d+)/(?P<which>\d+)/$', 'BDD.views.areusure'),
     url(r'^ajax_select/', include(ajax_select_urls)),

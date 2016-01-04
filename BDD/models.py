@@ -79,18 +79,19 @@ class TypeCour(models.Model):
     profs = models.ManyToManyField(Personne, blank=True)
     groupe = models.ManyToManyField(Groupe, blank=True)
     isExam = models.BooleanField()
-    
+    def __str__ (self):
+        return self.nom
 class Cour(models.Model):
     typeCour = models.ForeignKey(TypeCour)
     salles = models.ManyToManyField(Salle, blank=True)
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
     semaineMin = models.IntegerField()
     semaineMax = models.IntegerField()
-    jour = models.IntegerField()
+    jour = models.IntegerField(choices=SEMAINE, default=LUNDI)
     hmin = models.IntegerField()
     hmax = models.IntegerField()
     def __str__ (self):
-        return self.nom 
+        return self.typeCour.nom
 
 
    

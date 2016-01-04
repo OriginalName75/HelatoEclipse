@@ -22,6 +22,15 @@
 			{{ obj|getS:dd.1 }}
 		{% elif dd.0 == 2 %}
 			{{ obj|getSD:dd.1 }}
+		{% elif dd.0 == 3 %}
+					 - 
+					{% for l in obj|getS:dd.1|getSD:allllll %}
+						
+						 {{ l }}
+						  - 
+					{% empty %}
+						non atribué
+					{% endfor %}
 		{% else %}
 			{{ obj|getS:dd.1|getS:dd.2 }}
 		{% endif %}
@@ -42,9 +51,13 @@
 			<tr>
 				<td>
 					{% if dd.0 == 0 %}
-						{{ ddd|getS:dd.3 }}
+						<a href="/fiche/{{ dd.4 }}/{{ ddd.id }}" target="_blank">
+							{{ ddd|getS:dd.3 }}
+						</a>
 					{% else %}
-						{{ ddd }}
+						<a href="/fiche/{{ dd.3 }}/{{ ddd.id }}" target="_blank">
+							{{ ddd }}
+						</a>
 					{% endif %}
 				</td>
 			</tr>

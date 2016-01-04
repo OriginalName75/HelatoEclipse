@@ -83,20 +83,29 @@ personnes par page
 	
 	<tr>
 		{% for dd in listeliste %}
-		<td>
-		{% if dd.0 == 0 %}
-		{{ d|getS:dd.1 }}
-		{% elif dd.0 == 2 %}
-		{{ d|getSD:dd.1 }}
-		{% else %}
-		{{ d|getS:dd.1|getS:dd.2 }}
-		{% endif %}
-	    </td>
+			<td>
+				{% if dd.0 == 0 %}
+					{{ d|getS:dd.1 }}
+				{% elif dd.0 == 3 %}
+					 - 
+					{% for l in d|getS:dd.1|getSD:allllll %}
+						
+						 {{ l }}
+						  - 
+					{% empty %}
+						non atribué
+					{% endfor %}
+				{% elif dd.0 == 2 %}
+					{{ d|getSD:dd.1 }}
+				{% else %}
+					{{ d|getS:dd.1|getS:dd.2 }}
+				{% endif %}
+			</td>
 		{% endfor %}
 		<td>
-		<a href="/fiche/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">f</a>
-		<a href="/change/{{ table }}/{{ d.id }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">m</a> 
-		<a href="/delete/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/0">x</a>
+			<a href="/fiche/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">f</a>
+			<a href="/change/{{ table }}/{{ d.id }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">m</a> 
+			<a href="/delete/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/0">x</a>
 		</td>
 	</tr>
 {% empty %}

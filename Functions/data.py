@@ -5,7 +5,7 @@ Created on 30 oct. 2015
 '''
 from BDD import forms
 from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_TYPE, \
-    INCONNU_STATUT_SALLE
+    INCONNU_STATUT_SALLE, SEMAINEINCONNU
 from BDD.forms import fitrerP, AjouterP, fitrerGroupe
 from BDD.models import Personne, Cour, Groupe, UV, Module, Salle, Note, \
     horaireProf, TypeCour
@@ -23,6 +23,7 @@ def ficheAfter(t):
     
     
     return reponse
+        
 def quiry(t):
     """ gestion de correction automatique des forms """
     l = []
@@ -38,8 +39,7 @@ def quiry(t):
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['uv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'])
     elif t == 4:
-        l.append(['typeCour', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['salles', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        pass
         
     elif t == 7:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
@@ -71,7 +71,7 @@ def formsoustable(table):
     elif table == 3:
         l.append([forms.addGroupeModule, 'groupes', 1, 'groupes', Groupe, 'groupes'])
     elif table == 4:
-        pass
+        l.append([forms.addSalle, 'salles', 1, 'salles', Salle, 'salles'])
     elif table == 5:
         pass
     elif table == 6:
@@ -94,29 +94,49 @@ def links(table):
     elif table == 2:
         l.append(['/watch/3/0', 'Lui ajouter des modules'])
     return l  
+        
+        
+        
 def soustable(table):
-    """ pour les manytomany dans la fiche """
+    """ pour les manytomany dans la fiche et modifier """
+    
+    """ [a, b, c, d] 
+    
+    a=0 : taille de d est de 2
+    a=1 : taille de d est de 1
+    a=2 : taille de d est de 1 et on affiche pas dans fiche seulement dans modifier
+    b=0 : normal
+    b=1: il y a un set
+    c= nom de la caract
+    d = lien
+    
+    
+    
+    
+    """
+    
     l = []
     if table == 1:
-        l.append([1, 0, 'Personnes', 'personnes'])
-        l.append([1, 0, 'Modules', 'modules'])
+        l.append([1, 0, 'Personnes', ['personnes'], 0])
+        l.append([1, 0, 'Modules', ['modules'], 3])
+        l.append([0, 1, 'Cours', ['typecour_set', 'nom'], 7])
     elif table == 2:
-        l.append([0, 1, 'Modules', 'module_set', 'nom'])
+        l.append([0, 1, 'Modules', ['module_set', 'nom'], 3])
     elif table == 3:
-        l.append([0, 1, 'Groupes', 'groupe_set', 'nom'])
+        l.append([0, 1, 'Groupes', ['groupe_set', 'nom'], 1])
     elif table == 4:
-        pass
+        l.append([2, 0, 'Salles', ['salles'], 5])
     elif table == 5:
         pass
     elif table == 6:
         pass
     elif table == 7:
-        l.append([0, 1, 'Groupes', 'groupe', 'nom'])
-        l.append([1, 1, 'Profs', 'profs'])
+        l.append([0, 1, 'Groupes', ['groupe', 'nom'], 1])
+        l.append([1, 1, 'Profs', ['profs'], 0])
     elif table == 0:
         
-        l.append([0, 1, 'Groupes', 'groupe_set', 'nom'])
-        l.append([1, 1, 'Horaires', 'horaireprof_set']) 
+        l.append([0, 1, 'Groupes', ['groupe_set', 'nom'], 1])
+        l.append([1, 1, 'Horaires', ['horaireprof_set'], -1]) 
     
     return l
 def listinside(t):
@@ -131,7 +151,15 @@ def listinside(t):
         listeliste.append([0, 'nom'])
         listeliste.append([1, 'uv', 'nom'])
     elif t == 4:
-        listeliste.append([0, 'annee'])
+        listeliste.append([0, 'typeCour'])
+        listeliste.append([3, 'salles'])
+        listeliste.append([2, 'get_jour_display'])
+        listeliste.append([0, 'semaineMin'])
+        listeliste.append([0, 'semaineMax'])
+        listeliste.append([0, 'hmin'])
+        listeliste.append([0, 'hmax'])
+        
+        listeliste.append([0, 'uploadDate'])
     elif t == 6:
         listeliste.append([0, 'note'])
         listeliste.append([0, 'personne'])
@@ -171,7 +199,14 @@ def listTable(t):
     elif t == 2:
         l.append(['Nom', 1])
     elif t == 4:
-        l.append(['Année', 1])
+        l.append(['Cour', 1])
+        l.append(['Salles', 2])
+        l.append(['Jour', 3])
+        l.append(['Début seamaine', 4])
+        l.append(['Fin de seamaine', 5])
+        l.append(['H début', 6])
+        l.append(['H fin', 7])
+        l.append(['Ajout', 8])
     elif t == 3:
         l.append(['Nom', 1])
         l.append(['UV', 2])
@@ -216,7 +251,7 @@ def table(t):
     elif t == 3:
         return Module
     elif t == 4:
-        pass
+        return Cour
     elif t == 5:
         return Salle
     elif t == 6:
@@ -234,8 +269,20 @@ def changecond(table, cond, conditions, obj):
         cond.append(('nom', 0))
         conditions.append(obj.nom)
     elif table == 4:
-        cond.append(('annee', 0))
-        conditions.append(obj.annee)
+        cond.append(('typeCour', 0))
+        conditions.append(obj.typeCour.id)
+        cond.append(('jour', 0))
+        conditions.append(obj.jour)
+        cond.append(('semaineMin', 0))
+        conditions.append(obj.semaineMin)
+        cond.append(('semaineMax', 0))
+        conditions.append(obj.semaineMax)
+        cond.append(('hmin', 0))
+        conditions.append(obj.hmin)
+        cond.append(('hmax', 0))
+        conditions.append(obj.hmax)
+        
+        
     elif table == 6:
         cond.append(('note', 0))
         conditions.append(obj.note)
@@ -306,7 +353,20 @@ def classer(t, nomClasser):
     elif t == 2:
         column = 'nom'
     elif t == 4:
-        column = 'annee'
+        if nomClasser == 1:
+            column = 'typeCour__nom'
+        elif nomClasser == 2:
+            column = 'salles'
+        elif nomClasser == 4:
+            column = 'semaineMin'
+        elif nomClasser == 5:
+            column = 'semaineMax'
+        elif nomClasser == 6:
+            column = 'hmin'
+        elif nomClasser == 7:
+            column = 'hmax'
+        else:
+            column = 'jour'
     elif t == 5:
         if nomClasser == 1:
             column = 'nom'
@@ -368,7 +428,13 @@ def filtre(t):
     elif t == 2:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
     elif t == 4:
-        l.append(['annee', 'annee', "", 'annee', 0])
+        l.append(['typeCour', 'typeCour', "", 'typeCour__nom__icontains', 0])
+        l.append(['salles', 'salles', None, 'salles', 4])
+        l.append(['jour', 'jour', SEMAINEINCONNU, 'jour', 1])
+        l.append(['semaineMin', 'semaineMin', None, 'semaineMin', 0])
+        l.append(['semaineMax', 'semaineMax', None, 'semaineMax', 0])
+        l.append(['hmin', 'hmin', None, 'hmin', 0])
+        l.append(['hmax', 'hmax', None, 'hmax', 0])
     elif t == 3:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
         l.append(['uv', 'uv', "", 'uv__nom', 3])
@@ -484,7 +550,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeNote(post)
         elif n == 3:
-            return forms.NomFormSet
+            return forms.BaseNoteFormSet
         else:
             if post == None: 
                 return forms.AjouterNote

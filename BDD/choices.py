@@ -22,6 +22,8 @@ JEUDI=3
 VENDREDI=4
 SAMEDI=5
 DIMANCHE=6
+SEMAINEINCONNU=100
+
 CHOICESNB=[]
 for i in range(1,20):
     CHOICESNB.append((i,str(i)))
@@ -31,6 +33,8 @@ SEMI=1
 VAC=2
 VACANCETYPE=((PASVAC,'Pas de vacance'),(SEMI,'Un peu en vac'),(VAC,'Vacance'))    
 SEMAINE = ((LUNDI, 'Lundi'), (MARDI, 'Mardi'), (MECREDI, 'Mecredi'), (JEUDI, 'Jeudi'), (VENDREDI, 'Vendredi'), (SAMEDI, 'Samedi'), (DIMANCHE, 'Dimanche'))
+SEMAINEAAVECINCO = ((SEMAINEINCONNU, 'Inconnue'), (LUNDI, 'Lundi'), (MARDI, 'Mardi'), (MECREDI, 'Mecredi'), (JEUDI, 'Jeudi'), (VENDREDI, 'Vendredi'), (SAMEDI, 'Samedi'), (DIMANCHE, 'Dimanche'))
+
 SALLES = ((INCONNU_STATUT_SALLE, 'Type inconnu'), (CLASSE_STATUT, 'Classe'), (LABO_STATUT, 'Labo'), (INFO_STATUT, 'Info'))
 SEXE = ((INCONNU_STATUT, 'Sexe Inconnu'), (HOMME_STATUT, 'Homme'), (FEMME_STATUT, 'Femme'))
 TYPE = ((INCONNU_STATUT_TYPE, 'Statut Inconnu'), (PROF_STATUT, 'Prof/Chercheur'), (ELEVE_STATUT, 'Eleve'), (ADMINISTRATION_STATUT, 'Administration'), (ADMINISTRATEUR_STATUT, 'Administrateur Du Site'))

@@ -6,6 +6,31 @@ Created on 30 oct. 2015
 from BDD import models
 from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_SALLE
 
+
+
+####################### AJOUT #################
+
+def modCourLive(idP, salles=None, typeCour=None, jour=None, semaineMin=None, semaineMax=None, hmin=None, hmax=None):
+    c = models.Cour.objects.filter(id=idP)[0]
+    if salles != None:
+        c.salles = salles
+    if typeCour != None:
+        c.typeCour = typeCour
+    if jour != None:
+        c.jour = jour
+    if semaineMin != None:
+        c.semaineMin = semaineMin
+    if semaineMax != None:
+        c.semaineMax = semaineMax
+    if hmin != None:
+        c.hmin = hmin
+    if hmax != None:
+        c.hmax = hmax
+    c.save()
+
+
+########################### FIN AJOUT #######################
+
 ######################## mod ,""""""""""""""""""""""
 def modGroupe(idP, nom=None, personnes=None, modules=None):
     ######################## fin mod ,""""""""""""""""""""""
