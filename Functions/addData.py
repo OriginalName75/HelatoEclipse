@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from BDD import models
-from BDD.choices import PROF_STATUT
-from BDD.models import Personne, horaireProf
+from BDD.choices import PROF_STATUT, ADMINISTRATEUR_STATUT
+from BDD.models import Personne, horaireProf, Cour
 
 
 def checkNaddPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None, errors=None):
@@ -24,7 +24,13 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
     user.last_name = nom
     if email != None:
         user.email = email
-    if int(typeP) == 3:
+        #### change###
+        user.has_perm("BDD.add_note")
+        user.has_perm("BDD.change_note")
+        user.has_perm("BDD.delete_note")
+        user.is_staff=True
+        ### fin ##"
+    if typeP == ADMINISTRATEUR_STATUT:
         user.is_superuser = True
     user.save()
     p = models.Personne()
@@ -72,18 +78,39 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
             h.hmaxApresMidi = 8
             h.hminMatin = 1
             h.hmaxMatin = 3
-            h.save()        
-############################# modifié ######################        
+            h.save()     
+            
+            
+############################# modifiï¿½ ######################                   
+def addCalendrier(typeCour,jour,semaineMin,semaineMax,hmin,hmax,salles):
+    c = Cour()
+    c.typeCour = typeCour
+    c.jour = jour
+    
+    c.uploadDate = timezone.now()
+    c.semaineMin = semaineMin
+    c.semaineMax = semaineMax
+    c.hmin = hmin
+    c.hmax = hmax
+    c.save()
+    c.salles=salles
+    
+            
+            
+            
+############################# fin modifiï¿½ ######################              
+                     
+############################# modifiï¿½ ######################        
 def addGroupe(nomm, personnes=None, modules=None):
-############################# fin modifié ######################  
+############################# fin modifiï¿½ ######################  
     c = models.Groupe()
     c.nom = nomm
     c.uploadDate = timezone.now()
     c.save()
-    ############################# modifié ######################   
+    ############################# modifiï¿½ ######################   
     if (modules!=None):
         c.modules=modules
-    ############################# fin modifié ######################   
+    ############################# fin modifiï¿½ ######################   
     
     
     if (personnes!=None):
@@ -108,14 +135,21 @@ def addModule(nom, uv=None):
     c.nom = nom
     c.uv = uv
     c.save()
-def addNote(note, personne, module):
-   
+    ############################# modifiï¿½ ######################      
+def addNote(note, personne, module, prof):
+    
     c = models.Note()
     c.note = note
     c.personne = personne
     c.module = module
     c.uploadDate = timezone.now()
+    c.prof=prof
     c.save()
+    
+    
+############################# fin modifiï¿½ ######################      
+    
+    
 def addSalle(nom, capacite=None, typee=None):
    
     c = models.Salle()

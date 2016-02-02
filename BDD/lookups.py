@@ -4,9 +4,6 @@ Created on 19 nov. 2015
 @author: mabadie_2
 '''
 from ajax_select import register, LookupChannel
-from django.db.models.query_utils import Q
-from django.utils.html import escape
-
 from BDD.models import Personne, Groupe, Module, UV, Salle, TypeCour
 
 

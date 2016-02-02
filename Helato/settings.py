@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'BDD',
     'ajax_select', 
     'BDD.templatetags',
+    
 )
 
 MIDDLEWARE_CLASSES = (

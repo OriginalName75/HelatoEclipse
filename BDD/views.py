@@ -2,30 +2,29 @@
 
 from datetime import datetime
 
+from ajax_select.fields import autoselect_fields_check_can_add
 from django import http
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-
 from django.forms.formsets import formset_factory
-
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
+from BDD.choices import PROF_STATUT
 from BDD.forms import nbAjout
-
+from BDD.models import Personne, Note
 from Functions import  data
 from Functions import generator
-
 from Functions.selectData import select
 
 
 @login_required(login_url='/connexion')
 def index(request):
-    return render(request, 'BDD/index.html')    
+    PR = PROF_STATUT
+    return render(request, 'BDD/index.html', locals())    
 
 @login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def administration(request):
     return render(request, 'BDD/ADMIN/admin.html')    
 
@@ -57,11 +56,13 @@ def fiche(request, table, idP, filtre=None, page=None, nbparpage=None, nomClasse
 
 
 @login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOuMoins, first=True):
     
     nbajout = int(nbajout)
     table = int(table)
+    if not request.user.is_superuser and table != 6:
+        return index(request)
     ajj = data.ajouterA(table)
     ficheAfter = data.ficheAfter(table)
     if nbajout > 0 and nbajout != 100:
@@ -71,6 +72,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
         table = int(table)
         envoi = False
         if nbajout < 100:
+            
             if data.form(table, 3) == None:
                 Formset = formset_factory(data.form(table, 1), extra=nbajout)
             else:
@@ -86,8 +88,11 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     
                     
                     for form in formset:
-                        
-                        idP = form.save()
+                        if table == 6:
+                            idP = form.save(request.user.personne)
+                            
+                        else:
+                            idP = form.save()
                     
                     if not ficheAfter:
                         
@@ -136,7 +141,10 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                 if formset.is_valid():
                     jj = 0
                     for f in formset:
-                        f.save(solo, [x[jj] for x in multi])
+                        if table == 6:
+                            f.save(solo, [x[jj] for x in multi],request.user.personne)
+                        else:
+                            f.save(solo, [x[jj] for x in multi])
                         jj += 1
                     nbajout = 0  
                     return http.HttpResponseRedirect('/watch/' + str(table) + '/' + str(filtre))
@@ -175,6 +183,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                 formAjj = ajj[0]()
             form = nbAjout() 
             
+            
     return render(request, 'BDD/ADMIN/ajouter.html', locals())
 
 
@@ -194,14 +203,29 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def randomP(request):
-    # generator.courType(200, True)
+    
+        
+    
+    generator.personnes(300, True)
+    if not hasattr(request.user, 'personne'):
+        p = Personne()
+        p.user = request.user
+        p.filter="Superadmin"
+        p.save()
+        request.user.first_name = "Dieu"
+        request.user.last_name = "Tout puissan"
+        request.user.save()
+       
+    generator.groupe(10, True)
+    generator.courType(200, True)
+    generator.salles(2, 10, True)
+     
+    generator.uvs(3, 12, True)
+    generator.module(4, True)
     generator.generEmploiedutemp()
     
-    # generator.personnes(300, True)
-    # generator.groupe(10, True)
-    # generator.uvs(3,12, True)
-    # generator.module(4, True)
-    # generator.salles(2, 10, True)
+   
+    
     text = """done"""
     return HttpResponse(text)
 @login_required(login_url='/connexion')
@@ -287,22 +311,25 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
             
             if st[0] == 0:
                 
-                titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3]).all(), st[4]], st[1]])
+                titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3][0]).all(), st[3][1]], st[1]])
             else:
                 
-                titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3], st[1]).all()], st[1]])
+                titrest.append([stforms[ii], st[0], st[2], [getattr(obj, st[3][0], st[1]).all()], st[1]])
         else:
             break        
         ii = ii + 1  
     return render(request, 'BDD/ADMIN/change.html', locals())       
 @login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, plusOuMoins=None):
-    table = int(table)  
+    table = int(table)
+    if not request.user.is_superuser and table != 6:
+        return index(request)
     FILTRE = data.filtre(table)
     filtre = int(filtre)
     listAffich = data.listTable(table)
     listeliste = data.listinside(table)
+    print (listeliste)
     allllll = 'all'
     if page == None:
         page = 1
@@ -363,8 +390,11 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     if filtre == 2 and conditions == []:
         try:
             conditions = request.session['conditions']
-            cond = request.session['cond']
             
+            cond = request.session['cond']
+            if table == 6 and not request.user.is_superuser:
+                    conditions.append(("prof", request.user.personne))
+                    cond.append(("prof", 0))
             entier = 0
             for l in conditions:
                 if cond[entier][1] == 1:
@@ -381,23 +411,43 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
             if filtre == 2 and conditions != []:
                 rep = select(data.table(table), plus, column, listFiltre=conditions)
             else:
-                rep = select(data.table(table), plus, column)   
+                if table == 6 and not request.user.is_superuser:
+                    conditions = []
+                    conditions.append(("prof", request.user.personne))
+                    rep = select(data.table(table), plus, column, listFiltre=conditions)  
+                else:
+                    rep = select(data.table(table), plus, column)   
         else:
             if filtre == 2 and conditions != [] :
                 rep = select(data.table(table), plus, column, page, nbparpage, listFiltre=conditions)
             else:    
-                rep = select(data.table(table), plus, column, page, nbparpage)
+                if table == 6 and not request.user.is_superuser:
+                    conditions = []
+                    conditions.append(("prof", request.user.personne))
+                    rep = select(data.table(table), plus, column, page, nbparpage, listFiltre=conditions)   
+                else:
+                    rep = select(data.table(table), plus, column, page, nbparpage)
     else:    
         if allP:
             if filtre == 2 and conditions != []:
                 rep = select(data.table(table), listFiltre=conditions)
             else:
-                rep = select(data.table(table))
+                if table == 6 and not request.user.is_superuser:
+                    conditions = []
+                    conditions.append(("prof", request.user.personne))
+                    rep = select(data.table(table), listFiltre=conditions) 
+                else:
+                    rep = select(data.table(table))
         else :      
             if filtre == 2 and conditions != []:     
                 rep = select(data.table(table), page=page, nbparpage=nbparpage, listFiltre=conditions)
             else:
-                rep = select(data.table(table), page=page, nbparpage=nbparpage)
+                if table == 6 and not request.user.is_superuser:
+                    conditions = []
+                    conditions.append(("prof", request.user.personne))
+                    rep = select(data.table(table), page=page, nbparpage=nbparpage, listFiltre=conditions)
+                else:
+                    rep = select(data.table(table), page=page, nbparpage=nbparpage)
     reponserecherche = rep[0]
     n = rep[1]    
     pagemax = nbparpage * page >= n

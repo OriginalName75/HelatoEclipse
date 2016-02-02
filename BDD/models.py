@@ -71,9 +71,10 @@ class Note(models.Model):
     note = models.IntegerField()
     personne = models.ForeignKey(Personne) 
     module = models.ForeignKey(Module)
+    prof= models.ForeignKey(Personne, related_name="ANoter")
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
     def __str__ (self):
-        return self.note     
+        return str(self.note)    
 class TypeCour(models.Model):
     nom = models.CharField(max_length=30)
     profs = models.ManyToManyField(Personne, blank=True)

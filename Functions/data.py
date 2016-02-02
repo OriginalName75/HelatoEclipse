@@ -23,7 +23,6 @@ def ficheAfter(t):
     
     
     return reponse
-        
 def quiry(t):
     """ gestion de correction automatique des forms """
     l = []
@@ -39,7 +38,12 @@ def quiry(t):
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['uv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'])
     elif t == 4:
-        pass
+        l.append(['jour', "if ((VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
+        l.append(['semaineMin', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'])
+        l.append(['semaineMax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'])
+        l.append(['hmin', "if (VAL && VAL>=0 && VAL<=10) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'])
+        l.append(['hmax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'])
+      
         
     elif t == 7:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
@@ -71,7 +75,8 @@ def formsoustable(table):
     elif table == 3:
         l.append([forms.addGroupeModule, 'groupes', 1, 'groupes', Groupe, 'groupes'])
     elif table == 4:
-        l.append([forms.addSalle, 'salles', 1, 'salles', Salle, 'salles'])
+        pass
+        #l.append([forms.addSalle, 'salles', 1, 'salles', Salle, 'salles'])
     elif table == 5:
         pass
     elif table == 6:
@@ -132,11 +137,11 @@ def soustable(table):
         pass
     elif table == 7:
         l.append([0, 1, 'Groupes', ['groupe', 'nom'], 1])
-        l.append([1, 1, 'Profs', ['profs'], 0])
+        l.append([1, 0, 'Profs', ['profs'], 0])
     elif table == 0:
         
         l.append([0, 1, 'Groupes', ['groupe_set', 'nom'], 1])
-        l.append([1, 1, 'Horaires', ['horaireprof_set'], -1]) 
+        l.append([1, 1, 'Horaires', ['horaireprof_set'], 1]) 
     
     return l
 def listinside(t):
@@ -164,6 +169,7 @@ def listinside(t):
         listeliste.append([0, 'note'])
         listeliste.append([0, 'personne'])
         listeliste.append([1, 'module', 'nom'])
+        listeliste.append([0, 'prof'])
         listeliste.append([0, 'uploadDate'])
     elif t == 7:
         listeliste.append([0, 'nom'])
@@ -218,7 +224,8 @@ def listTable(t):
         l.append(['Note', 1])
         l.append(['Eleve', 2])
         l.append(['Module', 3])
-        l.append(['Ajout', 4])
+        l.append(['Celui qui à noté', 4])
+        l.append(['Ajout', 5])
     elif t == 7:
         l.append(['Nom', 1])
         l.append(['Exam', 2])
@@ -238,8 +245,6 @@ def listTable(t):
         
         l.append(['Adresse', 11])
         l.append(['Ajout', 12])
-        
-      
         
     return l
 def table(t):
@@ -339,7 +344,7 @@ def changecond(table, cond, conditions, obj):
             cond.append(('dateDeNaissance', 1))
         if obj.lieuDeNaissance != None:
             conditions.append(obj.lieuDeNaissance)
-            cond.append(('lieuDeNaissance', 0))
+            cond.append(('l*ieuDeNaissance', 0))
         if obj.numeroDeTel != None:
             conditions.append(obj.numeroDeTel)
             cond.append(('numeroDeTel', 0)) 
@@ -532,7 +537,7 @@ def form(t, n, post=None):
             else:
                 return forms.changeCalendrier(post)
         elif n == 3:
-            return forms.NomFormSet
+            return forms.CalendrierFormSet
         else:
             if post == None: 
                 return forms.AjouterCalendrier

@@ -44,7 +44,47 @@ class fitrerCalendrier(forms.Form):
     hmax = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'H Max', 'class':'form-control input-perso'}))
     
 class AjouterCalendrier(forms.Form):
-    pass
+    typeCour = AutoCompleteSelectField('typeCour', required=True, label="Type de cour", help_text=None)    
+    jour = forms.ChoiceField(choices=SEMAINEAAVECINCO, initial=SEMAINEINCONNU, required=True)
+    salles = AutoCompleteSelectMultipleField('salles', required=True, help_text=None)
+    semaineMin = forms.IntegerField(required=True, label="Semaine Min", widget=forms.TextInput(attrs={'placeholder': 'Semaine Min', 'class':'form-control input-perso'}))
+    semaineMax = forms.IntegerField(required=True, label="Semaine Max", widget=forms.TextInput(attrs={'placeholder': 'Semaine Max', 'class':'form-control input-perso'}))
+    hmin = forms.IntegerField(required=True, label="H Min", widget=forms.TextInput(attrs={'placeholder': 'H Min', 'class':'form-control input-perso'}))
+    hmax = forms.IntegerField(required=True, label="H max", widget=forms.TextInput(attrs={'placeholder': 'H Max', 'class':'form-control input-perso'}))
+    def clean(self):
+        
+        if (self.cleaned_data.get('semaineMin')==None or self.cleaned_data.get('semaineMax')==None or self.cleaned_data.get('semaineMin')>52 or self.cleaned_data.get('semaineMin')<0 or self.cleaned_data.get('semaineMax')>52 or self.cleaned_data.get('semaineMax')<0):
+
+            raise ValidationError(
+                "Les semaines doivent être positives 0 et strictement plus petit que 53"
+            )
+        if (self.cleaned_data.get('semaineMax')<self.cleaned_data.get('semaineMin')):
+
+            raise ValidationError(
+                "Les semaine min doit être < que semaine max"
+            )
+        if (self.cleaned_data.get('hmax')==None or self.cleaned_data.get('hmin')==None or self.cleaned_data.get('hmax')<self.cleaned_data.get('hmin')):
+
+            raise ValidationError(
+                "Les h min doit être < que h max"
+            )
+        if (self.cleaned_data.get('hmin')>0 or self.cleaned_data.get('hmin')<10 or self.cleaned_data.get('hmax')>0 or self.cleaned_data.get('hmax')<10):
+
+            raise ValidationError(
+                "Les heures doivent être positifs 0 et strictement plus petit que 11"
+            )
+        return self.cleaned_data
+    def save(self):
+        
+        data = self.cleaned_data
+        typeCour = data['typeCour']
+        jour = data['jour']
+        salles=data['salles']
+        semaineMin = data['semaineMin']
+        semaineMax = data['semaineMax']
+        hmin = data['hmin']
+        hmax = data['hmax']
+        return addData.addCalendrier(typeCour, jour, semaineMin, semaineMax, hmin, hmax, salles)
 class changeCalendrier(forms.Form):
     typeCour = AutoCompleteSelectField('typeCour', required=True, label="Type de cour", help_text=None)    
     jour = forms.ChoiceField(choices=SEMAINEAAVECINCO, initial=SEMAINEINCONNU)
@@ -77,12 +117,23 @@ class BaseNoteFormSet(BaseFormSet):
 #             if title in titles:
 #                 raise forms.ValidationError("Articles in a set must have distinct titles.")
 #             titles.append(title)
-
+class CalendrierFormSet(BaseFormSet):
+    def __init__(self, *args, **kwargs):
+        super(CalendrierFormSet, self).__init__(*args, **kwargs)
+        for form in self.forms:
+            
+            form.empty_permitted = False
+    def clean(self):
+        
+        if any(self.errors):
+            # Don't bother validating the formset unless each form is valid on its own
+            return
+    
 class PersonneFormSet(BaseFormSet):
     def __init__(self, *args, **kwargs):
         super(PersonneFormSet, self).__init__(*args, **kwargs)
-#         for form in self.forms:
-#             form.empty_permitted = False
+        for form in self.forms:
+            form.empty_permitted = False
     def clean(self):
         
         if any(self.errors):
@@ -142,10 +193,10 @@ class notes(forms.Form):
             )
         
         return self.cleaned_data  
-    def save(self, solo, multi):
+    def save(self, solo, multi, prof):
         if (not self.cleaned_data['nepasnoter']):
             
-            addData.addNote(self.cleaned_data['note'], multi[0][0], solo[0])
+            addData.addNote(self.cleaned_data['note'], multi[0][0], solo[0], prof)
 class chooseGroupe(forms.ModelForm):
     class Meta:
         model = Personne
@@ -413,12 +464,12 @@ class AjouterNote(forms.Form):
     note = forms.IntegerField(label="", required=True, widget=forms.TextInput(attrs={'placeholder': 'Note', 'class':'form-control input-perso'}))
     personne = AutoCompleteSelectField('personnes', required=True, help_text=None)
     module = AutoCompleteSelectField('module', required=True, help_text=None)
-    def save(self):
+    def save(self, prof):
         data = self.cleaned_data
         note = data['note']
         personne = data['personne']
         module = data['module']
-        addData.addNote(note, personne, module)            
+        addData.addNote(note, personne, module, prof)            
 class AjouterGroupe(forms.Form):
     nom = forms.CharField(required=True, label="", max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     personne = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)
@@ -491,3 +542,4 @@ class AjouterModule(forms.Form):
         nom = data['nom']
         uv = data['uv']
         addData.addModule(nom, uv)
+
