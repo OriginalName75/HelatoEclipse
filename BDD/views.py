@@ -2,7 +2,6 @@
 
 from datetime import datetime
 
-from ajax_select.fields import autoselect_fields_check_can_add
 from django import http
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
@@ -10,17 +9,74 @@ from django.forms.formsets import formset_factory
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from BDD.choices import PROF_STATUT
+from BDD.choices import PROF_STATUT, AJOUT, SALLESTATUT, MODIFIER
 from BDD.forms import nbAjout
-from BDD.models import Personne, Note
+from BDD.models import Personne, News
 from Functions import  data
 from Functions import generator
+from Functions.delete import supr_salles
+from Functions.news import addN
 from Functions.selectData import select
 
 
 @login_required(login_url='/connexion')
-def index(request):
+def index(request, plus=0):
     PR = PROF_STATUT
+    plus=int(plus)
+    new=News.objects.filter(personne__id__icontains=request.user.personne.id).order_by('-id')
+    maxx=new.count()
+    ajou=0
+    news=[]
+    l=0
+    i=0
+    fff=0
+    plus2=0
+    nb=1
+    first=True
+    if maxx>0:
+        while l<10 and i<maxx:
+            obj=new[i]
+            t=obj.type*100+obj.typeG
+            if i<maxx-1:
+                obj2=new[i+1]
+                tapres=obj2.type*100+obj2.typeG
+            else:
+                tapres=-2
+            if t==tapres:
+                nb=nb+1
+                
+                txt=addN(obj, nb, not plus==plus2+1,plus2+1)
+                if first:
+                    fff=ajou
+                    news.append(txt)
+                    ajou=ajou+1
+                    
+                else:
+                    
+                    news[fff]=txt
+              
+                first=False
+                if plus==plus2+1:
+                    
+                    news.append(obj.txt)
+                    ajou=ajou+1
+                
+               
+                    
+                
+            else:
+                l=l+1   
+                if nb==1 or plus==plus2+1:
+                    news.append(obj.txt)
+                    ajou=ajou+1
+                plus2=plus2+1
+                nbbbb=1
+                nb=1
+                first=True
+            i=i+1 
+            tavant=t
+        
+        
     return render(request, 'BDD/index.html', locals())    
 
 @login_required(login_url='/connexion')
@@ -73,11 +129,11 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
         envoi = False
         if nbajout < 100:
             
-            if data.form(table, 3) == None:
-                Formset = formset_factory(data.form(table, 1), extra=nbajout)
+            if data.form(request.user, table, 3) == None:
+                Formset = formset_factory(data.form(request.user, table, 1), extra=nbajout)
             else:
                 
-                Formset = formset_factory(data.form(table, 1), extra=nbajout, formset=data.form(table, 3))
+                Formset = formset_factory(data.form(request.user, table, 1), extra=nbajout, formset=data.form(request.user, table, 3))
             if request.method == 'POST' and first:
                 print("1")
                 formset = Formset(request.POST, request.FILES)
@@ -88,11 +144,9 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     
                     
                     for form in formset:
-                        if table == 6:
-                            idP = form.save(request.user.personne)
-                            
-                        else:
-                            idP = form.save()
+                        
+                        idP = form.save(request.user.personne)
+                        
                     
                     if not ficheAfter:
                         
@@ -188,13 +242,17 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
 
 
 @login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins, supri):
     supr = False
     table = int(table)
+    if not request.user.is_superuser and table != 6:
+        return index(request)
     p = data.table(table).objects.get(id=int(idP))
     if int(supri) == 1:
+        supr_salles(table, idP, request.user.personne)
         obj = data.table(table).objects.filter(id=int(idP))
+        
         obj.delete()
         supr = True
     
@@ -245,9 +303,11 @@ def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plu
         return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0)
     
 @login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, first=True):
     table = int(table)
+    if not request.user.is_superuser and table != 6:
+        return index(request)
     soustable = data.soustable(table)
     TABBLE = data.table(table)
     obj = TABBLE.objects.get(id=int(idP))
@@ -265,7 +325,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         for frm in stforms:
             
             if j == int(what) and frm[0].is_valid():
-                frm[0].savePerso(int(idP))
+                frm[0].savePerso(int(idP), request.user.personne, )
                 changed = True
             j += 1
         return http.HttpResponseRedirect('')
@@ -281,9 +341,9 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
             
     if (first and request.method == 'POST' and int(what) == 0):
         
-        form = data.form(table, 2, request.POST) 
+        form = data.form(request.user, table, 2, request.POST) 
         if form.is_valid():
-            form.modif(idP)    
+            form.modif(idP, request.user.personne)    
             changed = True
             
             
@@ -292,7 +352,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         cond = []
         conditions = []
         
-        form = data.form(table, 2)
+        form = data.form(request.user, table, 2)
         
         data.changecond(table, cond, conditions, obj)
          
@@ -357,7 +417,7 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     if filtre > 0:
         if request.method == 'POST':
            
-            form = data.form(table, 0, request.POST)
+            form = data.form(request.user, table, 0, request.POST)
                 
             if form.is_valid():
                 filtre = 2
@@ -386,7 +446,7 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
                 request.session['cond'] = cond
                 
         else:
-            form = data.form(table, 0)
+            form = data.form(request.user, table, 0)
     if filtre == 2 and conditions == []:
         try:
             conditions = request.session['conditions']

@@ -16,7 +16,10 @@ from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     SEMAINEAAVECINCO, SEMAINEINCONNU
 from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
 from Functions import addData, modiData
-
+class classUser(forms.Form):
+    def __init__(self, user=None, *args, **kwargs):
+        self.user=user
+        super(classUser, self).__init__(*args, **kwargs)
 
 class nbAjout(forms.Form):
     nb = forms.ChoiceField(label="Combien d'ajout ? :", choices=CHOICESNB)
@@ -223,9 +226,9 @@ class addGroupe(forms.ModelForm):
             initial['groupes'] = [t.pk for t in kwargs['instance'].groupe_set.all()]
         super(addGroupe, self).__init__(*args, **kwargs)
 
-    def savePerso(self, idP):
+    def savePerso(self, idP, p):
         groupes = self.cleaned_data['groupes']
-        modiData.modPersonne(idP, groupes=groupes)
+        modiData.modPersonne(p, idP, groupes=groupes)
 class addModule(forms.ModelForm):
     class Meta:
         model = Groupe
@@ -350,12 +353,12 @@ class changeSalle(forms.Form):
     capacite = forms.IntegerField(required=False, label="", widget=forms.TextInput(attrs={'placeholder': 'Capacite', 'class':'form-control input-perso'}))
     type = forms.ChoiceField(label="", choices=SALLES, initial=INCONNU_STATUT_SALLE)
 
-    def modif(self, idP):
+    def modif(self, idP,p):
         data = self.cleaned_data
         nom = data['nom']
         capacite = data['capacite']
         typee = data['type']
-        modiData.modSalle(idP, nom, capacite, typee)
+        modiData.modSalle(idP, p, nom, capacite, typee)
 class fitrerSalle(forms.Form):
 
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
@@ -402,7 +405,7 @@ class changeP(forms.Form):
     dateDeNaissance = forms.DateField(label="", required=False, input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'placeholder': 'Date naissance :jj/mm/aaaa', 'class':'form-control input-perso'}))
     lieuDeNaissance = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Lieu de Naissance', 'class':'form-control input-perso'}), required=False, max_length=100)
     numeroDeTel = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Numéro de téléphone', 'class':'form-control input-perso'}), required=False)
-    def modif(self, idP):
+    def modif(self, idP, p):
         data = self.cleaned_data
         nom = data['nom']
         prenom = data['prenom']
@@ -415,7 +418,7 @@ class changeP(forms.Form):
         dateDeNaissance = data['dateDeNaissance']
         lieuDeNaissance = data['lieuDeNaissance']
         numeroDeTel = data['numeroDeTel']
-        modiData.modPersonne(int(idP), nom, prenom, login, None, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, mail) 
+        modiData.modPersonne(p, int(idP), nom, prenom, login, None, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, mail) 
 
 class AjouterP(forms.Form):
     nom = forms.CharField(label="", required=True, max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
@@ -445,7 +448,7 @@ class AjouterP(forms.Form):
                 "Le nom d'utilisateur est déjà utlisé"
             )
         return self.cleaned_data
-    def save(self):
+    def save(self,p):
         data = self.cleaned_data
         nom = data['nom']
         prenom = data['prenom']
@@ -459,7 +462,7 @@ class AjouterP(forms.Form):
         dateDeNaissance = data['dateDeNaissance']
         lieuDeNaissance = data['lieuDeNaissance']
         numeroDeTel = data['numeroDeTel']
-        addData.addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, mail)
+        addData.addPersonne(p, nom, prenom, login, mdp, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, mail)
 class AjouterNote(forms.Form):
     note = forms.IntegerField(label="", required=True, widget=forms.TextInput(attrs={'placeholder': 'Note', 'class':'form-control input-perso'}))
     personne = AutoCompleteSelectField('personnes', required=True, help_text=None)
@@ -507,12 +510,12 @@ class AjouterSalle(forms.Form):
                 "Le nom de la salle est déjà utlisé"
             )
         return self.cleaned_data
-    def save(self):
+    def save(self, p):
         data = self.cleaned_data 
         nom = data['nom']
         capacite = data['capacite']
         typee = data['type']
-        addData.addSalle(nom, capacite, typee)
+        addData.addSalle(p, nom, capacite, typee)
 class AjouterUV(forms.Form):
     nom = forms.CharField(label="", required=True, max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     def save(self):

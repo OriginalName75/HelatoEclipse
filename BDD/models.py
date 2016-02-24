@@ -3,7 +3,8 @@ from django.db import models
 from django.utils.datetime_safe import datetime
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
-    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI
+    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI, TYPENEWS,\
+    TYPENEWSG, AJOUT
 
 
 # Create your models here.
@@ -94,15 +95,15 @@ class Cour(models.Model):
     def __str__ (self):
         return self.typeCour.nom
 
+class News(models.Model):
+    personne=models.ManyToManyField(Personne)
+    txt=models.CharField(max_length=100)
+    type = models.IntegerField(choices=TYPENEWS, default=INCONNU_STATUT_TYPE)
+    typeG= models.IntegerField(choices=TYPENEWSG, default=AJOUT)
+    uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
+    def __str__ (self):
+        return self.txt
 
-   
-       
-    
-    
-    
-    
-    
-    
     
      
     

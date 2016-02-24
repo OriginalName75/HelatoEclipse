@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from BDD import models
-from BDD.choices import PROF_STATUT, ADMINISTRATEUR_STATUT
+from BDD.choices import PROF_STATUT, ADMINISTRATEUR_STATUT, SALLESTATUT, AJOUT, \
+    SEXE, TYPE, PERSONNESTATUT
 from BDD.models import Personne, horaireProf, Cour
 
 
@@ -17,12 +18,13 @@ def checkNaddPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
     else :
         addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, email)
    
-def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None):
-    
+def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None):
+    txt="Vous avez ajouté " + prenom + " " + nom + " de login " + login + ", qui est " + str(SEXE[int(sexe)][1]) + " et qui est " + str(TYPE[int(typeP)][1]) +"."
     user = User.objects.create_user(username=login , password=mdp)
     user.first_name = prenom
     user.last_name = nom
-    if email != None:
+    if email != "" and email!=None:
+        txt= txt + " Son mail est " + str(email)
         user.email = email
         #### change###
         user.has_perm("BDD.add_note")
@@ -40,15 +42,21 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
             
     p.sexe = sexe
    
-    if adresse != None:
+    if adresse != "" and adresse != None:
         p.adresse = adresse
+        txt= txt + " Son adresse est " + adresse
     if promotion != None:
         p.promotion = promotion
-    if dateDeNaissance != None:
+        txt= txt + " Sa promotion est " + str(promotion)
+    if dateDeNaissance != "" and dateDeNaissance != None:
+        txt= txt + " Il/Elle est né(e) le " + str(dateDeNaissance)
         p.dateDeNaissance = dateDeNaissance
-    if lieuDeNaissance != None:
+        
+    if lieuDeNaissance != "" and lieuDeNaissance != None:
+        txt= txt + " Il/Elle est né(e) à " + str(lieuDeNaissance)
         p.lieuDeNaissance = lieuDeNaissance
-    if numeroDeTel != None:
+    if numeroDeTel != "" and numeroDeTel != None:
+        txt= txt + " Son noméro est le " + str(numeroDeTel)
         p.numeroDeTel = numeroDeTel
     stri = "{0} {1}".format(p.user.last_name, p.user.first_name)
     if Personne.objects.filter(filter=stri).count() > 0:
@@ -80,7 +88,13 @@ def addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=No
             h.hmaxMatin = 3
             h.save()     
             
-            
+    n=models.News()
+    n.txt=txt
+    n.typeG=AJOUT
+    n.type=PERSONNESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers)      
 ############################# modifi� ######################                   
 def addCalendrier(typeCour,jour,semaineMin,semaineMax,hmin,hmax,salles):
     c = Cour()
@@ -149,16 +163,34 @@ def addNote(note, personne, module, prof):
     
 ############################# fin modifi� ######################      
     
-    
-def addSalle(nom, capacite=None, typee=None):
-   
+### m ###   
+def addSalle(pers, nom, capacite=None, typee=None):
+### fm ###    
     c = models.Salle()
     c.nom = nom
     if typee != None:
         c.type = typee
     if capacite != None:
         c.capacite = capacite
-    c.save()    
+    c.save()
+    ### m ###     
+    n=models.News()
+    txt="Vous avez ajouté la salle " + nom
+    
+    if typee != None and int(typee)!=0:
+        txt = txt + " de type " + str(c.get_type_display())
+        if capacite != None:
+            txt=txt+ " et"
+    if capacite != None:
+        txt=txt+ " de " + str(capacite) + " places"   
+    n.txt=txt
+    n.typeG=AJOUT
+    n.type=SALLESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers)
+    ### fm ###   
+    
      
             
              

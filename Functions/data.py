@@ -344,7 +344,7 @@ def changecond(table, cond, conditions, obj):
             cond.append(('dateDeNaissance', 1))
         if obj.lieuDeNaissance != None:
             conditions.append(obj.lieuDeNaissance)
-            cond.append(('l*ieuDeNaissance', 0))
+            cond.append(('lieuDeNaissance', 0))
         if obj.numeroDeTel != None:
             conditions.append(obj.numeroDeTel)
             cond.append(('numeroDeTel', 0)) 
@@ -469,7 +469,7 @@ def filtre(t):
         l.append(['numeroDeTel', 'numeroDeTel', "", 'numeroDeTel', 0])
         
     return l
-def form(t, n, post=None):
+def form(user, t, n, post=None):
     """ LEs formulaires """
     if t == 1:
         if n == 0:

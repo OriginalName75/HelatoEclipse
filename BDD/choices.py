@@ -23,7 +23,11 @@ VENDREDI=4
 SAMEDI=5
 DIMANCHE=6
 SEMAINEINCONNU=100
-
+SALLESTATUT=1
+AJOUT=0
+MODIFIER=1
+SUPRIMER=2
+PERSONNESTATUT=2
 CHOICESNB=[]
 for i in range(1,20):
     CHOICESNB.append((i,str(i)))
@@ -38,3 +42,20 @@ SEMAINEAAVECINCO = ((SEMAINEINCONNU, 'Inconnue'), (LUNDI, 'Lundi'), (MARDI, 'Mar
 SALLES = ((INCONNU_STATUT_SALLE, 'Type inconnu'), (CLASSE_STATUT, 'Classe'), (LABO_STATUT, 'Labo'), (INFO_STATUT, 'Info'))
 SEXE = ((INCONNU_STATUT, 'Sexe Inconnu'), (HOMME_STATUT, 'Homme'), (FEMME_STATUT, 'Femme'))
 TYPE = ((INCONNU_STATUT_TYPE, 'Statut Inconnu'), (PROF_STATUT, 'Prof/Chercheur'), (ELEVE_STATUT, 'Eleve'), (ADMINISTRATION_STATUT, 'Administration'), (ADMINISTRATEUR_STATUT, 'Administrateur Du Site'))
+
+TYPENEWS = ((INCONNU_STATUT_TYPE, 'Statut Inconnu'), (SALLESTATUT, 'SALLE'), (PERSONNESTATUT, 'personne'))
+TYPENEWSG= ((AJOUT,'ajout'),(MODIFIER,'modifier'),(SUPRIMER,'suprilmer'),)
+
+
+
+
+def findchoice(ty, TUPLES):
+    strtyp=""
+        
+    for t in TUPLES:
+        
+        if int(ty)== int(t[0]):
+            strtyp=t[1]
+            break
+    return strtyp
+    
