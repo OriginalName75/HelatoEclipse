@@ -77,7 +77,7 @@ class AjouterCalendrier(forms.Form):
                 "Les heures doivent être positifs 0 et strictement plus petit que 11"
             )
         return self.cleaned_data
-    def save(self):
+    def save(self, p):
         
         data = self.cleaned_data
         typeCour = data['typeCour']
@@ -87,7 +87,7 @@ class AjouterCalendrier(forms.Form):
         semaineMax = data['semaineMax']
         hmin = data['hmin']
         hmax = data['hmax']
-        return addData.addCalendrier(typeCour, jour, semaineMin, semaineMax, hmin, hmax, salles)
+        return addData.addCalendrier(p, typeCour, jour, semaineMin, semaineMax, hmin, hmax, salles)
 class changeCalendrier(forms.Form):
     typeCour = AutoCompleteSelectField('typeCour', required=True, label="Type de cour", help_text=None)    
     jour = forms.ChoiceField(choices=SEMAINEAAVECINCO, initial=SEMAINEINCONNU)
@@ -237,9 +237,9 @@ class addModule(forms.ModelForm):
     modules = AutoCompleteSelectMultipleField('module', required=False, help_text=None)
 
 
-    def savePerso(self, idP):
+    def savePerso(self, idP, p):
         modules = self.cleaned_data['modules']
-        modiData.modGroupe(idP, modules=modules)
+        modiData.modGroupe(idP,p,  modules=modules)
 class addSalle(forms.ModelForm):
     class Meta:
         model = Salle
@@ -271,9 +271,9 @@ class addGroupeModule(forms.ModelForm):
             initial['groupes'] = [t.pk for t in kwargs['instance'].groupe_set.all()]
         super(addGroupeModule, self).__init__(*args, **kwargs)
 
-    def savePerso(self, idP):
+    def savePerso(self, idP, p):
         groupes = self.cleaned_data['groupes']
-        modiData.modModule(idP, groupes=groupes)
+        modiData.modModule(idP,p, groupes=groupes)
 
 class addTypeCour(forms.ModelForm):
     class Meta:
@@ -305,27 +305,27 @@ class addPersonne(forms.ModelForm):
   
     
 
-    def savePerso(self, idP):
+    def savePerso(self, idP, p):
         personnes = self.cleaned_data['personnes']
         
-        modiData.modGroupe(idP, personnes=personnes)
+        modiData.modGroupe(idP, p,  personnes=personnes)
 class changeGroupe(forms.Form):
 
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    def modif(self, idP):
+    def modif(self, idP, p):
         data = self.cleaned_data
         nom = data['nom']
-        modiData.modGroupe(idP, nom)    
+        modiData.modGroupe(idP,p, nom)    
 class fitrerGroupe(forms.Form):
 
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
 class changeUV(forms.Form):
         
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    def modif(self, idP):
+    def modif(self, idP, p):
         data = self.cleaned_data
         nom = data['nom']  
-        modiData.modUV(idP, nom)      
+        modiData.modUV(idP,p,  nom)      
 class fitrerUV(forms.Form):
         
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
@@ -370,11 +370,11 @@ class changeModule(forms.Form):
     
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     uv = AutoCompleteSelectField('uv', required=True, help_text=None)
-    def modif(self, idP):
+    def modif(self, idP, p):
         data = self.cleaned_data
         nom = data['nom']
         uv = data['uv']
-        modiData.modModule(idP, nom, uv)
+        modiData.modModule(idP,p,  nom, uv)
 class fitrerModule(forms.Form):
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     uv = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'UV', 'class':'form-control input-perso'}))
@@ -484,13 +484,13 @@ class AjouterGroupe(forms.Form):
                 "Le nom de groupe est déjà utlisé"
             )
         return self.cleaned_data
-    def save(self):
+    def save(self, pers):
         
         data = self.cleaned_data
         nom = data['nom']
         personne = data['personne']
         modules = data['modules']
-        return addData.addGroupe(nom, personnes=personne, modules=modules)
+        return addData.addGroupe(pers, nom, personnes=personne, modules=modules)
 class AjouterCour(forms.Form):
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     isExam = forms.BooleanField(required=False, label="C'est un exam ?")
@@ -518,10 +518,10 @@ class AjouterSalle(forms.Form):
         addData.addSalle(p, nom, capacite, typee)
 class AjouterUV(forms.Form):
     nom = forms.CharField(label="", required=True, max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    def save(self):
+    def save(self, p):
         data = self.cleaned_data
         nom = data['nom']
-        return addData.addUV(nom)
+        return addData.addUV(p, nom)
     def clean(self):
 
         if UV.objects.filter(nom=self.cleaned_data.get('nom')).exists():
@@ -540,9 +540,9 @@ class AjouterModule(forms.Form):
                 "Ce module est déjà créé pour cet uv"
             )
         return self.cleaned_data   
-    def save(self):
+    def save(self, p):
         data = self.cleaned_data
         nom = data['nom']
         uv = data['uv']
-        addData.addModule(nom, uv)
+        addData.addModule(p, nom, uv)
 

@@ -8,8 +8,10 @@ from django.utils import timezone
 
 from BDD import models
 from BDD.choices import PROF_STATUT, ADMINISTRATEUR_STATUT, SALLESTATUT, AJOUT, \
-    SEXE, TYPE, PERSONNESTATUT
-from BDD.models import Personne, horaireProf, Cour
+    SEXE, TYPE, PERSONNESTATUT, GROUPESTATUT, UVSTATUT, MODULESTATUT,\
+    CALENDRIERSTATUT
+from BDD.models import Personne, horaireProf, Cour, UV
+from Functions.news import manytomany
 
 
 def checkNaddPersonne(nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None, errors=None):
@@ -96,7 +98,8 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
     n.save()
     n.personne.add(pers)      
 ############################# modifi� ######################                   
-def addCalendrier(typeCour,jour,semaineMin,semaineMax,hmin,hmax,salles):
+def addCalendrier(pers, typeCour,jour,semaineMin,semaineMax,hmin,hmax,salles):
+    
     c = Cour()
     c.typeCour = typeCour
     c.jour = jour
@@ -109,26 +112,45 @@ def addCalendrier(typeCour,jour,semaineMin,semaineMax,hmin,hmax,salles):
     c.save()
     c.salles=salles
     
-            
+    n=models.News()
+    n.txt="Vous avez ajouté un cour de " + typeCour.nom + "" #besion de lalgo de quentin
+    n.typeG=AJOUT
+    n.type=CALENDRIERSTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers) 
             
             
 ############################# fin modifi� ######################              
                      
 ############################# modifi� ######################        
-def addGroupe(nomm, personnes=None, modules=None):
+def addGroupe(pers, nomm, personnes=None, modules=None):
 ############################# fin modifi� ######################  
+    txt="Vous avez ajouté le groupe " + nomm + ". "
     c = models.Groupe()
     c.nom = nomm
     c.uploadDate = timezone.now()
     c.save()
     ############################# modifi� ######################   
     if (modules!=None):
+        txt =manytomany(modules, txt, c, models.Module, "modules", "module", "au", False, attrafiche="nom")
         c.modules=modules
     ############################# fin modifi� ######################   
     
     
     if (personnes!=None):
+        txt =manytomany(personnes, txt, c, models.Personne, "personnes", "personne", "à la", False, STATUT=GROUPESTATUT)
         c.personnes=personnes
+    
+    n=models.News()
+    n.txt=txt
+    n.typeG=AJOUT
+    n.type=GROUPESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers) 
+    
+    
     
     return c.id
 def addCour(nom, isExam=False):
@@ -137,18 +159,35 @@ def addCour(nom, isExam=False):
     c.nom = nom
     c.isExam = isExam
     c.save()            
-def addUV(nom):
+def addUV(pers, nom):
    
     c = models.UV()
     c.nom = nom
     c.save()
+    n=models.News()
+    n.txt="Vous avez ajouté l\'UV " + c.nom
+    n.typeG=AJOUT
+    n.type=UVSTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers) 
     return c.id
-def addModule(nom, uv=None):
-   
+def addModule(pers, nom, uv=None):
+    txt="Vous avez ajouté le module " + nom
     c = models.Module()
     c.nom = nom
-    c.uv = uv
+    if uv!=None:
+        
+        txt=txt+ " dans l\'UV " + uv.nom
+        c.uv = uv
     c.save()
+    n=models.News()
+    n.txt=txt
+    n.typeG=AJOUT
+    n.type=MODULESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers) 
     ############################# modifi� ######################      
 def addNote(note, personne, module, prof):
     

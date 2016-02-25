@@ -6,13 +6,16 @@ Created on 30 oct. 2015
 from django.utils import timezone
 
 from BDD import models
-from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_SALLE, SALLESTATUT, \
-    MODIFIER, SALLES, PERSONNESTATUT, TYPE, findchoice, SEXE
+from BDD.choices import SALLESTATUT, \
+    MODIFIER, SALLES, PERSONNESTATUT, TYPE, findchoice, SEXE, GROUPESTATUT,\
+    UVSTATUT
+from Functions.news import manytomany
+from BDD.models import Groupe
 
 
 ####################### AJOUT #################
 def modCourLive(idP, salles=None, typeCour=None, jour=None, semaineMin=None, semaineMax=None, hmin=None, hmax=None):
-    c = models.Cour.objects.filter(id=idP)[0]
+    c = models.Cour.objects.get(id=idP)
     if salles != None:
         c.salles = salles
     if typeCour != None:
@@ -33,32 +36,62 @@ def modCourLive(idP, salles=None, typeCour=None, jour=None, semaineMin=None, sem
 ########################### FIN AJOUT #######################
 
 ######################## mod ,""""""""""""""""""""""
-def modGroupe(idP, nom=None, personnes=None, modules=None):
+def modGroupe(idP, p, nom=None, personnes=None, modules=None):
+    
     ######################## fin mod ,""""""""""""""""""""""
-    c = models.Groupe.objects.filter(id=idP)[0]
+    c = models.Groupe.objects.get(id=idP)
+    txt="Vous avez modifié le groupe " + c.nom
+    if nom != None and c.nom != nom:
+        txt=txt + " à " + " "
+        c.nom = nom
+    else:
+        txt=txt+". "
     ######################## mod ,""""""""""""""""""""""
-    if modules != None:
+    if modules != None and c.modules != modules:
+        txt =manytomany(modules, txt, c, models.Module, "modules", "module", "le", False, attrafiche="nom")
         c.modules = modules
     ########################finmod ,""""""""""""""""""""""
-    if nom != None:
-        c.nom = nom
-    if personnes != None:
+    
+    if personnes != None and c.personnes != personnes:
+        txt =manytomany(personnes, txt, c, models.Personne, "personnes", "personne", "la", False, STATUT=GROUPESTATUT)
         c.personnes = personnes
     c.save()
+    n = models.News()
+    n.txt = txt
+    n.typeG = MODIFIER
+    n.type = GROUPESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(p)
+    
 ####################### modifi� module #############################
-def modModule(idP, nom=None, uv=None, groupes=None):
+def modModule(idP,p,  nom=None, uv=None, groupes=None):
+   
 ####################### modifi� module #############################
-    c = models.Module.objects.filter(id=idP)[0]
-    if nom != None:
+    c = models.Module.objects.get(id=idP)
+    txt=" Vous avez modifié le module " + c.nom
+    if nom != None and c.nom!=nom:
+        txt=txt + " en " + nom + ". "
         c.nom = nom
+    else:
+        txt=txt+". "
     ####################### modifi� module #############################
-    if uv != None:
+    if uv != None and c.uv != uv:
+        txt=txt + " Le module n\'est plus dans " + c.uv.nom + " mais dans " + uv.nom +". "
         c.uv = uv
     if groupes != None:
-        
+        txt =manytomany(groupes, txt, c, models.Groupe, "groupe_set", "groupe", "au", True)
         c.groupe_set = groupes
     ####################### modifi� module #############################    
     c.save()
+    n = models.News()
+    
+    n.txt = txt
+    n.typeG = MODIFIER
+    n.type = SALLESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(p)
 def modNote(idP, note=None, personne=None, module=None):
     c = models.Note.objects.filter(id=idP)[0]
     if note != None:
@@ -117,16 +150,26 @@ def modSalle(idP, p, nom=None, capacite=None, typee=None):
     n.uploadDate = timezone.now()   
     n.save()
     n.personne.add(p)
-def modUV(idP, nom=None):
-    c = models.UV.objects.filter(id=idP)[0]
-    if nom != None:
+def modUV(idP, p, nom=None):
+    c = models.UV.objects.get(id=idP)
+    txt="Vous avez modifié le nom de l\'UV " + c.nom+ " en " + nom
+    
+    if nom != None and c.nom != nom:
         c.nom = nom
     c.save()
+    n = models.News()
+    
+    n.txt = txt
+    n.typeG = MODIFIER
+    n.type = UVSTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(p)
 def modPersonne(perso, idP, nom=None, prenom=None, login=None, mdp=None, sexe=None, typeP=None, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None, groupes=None):
     
     p = models.Personne.objects.filter(id=idP)[0]
     su=0
-    txt="Vous avez changé " + p.user.first_name + " " + p.user.last_name
+    txt="Vous avez changé la personne " + p.user.first_name + " " + p.user.last_name
     txt2="Votre profil à été changé :"
     if prenom != None and prenom!= "" and prenom!=p.user.first_name:
         su=1
@@ -140,54 +183,7 @@ def modPersonne(perso, idP, nom=None, prenom=None, login=None, mdp=None, sexe=No
         txt=txt + " en " + prenom + " " + nom
     txt=txt + ". "
     if groupes != None:
-        l=[]
-        for g in groupes:
-            found=False
-            for u in p.groupe_set.all():
-                if u.id==int(g):
-                    found=True
-                    
-                    break
-            if not found:
-                l.append(g)
-        l2=[]
-        for g in p.groupe_set.all():
-            found=False
-            for u in groupes:
-                if g.id==int(u):
-                    found=True
-                    
-                    break
-            if not found:
-                l2.append(g)
-        if len(l)>2:
-            txt= txt + ". Vous l\'avez ajouté à " + str(len(l)) + " groupes. " 
-            txt2= txt2 + ". Vous avez été ajouté à " + str(len(l)) + " groupes. "     
-        elif len(l)>0:
-            txt = txt + " Vous l\'avez ajouté "
-            txt2 = txt2 + " Vous avez été ajouté "
-            first=True
-            for ggg in l:
-                if not first:
-                    txt = txt + " et " 
-                    txt2 = txt2 + " et " 
-                txt= txt + " au groupe " + models.Groupe.objects.get(id=int(ggg)).nom + " "
-                txt2= txt2 + " au groupe " + models.Groupe.objects.get(id=int(ggg)).nom + " "
-                first=False
-        if len(l2)>2:
-            txt= txt + ". Vous l\'avez enlevé à " + str(len(l)) + " groupes. "   
-            txt2= txt2 + ". Vous avez été enlevé à " + str(len(l)) + " groupes. " 
-        elif len(l2)>0:
-            txt = txt + " Vous l\'avez enlevé "
-            txt2 = txt2 + " Vous avez été enlevé "
-            first=True
-            for ggg in l2:
-                if not first:
-                    txt = txt + " et " 
-                    txt2 = txt2 + " et " 
-                txt= txt + " au groupe " + ggg.nom + " "
-                txt2= txt2 + " au groupe " + ggg.nom + " "
-                first=False    
+        txt, txt2=manytomany(groupes, txt, p, models.Groupe, "groupe_set", "groupe", "au", True, attrafiche="nom", txt2=txt2)
         p.groupe_set = groupes
     if login != None and login!="" and login!=p.user.username:
         txt = txt + " Son login a changé de " + p.user.username + " à " + login

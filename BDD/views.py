@@ -9,7 +9,7 @@ from django.forms.formsets import formset_factory
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from BDD.choices import PROF_STATUT, AJOUT, SALLESTATUT, MODIFIER
+from BDD.choices import PROF_STATUT
 from BDD.forms import nbAjout
 from BDD.models import Personne, News
 from Functions import  data
@@ -325,7 +325,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         for frm in stforms:
             
             if j == int(what) and frm[0].is_valid():
-                frm[0].savePerso(int(idP), request.user.personne, )
+                frm[0].savePerso(int(idP), request.user.personne)
                 changed = True
             j += 1
         return http.HttpResponseRedirect('')
