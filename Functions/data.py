@@ -1,30 +1,58 @@
-'''
-Created on 30 oct. 2015
-
-@author: mabadie_2
-'''
+"""
+    The ''data'' module
+    ======================
+    
+    It defines the specifications of each kind of data in templates.
+    
+    
+@author: IWIMBDSL
+"""
 from BDD import forms
 from BDD.choices import INCONNU_STATUT, INCONNU_STATUT_TYPE, \
     INCONNU_STATUT_SALLE, SEMAINEINCONNU
 from BDD.forms import fitrerP, AjouterP, fitrerGroupe
 from BDD.models import Personne, Cour, Groupe, UV, Module, Salle, Note, \
-    horaireProf, TypeCour
+    TypeCour
 
 
 def ajouterA(t):
-    """ Pour un ajout par ManytoMany"""
+    """
+        For the modify view.
+        In addition to ask how many forms the user needs, it ask specific many to many relation ship.
+        Ex: to mark a group
+        
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    
+    
+    """
+   
     reponse = None
     if t == 6:
         reponse = [forms.chooseGroupe, [["groupes", 0, Personne, 'groupe__in', forms.notes, forms.BaseNoteFormSet], ["module", 1, Module]]]
     return reponse
 def ficheAfter(t):
-    """ Afficher une fiche après ajout """
+    """
+        Depends of the type of data, after an add, the user will be redirected 
+        to the specification of the new object.
+        For now it is not for all.
+        
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    
+    """
     reponse = True
     
     
     return reponse
 def quiry(t):
-    """ gestion de correction automatique des forms """
+    """ 
+        Defines Javascript for forms verification in live.
+    
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    
+    """
     l = []
     
     if t == 5:
@@ -65,7 +93,14 @@ def quiry(t):
 
     return l
 def formsoustable(table):
-    """ Pour les ManytoMany dans modifier"""
+    """ 
+        Defines the forms in the modify view for the many to many relations
+    
+    
+    :param table: it represent which kind of data it is (exemple: a groupe)
+    :type table: int 
+    
+    """
     l = []
     if table == 1:
         l.append([forms.addPersonne, 'personnes', 1, 'personnes', Personne, 'personnes'])
@@ -86,12 +121,17 @@ def formsoustable(table):
         l.append([forms.addPersonnetypeCour, 'personnes', 2, 'personnes', Personne, 'personnes'])
     elif table == 0:
         l.append([forms.addGroupe, 'id_groupes', 1, 'groupes', Groupe, 'groupe_set'])
-        
-        
+
         
     return l
 def links(table):
-    """ Afficher des liens """
+    """ Print links in fiche and modifie view
+
+
+    :param table: it represent which kind of data it is (exemple: a groupe)
+    :type table: int 
+    
+    """
     l = []
     if table == 0:
         l.append(['/watch/6/0', 'Lui ajouter des notes'])
@@ -103,9 +143,10 @@ def links(table):
         
         
 def soustable(table):
-    """ pour les manytomany dans la fiche et modifier """
+    """ 
+    For the many to many in modify and fiche view
     
-    """ [a, b, c, d] 
+     [a, b, c, d] 
     
     a=0 : taille de d est de 2
     a=1 : taille de d est de 1
@@ -145,7 +186,14 @@ def soustable(table):
     
     return l
 def listinside(t):
-    """ Affichage des tables """
+    """ 
+        For the watch view to print the data
+        
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    
+    
+    """
     listeliste = []
     if t == 1:
         listeliste.append([0, 'nom'])
@@ -197,7 +245,12 @@ def listinside(t):
     return listeliste
 
 def listTable(t):
-    """ Nom des caract """
+    """
+        In the watch view to print the names
+    
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    """
     l = []
     if t == 1:
         l.append(['Nom', 1])
@@ -248,7 +301,13 @@ def listTable(t):
         
     return l
 def table(t):
-    """ nom de la table """
+    """  
+        link between t and the table's name
+        
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    
+    """
     if t == 1:
         return Groupe
     elif t == 2:
@@ -266,7 +325,20 @@ def table(t):
     else:
         return Personne
 def changecond(table, cond, conditions, obj):
-    """ Changer les conditions initiales"""
+    """
+        To initiate the value of the forms in the modify view
+        
+    :param table: it represent which kind of data it is (exemple: a groupe)
+    :type table: int 
+    :param cond: previous condition
+    :type cond: list of tuple
+    :param conditions: previous condition
+    :type conditions: list of tuple
+    :param obj: object to modifie
+    :type obj: Model
+    
+    """
+    
     if table == 1:
         cond.append(('nom', 0))
         conditions.append(obj.nom)
@@ -349,7 +421,16 @@ def changecond(table, cond, conditions, obj):
             conditions.append(obj.numeroDeTel)
             cond.append(('numeroDeTel', 0)) 
 def classer(t, nomClasser):
-    """ Pour classer """
+    """
+        link between nomClasser and the name in the watch view
+        
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    :param nomClasser:represent witch column
+    :type nomClasser: int
+    
+    """
+   
     if t == 1:
         if nomClasser == 1:
             column = 'nom'
@@ -426,7 +507,14 @@ def classer(t, nomClasser):
     
     return column
 def filtre(t):
-    """ Comment filter """
+    """ 
+        What to filter in the watch view
+    
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    
+    
+    """
     l = []
     if t == 1:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
@@ -470,7 +558,19 @@ def filtre(t):
         
     return l
 def form(user, t, n, post=None):
-    """ LEs formulaires """
+    """
+        Returns the form in the modify view or in the filter in the watch view
+    
+    :param user: not used yet
+    :type user: not use yet
+    :param t: it represent which kind of data it is (exemple: a groupe)
+    :type t: int 
+    :param n: if =0, it is filter ; if =2 it is change, if =3 it is a formset, else ids to add
+    :type n: inr
+    :param post: request.POST value
+    :type post: request.POST of Django
+    """
+    
     if t == 1:
         if n == 0:
             if post == None:

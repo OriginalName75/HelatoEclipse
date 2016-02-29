@@ -1,8 +1,11 @@
-'''
-Created on 26 oct. 2015
-
-@author: Moran
-'''
+"""
+    The ''generator'' module
+    ======================
+    
+    Generate random data for testing
+    
+@author: IWIMBDSL
+"""
 from datetime import date
 import random
 
