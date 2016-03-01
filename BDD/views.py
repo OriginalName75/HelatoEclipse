@@ -339,13 +339,12 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     jj = 0
                     for f in formset:
                         if table == 6:
-                            f.save(solo, [x[jj] for x in multi],request.user.personne)
+                            f.save(request.user.personne, solo, [x[jj] for x in multi], request.user.personne)
                         else:
-                            f.save(solo, [x[jj] for x in multi])
+                            f.save(request.user.personne, solo, [x[jj] for x in multi])
                         jj += 1
                     nbajout = 0  
                     return http.HttpResponseRedirect('/watch/' + str(table) + '/' + str(filtre))
-            
     else:
         if request.method == 'POST':
             #===========================================================================

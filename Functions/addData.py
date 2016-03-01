@@ -23,7 +23,7 @@ from django.utils import timezone
 from BDD import models
 from BDD.choices import PROF_STATUT, ADMINISTRATEUR_STATUT, SALLESTATUT, AJOUT, \
     SEXE, TYPE, PERSONNESTATUT, GROUPESTATUT, UVSTATUT, MODULESTATUT, \
-    CALENDRIERSTATUT
+    CALENDRIERSTATUT, COURTYPESTATUT, NOTESTATUT
 from BDD.models import Personne, horaireProf, Cour
 from Functions.news import manytomany, day2
 
@@ -251,7 +251,7 @@ def addGroupe(pers, nomm, personnes=None, modules=None):
     
     
     return c.id
-def addCour(pers, nom, isExam=False, profs=False):
+def addCour(pers, nom, isExam=False, profs=None):
     """
        Add a type of lesson in the database
         
@@ -276,18 +276,23 @@ def addCour(pers, nom, isExam=False, profs=False):
     
     """
    
-    txt = ""
+    txt = "Vous avez ajouté le type de cour " + nom
+    if isExam:
+        txt = txt + " qui est un exam"
+    txt = txt + ". "
     c = models.TypeCour()
     c.nom = nom
+    
     c.isExam = isExam
     c.save() 
     if profs != None:
+        txt = manytomany(profs, txt, c, models.Personne, "profs", "prof", "le", False)
         c.profs=profs        
     
     n = models.News()
     n.txt = txt
     n.typeG = AJOUT
-    n.type = GROUPESTATUT
+    n.type = COURTYPESTATUT
     n.uploadDate = timezone.now()   
     n.save()
     n.personne.add(pers)    
@@ -385,6 +390,22 @@ def addNote(pers, note, personne, module, prof):
     c.uploadDate = timezone.now()
     c.prof = prof
     c.save()
+    
+    n = models.News()
+    n.txt = "Vous avez ajouté la note " + str(c.note) + " à la personne " + c.personne.filter + " au module " + c.module.nom  
+    n.typeG = AJOUT
+    n.type = NOTESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers)
+    
+    n2 = models.News()
+    n2.txt = "Vous avez eu " + str(c.note) + " au module " + c.module.nom  +" (noté par " + prof.filter +")"
+    n2.typeG = AJOUT
+    n2.type = NOTESTATUT
+    n2.uploadDate = timezone.now()   
+    n2.save()
+    n2.personne.add(c.personne)
     
 
 def addSalle(pers, nom, capacite=None, typee=None):

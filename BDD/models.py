@@ -99,7 +99,7 @@ class Groupe(models.Model):
         >> uv.save()
         >> m = Module(nom="connaissance de soi", uv=uv)
         >> m.save()
-        >> g = Group(nom="CM2")
+        >> g = Groupe(nom="CM2")
         >> g.modules.add(m) 
         >> g.save()
         add a module in a group
@@ -154,9 +154,7 @@ class Module(models.Model):
         
         return "%s - %s" % (self.nom, self.uv.nom)
     
-
-
-        return self.semaine        
+ 
 class Salle(models.Model):
     """
         It defines how a classroom is stocked in the database.

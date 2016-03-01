@@ -19,7 +19,7 @@ from django.utils import timezone
 from BDD import models
 from BDD.choices import SALLESTATUT, \
     MODIFIER, SALLES, PERSONNESTATUT, TYPE, findchoice, SEXE, GROUPESTATUT, \
-    UVSTATUT, SEMAINE, CALENDRIERSTATUT
+    UVSTATUT, SEMAINE, CALENDRIERSTATUT, NOTESTATUT
 from Functions.news import manytomany
 
 
@@ -57,29 +57,29 @@ def modCourLive(idP, pers, salles=None, typeCour=None, jour=None, semaineMin=Non
     c = models.Cour.objects.get(id=idP)
     if typeCour != None and c.typeCour.id != typeCour.id :
        
-        txt="Vous avez modifié un cour de " + c.typeCour.nom + " en un cour de " + typeCour.nom + ". "
+        txt = "Vous avez modifié un cour de " + c.typeCour.nom + " en un cour de " + typeCour.nom + ". "
         c.typeCour = typeCour
         
     else:
-        txt="Vous avez modifié un cour de " + c.typeCour.nom + ". "
+        txt = "Vous avez modifié un cour de " + c.typeCour.nom + ". "
     if salles != None and c.salles != salles:
         txt = manytomany(salles, txt, c, models.Salle, "salles", "salle", "la", False)
         c.salles = salles
     
     if jour != None and c.jour != jour:
-        txt=txt + "Vous avez modifié son jour de " + c.get_jour_display() + " à " + str(findchoice(int(jour),SEMAINE))
+        txt = txt + "Vous avez modifié son jour de " + c.get_jour_display() + " à " + str(findchoice(int(jour), SEMAINE))
         c.jour = jour
     if semaineMin != None and c.semaineMin != semaineMin:
-        txt=txt + "Vous avez modifié sa première semaine de " + str(c.semaineMin) + " à " + str(semaineMin)
+        txt = txt + "Vous avez modifié sa première semaine de " + str(c.semaineMin) + " à " + str(semaineMin)
         c.semaineMin = semaineMin
     if semaineMax != None and c.semaineMax != semaineMax:
-        txt=txt + "Vous avez modifié sa dernière semaine de " + str(c.semaineMax) + " à " + str(semaineMax)
+        txt = txt + "Vous avez modifié sa dernière semaine de " + str(c.semaineMax) + " à " + str(semaineMax)
         c.semaineMax = semaineMax
     if hmin != None and c.hmin != hmin:
-        txt=txt + "Vous avez modifié sa première heure de " + str(c.hmin) + " à " + str(hmin)
+        txt = txt + "Vous avez modifié sa première heure de " + str(c.hmin) + " à " + str(hmin)
         c.hmin = hmin
     if hmax != None and c.hmax != hmax:
-        txt=txt + "Vous avez modifié sa dernière heure de " + str(c.hmax) + " à " + str(hmax)
+        txt = txt + "Vous avez modifié sa dernière heure de " + str(c.hmax) + " à " + str(hmax)
         c.hmax = hmax
     c.save()
     
@@ -190,7 +190,7 @@ def modModule(idP, p, nom=None, uv=None, groupes=None):
     n.uploadDate = timezone.now()   
     n.save()
     n.personne.add(p)
-def modNote(idP,p, note=None, personne=None, module=None, prof=None):
+def modNote(idP, p, note=None, personne=None, module=None, prof=None):
     """
         modify a mark in the database
         
@@ -214,16 +214,71 @@ def modNote(idP,p, note=None, personne=None, module=None, prof=None):
     modify a mark in the database
     
     """
-    c = models.Note.objects.filter(id=idP)[0]
-    if note != None:
-        c.note = note
-    if personne != None:
+    c = models.Note.objects.get(id=idP)
+    txt = "Vous avez modifié une note"
+    txt3 = None
+    if personne != None and c.personne != personne:
+        txt = txt + " qui n\'est plus celle de" + c.personne.filter + " mais celle de " + personne.filter + ". "
+        txt2 = ""
+        txt3 = c.personne
         c.personne = personne
-    if module != None:
+        
+    else:
+        txt2 = "Une de votre note a été modifié."
+        txt = txt + " de " + personne.filter + ". "
+    if note != None and c.note != note:
+        stri = "La note n\'est plus de " + str(c.note) + " mais de " + str(note) + ". "
+        txt = txt + stri
+        txt2 = txt2 + stri
+        c.note = note
+    
+    if module != None and c.module != module:
+        stri="Le module noté n\'est plus celui de " + str(c.module) + " mais de " + str(module) + ". "
+        txt2 = txt2 + stri
+        txt = txt + stri
         c.module = module
-    if prof != None:
+    if prof != None and c.prof != prof:
+        stri = "Le prof qui note n\'est plus " + str(c.prof) + " mais " + str(prof) + ". "
+        txt = txt + stri
+        txt2 = txt2 + stri
         c.prof = prof
     c.save()
+    
+    n = models.News()
+    
+    n.txt = txt
+    n.typeG = MODIFIER
+    n.type = NOTESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(p)
+    if txt3==None:
+        n2 = models.News()
+        n2.txt = txt2
+        n2.typeG = MODIFIER
+        n2.type = SALLESTATUT
+        n2.uploadDate = timezone.now()   
+        n2.save()
+        n2.personne.add(personne)
+    else:
+        n2 = models.News()
+        n2.txt = "Une de vos note a été suprimmé"
+        n2.typeG = MODIFIER
+        n2.type = SALLESTATUT
+        n2.uploadDate = timezone.now()   
+        n2.save()
+        n2.personne.add(txt3)
+        
+        n3 = models.News()
+        n3.txt = "Vous avez une nouvelle note : " + str(c.note) + " au module " + str(c.module)
+        n3.typeG = MODIFIER
+        n3.type = SALLESTATUT
+        n3.uploadDate = timezone.now()   
+        n3.save()
+        n3.personne.add(personne)
+        
+        
+    
 def modCour(idP, p, nom=None, isExam=None, groupes=None, profs=None):
     """
        Modify a type of lesson in the database
@@ -248,16 +303,35 @@ def modCour(idP, p, nom=None, isExam=None, groupes=None, profs=None):
     
     
     """
+    
     c = models.TypeCour.objects.filter(id=idP)[0]
-    if nom != None:
+    txt = "Vous avez modifié le type de cour " + c.nom
+    if nom != None and c.nom != nom:
+        txt = txt + " en " + nom 
         c.nom = nom
-    if isExam != None:
+    txt = txt + ". "
+    if isExam != None and c.isExam != isExam:
+        if c.isExam:
+            txt = txt + "Ce n\'est plus un exam. "
+        else:
+            txt = txt + "C\'est maintenant un exam. "
         c.isExam = isExam
-    if groupes != None:
+    if groupes != None and c.groupe != groupes:
+        txt = manytomany(groupes, txt, c, models.Groupe, "groupe", "groupe", "au", False)
         c.groupe = groupes
-    if profs != None:
+    if profs != None and c.profs != profs:
+        txt = manytomany(profs, txt, c, models.Personne, "profs", "prof", "le", False)
         c.profs = profs
     c.save()
+    n = models.News()
+    
+    n.txt = txt
+    n.typeG = MODIFIER
+    n.type = SALLESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(p)
+    
 def modSalle(idP, p, nom=None, capacite=None, typee=None):
     """
         modify a classroom in the database

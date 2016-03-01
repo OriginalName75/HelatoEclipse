@@ -713,7 +713,7 @@ class addPersonnetypeCour(forms.ModelForm):
         """
         personnes = self.cleaned_data['profs']
         
-        modiData.modCour(idP, profs=personnes)    
+        modiData.modCour(idP, p, profs=personnes)    
 class addPersonne(forms.ModelForm):
     """
         A form that find with an AJAX script data regarding what is on the fields in the form.
@@ -1258,7 +1258,7 @@ class AjouterNote(forms.Form):
         note = data['note']
         personne = data['personne']
         module = data['module']
-        addData.addNote(note, personne, module, prof)            
+        addData.addNote(prof, note, personne, module, prof)            
 class AjouterGroupe(forms.Form):
     """
         A Form to add a group to the database. 
@@ -1324,11 +1324,11 @@ class AjouterCour(forms.Form):
     """
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     isExam = forms.BooleanField(required=False, label="C'est un exam ?")
-    def save(self):
+    def save(self, p):
         data = self.cleaned_data
         nom = data['nom']
         isExam = data['isExam']
-        addData.addCour(nom, isExam)
+        addData.addCour(p, nom, isExam)
 class AjouterSalle(forms.Form):
     """
         A Form to add a classroom to the database. 

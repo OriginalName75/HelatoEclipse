@@ -368,6 +368,7 @@ def changecond(table, cond, conditions, obj):
         cond.append(('module', 0))
         conditions.append(obj.module.id)
         
+        
     elif table == 7:
         cond.append(('nom', 0))
         conditions.append(obj.nom)

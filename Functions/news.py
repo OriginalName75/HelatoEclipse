@@ -15,7 +15,7 @@ from django.utils import timezone
 
 from BDD import models
 from BDD.choices import AJOUT, MODIFIER, SALLESTATUT, SUPRIMER, GROUPESTATUT, \
-    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT, COURTYPESTATUT
+    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT, COURTYPESTATUT, NOTESTATUT
 
 
 def addN(obj, nb, plus, n):
@@ -63,6 +63,8 @@ def addN(obj, nb, plus, n):
         txt = txt + str(nb) + " cours"
     elif  obj.type == COURTYPESTATUT:
         txt = txt + str(nb) + " type de cours"
+    elif  obj.type == NOTESTATUT:
+        txt = txt + str(nb) + " notes"   
     else :
         txt = txt + str(nb) + " personnes"  
     return txt
