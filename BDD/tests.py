@@ -163,11 +163,12 @@ class UVTestMommy(TestCase):
         self.assertTrue(isinstance(user,User))
         user.save()
         p2= Personne()
-        p2.sexe=HOMME_STATUT
-        p2.type=ELEVE_STATUT
+        p2.sexe=FEMME_STATUT
+        p2.type=PROF_STATUT
         p2.user=user
         self.assertTrue(isinstance(p2,Personne))
         p2.save()
         
         note = Note(note=0, personne=p1, module=m, prof=p2)
         note.save()
+        self
