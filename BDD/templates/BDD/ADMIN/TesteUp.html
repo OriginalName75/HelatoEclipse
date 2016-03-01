@@ -1,0 +1,9 @@
+{% for up in put %} 
+ {{ up.typetable }} 
+ {% for u in up.champsmodifie_set.all %} 
+  {{ u }} 
+  {{ u.valchamp }}
+ {% endfor %} 
+ {{ up.datemodif }} 
+ <br />
+{% endfor %}

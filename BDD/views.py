@@ -5,19 +5,29 @@ from datetime import datetime
 from django import http
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-
 from django.forms.formsets import formset_factory
-
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
 from BDD.forms import nbAjout
-
+from BDD.models import Modification
 from Functions import  data
 from Functions import generator
-
 from Functions.selectData import select
+
+
+#pour que Morgan fasse ses tests
+def morSup(request):
+    put = Modification.objects.all()
+    for p in put:
+        p.delete()
+    
+#    addData.addGroupe('bl', None)
+    return render(request, 'BDD/index.html')
+def mor(request):
+    put = Modification.objects.all()
+    return render(request, 'BDD/ADMIN/testeUp.html', locals())
+#jusque là
 
 
 @login_required(login_url='/connexion')
@@ -274,7 +284,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
             if cond[entier][1] == 1:
                 form.fields[cond[entier][0]].initial = l.strftime('%d/%m/%Y')
             else:   
-                form.fields[cond[entier][0]].initial = l
+                form.fields[cond[entier][0]].initial = l    
             entier = entier + 1 
     taille = len(stforms)
     for st in soustable:

@@ -3,10 +3,30 @@ from django.db import models
 from django.utils.datetime_safe import datetime
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
-    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI
+    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI, TYMO, INCONNU_STATUT_MOD
 
 
 # Create your models here.
+
+#modifications Morgan
+class Modification(models.Model):
+    datemodif = models.DateTimeField(default=datetime.now)  # date de la modification
+    typetable = models.CharField(max_length=200, null=True)  # type de table modifiée
+    typemod = models.IntegerField(choices=TYMO, default=INCONNU_STATUT_MOD) # type de la modification
+    ipmod = models.IntegerField (null=True) #Id de l'objet modifié
+    
+    def __str__ (self):
+        return self.datemodif.strftime('%d/%m/%Y %H:%M:%S')
+    
+class ChampsModifie(models.Model):
+    champs = models.ForeignKey(Modification)
+    nomchamp = models.CharField(max_length=50)
+    valchamp = models.CharField(max_length=1000, null=True)
+    
+    def __str__ (self):
+        return self.nomchamp
+#fin modifications Morgan
+
 class Personne(models.Model):
     sexe = models.IntegerField(choices=SEXE, default=INCONNU_STATUT)  # true = femme; false = homme
     adresse = models.CharField(max_length=200, null=True)  # adresse de le personne
@@ -18,12 +38,11 @@ class Personne(models.Model):
     user = models.OneToOneField(User)  # l'authentification est gérée pas django
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
     filter = models.CharField(max_length=200)  # adresse de le personne
-    
-
-
+    isvisible = models.BooleanField(default = True)
     
     def __str__ (self):
         return self.filter
+    
 class horaireProf(models.Model):
     prof = models.ForeignKey(Personne)
     jdelaSemaine = models.IntegerField(choices=SEMAINE, default=LUNDI)
@@ -34,47 +53,61 @@ class horaireProf(models.Model):
     
     def __str__ (self):
         return self.get_jdelaSemaine_display() + " : " + str(self.hminMatin) + "/" + str(self.hmaxMatin) + " + " + str(self.hminApresMidi) + "/" + str(self.hmaxApresMidi)
+    
 class Groupe(models.Model):
     nom = models.CharField(max_length=30)  # nom du groupe
     personnes = models.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
+    isvisible = models.BooleanField(default = True)
     
     def __str__ (self):
         return self.nom
+    
 class UV(models.Model):
     nom = models.CharField(max_length=30)  # nom de l'UV
-        
-    
+    isvisible = models.BooleanField(default = True)
+    uploadDate = models.DateTimeField(default=datetime.now)
+       
     def __str__ (self):
         return self.nom   
+    
 class Module(models.Model):
     nom = models.CharField(max_length=30)  # nom du module    
     uv = models.ForeignKey(UV)
-    def __str__ (self):
-        
-        return "%s - %s" % (self.nom, self.uv.nom)
+    isvisible = models.BooleanField(default = True)
+    uploadDate = models.DateTimeField(default=datetime.now)
     
-
-
+    def __str__ (self):
+        return "%s - %s" % (self.nom, self.uv.nom)
         return self.semaine        
+    
 class Salle(models.Model):
     nom = models.CharField(max_length=30)
     capacite = models.IntegerField(null=True)
     type = models.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE) 
+    isvisible = models.BooleanField(default = True)
+    uploadDate = models.DateTimeField(default=datetime.now)
+    
     def __str__ (self):
         return self.nom  
+    
 class Note(models.Model):
     note = models.IntegerField()
     personne = models.ForeignKey(Personne) 
     module = models.ForeignKey(Module)
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
+    isvisible = models.BooleanField(default = True)
+    
     def __str__ (self):
         return self.note     
+    
 class TypeCour(models.Model):
     nom = models.CharField(max_length=30)
     profs = models.ManyToManyField(Personne, blank=True)
     groupe = models.ManyToManyField(Groupe, blank=True)
-    isExam = models.BooleanField()
+    isExam = models.BooleanField(default = False)
+    isvisible = models.BooleanField(default = True)
+    uploadDate = models.DateTimeField(default=datetime.now)
     
 class Cour(models.Model):
     typeCour = models.ForeignKey(TypeCour)

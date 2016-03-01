@@ -37,6 +37,12 @@ urlpatterns = [
     url(r'^ajax_select/', include(ajax_select_urls)),
     url(r'^delete/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<supri>\d+)$', 'BDD.views.delete'),
     url(r'^randomP$', 'BDD.views.randomP'),
+    
+    #pour que Morgan fasse ses tests
+    url(r'^mor$', 'BDD.views.mor'),
+    url(r'^morSup$', 'BDD.views.morSup'),
+    #jusque là
+    
     url(r'$', 'BDD.views.index'),
     
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

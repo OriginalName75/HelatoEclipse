@@ -256,7 +256,7 @@ def changecond(table, cond, conditions, obj):
             cond.append(('capacite', 0))
             conditions.append(obj.capacite)
         if int(obj.type) != INCONNU_STATUT_SALLE:
-            conditions.append(obj.sexe)
+            conditions.append(obj.type)
             cond.append(('type', 0))
     elif table == 3:
         cond.append(('nom', 0))
