@@ -3,13 +3,6 @@
 <html>
 <head>
 <title>Helato</title>
-<link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
-
-<script src="/static/BDD/js/jquery.min.js"></script>
-<script src="/static/BDD/js/jquery-ui.js"></script>
-<link rel="stylesheet"  href="/static/BDD/CSS/jquery-ui.css" type="text/css" media="all">
-<!-- Custom styles for this template -->
-<script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <script src="{% static "BDD/lib/jquery/jquery-1.3.2.js" %}" type="text/javascript">
         </script>
@@ -52,59 +45,33 @@
 <p><a href="/">Back to Site</a></p>
 <p><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back</a></p>
 <p><a href="/administration">Back to Administration</a></p>
-{% if nbajout == 0 or nbajout == 100 or envoi %}
-	{% if envoi %}
-		<p><big><big>envoyé !!!</big></big> des autres ?</p>
-	{% endif %}
+{% if nbajout == 0 or envoi %}
+{% if envoi %}
+<p><big><big>envoyé !!!</big></big> des autres ?</p>
+{% endif %}
 	<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 		{% csrf_token %}
 		{{ form }}
 		<input type="submit" value="Les ajouter"/>
 	</form> 
-	{% if ajj != None %}
-		OU choisir des/un groupe(s) à noter<br><br>
-		<form action="/ajouter/{{ table }}/100/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
-		{% csrf_token %}
-		{{ formAjj }}
-		<input type="submit" value="Les noter"/>
-	</form> 
-	{% endif %}
+
+
 
 {% else %}
-	{% if form.errors %}
-		<p><big><big>Essai encore ;p</big></big></p>
-	{% endif %}
-	{% if nbajout > 100 %}
-	Noter pour : <br>
-		{% for s in solo %}
-			{{ s }}
-			<br>
-		{% endfor %}
-		<hr>
-		{% for m in multi %}
-			<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
-			{{ formset.management_form }}
-			{% csrf_token %}
-			{% for s in m %}
-					{{ s.0 }} : {{ s.1 }}
-					<br>
-			{% endfor %}
-			<input type="submit" value="Ajouter"/>
-			</form> 
-		{% endfor %}
-	{% else %}
-	{{ formset.non_form_errors }}
-		<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
-			{{ formset.management_form }}
-			{% for form in formset %}
-			{% csrf_token %}
-			{{ form }}
-			<div id="log">X</div>  
-			<hr>
-			{% endfor %}
-			<input type="submit" value="Ajouter"/>
-		</form> 
-	{% endif %}
+{% if form.errors %}
+<p><big><big>Essai encore ;p</big></big></p>
+{% endif %}
+
+<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+    {{ formset.management_form }}
+	{% for form in formset %}
+	{% csrf_token %}
+	{{ form }}
+	<div id="log">X</div>  
+	<hr>
+	{% endfor %}
+	<input type="submit" value="Ajouter"/>
+</form> 
 {% endif %}
 
 </body>

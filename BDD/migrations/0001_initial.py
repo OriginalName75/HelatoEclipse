@@ -23,6 +23,8 @@ class Migration(migrations.Migration):
                 ('jour', models.IntegerField(choices=[(0, 'Lundi'), (1, 'Mardi'), (2, 'Mecredi'), (3, 'Jeudi'), (4, 'Vendredi'), (5, 'Samedi'), (6, 'Dimanche')], default=0)),
                 ('hmin', models.IntegerField()),
                 ('hmax', models.IntegerField()),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('annee', models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
