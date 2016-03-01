@@ -171,7 +171,7 @@ class AjouterCalendrier(forms.Form):
         if (self.cleaned_data.get('semaineMin') == None or self.cleaned_data.get('semaineMax') == None or self.cleaned_data.get('semaineMin') > 52 or self.cleaned_data.get('semaineMin') < 0 or self.cleaned_data.get('semaineMax') > 52 or self.cleaned_data.get('semaineMax') < 0):
 
             raise ValidationError(
-                "Les semaines doivent être positives 0 et strictement plus petit que 53"
+                "Les semaines doivent être positives et strictement plus petit que 53"
             )
         if (self.cleaned_data.get('semaineMax') < self.cleaned_data.get('semaineMin')):
 
@@ -183,10 +183,10 @@ class AjouterCalendrier(forms.Form):
             raise ValidationError(
                 "Les h min doit être < que h max"
             )
-        if (self.cleaned_data.get('hmin') > 0 or self.cleaned_data.get('hmin') < 10 or self.cleaned_data.get('hmax') > 0 or self.cleaned_data.get('hmax') < 10):
+        if (self.cleaned_data.get('hmin') < 0 or self.cleaned_data.get('hmin') > 10 or self.cleaned_data.get('hmax') < 0 or self.cleaned_data.get('hmax') > 10):
 
             raise ValidationError(
-                "Les heures doivent être positifs 0 et strictement plus petit que 11"
+                "Les heures doivent être positives et strictement plus petite que 11"
             )
         return self.cleaned_data
     def save(self, p):

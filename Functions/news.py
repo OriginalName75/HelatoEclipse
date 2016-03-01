@@ -7,11 +7,15 @@
     
 @author: IWIMBDSL
 """
+from datetime import timedelta
+import datetime
+from math import floor
+
 from django.utils import timezone
 
 from BDD import models
 from BDD.choices import AJOUT, MODIFIER, SALLESTATUT, SUPRIMER, GROUPESTATUT, \
-    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT
+    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT, COURTYPESTATUT
 
 
 def addN(obj, nb, plus, n):
@@ -57,6 +61,8 @@ def addN(obj, nb, plus, n):
         txt = txt + str(nb) + " UV"
     elif  obj.type == CALENDRIERSTATUT:
         txt = txt + str(nb) + " cours"
+    elif  obj.type == COURTYPESTATUT:
+        txt = txt + str(nb) + " type de cours"
     else :
         txt = txt + str(nb) + " personnes"  
     return txt
@@ -191,3 +197,76 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
         return txt
     else:
         return txt, txt2
+
+def day(year):
+    """
+        Find the doomsday of the year
+        
+    :param year: year > 2000 and < 2099
+    :type year: int
+    :return: doomsday
+    :rtype: int
+    
+    :exemple:
+    
+    >> day(2O00)
+    3 
+    >> from BDD.choices import findchoice, SEMAINE
+    >> findchoice(day(2O00), SEMAINE)
+    Jeudi
+    
+    
+    """
+    
+    f = floor(year / 1000)
+    year = year - f * 1000
+    d = floor(year / 100)
+    year = year - d * 100
+    t = floor(year / 10)
+    q = year - f * 10
+    
+    twolastdigit = t * 10 + q
+    
+    q = twolastdigit // 12
+    r = twolastdigit % 12
+    
+    t = r // 4
+    
+    f = q + r + t + 2
+    
+    doomsday = f % 7
+    
+    # on met avec nos convention lundi = 0
+    doomsday = (doomsday - 1) % 7
+    
+    return doomsday
+    
+ 
+def day2(year, week, d):
+    """
+        return the date
+        
+    :param year: year > 2000 and < 2099
+    :type year: int
+    :param week: the week (number between 0 and 53)
+    :type week: int 
+    :param d: day between 0 and 6
+    :type d: int
+    :return: date
+    :rtype: datetime
+    """
+    
+    
+    doomsday = day(year)
+    if doomsday == 0:
+        w = 1
+    else:    
+        w = 7 - doomsday
+    re = datetime.date(year, 1, w) + timedelta(days=(int(week) - 1) * 7 + int(d))
+    return re
+    
+    
+    
+    
+    
+    

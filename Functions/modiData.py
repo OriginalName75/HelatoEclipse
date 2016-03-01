@@ -19,7 +19,7 @@ from django.utils import timezone
 from BDD import models
 from BDD.choices import SALLESTATUT, \
     MODIFIER, SALLES, PERSONNESTATUT, TYPE, findchoice, SEXE, GROUPESTATUT, \
-    UVSTATUT
+    UVSTATUT, SEMAINE, CALENDRIERSTATUT
 from Functions.news import manytomany
 
 
@@ -53,22 +53,44 @@ def modCourLive(idP, pers, salles=None, typeCour=None, jour=None, semaineMin=Non
     change the day of the lesson which id=3 
     
     """
+    
     c = models.Cour.objects.get(id=idP)
-    if salles != None:
-        c.salles = salles
-    if typeCour != None:
+    if typeCour != None and c.typeCour.id != typeCour.id :
+       
+        txt="Vous avez modifié un cour de " + c.typeCour.nom + " en un cour de " + typeCour.nom + ". "
         c.typeCour = typeCour
-    if jour != None:
+        
+    else:
+        txt="Vous avez modifié un cour de " + c.typeCour.nom + ". "
+    if salles != None and c.salles != salles:
+        txt = manytomany(salles, txt, c, models.Salle, "salles", "salle", "la", False)
+        c.salles = salles
+    
+    if jour != None and c.jour != jour:
+        txt=txt + "Vous avez modifié son jour de " + c.get_jour_display() + " à " + str(findchoice(int(jour),SEMAINE))
         c.jour = jour
-    if semaineMin != None:
+    if semaineMin != None and c.semaineMin != semaineMin:
+        txt=txt + "Vous avez modifié sa première semaine de " + str(c.semaineMin) + " à " + str(semaineMin)
         c.semaineMin = semaineMin
-    if semaineMax != None:
+    if semaineMax != None and c.semaineMax != semaineMax:
+        txt=txt + "Vous avez modifié sa dernière semaine de " + str(c.semaineMax) + " à " + str(semaineMax)
         c.semaineMax = semaineMax
-    if hmin != None:
+    if hmin != None and c.hmin != hmin:
+        txt=txt + "Vous avez modifié sa première heure de " + str(c.hmin) + " à " + str(hmin)
         c.hmin = hmin
-    if hmax != None:
+    if hmax != None and c.hmax != hmax:
+        txt=txt + "Vous avez modifié sa dernière heure de " + str(c.hmax) + " à " + str(hmax)
         c.hmax = hmax
     c.save()
+    
+    
+    n = models.News()
+    n.txt = txt
+    n.typeG = MODIFIER
+    n.type = CALENDRIERSTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers)
 
 def modGroupe(idP, p, nom=None, personnes=None, modules=None):
     """

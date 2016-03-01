@@ -15,6 +15,8 @@
     
 @author: IWIMBDSL
 """
+import datetime
+
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -23,7 +25,7 @@ from BDD.choices import PROF_STATUT, ADMINISTRATEUR_STATUT, SALLESTATUT, AJOUT, 
     SEXE, TYPE, PERSONNESTATUT, GROUPESTATUT, UVSTATUT, MODULESTATUT, \
     CALENDRIERSTATUT
 from BDD.models import Personne, horaireProf, Cour
-from Functions.news import manytomany
+from Functions.news import manytomany, day2
 
 
 def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promotion=None, dateDeNaissance=None, lieuDeNaissance=None, numeroDeTel=None, email=None):
@@ -185,8 +187,13 @@ def addCalendrier(pers, typeCour, jour, semaineMin, semaineMax, hmin, hmax, sall
     c.save()
     c.salles = salles
     
+    d=datetime.datetime.now()
     n = models.News()
-    n.txt = "Vous avez ajouté un cour de " + typeCour.nom + ""  # besion de lalgo de quentin
+    if semaineMin < semaineMax:
+        n.txt = "Vous avez ajouté un cour de " + typeCour.nom + " du " + day2(d.year,semaineMin,jour).strftime('%d/%m/%Y') + " au " + day2(d.year,semaineMax,jour).strftime('%d/%m/%Y') + " de l\'heure " + str(hmin) + " jusqu\'a " + str(hmax)  
+    else:
+        n.txt = "Vous avez ajouté un cour de " + typeCour.nom + " le " + day2(d.year,semaineMin,jour).strftime('%d/%m/%Y') + " de l\'heure " + str(hmin) + " jusqu\'a " + str(hmax)  
+
     n.typeG = AJOUT
     n.type = CALENDRIERSTATUT
     n.uploadDate = timezone.now()   
@@ -269,12 +276,21 @@ def addCour(pers, nom, isExam=False, profs=False):
     
     """
    
+    txt = ""
     c = models.TypeCour()
     c.nom = nom
     c.isExam = isExam
     c.save() 
     if profs != None:
-        c.profs=profs           
+        c.profs=profs        
+    
+    n = models.News()
+    n.txt = txt
+    n.typeG = AJOUT
+    n.type = GROUPESTATUT
+    n.uploadDate = timezone.now()   
+    n.save()
+    n.personne.add(pers)    
 def addUV(pers, nom):
     """
         Add an UV in the database
