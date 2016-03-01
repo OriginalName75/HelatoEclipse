@@ -83,11 +83,11 @@ def quiry(t):
     elif t == 0:
         l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
         l.append(['prenom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['login', "if (VAL.length > 3 && VAL) return true; else return false;"  , 'Ce champ doit avoir au moins 4 caractères'])
+        l.append(['login', "if (VAL.length > 3 && VAL) return true; else return false;"  , 'Ce champ doit avoir au moins 4 caracteres'])
         l.append(['numeroDeTel', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
         l.append(['promotion', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
         l.append(['mdp', "if (VAL.length > 5 && VAL) return true; else return false;"  , 'Au moins 6 caractere plz'])
-        l.append(['mdp2', "if ((VAL == jQuery('#id_form-'+lolo+'-mdp').val()) && VAL) return true; else return false;"  , 'Les mots de passe sont différents'])
+        l.append(['mdp2', "if ((VAL == jQuery('#id_form-'+lolo+'-mdp').val()) && VAL) return true; else return false;"  , 'Les mots de passe sont differents'])
         l.append(['mail', "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;"  , 'Ce n\'est pas un mail valide'])
         l.append(['dateDeNaissance', "if (!isValidDate(parseInt(VAL.split('/')[2]), parseInt(VAL.split('/')[0]), parseInt(VAL.split('/')[1]))) return false; else return true;"  , 'Ce n\'est pas une date valide'])
 
@@ -126,8 +126,6 @@ def formsoustable(table):
     return l
 def links(table):
     """ Print links in fiche and modifie view
-
-
     :param table: it represent which kind of data it is (exemple: a groupe)
     :type table: int 
     
@@ -261,9 +259,9 @@ def listTable(t):
         l.append(['Cour', 1])
         l.append(['Salles', 2])
         l.append(['Jour', 3])
-        l.append(['Début seamaine', 4])
+        l.append(['Debut seamaine', 4])
         l.append(['Fin de seamaine', 5])
-        l.append(['H début', 6])
+        l.append(['H debut', 6])
         l.append(['H fin', 7])
         l.append(['Ajout', 8])
     elif t == 3:
@@ -277,7 +275,7 @@ def listTable(t):
         l.append(['Note', 1])
         l.append(['Eleve', 2])
         l.append(['Module', 3])
-        l.append(['Celui qui à noté', 4])
+        l.append(['Celui qui a note', 4])
         l.append(['Ajout', 5])
     elif t == 7:
         l.append(['Nom', 1])
@@ -367,7 +365,6 @@ def changecond(table, cond, conditions, obj):
         conditions.append(obj.personne.id)
         cond.append(('module', 0))
         conditions.append(obj.module.id)
-        
         
     elif table == 7:
         cond.append(('nom', 0))
@@ -716,4 +713,3 @@ def form(user, t, n, post=None):
                 return AjouterP
             else:
                 return AjouterP(post)
-            
