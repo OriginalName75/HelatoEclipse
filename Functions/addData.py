@@ -67,7 +67,7 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
     
     """
     
-    txt = "Vous avez ajouté " + prenom + " " + nom + " de login " + login + ", qui est " + str(SEXE[int(sexe)][1]) + " et qui est " + str(TYPE[int(typeP)][1]) + "."
+    txt = "Vous avez ajoute " + prenom + " " + nom + " de login " + login + ", qui est " + str(SEXE[int(sexe)][1]) + " et qui est " + str(TYPE[int(typeP)][1]) + "."
     user = User.objects.create_user(username=login , password=mdp)
     user.first_name = prenom
     user.last_name = nom
@@ -97,14 +97,14 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
         p.promotion = promotion
         txt = txt + " Sa promotion est " + str(promotion)
     if dateDeNaissance != "" and dateDeNaissance != None:
-        txt = txt + " Il/Elle est né(e) le " + str(dateDeNaissance)
+        txt = txt + " Il/Elle est ne(e) le " + str(dateDeNaissance)
         p.dateDeNaissance = dateDeNaissance
         
     if lieuDeNaissance != "" and lieuDeNaissance != None:
-        txt = txt + " Il/Elle est né(e) à " + str(lieuDeNaissance)
+        txt = txt + " Il/Elle est ne(e) a " + str(lieuDeNaissance)
         p.lieuDeNaissance = lieuDeNaissance
     if numeroDeTel != "" and numeroDeTel != None:
-        txt = txt + " Son noméro est le " + str(numeroDeTel)
+        txt = txt + " Son nomero est le " + str(numeroDeTel)
         p.numeroDeTel = numeroDeTel
     stri = "{0} {1}".format(p.user.last_name, p.user.first_name)
     if Personne.objects.filter(filter=stri).count() > 0:
@@ -190,9 +190,9 @@ def addCalendrier(pers, typeCour, jour, semaineMin, semaineMax, hmin, hmax, sall
     d=datetime.datetime.now()
     n = models.News()
     if semaineMin < semaineMax:
-        n.txt = "Vous avez ajouté un cour de " + typeCour.nom + " du " + day2(d.year,semaineMin,jour).strftime('%d/%m/%Y') + " au " + day2(d.year,semaineMax,jour).strftime('%d/%m/%Y') + " de l\'heure " + str(hmin) + " jusqu\'a " + str(hmax)  
+        n.txt = "Vous avez ajoute un cour de " + typeCour.nom + " du " + day2(d.year,semaineMin,jour).strftime('%d/%m/%Y') + " au " + day2(d.year,semaineMax,jour).strftime('%d/%m/%Y') + " de l\'heure " + str(hmin) + " jusqu\'a " + str(hmax)  
     else:
-        n.txt = "Vous avez ajouté un cour de " + typeCour.nom + " le " + day2(d.year,semaineMin,jour).strftime('%d/%m/%Y') + " de l\'heure " + str(hmin) + " jusqu\'a " + str(hmax)  
+        n.txt = "Vous avez ajoute un cour de " + typeCour.nom + " le " + day2(d.year,semaineMin,jour).strftime('%d/%m/%Y') + " de l\'heure " + str(hmin) + " jusqu\'a " + str(hmax)  
 
     n.typeG = AJOUT
     n.type = CALENDRIERSTATUT
@@ -224,7 +224,7 @@ def addGroupe(pers, nomm, personnes=None, modules=None):
     
     """
 
-    txt = "Vous avez ajouté le groupe " + nomm + ". "
+    txt = "Vous avez ajoute le groupe " + nomm + ". "
     c = models.Groupe()
     c.nom = nomm
     c.uploadDate = timezone.now()
@@ -237,7 +237,7 @@ def addGroupe(pers, nomm, personnes=None, modules=None):
     
     
     if (personnes != None):
-        txt = manytomany(personnes, txt, c, models.Personne, "personnes", "personne", "à la", False, STATUT=GROUPESTATUT)
+        txt = manytomany(personnes, txt, c, models.Personne, "personnes", "personne", "a la", False, STATUT=GROUPESTATUT)
         c.personnes = personnes
     
     n = models.News()
@@ -251,7 +251,7 @@ def addGroupe(pers, nomm, personnes=None, modules=None):
     
     
     return c.id
-def addCour(pers, nom, isExam=False, profs=False):
+def addCour(pers, nom, isExam=False, profs=None):
     """
        Add a type of lesson in the database
         
@@ -311,7 +311,7 @@ def addUV(pers, nom):
     c.nom = nom
     c.save()
     n = models.News()
-    n.txt = "Vous avez ajouté l\'UV " + c.nom
+    n.txt = "Vous avez ajoute l\'UV " + c.nom
     n.typeG = AJOUT
     n.type = UVSTATUT
     n.uploadDate = timezone.now()   
@@ -333,12 +333,12 @@ def addModule(pers, nom, uv=None):
     :exemple:
     
     >> uv= UV.objects.get(id=5)
-    >> addModule(request.user.personne, "Géopolitique de Brest", uv)
+    >> addModule(request.user.personne, "Geopolitique de Brest", uv)
     save a module in the database
     
     """
     
-    txt = "Vous avez ajouté le module " + nom
+    txt = "Vous avez ajoute le module " + nom
     c = models.Module()
     c.nom = nom
     if uv != None:
@@ -417,7 +417,7 @@ def addSalle(pers, nom, capacite=None, typee=None):
     c.save()
      
     n = models.News()
-    txt = "Vous avez ajouté la salle " + nom
+    txt = "Vous avez ajoute la salle " + nom
     
     if typee != None and int(typee) != 0:
         txt = txt + " de type " + str(c.get_type_display())

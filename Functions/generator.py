@@ -18,8 +18,8 @@ from Functions import addData
 import random as r
 
 
-FIRST = ['Théorie', "Entropologie", "Théorème", "Supercherie", "Science", "Modélisation", "Formation", "Innutilisté", "Problème", "Problème non résolu", "Solution", "Complexe", "Paradoxe"]
-DEUZE = ['de Gauss', 'de Gauss-Wei[..]ass', 'de Pythagore', 'd\'Al Kachi', 'de Thalès', 'des éléments fini', "des elements infini", " de rien", "de tout", "de l'impossible", "du n'importe quoi", " de Hearthstone"]
+FIRST = ['Theorie', "Entropologie", "Theoreme", "Supercherie", "Science", "Modelisation", "Formation", "Innutiliste", "Probleme", "Probleme non resolu", "Solution", "Complexe", "Paradoxe"]
+DEUZE = ['de Gauss', 'de Gauss-Wei[..]ass', 'de Pythagore', 'd\'Al Kachi', 'de Thales', 'des elements fini', "des elements infini", " de rien", "de tout", "de l'impossible", "du n'importe quoi", " de Hearthstone"]
 
 @transaction.atomic
 def generEmploiedutemp():

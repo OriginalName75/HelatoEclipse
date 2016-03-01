@@ -39,7 +39,7 @@ def supr_salles(table, idP, p):
     
     """
     
-    txt = "vous avez suprimé "
+    txt = "vous avez suprime "
     obj = data.table(table).objects.get(id=int(idP))
     
     if table == 5:
@@ -53,7 +53,7 @@ def supr_salles(table, idP, p):
         txt = txt + "le groupe " + obj.nom
         for p in obj.personnes.all():
             n = models.News()
-            n.txt = "Votre groupe " + obj.nom + " a été suprimé"
+            n.txt = "Votre groupe " + obj.nom + " a ete suprime"
             n.typeG = SUPRIMER
             n.type = GROUPESTATUT
             n.uploadDate = timezone.now()   

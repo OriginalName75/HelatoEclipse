@@ -59,7 +59,7 @@ class Personne(models.Model):
     dateDeNaissance = models.DateField(null=True)  # date
     lieuDeNaissance = models.CharField(max_length=200, null=True)  # lieu de la naissance
     numeroDeTel = models.CharField(null=True, max_length=40)  # son 06
-    user = models.OneToOneField(User)  # l'authentification est gérée pas django
+    user = models.OneToOneField(User)  # l'authentification est geree pas django
     uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
     filter = models.CharField(max_length=200)  # adresse de le personne
     
@@ -67,7 +67,7 @@ class Personne(models.Model):
         return self.filter
 class horaireProf(models.Model):
     """ 
-        Pas encore utilisé
+        Pas encore utilise
     """
     prof = models.ForeignKey(Personne)
     jdelaSemaine = models.IntegerField(choices=SEMAINE, default=LUNDI)
@@ -143,7 +143,7 @@ class Module(models.Model):
         
         >> uv=UV(nom="2.9")
         >> uv.save()
-        >> m = Module(nom="géopolitique de brest", uv=uv)
+        >> m = Module(nom="geopolitique de brest", uv=uv)
         >> m.save()
         save a module in the database 
     """  
@@ -153,10 +153,7 @@ class Module(models.Model):
     def __str__ (self):
         
         return "%s - %s" % (self.nom, self.uv.nom)
-    
-
-
-        return self.semaine        
+           
 class Salle(models.Model):
     """
         It defines how a classroom is stocked in the database.

@@ -171,22 +171,22 @@ class AjouterCalendrier(forms.Form):
         if (self.cleaned_data.get('semaineMin') == None or self.cleaned_data.get('semaineMax') == None or self.cleaned_data.get('semaineMin') > 52 or self.cleaned_data.get('semaineMin') < 0 or self.cleaned_data.get('semaineMax') > 52 or self.cleaned_data.get('semaineMax') < 0):
 
             raise ValidationError(
-                "Les semaines doivent être positives et strictement plus petit que 53"
+                "Les semaines doivent etre positives et strictement plus petit que 53"
             )
         if (self.cleaned_data.get('semaineMax') < self.cleaned_data.get('semaineMin')):
 
             raise ValidationError(
-                "Les semaine min doit être < que semaine max"
+                "Les semaine min doit etre < que semaine max"
             )
         if (self.cleaned_data.get('hmax') == None or self.cleaned_data.get('hmin') == None or self.cleaned_data.get('hmax') < self.cleaned_data.get('hmin')):
 
             raise ValidationError(
-                "Les h min doit être < que h max"
+                "Les h min doit etre < que h max"
             )
         if (self.cleaned_data.get('hmin') < 0 or self.cleaned_data.get('hmin') > 10 or self.cleaned_data.get('hmax') < 0 or self.cleaned_data.get('hmax') > 10):
 
             raise ValidationError(
-                "Les heures doivent être positives et strictement plus petite que 11"
+                "Les heures doivent etre positives et strictement plus petite que 11"
             )
         return self.cleaned_data
     def save(self, p):
@@ -347,7 +347,7 @@ class PersonneFormSet(BaseFormSet):
         for form in self.forms:
             login = form.cleaned_data['login']
             if login in logins:
-                raise forms.ValidationError("Les logins doivent être deux à deux distinct")
+                raise forms.ValidationError("Les logins doivent etre deux a deux distinct")
             logins.append(login)
 class NomFormSet(BaseFormSet):
     """
@@ -377,7 +377,7 @@ class NomFormSet(BaseFormSet):
         for form in self.forms:
             login = form.cleaned_data['nom']
             if login in logins:
-                raise forms.ValidationError("Les noms doivent être deux à deux distinct")
+                raise forms.ValidationError("Les noms doivent etre deux a deux distinct")
             logins.append(login)
 class moduleFormSet(BaseFormSet):
     """
@@ -409,7 +409,7 @@ class moduleFormSet(BaseFormSet):
             uv = form.cleaned_data['uv']
             for i in l:
                 if i[0] == nom and uv == i[1]:
-                    raise forms.ValidationError("Les modules doivent être deux à deux distinct par uv")
+                    raise forms.ValidationError("Les modules doivent etre deux a deux distinct par uv")
                     break
             
             l.append([nom, uv])
@@ -713,7 +713,7 @@ class addPersonnetypeCour(forms.ModelForm):
         """
         personnes = self.cleaned_data['profs']
         
-        modiData.modCour(idP, profs=personnes)    
+        modiData.modCour(idP,p, profs=personnes)    
 class addPersonne(forms.ModelForm):
     """
         A form that find with an AJAX script data regarding what is on the fields in the form.
@@ -889,7 +889,7 @@ class changeNote(forms.Form):
                 
     """
     note = forms.IntegerField(label="", required=True, widget=forms.TextInput(attrs={'placeholder': 'Note', 'class':'form-control input-perso'}))
-    personne = AutoCompleteSelectField('personnes', required=True, help_text=None, label="Personne notée")
+    personne = AutoCompleteSelectField('personnes', required=True, help_text=None, label="Personne notee")
     module = AutoCompleteSelectField('module', required=True, help_text=None, label="Module")
     def modif(self, idP, p):
         """
@@ -1084,7 +1084,7 @@ class fitrerP(forms.Form):
     typeP = forms.ChoiceField(label="", choices=TYPE, initial=INCONNU_STATUT_TYPE)
     dateDeNaissance = forms.DateField(label="", required=False, input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'placeholder': 'Date naissance :jj/mm/aaaa', 'class':'form-control input-perso'}))
     lieuDeNaissance = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Lieu de Naissance', 'class':'form-control input-perso'}), required=False, max_length=100)
-    numeroDeTel = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Numéro de téléphone', 'class':'form-control input-perso'}), required=False)
+    numeroDeTel = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Numero de telephone', 'class':'form-control input-perso'}), required=False)
     
 class changeP(forms.Form):
     """
@@ -1117,7 +1117,7 @@ class changeP(forms.Form):
     typeP = forms.ChoiceField(label="", choices=TYPE, initial=INCONNU_STATUT_TYPE)
     dateDeNaissance = forms.DateField(label="", required=False, input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'placeholder': 'Date naissance :jj/mm/aaaa', 'class':'form-control input-perso'}))
     lieuDeNaissance = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Lieu de Naissance', 'class':'form-control input-perso'}), required=False, max_length=100)
-    numeroDeTel = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Numéro de téléphone', 'class':'form-control input-perso'}), required=False)
+    numeroDeTel = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Numero de telephone', 'class':'form-control input-perso'}), required=False)
     def modif(self, idP, p):
         """
             changes the person selected regarding the form fields
@@ -1180,7 +1180,7 @@ class AjouterP(forms.Form):
     typeP = forms.ChoiceField(label="", required=False, choices=TYPE, initial=INCONNU_STATUT_TYPE)
     dateDeNaissance = forms.DateField(label="", required=False, input_formats=['%d/%m/%Y'], widget=forms.TextInput(attrs={'placeholder': 'Naissance : jj/mm/aaaa', 'class':'form-control input-perso'}))
     lieuDeNaissance = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Lieu de naissance', 'class':'form-control input-perso'}), required=False, max_length=300)
-    numeroDeTel = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Numéro de téléphone', 'class':'form-control input-perso'}), required=False)
+    numeroDeTel = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': 'Numero de telephone', 'class':'form-control input-perso'}), required=False)
   
     def clean(self):
         """
@@ -1194,11 +1194,11 @@ class AjouterP(forms.Form):
             self.cleaned_data.get('mdp2')):
 
             raise ValidationError(
-                "Les mots de passes sont différents"
+                "Les mots de passes sont differents"
             )
         if User.objects.filter(username=self.cleaned_data.get('login')).exists():
             raise ValidationError(
-                "Le nom d'utilisateur est déjà utlisé"
+                "Le nom d'utilisateur est deja utlise"
             )
         return self.cleaned_data
     def save(self, p):
@@ -1258,7 +1258,7 @@ class AjouterNote(forms.Form):
         note = data['note']
         personne = data['personne']
         module = data['module']
-        addData.addNote(note, personne, module, prof)            
+        addData.addNote(prof, note, personne, module, prof)            
 class AjouterGroupe(forms.Form):
     """
         A Form to add a group to the database. 
@@ -1281,7 +1281,7 @@ class AjouterGroupe(forms.Form):
     """
     nom = forms.CharField(required=True, label="", max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     personne = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)
-    modules = AutoCompleteSelectMultipleField('module', required=False, help_text=None, label="Module(s) noté(s)")
+    modules = AutoCompleteSelectMultipleField('module', required=False, help_text=None, label="Module(s) note(s)")
     def clean(self):
         """
            Overwrite django clean() function. It adds additional requirements of the form
@@ -1292,7 +1292,7 @@ class AjouterGroupe(forms.Form):
         """
         if Groupe.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
-                "Le nom de groupe est déjà utlisé"
+                "Le nom de groupe est deja utlise"
             )
         return self.cleaned_data
     def save(self, pers):
@@ -1324,11 +1324,11 @@ class AjouterCour(forms.Form):
     """
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
     isExam = forms.BooleanField(required=False, label="C'est un exam ?")
-    def save(self):
+    def save(self,p):
         data = self.cleaned_data
         nom = data['nom']
         isExam = data['isExam']
-        addData.addCour(nom, isExam)
+        addData.addCour(p,nom, isExam)
 class AjouterSalle(forms.Form):
     """
         A Form to add a classroom to the database. 
@@ -1362,7 +1362,7 @@ class AjouterSalle(forms.Form):
         """
         if Salle.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
-                "Le nom de la salle est déjà utlisé"
+                "Le nom de la salle est deja utlise"
             )
         return self.cleaned_data
     def save(self, p):
@@ -1435,7 +1435,7 @@ class AjouterUV(forms.Form):
         """
         if UV.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
-                "Cet UV est déjà créé"
+                "Cet UV est deja cree"
             )
         return self.cleaned_data   
 class AjouterModule(forms.Form):
@@ -1470,7 +1470,7 @@ class AjouterModule(forms.Form):
         """
         if Module.objects.filter(nom=self.cleaned_data.get('nom'), uv=self.cleaned_data.get('uv')).exists():
             raise ValidationError(
-                "Ce module est déjà créé pour cet uv"
+                "Ce module est deja cree pour cet uv"
             )
         return self.cleaned_data   
     def save(self, p):

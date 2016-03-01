@@ -46,11 +46,11 @@ def addN(obj, nb, plus, n):
         txt = "<a href=\"/f/0\">-</a> "
     
     if obj.typeG == AJOUT:
-        txt = txt + "Vous avez ajouté "
+        txt = txt + "Vous avez ajoute "
     elif obj.typeG == MODIFIER:
-        txt = txt + "Vous avez modifié "
+        txt = txt + "Vous avez modifie "
     else:
-        txt = txt + "Vous avez suprimé "
+        txt = txt + "Vous avez suprime "
     if obj.type == SALLESTATUT:
         txt = txt + str(nb) + " salles"
     elif  obj.type == GROUPESTATUT:
@@ -110,7 +110,7 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
             l.append(g)
             if STATUT != None:
                 n = models.News()
-                n.txt = "Vous avez été ajouté à " + str(obj)
+                n.txt = "Vous avez ete ajoute a " + str(obj)
                 n.typeG = AJOUT
                 n.type = STATUT
                 n.uploadDate = timezone.now()   
@@ -129,7 +129,7 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
             l2.append(g)
             if STATUT != None:
                 n = models.News()
-                n.txt = "Vous avez été enlevé de " + str(obj)
+                n.txt = "Vous avez ete enleve de " + str(obj)
                 n.typeG = SUPRIMER
                 n.type = STATUT
                 n.uploadDate = timezone.now()   
@@ -137,19 +137,19 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
                 n.personne.add(g) 
     if len(l) > 2:
         if sens:
-            txt = txt + ". Vous l\'avez ajouté à " + str(len(l)) + " " + nom + "s. "    
+            txt = txt + ". Vous l\'avez ajoute a " + str(len(l)) + " " + nom + "s. "    
         else:
-            txt = txt + ". Vous y avez ajouté " + str(len(l)) + " " + nom + "s. "  
+            txt = txt + ". Vous y avez ajoute " + str(len(l)) + " " + nom + "s. "  
             
         if txt2 != None:
-                txt2 = txt2 + ". Vous avez été ajouté à " + str(len(l)) + " " + nom + "s. "        
+                txt2 = txt2 + ". Vous avez ete ajoute a " + str(len(l)) + " " + nom + "s. "        
     elif len(l) > 0:
         if sens:
-            txt = txt + " Vous l\'avez ajouté "
+            txt = txt + " Vous l\'avez ajoute "
         else:
-            txt = txt + " Vous y avez ajouté "
+            txt = txt + " Vous y avez ajoute "
         if txt2 != None:
-            txt2 = txt2 + " Vous avez été ajouté "
+            txt2 = txt2 + " Vous avez ete ajoute "
         first = True
         for ggg in l:
             if not first:
@@ -167,18 +167,18 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
             first = False
     if len(l2) > 2:
         if sens:
-            txt = txt + ". Vous l\'avez enlevé à " + str(len(l)) + " " + nom + ". "   
+            txt = txt + ". Vous l\'avez enleve a " + str(len(l)) + " " + nom + ". "   
         else:
-            txt = txt + ". Vous y avez enlevé " + str(len(l)) + " " + nom + ". "   
+            txt = txt + ". Vous y avez enleve " + str(len(l)) + " " + nom + ". "   
         if txt2 != None:
-            txt2 = txt2 + ". Vous avez été enlevé à " + str(len(l)) + " " + nom + "s. " 
+            txt2 = txt2 + ". Vous avez ete enleve a " + str(len(l)) + " " + nom + "s. " 
     elif len(l2) > 0:
         if sens:
-            txt = txt + " Vous l\'avez enlevé "
+            txt = txt + " Vous l\'avez enleve "
         else:
-            txt = txt + " Vous y avez enlevé "
+            txt = txt + " Vous y avez enleve "
         if txt2 != None:
-            txt2 = txt2 + " Vous avez été enlevé "
+            txt2 = txt2 + " Vous avez ete enleve "
         first = True
         for ggg in l2:
             if not first:
