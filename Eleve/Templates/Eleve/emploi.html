@@ -1,0 +1,74 @@
+{% extends "eleve.html" %}
+{% load watchTag %}
+
+</aside>	
+	
+{% block aside %}
+	<form method="post" action="/emploi/">
+   	{% csrf_token %}
+	{{ formul }}
+	<input type="submit" value="Go !"/>
+</form>
+{% endblock %}
+
+
+{% block navigation %}
+<div class="navigation">
+<li><a href="/emploi/{{pre}}"> Semaine precedente </a></li>
+<li><a href="/emploi/{{pre10}}"> << </a></li>
+<li><a href="/emploi/{{pre5}}"> < </a></li>
+<li><a href="Equipe.html"> {{ semaine }} </a></li>
+<li><a href="/emploi/{{suiv5}}"> > </a></li>
+<li><a href="/emploi/{{suiv10}}"> >> </a></li>
+<li><a href="/emploi/{{suiv}}"> Semaine suivante </a></li>
+</div>
+{% endblock %}
+
+
+
+{% block body %}
+<table>
+	<tr>
+		<th width=40> </th>
+		<th width=195>Lundi {{  dlundi }}</th>
+		<th width=195>Mardi {{  dmardi }}</th>
+		<th width=195>Mercredi {{  dmercredi }}</th>
+		<th width=195>Jeudi {{  djeudi }}</th>
+		<th width=195>Vendredi {{  dvendredi }}</th>
+	</tr>
+	
+{% for i in l5 %}
+	<tr>
+		<th height=87>H{{forloop.counter|add:0}} </th>
+		{% for k in ljour %}
+		<td>{% for j in k|index:i %}
+			{% if forloop.counter != 1 %}
+			<strong>/!\ {{ j.typeCour}}</strong>
+			{% for s in j.salles.all %}
+			<strong>{{ s }}</strong>
+			{% endfor %}
+			<br>
+			{% for h in j.typeCour.profs.all %}
+				<strong>{{ h.user.last_name }}</strong>
+				<strong>{{ h.user.first_name }}</strong>
+			{% endfor %}
+			{% else %}
+			{{ j.typeCour}}
+			{% for s in j.salles.all %}
+				{{ s }}
+			{% endfor %}
+			<br>
+			{% for h in j.typeCour.profs.all %}
+				{{ h.user.last_name }}
+				{{ h.user.first_name }}
+			{% endfor %}
+			{% endif %}
+			<br>
+		{% endfor %}</td>
+		{% endfor %}
+	</tr>
+{% endfor %}
+		
+</table>
+
+{% endblock %}
