@@ -17,9 +17,15 @@ from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
 from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
 from Functions import addData, modiData
 
+class semaine(forms.Form):
+    nb = forms.IntegerField(label="Semaine :")
+
+
+
 
 class nbAjout(forms.Form):
     nb = forms.ChoiceField(label="Combien d'ajout ? :", choices=CHOICESNB)
+
 class changeCour(forms.Form):
 
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))

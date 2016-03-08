@@ -12,4 +12,7 @@ def getS(model,arg):
 @register.filter(is_safe=True)
 def getSD(model,arg):
     return getattr(model, arg)()
-    
+
+@register.filter
+def index(List,i):
+    return List[int(i)]
