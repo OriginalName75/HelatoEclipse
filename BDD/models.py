@@ -16,12 +16,11 @@
 """
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils.datetime_safe import datetime
+from django.utils import timezone
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
-    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI, TYPENEWS,\
+    INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI, TYPENEWS, \
     TYPENEWSG, AJOUT
-
 
 
 class Personne(models.Model):
@@ -60,7 +59,7 @@ class Personne(models.Model):
     lieuDeNaissance = models.CharField(max_length=200, null=True)  # lieu de la naissance
     numeroDeTel = models.CharField(null=True, max_length=40)  # son 06
     user = models.OneToOneField(User)  # l'authentification est gérée pas django
-    uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
+    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
     filter = models.CharField(max_length=200)  # adresse de le personne
     
     def __str__ (self):
@@ -107,7 +106,7 @@ class Groupe(models.Model):
     """
     nom = models.CharField(max_length=30)  # nom du groupe
     personnes = models.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
-    uploadDate = models.DateTimeField(default=datetime.now())  # date de l'upload
+    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
     #########"   modif momo #########################
     
     modules=models.ManyToManyField('Module', blank=True)
@@ -196,7 +195,7 @@ class Note(models.Model):
     personne = models.ForeignKey(Personne) 
     module = models.ForeignKey(Module)
     prof= models.ForeignKey(Personne, related_name="ANoter")
-    uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
+    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
     def __str__ (self):
         return str(self.note)    
 class TypeCour(models.Model):
@@ -244,7 +243,7 @@ class Cour(models.Model):
     
     typeCour = models.ForeignKey(TypeCour)
     salles = models.ManyToManyField(Salle, blank=True)
-    uploadDate = models.DateTimeField(default=datetime.now)  # date de l'upload
+    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
     semaineMin = models.IntegerField()
     semaineMax = models.IntegerField()
     jour = models.IntegerField(choices=SEMAINE, default=LUNDI)
@@ -274,7 +273,7 @@ class News(models.Model):
     txt=models.CharField(max_length=100)
     type = models.IntegerField(choices=TYPENEWS, default=INCONNU_STATUT_TYPE)
     typeG= models.IntegerField(choices=TYPENEWSG, default=AJOUT)
-    uploadDate = models.DateTimeField(default=datetime.now())  # date de l'upload
+    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
     def __str__ (self):
         return self.txt
 

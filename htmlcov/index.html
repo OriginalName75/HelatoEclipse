@@ -1,0 +1,410 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.debounce.min.js"></script>
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.index_ready);
+    </script>
+</head>
+<body class="indexfile">
+
+<div id="header">
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">48%</span>
+        </h1>
+
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+
+        <form id="filter_container">
+            <input id="filter" type="text" value="" placeholder="filter..." />
+        </form>
+    </div>
+</div>
+
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">n</span>
+        <span class="key">s</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        
+        <span class="key">c</span> &nbsp; change column sorting
+    </p>
+    </div>
+</div>
+
+<div id="index">
+    <table class="index">
+        <thead>
+            
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>3112</td>
+                <td>1620</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1492 3112">48%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD___init___py.html">BDD\__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_admin_py.html">BDD\admin.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_choices_py.html">BDD\choices.py</a></td>
+                <td>53</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="47 53">89%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_forms_py.html">BDD\forms.py</a></td>
+                <td>408</td>
+                <td>189</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="219 408">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_lookups_py.html">BDD\lookups.py</a></td>
+                <td>45</td>
+                <td>12</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="33 45">73%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_migrations_0001_initial_py.html">BDD\migrations\0001_initial.py</a></td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 7">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_migrations_0002_auto_20160301_1636_py.html">BDD\migrations\0002_auto_20160301_1636.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_migrations___init___py.html">BDD\migrations\__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_models_py.html">BDD\models.py</a></td>
+                <td>82</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="74 82">90%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_templatetags___init___py.html">BDD\templatetags\__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_templatetags_watchTag_py.html">BDD\templatetags\watchTag.py</a></td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 6">83%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_tests_py.html">BDD\tests.py</a></td>
+                <td>240</td>
+                <td>40</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="200 240">83%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_views_py.html">BDD\views.py</a></td>
+                <td>384</td>
+                <td>235</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="149 384">39%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions___init___py.html">Functions\__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_addData_py.html">Functions\addData.py</a></td>
+                <td>225</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="204 225">91%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_data_py.html">Functions\data.py</a></td>
+                <td>507</td>
+                <td>361</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="146 507">29%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_delete_py.html">Functions\delete.py</a></td>
+                <td>40</td>
+                <td>35</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 40">12%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_generator_py.html">Functions\generator.py</a></td>
+                <td>180</td>
+                <td>156</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="24 180">13%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_modiData_py.html">Functions\modiData.py</a></td>
+                <td>285</td>
+                <td>273</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="12 285">4%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_news_py.html">Functions\news.py</a></td>
+                <td>143</td>
+                <td>52</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="91 143">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_selectData_py.html">Functions\selectData.py</a></td>
+                <td>25</td>
+                <td>9</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 25">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Helato___init___py.html">Helato\__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Helato_settings_py.html">Helato\settings.py</a></td>
+                <td>31</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="26 31">84%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Helato_urls_py.html">Helato\urls.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select___init___py.html">ajax_select\__init__.py</a></td>
+                <td>12</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 12">83%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_admin_py.html">ajax_select\admin.py</a></td>
+                <td>16</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 16">62%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_apps_py.html">ajax_select\apps.py</a></td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 7">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_fields_py.html">ajax_select\fields.py</a></td>
+                <td>215</td>
+                <td>98</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="117 215">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_helpers_py.html">ajax_select\helpers.py</a></td>
+                <td>40</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 40">18%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_lookup_channel_py.html">ajax_select\lookup_channel.py</a></td>
+                <td>28</td>
+                <td>10</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 28">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_models_py.html">ajax_select\models.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_registry_py.html">ajax_select\registry.py</a></td>
+                <td>64</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="31 64">48%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_urls_py.html">ajax_select\urls.py</a></td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 3">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_views_py.html">ajax_select\views.py</a></td>
+                <td>44</td>
+                <td>35</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 44">20%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="manage_py.html">manage.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <p id="no_rows">
+        No items found using the specified filter.
+    </p>
+</div>
+
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.3</a>,
+            created at 2016-03-07 18:25
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

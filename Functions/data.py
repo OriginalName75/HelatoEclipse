@@ -476,7 +476,7 @@ def classer(t, nomClasser):
         if nomClasser == 1:
             column = 'nom'
         else:
-            column = 'uploadDate'
+            column = 'isExam'
     elif t == 0:
         if nomClasser == 1:
             column = 'user__last_name'
@@ -502,7 +502,8 @@ def classer(t, nomClasser):
             column = 'user__username'
         else:
             column = 'uploadDate'
-    
+    else:
+        column = 'error'
     return column
 def filtre(t):
     """ 

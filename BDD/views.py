@@ -686,7 +686,7 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     filtre = int(filtre)
     listAffich = data.listTable(table)
     listeliste = data.listinside(table)
-    print (listeliste)
+    
     allllll = 'all'
     if page == None:
         page = 1

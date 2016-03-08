@@ -66,7 +66,8 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
     save a person in the database
     
     """
-    
+    if models.User.objects.filter(username=login).count()>0:
+        return "Login already taken"
     txt = "Vous avez ajouté " + prenom + " " + nom + " de login " + login + ", qui est " + str(SEXE[int(sexe)][1]) + " et qui est " + str(TYPE[int(typeP)][1]) + "."
     user = User.objects.create_user(username=login , password=mdp)
     user.first_name = prenom
@@ -107,14 +108,14 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
         txt = txt + " Son noméro est le " + str(numeroDeTel)
         p.numeroDeTel = numeroDeTel
     stri = "{0} {1}".format(p.user.last_name, p.user.first_name)
-    if Personne.objects.filter(filter=stri).count() > 0:
+    if Personne.objects.filter(filter=stri).count() > 0 and lieuDeNaissance!=None:
         stri = stri + " de " + lieuDeNaissance
-    if Personne.objects.filter(filter=stri).count() > 0:
+    if Personne.objects.filter(filter=stri).count() > 0 and dateDeNaissance!=None:
         stri = stri + " du " + p.dateDeNaissance.strftime("%d/%m/%y")
     i = 1
     strbase = stri
     while (Personne.objects.filter(filter=stri).count() > 0):
-        stri = strbase + i
+        stri = strbase + str(i)
         i = i + 1
         
         
@@ -142,7 +143,12 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
     n.type = PERSONNESTATUT
     n.uploadDate = timezone.now()   
     n.save()
-    n.personne.add(pers)      
+    n.personne.add(pers) 
+    
+    ####################################
+    return p
+    
+    ##################     
                  
 def addCalendrier(pers, typeCour, jour, semaineMin, semaineMax, hmin, hmax, salles):
     """
@@ -174,7 +180,8 @@ def addCalendrier(pers, typeCour, jour, semaineMin, semaineMax, hmin, hmax, sall
     save a lesson in the database
     
     """
-    
+    if hmin>hmax or semaineMin>semaineMax:
+        return "entrées non valide"
     c = Cour()
     c.typeCour = typeCour
     c.jour = jour
@@ -199,7 +206,7 @@ def addCalendrier(pers, typeCour, jour, semaineMin, semaineMax, hmin, hmax, sall
     n.uploadDate = timezone.now()   
     n.save()
     n.personne.add(pers) 
-                   
+    return c
 def addGroupe(pers, nomm, personnes=None, modules=None):
     """
         Add a group in the database
@@ -223,7 +230,8 @@ def addGroupe(pers, nomm, personnes=None, modules=None):
     save a group in the database whit modules
     
     """
-
+    if models.Groupe.objects.filter(nom=nomm).count()>0:
+        return "Name already taken"
     txt = "Vous avez ajouté le groupe " + nomm + ". "
     c = models.Groupe()
     c.nom = nomm
@@ -275,7 +283,11 @@ def addCour(pers, nom, isExam=False, profs=None):
     save exam in the database 
     
     """
-   
+    if models.TypeCour.objects.filter(nom__iexact=nom).count()>0:
+        print ("Ajout type de cour : nom deja pris")
+        return "Name already taken"
+    if isExam==None:
+        isExam=False
     txt = "Vous avez ajouté le type de cour " + nom
     if isExam:
         txt = txt + " qui est un exam"
@@ -296,6 +308,7 @@ def addCour(pers, nom, isExam=False, profs=None):
     n.uploadDate = timezone.now()   
     n.save()
     n.personne.add(pers)    
+    return c
 def addUV(pers, nom):
     """
         Add an UV in the database
@@ -311,7 +324,8 @@ def addUV(pers, nom):
     save an UV in the database
     
     """
-   
+    if models.UV.objects.filter(nom=nom).count()>0:
+        return "Name already taken"
     c = models.UV()
     c.nom = nom
     c.save()
@@ -323,7 +337,7 @@ def addUV(pers, nom):
     n.save()
     n.personne.add(pers) 
     return c.id
-def addModule(pers, nom, uv=None):
+def addModule(pers, nom, uv):
     """
         Add a module in the database
         
@@ -342,7 +356,8 @@ def addModule(pers, nom, uv=None):
     save a module in the database
     
     """
-    
+    if models.Module.objects.filter(nom=nom, uv=uv).count()>0:
+        return "Name already taken in this uv"
     txt = "Vous avez ajouté le module " + nom
     c = models.Module()
     c.nom = nom
@@ -357,7 +372,7 @@ def addModule(pers, nom, uv=None):
     n.uploadDate = timezone.now()   
     n.save()
     n.personne.add(pers) 
-      
+    return c
 def addNote(pers, note, personne, module, prof):
     """
         Add a mark in the database
@@ -406,7 +421,7 @@ def addNote(pers, note, personne, module, prof):
     n2.uploadDate = timezone.now()   
     n2.save()
     n2.personne.add(c.personne)
-    
+    return c
 
 def addSalle(pers, nom, capacite=None, typee=None):
     """
@@ -428,7 +443,8 @@ def addSalle(pers, nom, capacite=None, typee=None):
     save a classroom in the database
     
     """
-  
+    if models.Salle.objects.filter(nom=nom).count()>0:
+        return "Name already taken"
     c = models.Salle()
     c.nom = nom
     if typee != None:
@@ -452,4 +468,4 @@ def addSalle(pers, nom, capacite=None, typee=None):
     n.uploadDate = timezone.now()   
     n.save()
     n.personne.add(pers)
-    
+    return c

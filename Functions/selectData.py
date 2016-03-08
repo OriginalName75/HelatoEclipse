@@ -34,11 +34,12 @@ def select(table, plus=None, column=None, page=None, nbparpage=None, listFiltre=
     :rtype: list Model, int
     
     """
-    
+    if page != None and int(page)<1:
+        page=1
     if listFiltre == None:
         n = table.objects.count()
         
-        if plus == None or column == None:
+        if plus == None or column == None or column=="error":
             if page == None or nbparpage == None or n <= nbparpage:
                 var = table.objects.all()
             else:
@@ -51,7 +52,7 @@ def select(table, plus=None, column=None, page=None, nbparpage=None, listFiltre=
     else:
         objets_q = [Q(x) for x in listFiltre]
         n = table.objects.filter(reduce(operator.and_, objets_q)).count()
-        if plus == None or column == None:
+        if plus == None or column == None or column=="error":
             if page == None or nbparpage == None or n <= nbparpage:
                 var = table.objects.filter(reduce(operator.and_, objets_q))
             else:
