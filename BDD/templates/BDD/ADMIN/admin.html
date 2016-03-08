@@ -1,2 +1,14 @@
 {% extends "administrateur.html" %}
-{% load watchTag %}
+
+
+{% block body %}
+
+<div id="news">
+
+{% for n in news %}
+{{n|safe}}
+<br>
+{% endfor %}
+
+</div>
+{% endblock %}

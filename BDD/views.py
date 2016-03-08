@@ -31,6 +31,7 @@ from django.shortcuts import render
 from BDD.choices import PROF_STATUT
 from BDD.forms import nbAjout
 from BDD.models import Personne, News
+from Eleve.views import menu
 from Functions import  data
 from Functions import generator
 from Functions.delete import supr_salles
@@ -39,9 +40,23 @@ from Functions.selectData import select
 
 
 @login_required(login_url='/connexion')
-def index(request, plus=0):
+def index(request):
+   
+   
+            
+        if request.user.is_superuser or int(request.user.personne.type)==PROF_STATUT :
+            return administration(request)
+        else :
+            return menu(request)
+        
+        
+
+@login_required(login_url='/connexion')
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
+def administration(request, plus=0):
     """
-        It defines the variables used in the template index.html, which is the welcome page.
+        Define what is in the admin and teacher index page of the template admin.html.
+        Links are define in this template to the data of the website.
         
         
     :param request: Class that give many information like POST, GET and user data.
@@ -50,11 +65,6 @@ def index(request, plus=0):
     :type plus: int
     :return: What the user is going to view on his screen 
     :rtype: HttpResponse
-    
-    :Exemple:
-    
-    >> index(request, 1)
-    Will return the http response of the welcome page. Moreover the first news will be clarified.
     
     """
     PR = PROF_STATUT
@@ -72,6 +82,7 @@ def index(request, plus=0):
     #===========================================================================
     #                                 NEWS                                     
     #===========================================================================
+    
     if maxx>0:
         while l<10 and i<maxx:
             obj=new[i]
@@ -110,29 +121,9 @@ def index(request, plus=0):
                 first=True
             i=i+1 
             tavant=t
-        
-     
-    return render(request, 'BDD/index.html', locals())    
-
-@login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
-def administration(request):
-    """
-        Define what is in the admin and teacher index page of the template admin.html.
-        Links are define in this template to the data of the website.
-        
-        
-    :param request: Class that give many information like POST, GET and user data.
-    :type request: Request
-    :param plus: For the news. If plus>0, the plusth news will be clarified.
-    :type plus: int
-    :return: What the user is going to view on his screen 
-    :rtype: HttpResponse
-    
-    """
+            
     import datetime
     timenow = datetime.datetime.now()
-    
      
     return render(request, 'BDD/ADMIN/admin.html', locals())    
 
