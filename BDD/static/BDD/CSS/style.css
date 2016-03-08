@@ -168,9 +168,10 @@ strong
 #news
 {
 	position: relative;
-	top: -615px;
-	right: -95px;
+	top: -570px;
+	right: -150px;
 	margin-left: auto;
  	margin-right: auto;
  	width: 200;
+	background-color: rgb(12,12,18); 
 }
