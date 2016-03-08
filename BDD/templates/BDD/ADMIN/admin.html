@@ -1,24 +1,2 @@
-<html>
-<head>
-<title>Helato</title>
-</head>
-<body>
-
-<p>Salut {{user.username}}</p>
-<p><a href="/deconnexion">Deco</a></p>
-{% if user.is_superuser %}
-<p><a href="watch/0/0">Personnes</a></p>
-
-<p><a href="watch/1/0">Groupes</a></p>
-<p><a href="watch/2/0">UV</a></p>
-<p><a href="watch/3/0">Modules</a></p>
-<p><a href="watch/4/0">Calandrier</a></p>
-<p><a href="watch/5/0">Salles</a></p>
-<p><a href="watch/7/0">Cours</a></p>
-{% endif %}
-<p><a href="watch/6/0">Notes</a></p>
-
-
-<p><a href="/">Back to Site</a></p>
-</body>
-</html>
+{% extends "administrateur.html" %}
+{% load watchTag %}

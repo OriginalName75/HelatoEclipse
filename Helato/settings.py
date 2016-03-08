@@ -60,6 +60,7 @@ else:
         'django.contrib.messages',
         'django.contrib.staticfiles',
         'BDD',
+        'Eleve',
         'ajax_select', 
         'BDD.templatetags',
         
@@ -135,3 +136,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_URL = '/connexion/'
 LOGIN_REDIRECT_URL = '/'
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".                                                                                                                                          
+    # Always use forward slashes, even on Windows.                                                                                                                                                                   
+    # Don't forget to use absolute paths, not relative paths.                                                                                                                                                        
+    '/path_to/Helato/BDD/static',
+)

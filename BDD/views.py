@@ -111,7 +111,7 @@ def index(request, plus=0):
             i=i+1 
             tavant=t
         
-        
+     
     return render(request, 'BDD/index.html', locals())    
 
 @login_required(login_url='/connexion')
@@ -130,7 +130,11 @@ def administration(request):
     :rtype: HttpResponse
     
     """
-    return render(request, 'BDD/ADMIN/admin.html')    
+    import datetime
+    timenow = datetime.datetime.now()
+    
+     
+    return render(request, 'BDD/ADMIN/admin.html', locals())    
 
 
 @login_required(login_url='/connexion')
@@ -249,6 +253,8 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
     if he doesn't do it correctly (so no errors occurs)
     
     """
+    
+    
     nbajout = int(nbajout)
     table = int(table)
    
@@ -438,7 +444,10 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
     .. warnings:: the id is in the url but if the user is a teacher and not an admin, 
     he can delete only his own adds. Only an admin has to care about using urls.
     
+    
     """
+
+    
     supr = False
     table = int(table)
     if not request.user.is_superuser and table != 6:
@@ -471,16 +480,17 @@ def randomP(request):
     """
         
     
-    generator.personnes(300, True)
+    
     if not hasattr(request.user, 'personne'):
         p = Personne()
         p.user = request.user
         p.filter="Superadmin"
         p.save()
         request.user.first_name = "Dieu"
-        request.user.last_name = "Tout puissan"
+        request.user.last_name = "Tout puissant"
         request.user.save()
-       
+        
+    generator.personnes(request.user.personne, 300, True)  
     generator.groupe(10, True)
     generator.courType(200, True)
     generator.salles(2, 10, True)
@@ -560,6 +570,8 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
     .. warnings:: admin or teacher in a specific view can change ids in the url.
     
     """
+
+
     table = int(table)
     if not request.user.is_superuser and table != 6:
         return index(request)
@@ -679,6 +691,8 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     
     
     """
+
+
     table = int(table)
     if not request.user.is_superuser and table != 6:
         return index(request)

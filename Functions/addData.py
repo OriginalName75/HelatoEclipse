@@ -68,7 +68,7 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
     """
     if models.User.objects.filter(username=login).count()>0:
         return "Login already taken"
-    txt = "Vous avez ajouté " + prenom + " " + nom + " de login " + login + ", qui est " + str(SEXE[int(sexe)][1]) + " et qui est " + str(TYPE[int(typeP)][1]) + "."
+    txt = "Vous avez ajoute " + prenom + " " + nom + " de login " + login + ", qui est " + str(SEXE[int(sexe)][1]) + " et qui est " + str(TYPE[int(typeP)][1]) + "."
     user = User.objects.create_user(username=login , password=mdp)
     user.first_name = prenom
     user.last_name = nom

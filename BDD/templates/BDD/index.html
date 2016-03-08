@@ -5,14 +5,20 @@
 <body>
 <p>Salut {{user.username}}</p>
 <p><a href="/deconnexion">Deco</a></p>
-<p> NEWS : </p>
-<p>
-	{% for n in news %}
-		{{ n|safe }}</br>
-	{% endfor %}
-</p>
-{% if user.is_superuser or user.personne.type == PR %}
+
+{% if user.is_superuser %}
 <p><a href="/administration">Admninistration</a></p>
+
+{% else %}
+<p><a href="/menu/">Mon compte</a></p>
+
+
 {% endif %}
+
+{% for n in news %}
+{{n|safe}}
+<br>
+{% endfor %}
+
 </body>
 </html>

@@ -33,6 +33,9 @@ from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
 from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
 from Functions import addData, modiData
 
+class semaine(forms.Form):
+    nb = forms.IntegerField(label="Semaine :")
+
 class nbAjout(forms.Form):
     """
         Form which ask how much object the user want to add

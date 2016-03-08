@@ -180,14 +180,15 @@ def telgene():
         
     return stri
 @transaction.atomic
-def personnes(n, clear=False):
+def personnes(pers, n, clear=False):
     prenoms = ['Tyrion', 'Cersei', 'Jon', 'Sensae', 'Arya', 'Jorah', 'Jaime', 'Samwell', 'Petyr', 'Theon', 'Tywin', 'Sandor', 'Jofrey']
     noms = ['Lannister', 'Clarke', 'Harington', 'Snow', 'Slark', 'Turner', 'Williams', 'Glen', 'Bradley', 'Hill', 'Baratheon']
     villes = ['Paris', 'Brest', 'New York', 'Trouville', 'Pekin']
     i = 0
     if (clear):
         for p in Personne.objects.all():
-            p.delete()
+            if p.id!=pers.id :
+                p.delete()
     while i < n:
         prenom = prenoms[random.randint(0, len(prenoms) - 1)]
         nom = noms[random.randint(0, len(noms) - 1)]
@@ -213,5 +214,5 @@ def personnes(n, clear=False):
         
         
         
-        addData.addPersonne(nom, prenom, login, mdp, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, mail)
+        addData.addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse, promotion, dateDeNaissance, lieuDeNaissance, numeroDeTel, mail)
         i = i + 1

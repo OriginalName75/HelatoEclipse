@@ -39,7 +39,11 @@ urlpatterns = [
     url(r'^ajax_select/', include(ajax_select_urls)),
     url(r'^delete/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<supri>\d+)$', 'BDD.views.delete'),
     url(r'^randomP$', 'BDD.views.randomP'),
-    url(r'^f/(?P<plus>\d+)$', 'BDD.views.index'),
+    url(r'^menu/$', 'Eleve.views.menu'),
+    url(r'^donnees/$', 'Eleve.views.donnees'),
+    url(r'^emploi/(?P<semaine>\d+)$', 'Eleve.views.emploi'),
+    url(r'^emploi/$', 'Eleve.views.emploi'),
+    url(r'^note/$', 'Eleve.views.note'),
     url(r'$', 'BDD.views.index'),
     
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
