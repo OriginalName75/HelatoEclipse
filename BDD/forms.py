@@ -33,6 +33,9 @@ from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
 from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
 from Functions import addData, modiData
 
+class langage(forms.Form):
+    txt=forms.CharField(max_length=300)
+
 class semaine(forms.Form):
     nb = forms.IntegerField(label="Semaine :")
 

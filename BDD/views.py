@@ -28,6 +28,7 @@ from django.forms.formsets import formset_factory
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from BDD import forms
 from BDD.choices import PROF_STATUT
 from BDD.forms import nbAjout
 from BDD.models import Personne, News
@@ -37,6 +38,7 @@ from Functions import generator
 from Functions.delete import supr_salles
 from Functions.news import addN
 from Functions.selectData import select
+from language import connexion
 
 
 @login_required(login_url='/connexion')
@@ -494,6 +496,16 @@ def randomP(request):
     
     text = """done"""
     return HttpResponse(text)
+@login_required(login_url='/connexion')
+@user_passes_test(lambda u: u.is_superuser)
+def langage(request):
+    if request.method == 'POST':
+        form=forms.langage(request.POST)   
+        str=form.cleaned_data['txt']
+        reponse=connexion(str)
+    else:
+        form=forms.langage()    
+    return render(request, 'BDD/ADMIN/lang.html', locals())
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nor, which):

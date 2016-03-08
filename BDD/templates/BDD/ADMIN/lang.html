@@ -1,0 +1,6 @@
+<form action="/lang" method="post">
+	{% csrf_token %}
+	{{ form}}
+	<input type="submit" value="Change"/>
+</form>
+{{ reponse }}

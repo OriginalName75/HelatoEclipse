@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^connexion$', auth_views.login, {'template_name':'BDD/conn.html'}),
     url(r'^deconnexion$', auth_views.logout, {'next_page':'/connexion'}),
     url(r'^administration$', 'BDD.views.administration'),
-    
+    url(r'^lang$', 'BDD.views.langage'),
     url(r'^watch/(?P<table>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.watch'),
     url(r'^watch/(?P<table>\d+)/(?P<filtre>\d+)$', 'BDD.views.watch'),
     url(r'^ajouter/(?P<table>\d+)/(?P<nbajout>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.ajouter'),
