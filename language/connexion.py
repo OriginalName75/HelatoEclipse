@@ -6,5 +6,5 @@ Created on 8 mars 2016
 def connect(str):
     
     
-    return ""
+    return str
     

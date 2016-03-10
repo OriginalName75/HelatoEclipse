@@ -1,4 +1,4 @@
-from collections.__main__ import p
+
 from datetime import timedelta
 
 from django.contrib.auth.decorators import login_required

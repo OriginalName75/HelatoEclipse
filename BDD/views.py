@@ -20,7 +20,6 @@
 @author: IWIMBDSL
 """
 from datetime import datetime
-
 from django import http
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
@@ -500,9 +499,10 @@ def randomP(request):
 @user_passes_test(lambda u: u.is_superuser)
 def langage(request):
     if request.method == 'POST':
-        form=forms.langage(request.POST)   
-        str=form.cleaned_data['txt']
-        reponse=connexion(str)
+        form=forms.langage(request.POST)  
+        if form.is_valid(): 
+            str=form.cleaned_data['txt']
+            reponse=connexion.connect(str)
     else:
         form=forms.langage()    
     return render(request, 'BDD/ADMIN/lang.html', locals())
