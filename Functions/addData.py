@@ -362,6 +362,7 @@ def addModule(pers, nom, uv):
     txt = "Vous avez ajouté le module " + nom
     c = models.Module()
     c.nom = nom
+    
     if uv != None:
         txt = txt + " dans l\'UV " + uv.nom
         c.uv = uv

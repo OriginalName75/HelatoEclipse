@@ -266,5 +266,5 @@ def day2(year, week, d):
         w = 1
     else:    
         w = 7 - doomsday
-    re = datetime.date(year, 1, w) + timedelta(days=(int(week) - 1) * 7 + int(d))
+    re = datetime.date(int(year), 1, int(w)) + timedelta(days=(int(week) - 1) * 7 + int(d))
     return re

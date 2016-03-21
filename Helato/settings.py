@@ -47,6 +47,7 @@ if test:
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'Eleve',
         'BDD',
         'BDD.templatetags',
         

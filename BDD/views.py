@@ -45,7 +45,7 @@ def index(request):
    
    
             
-        if request.user.is_superuser or int(request.user.personne.type)==PROF_STATUT :
+        if request.user.is_superuser or int(request.user.personne.type) == PROF_STATUT :
             return administration(request)
         else :
             return menu(request)
@@ -69,59 +69,59 @@ def administration(request, plus=0):
     
     """
     PR = PROF_STATUT
-    plus=int(plus)
-    new=News.objects.filter(personne__id__icontains=request.user.personne.id).order_by('-id')
-    maxx=new.count()
-    ajou=0
-    news=[]
-    l=0
-    i=0
-    fff=0
-    plus2=0
-    nb=1
-    first=True
+    plus = int(plus)
+    new = News.objects.filter(personne__id__icontains=request.user.personne.id).order_by('-id')
+    maxx = new.count()
+    ajou = 0
+    news = []
+    l = 0
+    i = 0
+    fff = 0
+    plus2 = 0
+    nb = 1
+    first = True
     #===========================================================================
     #                                 NEWS                                     
     #===========================================================================
     
-    if maxx>0:
-        while l<10 and i<maxx:
-            obj=new[i]
-            t=obj.type*100+obj.typeG
-            if i<maxx-1:
-                obj2=new[i+1]
-                tapres=obj2.type*100+obj2.typeG
+    if maxx > 0:
+        while l < 10 and i < maxx:
+            obj = new[i]
+            t = obj.type * 100 + obj.typeG
+            if i < maxx - 1:
+                obj2 = new[i + 1]
+                tapres = obj2.type * 100 + obj2.typeG
             else:
-                tapres=-2
-            if t==tapres:
-                nb=nb+1
+                tapres = -2
+            if t == tapres:
+                nb = nb + 1
                 
-                txt=addN(obj, nb, not plus==plus2+1,plus2+1)
+                txt = addN(obj, nb, not plus == plus2 + 1, plus2 + 1)
                 if first:
-                    fff=ajou
+                    fff = ajou
                     news.append(txt)
-                    ajou=ajou+1
+                    ajou = ajou + 1
                     
                 else:
                     
-                    news[fff]=txt
+                    news[fff] = txt
               
-                first=False
-                if plus==plus2+1:
+                first = False
+                if plus == plus2 + 1:
                     
                     news.append(obj.txt)
-                    ajou=ajou+1
+                    ajou = ajou + 1
             else:
-                l=l+1   
-                if nb==1 or plus==plus2+1:
+                l = l + 1   
+                if nb == 1 or plus == plus2 + 1:
                     news.append(obj.txt)
-                    ajou=ajou+1
-                plus2=plus2+1
-                nbbbb=1
-                nb=1
-                first=True
-            i=i+1 
-            tavant=t
+                    ajou = ajou + 1
+                plus2 = plus2 + 1
+                nbbbb = 1
+                nb = 1
+                first = True
+            i = i + 1 
+            tavant = t
             
     import datetime
     timenow = datetime.datetime.now()
@@ -130,7 +130,7 @@ def administration(request, plus=0):
 
 
 @login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def fiche(request, table, idP, filtre=None, page=None, nbparpage=None, nomClasser=None, plusOuMoins=None):
     """
         It defines the variables used in the template fiche.html, which show specifications of an object in the database.
@@ -173,9 +173,15 @@ def fiche(request, table, idP, filtre=None, page=None, nbparpage=None, nomClasse
     table = int(table)
     allllll = 'all'
     TABBLE = data.table(table)
-    if not TABBLE.objects.filter(id=int(idP)).count()>0:
+    if not TABBLE.objects.filter(id=int(idP)).count() > 0:
         return http.HttpResponseRedirect('/')
+    if not request.user.is_superuser and table != 6:
+        return http.HttpResponseRedirect('/')
+    
     obj = TABBLE.objects.get(id=int(idP))
+    if not request.user.is_superuser and table == 6:
+        if obj.prof.id!=request.user.personne.id:
+            return http.HttpResponseRedirect('/')
     listeliste = data.listinside(table)
     listetab = data.listTable(table)
     links = data.links(table)
@@ -250,8 +256,8 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
     nbajout = int(nbajout)
     table = int(table)
    
-    if not request.user.is_superuser and table != 6: # case of teacher
-        return index(request)
+    if not request.user.is_superuser and table != 6:  # case of teacher
+        return http.HttpResponseRedirect('/')
     ajj = data.ajouterA(table)
     ficheAfter = data.ficheAfter(table)
     if nbajout > 0 and nbajout != 100:
@@ -337,9 +343,9 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     jj = 0
                     for f in formset:
                         if table == 6:
-                            f.save(request.user.personne,solo, [x[jj] for x in multi],request.user.personne)
+                            f.save(request.user.personne, solo, [x[jj] for x in multi], request.user.personne)
                         else:
-                            f.save(request.user.personne,solo, [x[jj] for x in multi])
+                            f.save(request.user.personne, solo, [x[jj] for x in multi])
                         jj += 1
                     nbajout = 0  
                     return http.HttpResponseRedirect('/watch/' + str(table) + '/' + str(filtre))
@@ -443,8 +449,8 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
     supr = False
     table = int(table)
     if not request.user.is_superuser and table != 6:
-        return index(request)
-    if not data.table(table).objects.filter(id=int(idP)).count()>0:
+        return http.HttpResponseRedirect('/')
+    if not data.table(table).objects.filter(id=int(idP)).count() > 0:
         return http.HttpResponseRedirect('/')
     p = data.table(table).objects.get(id=int(idP))
     #===========================================================================
@@ -452,12 +458,15 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
     #===========================================================================
     if int(supri) == 1:
         
-        obj = data.table(table).objects.filter(id=int(idP))
+        obj = data.table(table).objects.get(id=int(idP))
+        if not request.user.is_superuser and table == 6:
+            if request.user.personne.id != obj.personne.id:
+                return http.HttpResponseRedirect('/')
         supr_salles(table, idP, request.user.personne)
-        if not request.user.is_superuser and table==6:
-            if request.user.personne.id!= obj.personne.id:
-                return index(request)
         
+        if table == 0:
+            if hasattr(obj, "user"):
+                obj.user.delete()
         obj.delete()
         supr = True
     
@@ -476,7 +485,7 @@ def randomP(request):
     if not hasattr(request.user, 'personne'):
         p = Personne()
         p.user = request.user
-        p.filter="Superadmin"
+        p.filter = "Superadmin"
         p.save()
         request.user.first_name = "Dieu"
         request.user.last_name = "Tout puissant"
@@ -499,34 +508,34 @@ def randomP(request):
 @user_passes_test(lambda u: u.is_superuser)
 def langage(request):
     if request.method == 'POST':
-        form=forms.langage(request.POST)  
+        form = forms.langage(request.POST)  
         if form.is_valid(): 
-            str=form.cleaned_data['txt']
-            reponse=connexion.connect(str)
+            strr = form.cleaned_data['txt']
+            reponse = connexion.connect(strr)
     else:
-        form=forms.langage()    
+        form = forms.langage()    
     return render(request, 'BDD/ADMIN/lang.html', locals())
-@login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
-def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nor, which):
-    """
-        Not used yet. Was used before.
-        Can be used later.
-    
-    """
-    table = int(table)
-    
-    if int(nor) == 0:
-        return render(request, 'BDD/ADMIN/areusure.html', locals())  
-    else:
-        TABBLE = data.table(table)
-        obj = TABBLE.objects.get(id=int(idP))
-        l = data.soustable(table)
-        for ll in l:
-            gr = getattr(obj, ll[3]).get(id=int(what))
-            getattr(obj, ll[3]).remove(gr)
-        return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0)
-    
+# @login_required(login_url='/connexion')
+# @user_passes_test(lambda u: u.is_superuser)
+# def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nor, which):
+#     """
+#         Not used yet. Was used before.
+#         Can be used later.
+#     
+#     """
+#     table = int(table)
+#     
+#     if int(nor) == 0:
+#         return render(request, 'BDD/ADMIN/areusure.html', locals())  
+#     else:
+#         TABBLE = data.table(table)
+#         obj = TABBLE.objects.get(id=int(idP))
+#         l = data.soustable(table)
+#         for ll in l:
+#             gr = getattr(obj, ll[3]).get(id=int(what))
+#             getattr(obj, ll[3]).remove(gr)
+#         return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0)
+#     
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, first=True):
@@ -576,8 +585,10 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
 
 
     table = int(table)
+    if not data.table(table).objects.filter(id=int(idP)).count() > 0 or table > 7:
+        return http.HttpResponseRedirect('/')
     if not request.user.is_superuser and table != 6:
-        return index(request)
+        return http.HttpResponseRedirect('/')
     soustable = data.soustable(table)
     TABBLE = data.table(table)
     obj = TABBLE.objects.get(id=int(idP))
@@ -608,7 +619,6 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
     else:
         
         stforms = data.formsoustable(table)
-    
         for frm in stforms:
             instance = TABBLE.objects.get(id=int(idP))
             frm[0] = frm[0](instance=instance)
@@ -643,7 +653,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
                 form.fields[cond[entier][0]].initial = l
             entier = entier + 1 
     taille = len(stforms)
-    print(taille)
+  
     for st in soustable:
         
         if ii < taille:

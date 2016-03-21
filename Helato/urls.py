@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^connexion$', auth_views.login, {'template_name':'BDD/conn.html'}),
     url(r'^deconnexion$', auth_views.logout, {'next_page':'/connexion'}),
     url(r'^administration$', 'BDD.views.administration'),
+    url(r'^administration/(?P<plus>\d+)$', 'BDD.views.administration'),
     url(r'^lang$', 'BDD.views.langage'),
     url(r'^watch/(?P<table>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.watch'),
     url(r'^watch/(?P<table>\d+)/(?P<filtre>\d+)$', 'BDD.views.watch'),
@@ -35,7 +36,6 @@ urlpatterns = [
     url(r'^fiche/(?P<table>\d+)/(?P<idP>\d+)$', 'BDD.views.fiche'),
 
     url(r'^change/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.change'),
-    url(r'^areusure/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<nor>\d+)/(?P<which>\d+)/$', 'BDD.views.areusure'),
     url(r'^ajax_select/', include(ajax_select_urls)),
     url(r'^delete/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<supri>\d+)$', 'BDD.views.delete'),
     url(r'^randomP$', 'BDD.views.randomP'),

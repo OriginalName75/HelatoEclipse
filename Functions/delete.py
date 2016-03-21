@@ -17,7 +17,7 @@ from django.utils import timezone
 
 from BDD import models
 from BDD.choices import SUPRIMER, SALLESTATUT, GROUPESTATUT, PERSONNESTATUT, \
-    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT
+    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT, NOTESTATUT, COURTYPESTATUT
 from Functions import data
 
 
@@ -68,6 +68,12 @@ def supr_salles(table, idP, p):
     elif table == 4:
         ST = CALENDRIERSTATUT
         txt = txt + "un cour de " + obj.typeCour.nom
+    elif table == 6:
+        ST = NOTESTATUT
+        txt = txt + "une note de " + obj.personne.filter
+    else :
+        ST = COURTYPESTATUT
+        txt = txt + "un cour de " + obj.nom
     n = models.News()
     n.txt = txt
     n.typeG = SUPRIMER
