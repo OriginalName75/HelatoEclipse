@@ -1,16 +1,34 @@
-'''
-Created on 2 févr. 2016
-
-@author: Morgan
-'''
+"""
+    The ''Ctrlz'' module
+    ======================
+    
+    It define the functions to cancel an action and to delete a table from the database.
+    
+    :Exemple:
+    >> Ctrlz(datetime.now())
+    cancel the last action
+    
+@author: IWIMBDSL
+"""
 
 from BDD import models
-from BDD.choices import AJOUT, MODIFIE, SUPPRIME
+from BDD.choices import AJOUT, MODIFIER, SUPRIMER
 from BDD.models import Modification, ChampsModifie, Personne, Groupe, Module, \
-    Salle, Note, UV, TypeCour
+    Salle, Note, UV, TypeCour, News, Cour
 
 
 def Ctrlz(d):
+    """
+        Cancel the last action before the datetime d.
+        
+        :param d: time from which the last action is calculated
+        :type d: datetime
+        
+        :example:
+        >> Ctrlz((2016,03,17,18,45,00))
+        cancel the last action done before quarter to 7pm, the 17th of march 2016
+    """
+    
     i=models.Modification.objects.filter(models.Modification.datemodif<d)[0]
     a=i[0]
     for p in i:
@@ -47,11 +65,11 @@ def Ctrlz(d):
                                 i=models.Cour.objects.filter(id=a.ipmod).count()
                                 if(i!=0):
                                     b = models.Cour.objects.filter(id=a.ipmod)[0]
-    if a.typemod == SUPPRIME:
+    if a.typemod == SUPRIMER:
         b.isvisible = True
     elif a.typemod == AJOUT:
         b.isvisible = False
-    elif a.typemod == MODIFIE:
+    elif a.typemod == MODIFIER:
         for k in models.ChampsModifie.objects.filter(models.ChampsModifie.champs==a)[0]:
             if k.nomchamp == 'nom changé depuis':
                 b.nom = k.valchamp
@@ -94,6 +112,17 @@ def Ctrlz(d):
     a.datemodif.replace(day=01, month=01)
     
 def delet(dat):
+    """
+        Delete from the database any Modification or News older than dat and delete every table from the base 
+        which is not visible (isvisible=False).
+    
+        :param dat: date from which deleting is done
+        :type dat: datetime
+        
+        :examples:
+        >> delet(datetime.now()-timedelta(days=7))
+        delete the useless part of the database older than one week
+    """
     y = Modification.objects.all()
     for x in y:
         if x.datemodif < dat:
@@ -102,33 +131,40 @@ def delet(dat):
     for x in y:
         if x.champs.datemodif < dat:
             x.delete()
+    y = News.objects.all()
+    for x in y:
+        if x.uploadDate < dat:
+            x.delete()
+    
     y = Personne.objects.all()
     for x in y:
-        if x.isvisible==False:
+        if x.isvisible==False and x.uploadDate < dat:
             x.delete()
     y = Groupe.objects.all()
     for x in y:
-        if x.isvisible==False:
+        if x.isvisible==False and x.uploadDate < dat:
             x.delete()
     y = UV.objects.all()
     for x in y:
-        if x.isvisible==False:
+        if x.isvisible==False and x.uploadDate < dat:
             x.delete()
     y = Module.objects.all()
     for x in y:
-        if x.isvisible==False:
+        if x.isvisible==False and x.uploadDate < dat:
             x.delete()
     y = Salle.objects.all()
     for x in y:
-        if x.isvisible==False:
+        if x.isvisible==False and x.uploadDate < dat:
             x.delete()
     y = Note.objects.all()
     for x in y:
-        if x.isvisible==False:
+        if x.isvisible==False and x.uploadDate < dat:
             x.delete()
     y = TypeCour.objects.all()
     for x in y:
-        if x.isvisible==False:
+        if x.isvisible==False and x.uploadDate < dat:
             x.delete()
-    
-    
+    y = Cour.objects.all()
+    for x in y:
+        if x.isvisible==False and x.uploadDate < dat:
+            x.delete()

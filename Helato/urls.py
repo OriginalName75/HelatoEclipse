@@ -32,16 +32,19 @@ urlpatterns = [
     url(r'^watch/(?P<table>\d+)/(?P<filtre>\d+)$', 'BDD.views.watch'),
     url(r'^ajouter/(?P<table>\d+)/(?P<nbajout>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.ajouter'),
     url(r'^fiche/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.fiche'),
+    url(r'^fiche/(?P<table>\d+)/(?P<idP>\d+)$', 'BDD.views.fiche'),
+
     url(r'^change/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)$', 'BDD.views.change'),
     url(r'^areusure/(?P<table>\d+)/(?P<idP>\d+)/(?P<what>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<nor>\d+)/(?P<which>\d+)/$', 'BDD.views.areusure'),
     url(r'^ajax_select/', include(ajax_select_urls)),
     url(r'^delete/(?P<table>\d+)/(?P<idP>\d+)/(?P<filtre>\d+)/(?P<page>\d+)/(?P<nbparpage>\d+)/(?P<nomClasser>\d+)/(?P<plusOuMoins>\d+)/(?P<supri>\d+)$', 'BDD.views.delete'),
     url(r'^randomP$', 'BDD.views.randomP'),
+    url(r'^f/(?P<plus>\d+)$', 'BDD.views.index'),
     
     #pour que Morgan fasse ses tests
     url(r'^mor$', 'BDD.views.mor'),
     url(r'^morSup$', 'BDD.views.morSup'),
-    #jusque là
+    #jusque lï¿½
     
     url(r'$', 'BDD.views.index'),
     

@@ -1,8 +1,13 @@
-'''
-Created on 28 oct. 2015
-
-@author: Moran
-'''
+"""
+    The ''selectData'' module
+    ======================
+    
+    Functions to select data
+    
+    
+    
+@author: IWIMBDSL
+"""
 from _functools import reduce
 import operator
 
@@ -10,6 +15,25 @@ from django.db.models import Q
 
 
 def select(table, plus=None, column=None, page=None, nbparpage=None, listFiltre=None):
+    """
+        Select data depends if it is filtered or not, sorted or not etc..
+        
+    :param table: define in which model the object is.
+    :type table: int   
+    :param plus: if equals to '-', sort by descending order; if '' in the ascending order
+    :type plus: string
+    :param column: which column to sort
+    :type column: string
+    :param page: defines which page is printed. 
+    :type page: int
+    :param nbparpage: defines how many object are printed every pages. if None it is all in 1 page             
+    :type nbparpage: int 
+    :param listFiltre:  lists of filter conditions
+    :type listFiltre: list of string
+    :return: the list of objects and the total nmber of ibjetc in the database
+    :rtype: list Model, int
+    
+    """
     
     if listFiltre == None:
         n = table.objects.count()

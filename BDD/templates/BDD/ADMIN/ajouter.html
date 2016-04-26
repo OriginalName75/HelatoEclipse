@@ -1,5 +1,4 @@
 {{ form.media }} 
-
 {% load staticfiles %}
 <html>
 <head>
@@ -21,7 +20,6 @@
 		<script>
 			$(document).keypress(function(e){
 			document.getElementById('log').innerHTML = 'v';
-
 			
 		});
        </script> 
@@ -94,6 +92,7 @@
 			</form> 
 		{% endfor %}
 	{% else %}
+	{{ formset.non_form_errors }}
 		<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 			{{ formset.management_form }}
 			{% for form in formset %}
