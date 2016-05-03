@@ -255,10 +255,11 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
     
     nbajout = int(nbajout)
     table = int(table)
-   
+    MODEL=data.table(table)()
+    AJJ=MODEL.ajouterPlusieurs()
     if not request.user.is_superuser and table != 6:  # case of teacher
         return http.HttpResponseRedirect('/')
-    ajj = data.ajouterA(table)
+    #ajj = data.ajouterA(table)
     ficheAfter = data.ficheAfter(table)
     if nbajout > 0 and nbajout != 100:
         
@@ -309,35 +310,37 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
             multi = []
             i = 0
             
-            
-            for x in ajj[1]:
-                if x[1] == 0:
-                    kwargs = {
-                        x[3]: stock[i]
-                    }
-                    a = x[2].objects.filter(**kwargs)
-                    nb = a.count()
-                    Formset = formset_factory(x[4], extra=nb, formset=x[5])
-                    
-                    if request.method == 'POST' and first:
-                       
-                        formset = Formset(request.POST, request.FILES)
-                    
-                            
-                    else:
-                        formset = Formset()
-                    b = []
-                    ii = 0
-                    for aa in a:
-                        b.append([aa, formset[ii]])
-                        ii += 1
+            if AJJ!=None:
+                
+                for x in AJJ.listFieldForm:
+                    if i==0:
+                        kwargs = {
+                            AJJ.Qcode: stock[i]
+                        }
+                        a = AJJ.listModel[i].objects.filter(**kwargs)
+                        nb = a.count()
+                        Formset = formset_factory(AJJ.form, extra=nb, formset=AJJ.baseForm)
                         
-                    multi.append(b)
+                        if request.method == 'POST' and first:
+                           
+                            formset = Formset(request.POST, request.FILES)
+                        
+                                
+                        else:
+                            formset = Formset()
+                        b = []
+                        ii = 0
+                        for aa in a:
+                            b.append([aa, formset[ii]])
+                            ii += 1
+                            
+                        multi.append(b)
+                        
+                        
+                    else:
+                        solo.append(AJJ.listModel[i].objects.get(id=stock[i]))
+                    i += 1
                     
-                    
-                else:
-                    solo.append(x[2].objects.get(id=stock[i]))
-                i += 1
             if request.method == 'POST' and first:
                 if formset.is_valid():
                     jj = 0
@@ -356,7 +359,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
             #      Normal nb ajout. no many to many relations. 
             #      print forms to know how much
             #===========================================================================
-            if ajj == None or nbajout < 100:
+            if AJJ == None or nbajout < 100:
                 
                 form = nbAjout(request.POST)
                 
@@ -365,27 +368,28 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     
                     return ajouter(request, table, nb, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
                 else:
-                    if ajj != None:
-                        formAjj = ajj[0]()
+                    if AJJ != None:
+                        formAjj = AJJ.formInit()
             #===========================================================================
             #      Many to many relations,print the forms
             #      to know which many to many relations 
             #===========================================================================
             else:
-                formAjj = ajj[0](request.POST)
+                formAjj = AJJ.formInit(request.POST)
                 stock = []
                 if formAjj.is_valid():
-                    for x in ajj[1]:
-                        if x[1] == 0:
-                            stock.append(formAjj.cleaned_data[x[0]])
+                    i=0
+                    for x in AJJ.listFieldForm:
+                        if i == 0:
+                            stock.append(formAjj.cleaned_data[x])
                         else:
-                            stock.append(formAjj.cleaned_data[x[0]].id)
-                
+                            stock.append(formAjj.cleaned_data[x].id)
+                        i=i+1
                     request.session['stock'] = stock
                     return ajouter(request, table, 101, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
         else:
-            if ajj != None:
-                formAjj = ajj[0]()
+            if AJJ != None:
+                formAjj = AJJ.listFieldForm()
             form = nbAjout() 
             
             
@@ -511,7 +515,7 @@ def langage(request):
         form = forms.langage(request.POST)  
         if form.is_valid(): 
             strr = form.cleaned_data['txt']
-            reponse = connexion.connect(strr)
+            reponse = connexion.connect(strr, request.user.personne.id)
     else:
         form = forms.langage()    
     return render(request, 'BDD/ADMIN/lang.html', locals())

@@ -31,7 +31,7 @@ from django.forms.formsets import BaseFormSet
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB, \
     SEMAINEAAVECINCO, SEMAINEINCONNU
-from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
+from BDD import models
 from Functions import addData, modiData
 
 class langage(forms.Form):
@@ -470,7 +470,7 @@ class chooseGroupe(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Personne
+        model = models.Personne
         fields = ['groupes']
 
     groupes = AutoCompleteSelectMultipleField('groupes', required=True, help_text=None)
@@ -486,7 +486,7 @@ class addGroupe(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Personne
+        model = models.Personne
         fields = ['groupes']
 
     groupes = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)
@@ -537,7 +537,7 @@ class addModule(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Groupe
+        model = models.Groupe
         fields = ['modules']
 
     modules = AutoCompleteSelectMultipleField('module', required=False, help_text=None)
@@ -573,7 +573,7 @@ class addSalle(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Salle
+        model = models.Salle
         fields = ['salles']
 
     salles = AutoCompleteSelectMultipleField('salles', required=False, help_text=None)
@@ -610,7 +610,7 @@ class addGroupeModule(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Module
+        model = models.Module
         fields = ['groupes']
 
     groupes = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)
@@ -661,7 +661,7 @@ class addTypeCour(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = TypeCour
+        model = models.TypeCour
         fields = ['groupe']
     
     groupe = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)    
@@ -696,7 +696,7 @@ class addPersonnetypeCour(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = TypeCour
+        model = models.TypeCour
         fields = ['profs']
     
     profs = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)   
@@ -731,7 +731,7 @@ class addPersonne(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Personne
+        model = models.Personne
         fields = ['personnes']
     
     personnes = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)
@@ -1296,7 +1296,7 @@ class AjouterGroupe(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if Groupe.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+        if models.Groupe.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
                 "Le nom de groupe est deja utlise"
             )
@@ -1366,7 +1366,7 @@ class AjouterSalle(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if Salle.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+        if models.Salle.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
                 "Le nom de la salle est deja utlise"
             )
@@ -1439,7 +1439,7 @@ class AjouterUV(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if UV.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+        if models.UV.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
                 "Cet UV est deja cree"
             )
@@ -1474,7 +1474,7 @@ class AjouterModule(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if Module.objects.filter(nom=self.cleaned_data.get('nom'), uv=self.cleaned_data.get('uv')).exists():
+        if models.Module.objects.filter(nom=self.cleaned_data.get('nom'), uv=self.cleaned_data.get('uv')).exists():
             raise ValidationError(
                 "Ce module est deja cree pour cet uv"
             )

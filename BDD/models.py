@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    The ''models'' module
+    The ''mod'' module
     ======================
     
     It defines what is on the database
@@ -16,7 +16,7 @@
 @author: IWIMBDSL
 """
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import models as mod
 from django.utils import timezone
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
@@ -24,7 +24,25 @@ from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     TYPENEWSG, AJOUT
 
 
-class Personne(models.Model):
+
+
+class PaternModel(mod.Model):
+    
+    def ajouterPlusieurs(self):
+        """
+        In the add view
+        
+        Ex: When the user wants to add marks for an entire group.
+        
+    :return: None by default ; But if it is overwritten, 
+  
+    :rtype: None by default ;
+    
+    
+    """
+        return None
+
+class Personne(PaternModel):
     """
         It defines how a person is stocked in the database.
         
@@ -39,7 +57,7 @@ class Personne(models.Model):
         It has also a filter (which defines a person in a unique way), used in forms.
         
         :exemple:
-        >> from django.contrib.auth.models import User
+        >> from django.contrib.auth.mod import User
         >> from BDD.choices import HOMME_STATUT, ELEVE_STATUT
         >> user=User(first_name="Jimmy", last_name="Page", username="LedZep", password="123456", email="jimmy@ledzep.com")
         >> user.save()
@@ -52,33 +70,33 @@ class Personne(models.Model):
         
     """
     
-    sexe = models.IntegerField(choices=SEXE, default=INCONNU_STATUT)  # true = femme; false = homme
-    adresse = models.CharField(max_length=200, null=True)  # adresse de le personne
-    promotion = models.IntegerField(null=True)  # ex : 2017
-    type = models.IntegerField(choices=TYPE, default=INCONNU_STATUT_TYPE)
-    dateDeNaissance = models.DateField(null=True)  # date
-    lieuDeNaissance = models.CharField(max_length=200, null=True)  # lieu de la naissance
-    numeroDeTel = models.CharField(null=True, max_length=40)  # son 06
-    user = models.OneToOneField(User)  # l'authentification est gérée pas django
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
-    filter = models.CharField(max_length=200)  # adresse de le personne
+    sexe = mod.IntegerField(choices=SEXE, default=INCONNU_STATUT)  # true = femme; false = homme
+    adresse = mod.CharField(max_length=200, null=True)  # adresse de le personne
+    promotion = mod.IntegerField(null=True)  # ex : 2017
+    type = mod.IntegerField(choices=TYPE, default=INCONNU_STATUT_TYPE)
+    dateDeNaissance = mod.DateField(null=True)  # date
+    lieuDeNaissance = mod.CharField(max_length=200, null=True)  # lieu de la naissance
+    numeroDeTel = mod.CharField(null=True, max_length=40)  # son 06
+    user = mod.OneToOneField(User)  # l'authentification est gérée pas django
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    filter = mod.CharField(max_length=200)  # adresse de le personne
     
     def __str__ (self):
         return self.filter
-class horaireProf(models.Model):
+class horaireProf(PaternModel):
     """ 
         Pas encore utilisé
     """
-    prof = models.ForeignKey(Personne)
-    jdelaSemaine = models.IntegerField(choices=SEMAINE, default=LUNDI)
-    hminMatin = models.IntegerField()
-    hmaxMatin = models.IntegerField()
-    hminApresMidi = models.IntegerField()
-    hmaxApresMidi = models.IntegerField()
+    prof = mod.ForeignKey(Personne)
+    jdelaSemaine = mod.IntegerField(choices=SEMAINE, default=LUNDI)
+    hminMatin = mod.IntegerField()
+    hmaxMatin = mod.IntegerField()
+    hminApresMidi = mod.IntegerField()
+    hmaxApresMidi = mod.IntegerField()
     
     def __str__ (self):
         return self.get_jdelaSemaine_display() + " : " + str(self.hminMatin) + "/" + str(self.hmaxMatin) + " + " + str(self.hminApresMidi) + "/" + str(self.hmaxApresMidi)
-class Groupe(models.Model):
+class Groupe(PaternModel):
     """
         It defines how a group is stocked in the database.
         
@@ -105,17 +123,17 @@ class Groupe(models.Model):
         add a module in a group
         
     """
-    nom = models.CharField(max_length=30)  # nom du groupe
-    personnes = models.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
+    nom = mod.CharField(max_length=30)  # nom du groupe
+    personnes = mod.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
     #########"   modif momo #########################
     
-    modules=models.ManyToManyField('Module', blank=True)
+    modules=mod.ManyToManyField('Module', blank=True)
     
     #########"   fin modif momo #########################
     def __str__ (self):
         return self.nom
-class UV(models.Model):
+class UV(PaternModel):
     """
         It defines how an UV is stocked in the database.
         
@@ -128,12 +146,9 @@ class UV(models.Model):
         save an UV in the database 
         
     """
-    nom = models.CharField(max_length=30)  # nom de l'UV
-        
-    
-    def __str__ (self):
-        return self.nom   
-class Module(models.Model):
+    nom = mod.CharField(max_length=30)  # nom de l'UV
+   
+class Module(PaternModel):
     """
         It defines how a module is stocked in the database.
         
@@ -147,15 +162,15 @@ class Module(models.Model):
         >> m.save()
         save a module in the database 
     """  
-    nom = models.CharField(max_length=30)  # nom du module    
-    uv = models.ForeignKey(UV)
+    nom = mod.CharField(max_length=30)  # nom du module    
+    uv = mod.ForeignKey(UV)
     
     def __str__ (self):
         
         return "%s - %s" % (self.nom, self.uv.nom)
     
  
-class Salle(models.Model):
+class Salle(PaternModel):
     """
         It defines how a classroom is stocked in the database.
         
@@ -168,12 +183,12 @@ class Salle(models.Model):
         save a classroom in the database 
     """
    
-    nom = models.CharField(max_length=30)
-    capacite = models.IntegerField(null=True)
-    type = models.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE) 
+    nom = mod.CharField(max_length=30)
+    capacite = mod.IntegerField(null=True)
+    type = mod.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE) 
     def __str__ (self):
         return self.nom  
-class Note(models.Model):
+class Note(PaternModel):
     """
         It defines how a mark is stocked in the database.
         
@@ -192,14 +207,22 @@ class Note(models.Model):
         save a mark in the database 
     """
    
-    note = models.IntegerField()
-    personne = models.ForeignKey(Personne) 
-    module = models.ForeignKey(Module)
-    prof= models.ForeignKey(Personne, related_name="ANoter")
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
+    note = mod.IntegerField(default=0, blank=True, null=True)
+    personne = mod.ForeignKey(Personne) 
+    module = mod.ForeignKey(Module)
+    prof= mod.ForeignKey(Personne, related_name="ANoter")
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    def ajouterPlusieurs(self):
+        """
+            See ajouterPlusieurs of PaternModel
+        """
+        from BDD.forms import chooseGroupe, notes, BaseNoteFormSet
+        from Functions.data import ADDMANY
+        return ADDMANY(chooseGroupe, notes, BaseNoteFormSet, ["groupes","module"], [Personne,Module],'groupe__in')
+    
     def __str__ (self):
         return str(self.note)    
-class TypeCour(models.Model):
+class TypeCour(PaternModel):
     """
         It defines a type of lesson.
         
@@ -217,13 +240,14 @@ class TypeCour(models.Model):
         >> t.save()
         save a type of lesson in the database 
     """
-    nom = models.CharField(max_length=30)
-    profs = models.ManyToManyField(Personne, blank=True)
-    groupe = models.ManyToManyField(Groupe, blank=True)
-    isExam = models.BooleanField()
+    nom = mod.CharField(max_length=30)
+    profs = mod.ManyToManyField(Personne, blank=True)
+    groupe = mod.ManyToManyField(Groupe, blank=True)
+    isExam = mod.BooleanField()
     def __str__ (self):
         return self.nom
-class Cour(models.Model):
+    
+class Cour(PaternModel):
     """
         It defines a lesson.
         
@@ -242,18 +266,18 @@ class Cour(models.Model):
         save a lesson in the database 
     """
     
-    typeCour = models.ForeignKey(TypeCour)
-    salles = models.ManyToManyField(Salle, blank=True)
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
-    semaineMin = models.IntegerField()
-    semaineMax = models.IntegerField()
-    jour = models.IntegerField(choices=SEMAINE, default=LUNDI)
-    hmin = models.IntegerField()
-    hmax = models.IntegerField()
+    typeCour = mod.ForeignKey(TypeCour)
+    salles = mod.ManyToManyField(Salle, blank=True)
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    semaineMin = mod.IntegerField()
+    semaineMax = mod.IntegerField()
+    jour = mod.IntegerField(choices=SEMAINE, default=LUNDI)
+    hmin = mod.IntegerField()
+    hmax = mod.IntegerField()
     def __str__ (self):
         return self.typeCour.nom
 
-class News(models.Model):
+class News(mod.Model):
     """
         It defines a news.
         
@@ -270,11 +294,11 @@ class News(models.Model):
         save a lesson in the database (the upload date is automatic)
     """
     
-    personne=models.ManyToManyField(Personne)
-    txt=models.CharField(max_length=100)
-    type = models.IntegerField(choices=TYPENEWS, default=INCONNU_STATUT_TYPE)
-    typeG= models.IntegerField(choices=TYPENEWSG, default=AJOUT)
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
+    personne=mod.ManyToManyField(Personne)
+    txt=mod.CharField(max_length=100)
+    type = mod.IntegerField(choices=TYPENEWS, default=INCONNU_STATUT_TYPE)
+    typeG= mod.IntegerField(choices=TYPENEWSG, default=AJOUT)
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
     def __str__ (self):
         return self.txt
 

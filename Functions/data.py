@@ -15,6 +15,35 @@ from BDD.models import Personne, Cour, Groupe, UV, Module, Salle, Note, \
     TypeCour
 
 
+class ADDMANY():
+    """
+        
+        :formInit: Before adding, ask which objects 
+        :tformInit: form
+        Ex (add marks) : the form ask which group is marked and which module the group is marked
+        :form: form to add an object
+        :tform: form
+        Ex (add marks) : a form which ask the mark of a person
+        :baseForm: BaseForm of :form:, to check errors.
+        :tbaseForm: Baseform 
+        :listFieldForm: names of the fields of formInit in the right order
+        :tlistFieldForm:  list of string
+        :listModel: list of the related Model in the right order
+        :tlistModel: list of Models
+        :QCode:  Qcode (Django)
+        :tQCode: string
+        
+    """
+    def __init__(self, formInit, form, baseForm, listFieldForm, listModel, QCode):
+        self.formInit = form
+        self.form = form
+        self.baseForm = baseForm
+        self.listFieldForm = listFieldForm
+        self.listModel= listModel
+        self.QCode=QCode
+  
+
+
 def ajouterA(t):
     """
         For the modify view.
@@ -111,7 +140,7 @@ def formsoustable(table):
         l.append([forms.addGroupeModule, 'groupes', 1, 'groupes', Groupe, 'groupes'])
     elif table == 4:
         pass
-        #l.append([forms.addSalle, 'salles', 1, 'salles', Salle, 'salles'])
+        # l.append([forms.addSalle, 'salles', 1, 'salles', Salle, 'salles'])
     elif table == 5:
         pass
     elif table == 6:
