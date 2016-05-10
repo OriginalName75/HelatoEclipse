@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import datetime
-from django.utils.timezone import utc
-from django.conf import settings
 import django.utils.datetime_safe
+from django.conf import settings
+from django.utils.timezone import utc
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChampsModifie',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
                 ('nomchamp', models.CharField(max_length=50)),
                 ('valchamp', models.CharField(max_length=1000, null=True)),
             ],
@@ -26,38 +26,38 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Modification',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
                 ('datemodif', models.DateTimeField(default=django.utils.datetime_safe.datetime.now)),
                 ('typetable', models.CharField(max_length=200, null=True)),
-                ('typemod', models.IntegerField(default=0, choices=[(0, b'Ajout'), (1, b'Modifier'), (2, b'Supprimer'), (0, b'mod statut inconnu')])),
+                ('typemod', models.IntegerField(default=0, choices=[(0, 'Ajout'), (1, 'Modifier'), (2, 'Supprimer'), (0, 'mod statut inconnu')])),
                 ('ipmod', models.IntegerField(null=True)),
             ],
         ),
         migrations.CreateModel(
             name='News',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
                 ('txt', models.CharField(max_length=100)),
-                ('type', models.IntegerField(default=4, choices=[(4, b'Statut Inconnu'), (1, b'SALLE'), (2, b'personne'), (3, b'groupe'), (4, b'uv'), (5, b'module'), (6, b'cour'), (7, b'type de cour'), (8, b'notes')])),
-                ('typeG', models.IntegerField(default=0, choices=[(0, b'ajout'), (1, b'modifier'), (2, b'suprilmer')])),
-                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 9, 0, 18, 622562, tzinfo=utc))),
+                ('type', models.IntegerField(default=4, choices=[(4, 'Statut Inconnu'), (1, 'SALLE'), (2, 'personne'), (3, 'groupe'), (4, 'uv'), (5, 'module'), (6, 'cour'), (7, 'type de cour'), (8, 'notes')])),
+                ('typeG', models.IntegerField(default=0, choices=[(0, 'ajout'), (1, 'modifier'), (2, 'suprilmer')])),
+                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 11, 53, 30, 950068, tzinfo=utc))),
                 ('isvisible', models.BooleanField(default=True)),
             ],
         ),
         migrations.CreateModel(
             name='PaternModel',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
             ],
         ),
         migrations.CreateModel(
             name='Cour',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
-                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 9, 0, 18, 617660, tzinfo=utc))),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
+                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 11, 53, 30, 946809, tzinfo=utc))),
                 ('semaineMin', models.IntegerField()),
                 ('semaineMax', models.IntegerField()),
-                ('jour', models.IntegerField(default=0, choices=[(0, b'Lundi'), (1, b'Mardi'), (2, b'Mecredi'), (3, b'Jeudi'), (4, b'Vendredi'), (5, b'Samedi'), (6, b'Dimanche')])),
+                ('jour', models.IntegerField(default=0, choices=[(0, 'Lundi'), (1, 'Mardi'), (2, 'Mecredi'), (3, 'Jeudi'), (4, 'Vendredi'), (5, 'Samedi'), (6, 'Dimanche')])),
                 ('hmin', models.IntegerField()),
                 ('hmax', models.IntegerField()),
                 ('isvisible', models.BooleanField(default=True)),
@@ -67,9 +67,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Groupe',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
-                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 9, 0, 18, 598922, tzinfo=utc))),
+                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 11, 53, 30, 929639, tzinfo=utc))),
                 ('isvisible', models.BooleanField(default=True)),
             ],
             bases=('BDD.paternmodel',),
@@ -77,8 +77,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='horaireProf',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
-                ('jdelaSemaine', models.IntegerField(default=0, choices=[(0, b'Lundi'), (1, b'Mardi'), (2, b'Mecredi'), (3, b'Jeudi'), (4, b'Vendredi'), (5, b'Samedi'), (6, b'Dimanche')])),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
+                ('jdelaSemaine', models.IntegerField(default=0, choices=[(0, 'Lundi'), (1, 'Mardi'), (2, 'Mecredi'), (3, 'Jeudi'), (4, 'Vendredi'), (5, 'Samedi'), (6, 'Dimanche')])),
                 ('hminMatin', models.IntegerField()),
                 ('hmaxMatin', models.IntegerField()),
                 ('hminApresMidi', models.IntegerField()),
@@ -90,7 +90,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Module',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('isvisible', models.BooleanField(default=True)),
             ],
@@ -99,9 +99,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Note',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
-                ('note', models.IntegerField(default=0, null=True, blank=True)),
-                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 9, 0, 18, 609762, tzinfo=utc))),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
+                ('lanote', models.IntegerField(default=0, null=True, blank=True)),
+                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 11, 53, 30, 938156, tzinfo=utc))),
                 ('isvisible', models.BooleanField(default=True)),
                 ('module', models.ForeignKey(to='BDD.Module')),
             ],
@@ -110,15 +110,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Personne',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
-                ('sexe', models.IntegerField(default=0, choices=[(0, b'Sexe Inconnu'), (1, b'Homme'), (2, b'Femme')])),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
+                ('sexe', models.IntegerField(default=0, choices=[(0, 'Sexe Inconnu'), (1, 'Homme'), (2, 'Femme')])),
                 ('adresse', models.CharField(max_length=200, null=True)),
                 ('promotion', models.IntegerField(null=True)),
-                ('type', models.IntegerField(default=4, choices=[(4, b'Statut Inconnu'), (0, b'Prof/Chercheur'), (1, b'Eleve'), (2, b'Administration'), (3, b'Administrateur Du Site')])),
+                ('type', models.IntegerField(default=4, choices=[(4, 'Statut Inconnu'), (0, 'Prof/Chercheur'), (1, 'Eleve'), (2, 'Administration'), (3, 'Administrateur Du Site')])),
                 ('dateDeNaissance', models.DateField(null=True)),
                 ('lieuDeNaissance', models.CharField(max_length=200, null=True)),
                 ('numeroDeTel', models.CharField(max_length=40, null=True)),
-                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 9, 0, 18, 594471, tzinfo=utc))),
+                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 11, 53, 30, 925949, tzinfo=utc))),
                 ('filter', models.CharField(max_length=200)),
                 ('isvisible', models.BooleanField(default=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
@@ -128,10 +128,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Salle',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('capacite', models.IntegerField(null=True)),
-                ('type', models.IntegerField(default=0, choices=[(0, b'Type inconnu'), (1, b'Classe'), (2, b'Labo'), (3, b'Info')])),
+                ('type', models.IntegerField(default=0, choices=[(0, 'Type inconnu'), (1, 'Classe'), (2, 'Labo'), (3, 'Info')])),
                 ('isvisible', models.BooleanField(default=True)),
             ],
             bases=('BDD.paternmodel',),
@@ -139,10 +139,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TypeCour',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('isExam', models.BooleanField()),
                 ('isvisible', models.BooleanField(default=True)),
+                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 11, 53, 30, 939939, tzinfo=utc))),
                 ('groupe', models.ManyToManyField(to='BDD.Groupe', blank=True)),
                 ('profs', models.ManyToManyField(to='BDD.Personne', blank=True)),
             ],
@@ -151,9 +152,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UV',
             fields=[
-                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='BDD.PaternModel')),
+                ('paternmodel_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='BDD.PaternModel', serialize=False, primary_key=True)),
                 ('nom', models.CharField(max_length=30)),
                 ('isvisible', models.BooleanField(default=True)),
+                ('uploadDate', models.DateTimeField(default=datetime.datetime(2016, 5, 10, 11, 53, 30, 933925, tzinfo=utc))),
             ],
             bases=('BDD.paternmodel',),
         ),
