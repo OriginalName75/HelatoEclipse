@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>Helato</title>
+<link href="/static/BDD/CSS/style2.css" type="text/css" media="all" title="Design" rel="stylesheet" />
 <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
 
 <script src="/static/BDD/js/jquery.min.js"></script>
@@ -13,11 +14,18 @@
 <script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
 
 </head>
+
+<nav>
+<ul>
+<li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+{% for l in links %}
+	<li><a href="{{ l.0 }}">{{ l.1 }}</a> &nbsp;&nbsp;&nbsp;</li>
+{% endfor %}
+<li><a href="/administration">Accueil</a></li>
+</ul>
+</nav>
+
 <body>
-<p><a href="/">Back to Site</a>
-<a href="/administration">Back to administration</a>
-<a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back</a>
-</p>
 
 <form action="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 	{% csrf_token %}
@@ -28,17 +36,11 @@
 	changed
 {% endif %}
 
-{% for l in links %}
-	<a href="{{ l.0 }}">{{ l.1 }}</a> &nbsp;&nbsp;&nbsp;
-{% endfor %}
-<br/><br/>
+
+
 {% for dd in titrest %}
-	<table border="1 ">
-		<tr>
-			<td>
-				<b>{{ dd.2 }}</b>
-			</td>
-		</tr>
+
+		
 		
 		<tr>
 			<td>
@@ -61,7 +63,7 @@
 
 			</td>
 		</tr>
-	</table>
+
 {% endfor %}
 
 </body>

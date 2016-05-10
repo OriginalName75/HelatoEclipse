@@ -132,10 +132,10 @@ def links(table):
     """
     l = []
     if table == 0:
-        l.append(['/watch/6/0', 'Lui ajouter des notes'])
-        l.append(['/watch/7/0', 'Lui ajouter des cours'])
+        l.append(['/watch/6/0', 'Ajouter des notes'])
+        l.append(['/watch/7/0', 'Ajouter des cours'])
     elif table == 2:
-        l.append(['/watch/3/0', 'Lui ajouter des modules'])
+        l.append(['/watch/3/0', 'Ajouter des modules'])
     return l  
         
         

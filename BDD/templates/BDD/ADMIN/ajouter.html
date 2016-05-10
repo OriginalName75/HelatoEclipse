@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>Helato</title>
+<link href="/static/BDD/CSS/style2.css" type="text/css" media="all" title="Design" rel="stylesheet" />
 <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
 
 <script src="/static/BDD/js/jquery.min.js"></script>
@@ -46,14 +47,17 @@
         </script>	
 	   
 </head>
+
+<nav>            
+<ul>            
+<li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/administration">Accueil</a></li>
+</ul>
+</nav>
+
 <body>
 		 
-       
-            
-            
-<p><a href="/">Back to Site</a></p>
-<p><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back</a></p>
-<p><a href="/administration">Back to Administration</a></p>
+
 {% if nbajout == 0 or nbajout == 100 or envoi %}
 	{% if envoi %}
 		<p><big><big>envoyé !!!</big></big> des autres ?</p>

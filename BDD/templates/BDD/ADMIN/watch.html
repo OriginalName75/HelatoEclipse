@@ -3,8 +3,13 @@
 <html>
 <head>
 <title>Helato</title>
+
+<link href="/static/BDD/CSS/style2.css" type="text/css" media="all" title="Design" rel="stylesheet" />
 {% if filtre != 0 %}
+	
+	
 	<link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
+	
 
 <script src="/static/BDD/js/jquery.min.js"></script>
 <script src="/static/BDD/js/jquery-ui.js"></script>
@@ -14,13 +19,24 @@
 {% endif %}
 </head>
 <body>
-<p><a href="/">Back to Site</a>
-<a href="/administration">Back to administration</a></p>
+<nav>
+<ul>
+<li><a href="/administration">Accueil</a></li>
+<li><a href="/watch/0/0">Personnes</a></li>
+<li><a href="/watch/1/0">Groupes</a></li>
+<li><a href="/watch/3/0">Modules</a></li>
+<li><a href="/watch/4/0">Calendrier</a></li>
+<li><a href="/watch/5/0">Salles</a></li>
+<li><a href="/watch/6/0">Notes</a></li>
+<li><a href="/watch/7/0">Cours</a></li>
+<li><a href="/deconnexion">Deco</a></li>
+</ul>
+</nav>	
 
-<p><a href="/ajouter/{{ table }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Ajouter</a> 
+<div id="menu"><a href="/ajouter/{{ table }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Ajouter</a> 
 
 {% if filtre == 0 %}
-<a href="/watch/{{ table }}/1/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Filtre</a>
+<a href="/watch/{{ table }}/1/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Filtrer</a>
 {% else %}
 <a href="/watch/{{ table }}/0/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Pas de filtre</a>
 {% endif %}
@@ -28,17 +44,17 @@
 
 
 {% if filtre > 0 %}
-<form action="/watch/{{ table }}/2/1/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+<div id="filtre"><form action="/watch/{{ table }}/2/1/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 	{% csrf_token %}
 	{{ form }}
 	<input type="submit" value="Filtrer"/>
 </form>
-
+</filtre>
 {% endif %}
 
 
-</p>
-<p>
+</menu>
+<div id="page">
 {% if not allP %}
 {% if page > 1 %}
 <a href="/watch/{{ table }}/{{ filtre }}/{{ pagemoins }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">&#139;&#139;</a>
@@ -68,7 +84,7 @@ Afficher <a href="/watch/{{ table }}/{{ filtre }}/1/20/{{ nomClasser }}/{{ plusO
 
 personnes par page
 
-</p>
+</page>
 <table width="100%" border="1">
 	<tr>
 		{% for l in listAffich %}
