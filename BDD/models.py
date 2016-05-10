@@ -15,15 +15,15 @@
     
 @author: IWIMBDSL
 """
+
 from django.contrib.auth.models import User
 from django.db import models as mod
 from django.utils import timezone
+from django.utils.datetime_safe import datetime
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI, TYPENEWS, \
-    TYPENEWSG, AJOUT
-
-
+    TYPENEWSG, AJOUT, TYMO, INCONNU_STATUT_MOD
 
 
 class PaternModel(mod.Model):
@@ -41,6 +41,55 @@ class PaternModel(mod.Model):
     
     """
         return None
+class Modification(mod.Model):
+    """
+        A modification is a table that stores the modifications applied to an other table.
+        
+        A Modification has a datemodif, a typetable, a typemod (to represent if the table were added, 
+        deleted or just modified) and an ipmod (which stored the id of the modified table)
+        
+        :example:
+        >> from BDD.choices import AJOUT
+        >> mod = mod.Modification()
+        >> mod.datemodif = timezone.now()
+        >> mod.typetable = 'Groupe'
+        >> mod.typemod = AJOUT
+        >> mod.ipmod = c.id
+        >> mod.save()
+        save the modification representing the add of a group
+    """
+    
+    datemodif = mod.DateTimeField(default=datetime.now)
+    typetable = mod.CharField(max_length=200, null=True)
+    typemod = mod.IntegerField(choices=TYMO, default=INCONNU_STATUT_MOD)
+    ipmod = mod.IntegerField (null=True)
+    
+    def __str__ (self):
+        return self.datemodif.strftime('%d/%m/%Y %H:%M:%S')
+
+class ChampsModifie(mod.Model):
+    """
+        A ChampsModifie is a table that stores one of the modifications applied to an other table.
+        
+        A ChampsModifie has a champs (which links it to the Modification it is associate with),
+        a nomchamp (type of the changed field), and a valchamp (value of this field).
+        
+        :example:
+        >> cm1 = mod.ChampsModifie()
+        >> cm1.champs = mod
+        >> cm1.nomchamp = 'nom'
+        >> cm1.valchamp = nomm
+        >> cm1.save()
+        save the modification representing the change of the name of the table represented by the Modification
+        mod from nomm
+    """
+    
+    champs = mod.ForeignKey(Modification)
+    nomchamp = mod.CharField(max_length=50)
+    valchamp = mod.CharField(max_length=1000, null=True)
+    
+    def __str__ (self):
+        return self.nomchamp
 
 class Personne(PaternModel):
     """
@@ -80,7 +129,7 @@ class Personne(PaternModel):
     user = mod.OneToOneField(User)  # l'authentification est gérée pas django
     uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
     filter = mod.CharField(max_length=200)  # adresse de le personne
-    
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.filter
 class horaireProf(PaternModel):
@@ -93,7 +142,7 @@ class horaireProf(PaternModel):
     hmaxMatin = mod.IntegerField()
     hminApresMidi = mod.IntegerField()
     hmaxApresMidi = mod.IntegerField()
-    
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.get_jdelaSemaine_display() + " : " + str(self.hminMatin) + "/" + str(self.hmaxMatin) + " + " + str(self.hminApresMidi) + "/" + str(self.hmaxApresMidi)
 class Groupe(PaternModel):
@@ -126,11 +175,11 @@ class Groupe(PaternModel):
     nom = mod.CharField(max_length=30)  # nom du groupe
     personnes = mod.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
     uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
-    #########"   modif momo #########################
+    
     
     modules=mod.ManyToManyField('Module', blank=True)
     
-    #########"   fin modif momo #########################
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.nom
 class UV(PaternModel):
@@ -147,7 +196,8 @@ class UV(PaternModel):
         
     """
     nom = mod.CharField(max_length=30)  # nom de l'UV
-   
+    isvisible = mod.BooleanField(default = True)
+    uploadDate = mod.DateTimeField(default=timezone.now()) 
 class Module(PaternModel):
     """
         It defines how a module is stocked in the database.
@@ -164,7 +214,7 @@ class Module(PaternModel):
     """  
     nom = mod.CharField(max_length=30)  # nom du module    
     uv = mod.ForeignKey(UV)
-    
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         
         return "%s - %s" % (self.nom, self.uv.nom)
@@ -185,7 +235,8 @@ class Salle(PaternModel):
    
     nom = mod.CharField(max_length=30)
     capacite = mod.IntegerField(null=True)
-    type = mod.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE) 
+    type = mod.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE)
+    isvisible = mod.BooleanField(default = True) 
     def __str__ (self):
         return self.nom  
 class Note(PaternModel):
@@ -207,11 +258,12 @@ class Note(PaternModel):
         save a mark in the database 
     """
    
-    note = mod.IntegerField(default=0, blank=True, null=True)
+    lanote = mod.IntegerField(default=0, blank=True, null=True)
     personne = mod.ForeignKey(Personne) 
     module = mod.ForeignKey(Module)
     prof= mod.ForeignKey(Personne, related_name="ANoter")
     uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    isvisible = mod.BooleanField(default = True)
     def ajouterPlusieurs(self):
         """
             See ajouterPlusieurs of PaternModel
@@ -221,7 +273,7 @@ class Note(PaternModel):
         return ADDMANY(chooseGroupe, notes, BaseNoteFormSet, ["groupes","module"], [Personne,Module],'groupe__in')
     
     def __str__ (self):
-        return str(self.note)    
+        return str(self.lanote)    
 class TypeCour(PaternModel):
     """
         It defines a type of lesson.
@@ -244,6 +296,8 @@ class TypeCour(PaternModel):
     profs = mod.ManyToManyField(Personne, blank=True)
     groupe = mod.ManyToManyField(Groupe, blank=True)
     isExam = mod.BooleanField()
+    isvisible = mod.BooleanField(default = True)
+    uploadDate = mod.DateTimeField(default=timezone.now()) 
     def __str__ (self):
         return self.nom
     
@@ -274,6 +328,7 @@ class Cour(PaternModel):
     jour = mod.IntegerField(choices=SEMAINE, default=LUNDI)
     hmin = mod.IntegerField()
     hmax = mod.IntegerField()
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.typeCour.nom
 
@@ -299,6 +354,7 @@ class News(mod.Model):
     type = mod.IntegerField(choices=TYPENEWS, default=INCONNU_STATUT_TYPE)
     typeG= mod.IntegerField(choices=TYPENEWSG, default=AJOUT)
     uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.txt
 

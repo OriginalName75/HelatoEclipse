@@ -137,7 +137,22 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
             h.hminMatin = 1
             h.hmaxMatin = 3
             h.save()     
-            
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'Personne'
+    mod.typemod = AJOUT
+    mod.ipmod = p.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'Identité'
+    cm1.valchamp = nom+' '+prenom
+    cm1.save()
+    cm2 = models.ChampsModifie()
+    cm2.champs = mod
+    cm2.nomchamp = 'Date d\'upload'
+    cm2.valchamp = p.uploadDate
+    cm2.save()     
     n = models.News()
     n.txt = txt
     n.typeG = AJOUT
@@ -146,10 +161,10 @@ def addPersonne(pers, nom, prenom, login, mdp, sexe, typeP, adresse=None, promot
     n.save()
     n.personne.add(pers) 
     
-    ####################################
+    
     return p
     
-    ##################     
+       
                  
 def addCalendrier(pers, typeCour, jour, semaineMin, semaineMax, hmin, hmax, salles):
     """
@@ -194,6 +209,47 @@ def addCalendrier(pers, typeCour, jour, semaineMin, semaineMax, hmin, hmax, sall
     c.hmax = hmax
     c.save()
     c.salles = salles
+    
+    
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'TypeCour'
+    mod.typemod = AJOUT
+    mod.ipmod = c.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'Jour'
+    cm1.valchamp = jour
+    cm1.save()
+    cm2 = models.ChampsModifie()
+    cm2.champs = mod
+    cm2.nomchamp = 'Date d\'upload'
+    cm2.valchamp = c.uploadDate
+    cm2.save()
+    cm3 = models.ChampsModifie()
+    cm3.champs = mod
+    cm3.nomchamp = 'Semaines'
+    cm3.valchamp = 'De la semaine '+str(semaineMin)+' à la semaine '+str(semaineMax)
+    cm3.save()
+    cm4 = models.ChampsModifie()
+    cm4.champs = mod
+    cm4.nomchamp = 'Heures'
+    cm4.valchamp = 'De l\H'+hmin+' à l\H'+hmax
+    cm4.save()
+    cm5 = models.ChampsModifie()
+    cm5.champs = mod
+    cm5.nomchamp = 'Salles du cour '
+    a = ''
+    for p in c.salles.all():
+        a = a+str(p)+' '
+    cm5.valchamp = a
+    cm5.save()
+    cm6 = models.ChampsModifie()
+    cm6.champs = mod
+    cm6.nomchamp = 'Type de cour'
+    cm6.valchamp = typeCour
+    cm6.save()
     
     d=datetime.datetime.now()
     n = models.News()
@@ -248,7 +304,41 @@ def addGroupe(pers, nomm, personnes=None, modules=None):
     if (personnes != None):
         txt = manytomany(personnes, txt, c, models.Personne, "personnes", "personne", "à la", False, STATUT=GROUPESTATUT)
         c.personnes = personnes
-    
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'Groupe'
+    mod.typemod = AJOUT
+    mod.ipmod = c.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'nom'
+    cm1.valchamp = nomm
+    cm1.save()
+    cm2 = models.ChampsModifie()
+    cm2.champs = mod
+    cm2.nomchamp = 'Date d\'upload'
+    cm2.valchamp = c.uploadDate
+    cm2.save()
+    if (personnes != None):
+        cm3 = models.ChampsModifie()
+        cm3.champs = mod
+        cm3.nomchamp = 'Personnes du groupe '
+        a = ''
+        for p in c.personnes.all():
+            a = a+str(p)+' '
+        cm3.valchamp = a
+        cm3.save()
+    if (modules != None):
+        cm4 = models.ChampsModifie()
+        cm4.champs = mod
+        cm4.nomchamp = 'Modules du groupe '
+        m = ''
+        for p in c.modules.all():
+            m = m+str(p)+' '
+        cm4.valchamp = m
+        cm4.save()
+
     n = models.News()
     n.txt = txt
     n.typeG = AJOUT
@@ -301,6 +391,46 @@ def addCour(pers, nom, isExam=False, profs=None):
     if profs != None:
         txt = manytomany(profs, txt, c, models.Personne, "profs", "prof", "le", False)
         c.profs=profs        
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'Cour'
+    mod.typemod = AJOUT
+    mod.ipmod = c.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'Nom'
+    cm1.valchamp = nom
+    cm1.save()
+    cm2 = models.ChampsModifie()
+    cm2.champs = mod
+    cm2.nomchamp = 'C\'est un Exam ?'
+    if isExam:
+        cm2.valchamp = 'oui'
+    else:
+        cm2.valchamp = 'non'
+    cm2.save()
+    cm3 = models.ChampsModifie()
+    cm3.champs = mod
+    cm3.nomchamp = 'Date d\'upload'
+    cm3.valchamp = c.uploadDate
+    cm3.save()
+    cm4 = models.ChampsModifie()
+    cm4.champs = mod
+    cm4.nomchamp = 'Profs'
+    a = ''
+    for s in c.profs.all():
+        a = a+str(s)
+    cm4.valchamp = a
+    cm4.save()
+    cm5 = models.ChampsModifie()
+    cm5.champs = mod
+    cm5.nomchamp = 'Groupes'
+    g = ''
+    for t in c.groupe.all():
+        g = g+str(t)
+    cm5.valchamp = g
+    cm5.save()
     
     n = models.News()
     n.txt = txt
@@ -330,6 +460,23 @@ def addUV(pers, nom):
     c = models.UV()
     c.nom = nom
     c.save()
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'UV'
+    mod.typemod = AJOUT
+    mod.ipmod = c.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'nom'
+    cm1.valchamp = nom
+    cm1.save()
+    cm2 = models.ChampsModifie()
+    cm2.champs = mod
+    cm2.nomchamp = 'Date d\'upload'
+    cm2.valchamp = c.uploadDate
+    cm2.save()
+        
     n = models.News()
     n.txt = "Vous avez ajouté l\'UV " + c.nom
     n.typeG = AJOUT
@@ -367,6 +514,29 @@ def addModule(pers, nom, uv):
         txt = txt + " dans l\'UV " + uv.nom
         c.uv = uv
     c.save()
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'Module'
+    mod.typemod = AJOUT
+    mod.ipmod = c.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'nom'
+    cm1.valchamp = nom
+    cm1.save()
+    if uv != None:
+        cm2 = models.ChampsModifie()
+        cm2.champs = mod
+        cm2.nomchamp = 'dans l\'uv'
+        cm2.valchamp = str(uv)
+        cm2.save()
+    cm3 = models.ChampsModifie()
+    cm3.champs = mod
+    cm3.nomchamp = 'Date d\'upload'
+    cm3.valchamp = c.uploadDate
+    cm3.save()
+        
     n = models.News()
     n.txt = txt
     n.typeG = AJOUT
@@ -401,15 +571,46 @@ def addNote(pers, note, personne, module, prof):
     """
     
     c = models.Note()
-    c.note = note
+    c.lanote = note
     c.personne = personne
     c.module = module
     c.uploadDate = timezone.now()
     c.prof = prof
     c.save()
     
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'Note'
+    mod.typemod = AJOUT
+    mod.ipmod = c.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'Elève'
+    cm1.valchamp = personne
+    cm1.save()
+    cm2= models.ChampsModifie()
+    cm2.champs = mod
+    cm2.nomchamp = 'Note'
+    cm2.valchamp = note
+    cm2.save()
+    cm3 = models.ChampsModifie()
+    cm3.champs = mod
+    cm3.nomchamp = 'Module'
+    cm3.valchamp = module
+    cm3.save()
+    cm4 = models.ChampsModifie()
+    cm4.champs = mod
+    cm4.nomchamp = 'Noté par'
+    cm4.valchamp = prof
+    cm4.save()
+    cm5 = models.ChampsModifie()
+    cm5.champs = mod
+    cm5.nomchamp = 'Date d\'upload'
+    cm5.valchamp = c.uploadDate
+    cm5.save()
     n = models.News()
-    n.txt = "Vous avez ajouté la note " + str(c.note) + " à la personne " + c.personne.filter + " au module " + c.module.nom  
+    n.txt = "Vous avez ajouté la note " + str(c.lanote) + " à la personne " + c.personne.filter + " au module " + c.module.nom  
     n.typeG = AJOUT
     n.type = NOTESTATUT
     n.uploadDate = timezone.now()   
@@ -417,7 +618,7 @@ def addNote(pers, note, personne, module, prof):
     n.personne.add(pers)
     
     n2 = models.News()
-    n2.txt = "Vous avez eu " + str(c.note) + " au module " + c.module.nom  +" (noté par " + prof.filter +")"
+    n2.txt = "Vous avez eu " + str(c.lanote) + " au module " + c.module.nom  +" (noté par " + prof.filter +")"
     n2.typeG = AJOUT
     n2.type = NOTESTATUT
     n2.uploadDate = timezone.now()   
@@ -454,7 +655,42 @@ def addSalle(pers, nom, capacite=None, typee=None):
     if capacite != None:
         c.capacite = capacite
     c.save()
-     
+    mod = models.Modification()
+    mod.datemodif = timezone.now()
+    mod.typetable = 'Salle'
+    mod.typemod = AJOUT
+    mod.ipmod = c.id
+    mod.save()
+    cm1 = models.ChampsModifie()
+    cm1.champs = mod
+    cm1.nomchamp = 'Salle '
+    cm1.valchamp = nom
+    cm1.save()
+    if capacite != None:
+        cm2 = models.ChampsModifie()
+        cm2.champs = mod
+        cm2.nomchamp = 'Capacite de la salle'
+        cm2.valchamp = str(capacite)+' personnes'
+        cm2.save()
+    if str(typee) != '0' and typee != None:
+        cm3 = models.ChampsModifie()
+        cm3.champs = mod
+        cm3.nomchamp = 'Type de salle'
+        if str(type)=='1':
+            cm3.valchamp = 'Classe'
+        elif str(type)=='2':
+            cm3.valchamp = 'Labo'
+        elif str(type)=='3':
+            cm3.valchamp = 'Info'
+        else:
+            cm3.valchamp = 'Inconnu' 
+        cm3.save()
+        cm4 = models.ChampsModifie()
+        cm4.champs = mod
+        cm4.nomchamp = 'Date d\'upload'
+        cm4.valchamp = c.uploadDate
+        cm4.save()
+
     n = models.News()
     txt = "Vous avez ajouté la salle " + nom
     

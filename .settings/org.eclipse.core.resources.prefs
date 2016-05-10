@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//BDD/forms.py=utf-8
+encoding//BDD/migrations/0001_initial.py=utf-8
 encoding//BDD/models.py=utf-8
 encoding//BDD/static/BDD/javascripts/jquery-1.10.2.js=UTF-8
 encoding//BDD/static/BDD/javascripts/jquery-ui.js=UTF-8

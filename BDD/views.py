@@ -389,7 +389,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     return ajouter(request, table, 101, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
         else:
             if AJJ != None:
-                formAjj = AJJ.listFieldForm()
+                formAjj = AJJ.formInit()
             form = nbAjout() 
             
             
@@ -511,7 +511,7 @@ def randomP(request):
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def langage(request):
-    
+    text=[]
         
         
     if request.method == 'POST':
@@ -538,13 +538,13 @@ def langage(request):
             else:
                 request.session['argg'] = []
                 request.session['resp'] =[]
-                
-    text=[]
-    ii=0
-    for x in request.session['argg']:
-        text.append([x,request.session['resp'][ii]])
-        ii=ii+1
-    text=reversed(text)
+            ii=0
+            for x in request.session['argg']:
+                text.append([x,request.session['resp'][ii]])
+                ii=ii+1
+            text=reversed(text)    
+    
+    
     form = forms.langage()    
     return render(request, 'BDD/ADMIN/lang.html', locals())
 # @login_required(login_url='/connexion')

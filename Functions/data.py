@@ -241,7 +241,7 @@ def listinside(t):
         
         listeliste.append([0, 'uploadDate'])
     elif t == 6:
-        listeliste.append([0, 'note'])
+        listeliste.append([0, 'lanote'])
         listeliste.append([0, 'personne'])
         listeliste.append([1, 'module', 'nom'])
         listeliste.append([0, 'prof'])
@@ -388,8 +388,8 @@ def changecond(table, cond, conditions, obj):
         
         
     elif table == 6:
-        cond.append(('note', 0))
-        conditions.append(obj.note)
+        cond.append(('lanote', 0))
+        conditions.append(obj.lanote)
         cond.append(('personne', 0))
         conditions.append(obj.personne.id)
         cond.append(('module', 0))
@@ -489,7 +489,7 @@ def classer(t, nomClasser):
             column = 'type'
     elif t == 6:
         if nomClasser == 1:
-            column = 'note'
+            column = 'lanote'
         elif nomClasser == 2:
             column = 'personne'
         elif nomClasser == 3:
@@ -560,7 +560,7 @@ def filtre(t):
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
         l.append(['uv', 'uv', "", 'uv__nom', 3])
     elif t == 6:
-        l.append(['note', 'note', None, 'note', 0])
+        l.append(['lanote', 'lanote', None, 'lanote', 0])
         l.append(['personne', 'personne', "", 'personne__filter__icontains', 0])
         l.append(['module', 'module', "", 'module__nom__icontains', 0])
     elif t == 7:
