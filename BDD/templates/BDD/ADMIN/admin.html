@@ -3,12 +3,18 @@
 
 {% block body %}
 
-<div id="news">
+
 
 {% for n in news %}
+
+<div id="news">
+<br>
 {{n|safe}}
+<br>
+<br>
+</div>
 <br>
 {% endfor %}
 
-</div>
+
 {% endblock %}

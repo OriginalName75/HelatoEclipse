@@ -157,11 +157,12 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
                 if txt2 != None:
                     txt2 = txt2 + " et " 
             if attrafiche != None:
-                if not (ggg is int) or not (ggg is str):
+                if not (type(ggg) is int) and not (type(ggg) is str) and not (type(ggg) is unicode):
+                   
                     ggg=ggg.id
                 att = getattr(model.objects.get(id=int(ggg)), attrafiche)
             else:
-                if not (ggg is int) or not (ggg is str):
+                if not (type(ggg) is int) and not (type(ggg) is str) and not (type(ggg) is unicode):
                     ggg=ggg.id
                 att = str(model.objects.get(id=int(ggg)))
             

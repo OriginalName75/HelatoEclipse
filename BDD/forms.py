@@ -35,9 +35,31 @@ from BDD import models
 from Functions import addData, modiData
 
 class langage(forms.Form):
-    txt=forms.CharField(max_length=300)
+    """
+        Simulate a shell
+        
+        :Exemples:
+    
+        >> form=langage() 
+        >> form
+        return html code of a shell (without the design)
+        
+    """
+    txt=forms.CharField(label="", max_length=300)
+    txt.widget.attrs.update({'style' : 'color:white; border: none; background-color:black', 'autofocus': 'autofocus'})
+   
 
 class semaine(forms.Form):
+    """
+        Select the a week (nuumbers only)
+        
+        :Exemples:
+    
+        >> form=semaine() 
+        >> form
+        return html code with a single field in order to select a week
+        
+    """
     nb = forms.IntegerField(label="Semaine :")
 
 class nbAjout(forms.Form):

@@ -7,7 +7,7 @@ from language.langage import use
 
 
 def connect(strr, iid):
-    strrrr=use(strr, iid)
+    strrrr= use(strr, iid)
     
     return strrrr
     

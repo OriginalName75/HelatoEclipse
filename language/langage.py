@@ -50,6 +50,18 @@ print(tokens)
 # Cette partie intervient dans l'analyse lexicale
 
 t_ignore = ' \t\x0c'
+
+def p_expression_ajouter_groupe(p):
+    '''expression : AJOUTER GROUPE TEXT'''
+    global glob_str
+    global iddddddd
+    
+    if p[3]!=None and p[3]!="":
+        temp=p[3][1:-1]
+        addGroupe(iddddddd,temp)
+        glob_str="Vous avez ajoute le groupe "+ temp
+
+
 def t_TEXT(t):
     r'\'.+?\''
     t.type = reserved.get(t.value,"TEXT")
@@ -409,14 +421,6 @@ def p_expression_facul_uv(p):
     '''facul_uv : UV EQUALS TEXT'''
     pass
 
-def p_expression_ajouter_groupe(p):
-    '''expression : AJOUTER GROUPE TEXT'''
-    global glob_str
-    
-    global iddddddd
-    if p[3]!=None and p[3]!="":
-        addGroupe(iddddddd,p[3])
-        glob_str="Vous avez ajoute le groupe "+ p[3]
 
 def p_expression_modifier_groupe(p):
     '''expression : MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT'''

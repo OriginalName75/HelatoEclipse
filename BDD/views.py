@@ -511,13 +511,41 @@ def randomP(request):
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
 def langage(request):
+    
+        
+        
     if request.method == 'POST':
         form = forms.langage(request.POST)  
         if form.is_valid(): 
             strr = form.cleaned_data['txt']
-            reponse = connexion.connect(strr, request.user.personne.id)
-    else:
-        form = forms.langage()    
+            if strr!="clear":
+                reponse = connexion.connect(strr, request.user.personne.id)
+                strr = ">>>" + strr
+                if not 'argg' in request.session or not request.session['argg']:
+                    request.session['argg'] = [strr]
+                else:
+                    saved_list = request.session['argg']
+                    saved_list.append(strr)
+                    request.session['argg'] = saved_list
+                
+                if not 'resp' in request.session or not request.session['resp']:
+                    request.session['resp'] = [reponse]
+                else:
+                    
+                    saved_list = request.session['resp']
+                    saved_list.append(reponse)
+                    request.session['resp'] = saved_list   
+            else:
+                request.session['argg'] = []
+                request.session['resp'] =[]
+                
+    text=[]
+    ii=0
+    for x in request.session['argg']:
+        text.append([x,request.session['resp'][ii]])
+        ii=ii+1
+    text=reversed(text)
+    form = forms.langage()    
     return render(request, 'BDD/ADMIN/lang.html', locals())
 # @login_required(login_url='/connexion')
 # @user_passes_test(lambda u: u.is_superuser)

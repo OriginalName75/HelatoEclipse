@@ -66,3 +66,4 @@ def select(table, plus=None, column=None, page=None, nbparpage=None, listFiltre=
     
     return [var, n]
     
+
