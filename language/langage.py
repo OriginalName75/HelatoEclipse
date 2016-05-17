@@ -1,6 +1,7 @@
-
-
 from Functions.addData import *
+from Functions.modiData import *
+from Functions.delete import *
+from BDD.models import *
 import ply.lex as lx
 import ply.yacc as yacc
 
@@ -11,6 +12,8 @@ global listePrenom
 listePrenom=[]
 global glob_str
 glob_str=""
+global dicV
+dicV={}
 
 reserved={'ajouter':'AJOUTER',
           'personne':'PERSONNE',
@@ -447,20 +450,36 @@ def p_expression_ajouter_groupe(p):
     global glob_str
     global iddddddd
     if p[3]!=None and p[3]!="":
-        addGroupe(iddddddd,p[3])
+        addGroupe(iddddddd,p[3][1:-1])
         glob_str="Vous avez ajoute le groupe "+ p[3]
 
 def p_expression_modifier_groupe(p):
-    '''expression : MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT'''
-    pass
+    '''expression : MODIFIER GROUPE NOM EQUALS TEXT NOUVEAU EQUALS TEXT'''
+    global glob_str
+    global iddddddd
 
-def p_condition_modifier_groupe(p):
-    '''condition_modifier_groupe : NOM EQUALS TEXT '''
-    pass
+    groupes=Groupe.objects.filter(nom=p[5][1:-1])
+    if len(groupes)==1:
+        idGroupe=groupes[0].id
+        modGroupe(idGroupe, iddddddd, p[8][1:-1], personnes=None, modules=None)
+        glob_str="Vous avez modifié le groupe "+ p[5] +" avec le nouveau nom "+p[8]
+    else:
+        glob_str="Echouer de modifier ce groupe! "
+
 
 def p_expression_supprimer_groupe(p):
     '''expression : SUPPRIMER GROUPE TEXT'''
-    pass
+    global glob_str
+    global iddddddd
+
+    groupes=Groupe.objects.filter(nom=p[3][1:-1])
+    glob_str="jules"
+    if len(groupes)==1:
+        idGroupe=groupes[0].id
+        supr_salles(1,idGroupe,iddddddd)
+        glob_str="Vous avez supprimer le groupe "+ p[3]
+    else:
+        glob_str="Echouer de supprimer ce groupe! "
 
 def p_expression_ajouter_uv(p):
     '''expression : AJOUTER UV TEXT NUM EQUALS FLOAT '''
@@ -471,16 +490,27 @@ def p_expression_ajouter_uv(p):
         glob_str="Vous avez ajoute l'UV "+ p[3]
 
 def p_expression_modifier_uv(p):
-    '''expression : MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT'''
-    pass
-
-def p_condition_modifier_uv(p):
-    ''' condition_modifier_uv : NOM EQUALS TEXT'''
-    pass
+    '''expression : MODIFIER UV NOM EQUALS TEXT NOUVEAU EQUALS TEXT'''
+    global glob_str
+    global iddddddd
+    uvs=UV.objects.filter(nom=p[5][1:-1])
+    if len(uvs)==1:
+        idUV=uvs[0].id
+        modUV(idUV,iddddddd,p[8][1:-1])
+        glob_str="Vous avez modifie l'UV "+ p[5] +" avec le nouveau nom "+p[8]
+    else: glob_str="Echouer de modifier cette UV!"
 
 def p_expression_supprimer_uv(p):
     '''expression : SUPPRIMER UV TEXT'''
-    pass
+    global glob_str
+    global iddddddd
+    uvs=UV.objects.filter(nom=p[3][1:-1])
+    if len(uvs)==1:
+        idUV=uvs[0].id
+        supr_salles(2,idUV,iddddddd)
+        glob_str="Vous avez supprimer l'UV "+ p[3]
+    else:
+        glob_str="Echouer de supprimer cette UV!
 
 
 def p_expression_ajouter_module(p):
@@ -496,7 +526,7 @@ def p_expression_modifier_module(p):
     pass
 
 def p_condition_modifier_module(p):
-    ''' condition_modifier_module : NOM EQUALS TEXT'''
+    ''' condition_modifier_module : '''
     pass
 
 def p_but_modifier_module(p):
@@ -512,7 +542,7 @@ def p_expression_supprimer_module(p):
 
 def p_error(t):
     global glob_str
-  
+
     try:
         glob_str="Erreur syntaxique '"+ str(t.value) +"'"
         print("Erreur syntaxique '"+ str(t.value) +"'")
@@ -520,8 +550,8 @@ def p_error(t):
         glob_str="Erreur LEXICALE "
         print("Erreur LEXICALE ")
 
- 
-parser=yacc.yacc() 
+
+parser=yacc.yacc()
 def use(strr, iid):
     global iddddddd
     iddddddd=iid
