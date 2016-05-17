@@ -1,0 +1,84 @@
+{% load watchTag %}
+
+<link href="/static/BDD/CSS/style2.css" type="text/css" media="all" title="Design" rel="stylesheet" />
+	
+<nav>	
+<ul>
+<li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Modifier</a></li>
+{% for l in links %}
+	<a href="{{ l.0 }}">{{ l.1 }}</a> &nbsp;&nbsp;&nbsp;
+{% endfor %}
+<li><a href="/administration">Accueil</a></li>
+</ul>
+</nav>
+
+
+<br/><br/>
+<table border="1">
+<tr>
+	{% for l in listetab %}
+		<td>
+			<b>{{ l.0 }} </b>
+		</td>
+	{% endfor %}
+</tr><tr>
+{% for dd in listeliste %}
+	<td>
+		{% if dd.0 == 0 %}
+			{{ obj|getS:dd.1 }}
+		{% elif dd.0 == 2 %}
+			{{ obj|getSD:dd.1 }}
+		{% elif dd.0 == 3 %}
+					 - 
+					{% for l in obj|getS:dd.1|getSD:allllll %}
+						
+						 {{ l }}
+						  - 
+					{% empty %}
+						non atribué
+					{% endfor %}
+		{% else %}
+			{{ obj|getS:dd.1|getS:dd.2 }}
+		{% endif %}
+	</td>
+{% endfor %}
+</tr></table>
+
+<br/><br/>
+{% for dd in titrest %}
+	<table border="1">
+		<tr>
+			<td>
+				<b>{{ dd.1 }}</b>
+			</td>
+		</tr>
+		
+		{% for ddd in dd.2 %}
+			<tr>
+				<td>
+					{% if dd.0 == 0 %}
+						<a href="/fiche/{{ dd.4 }}/{{ ddd.id }}" target="_blank">
+							{{ ddd|getS:dd.3 }}
+						</a>
+					{% else %}
+						<a href="/fiche/{{ dd.3 }}/{{ ddd.id }}" target="_blank">
+							{{ ddd }}
+						</a>
+					{% endif %}
+				</td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td>
+					Pas de {{ dd.1 }}
+				</td>
+			</tr>
+		{% endfor %}
+		
+	</table>
+	<br><br>
+{% endfor %}
+
+
+

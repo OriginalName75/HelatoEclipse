@@ -1,0 +1,177 @@
+nav
+{
+    width: 1000px;
+	text-align: center;
+	border-radius: 10px;
+	position: relative;
+	top: -80px;
+	right: -100px;
+	border: 3px solid;
+}
+
+nav ul
+{
+    list-style-type: none;
+}
+
+nav li
+{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+nav a
+{
+    font-size: 1.3em;
+    color: #181818;
+    padding-bottom: 3px;
+    text-decoration: none;
+}
+
+nav a:hover
+{
+    color: #760001;
+    border-bottom: 3px solid #760001;
+}
+
+body
+{
+    background-color: rgb(254,246,218);
+	width: 1015px; 
+    margin: auto;
+}
+
+
+header
+{
+    display: inline-block;
+	width: 800px;
+	vertical-align: top;
+	background-color: rgb(110,104,98);
+	border-radius: 10px;
+	text-align: center;
+	color: rgb(203,203,203);
+	font-size: 1.5em;
+}
+
+.Logo
+{
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	left: -150px;
+	top: 0px;
+	margin: 5px;
+	
+}
+
+footer
+{
+	position: relative;
+	left: 20px;
+	top: -60px;
+	max-width: 800px;
+}
+
+.reseau
+{
+	border-radius: 10px;
+	display: inline-block;
+	position: relative;
+	top: -58px;
+}
+
+aside
+{
+	width: 220px;
+	height: 550px;
+	display: inline-block;
+	vertical-align: top;
+	background-color: rgb(110,104,98); 
+	border-radius: 10px;
+	text-align: center;
+	position: relative;
+	top: -60px;
+	left: -140px;
+	color: rgb(203,203,203);
+}
+
+.arrondie 
+{
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+
+form
+{
+	position: relative;
+	top: 50px;
+}
+
+input
+{
+	margin: 5px;
+}
+
+div.navigation
+{
+    width: 1000px;
+	text-align: center;
+	position: relative;
+	top: -600px;
+	right: -100px;
+}
+
+div.navigation li
+{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+
+div.navigation a
+{
+	font-size: 1em;
+    color: #181818;
+    padding-bottom: 3px;
+    text-decoration: none;
+}
+
+div.navigation a:hover
+{
+    color: #760001;
+    border-bottom: 1px solid #760001;
+}
+
+table
+{
+	display: inline-block;
+	position: relative;
+	top: -615px;
+	right: -95px;
+	border-collapse: collapse;
+	font-size: 0.9em;
+	
+}
+
+td, th 
+{
+    border: 1px solid black;
+}
+	
+strong 
+{
+     color: #FF0000;
+}
+
+#news
+{
+	position: relative;
+	top: -570px;
+	right: -150px;
+	width: 400px;
+	background-color: rgb(202,108,72); 
+	border-radius:10px;
+		text-align: center;
+}

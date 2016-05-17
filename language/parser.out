@@ -7,2320 +7,2359 @@ Unused terminals:
 Grammar
 
 Rule 0     S' -> expression
-Rule 1     expression -> AJOUTER GROUPE TEXT
-Rule 2     expression -> SUPPRIMER PERSONNE NOM EQUALS noms facul2
-Rule 3     expression -> AFFICHER PERSONNE
-Rule 4     expression -> AFFICHER PERSONNE facul3
-Rule 5     facul3 -> NOM EQUALS noms facul2
-Rule 6     facul3 -> facul2
-Rule 7     facul2 -> PRENOM EQUALS prenoms facul
-Rule 8     facul2 -> facul
-Rule 9     expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms facul
-Rule 10    noms -> ID
-Rule 11    noms -> ID noms
-Rule 12    prenoms -> ID
-Rule 13    prenoms -> ID prenoms
-Rule 14    condition_modif -> attribut EQUALS element
-Rule 15    condition_modif -> attribut EQUALS element ET condition_modif
-Rule 16    attribut -> NOM
-Rule 17    attribut -> PRENOM
-Rule 18    attribut -> ADRS
-Rule 19    attribut -> SEXE
-Rule 20    attribut -> PROMOTION
-Rule 21    attribut -> MAIL
-Rule 22    attribut -> LIEUNAIS
-Rule 23    attribut -> NUMERO
-Rule 24    attribut -> LOGIN
-Rule 25    attribut -> MDPASS
-Rule 26    attribut -> DATENAIS
-Rule 27    element -> ID
-Rule 28    element -> TEXT
-Rule 29    element -> NUM
-Rule 30    element -> MAILXP
-Rule 31    element -> DATE
-Rule 32    element -> PROMOXP
-Rule 33    element -> SEX
-Rule 34    expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element
-Rule 35    facul -> date_naiss facul
-Rule 36    facul -> sexuality facul
-Rule 37    facul -> lieu_nais facul
-Rule 38    facul -> adresses facul
-Rule 39    facul -> type facul
-Rule 40    facul -> promotion facul
-Rule 41    facul -> login facul
-Rule 42    facul -> mail facul
-Rule 43    facul -> mdp facul
-Rule 44    facul -> numero facul
-Rule 45    facul -> <empty>
-Rule 46    date_naiss -> DATENAIS EQUALS DATE
-Rule 47    sexuality -> SEXE EQUALS SEX
-Rule 48    adresses -> ADRS EQUALS TEXT
-Rule 49    lieu_nais -> LIEUNAIS EQUALS TEXT
-Rule 50    type -> TYPE EQUALS NUM
-Rule 51    promotion -> PROMOTION EQUALS PROMOXP
-Rule 52    mdp -> MDPASS EQUALS TEXT
-Rule 53    numero -> NUMERO EQUALS NUM
-Rule 54    mail -> MAIL EQUALS MAILXP
-Rule 55    login -> LOGIN EQUALS ID
-Rule 56    expression -> AFFICHER GROUPE
-Rule 57    expression -> AFFICHER UV
-Rule 58    expression -> AFFICHER MODULE facul_uv
-Rule 59    facul_uv -> UV EQUALS TEXT
-Rule 60    expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT
-Rule 61    condition_modifier_groupe -> NOM EQUALS TEXT
-Rule 62    expression -> SUPPRIMER GROUPE TEXT
-Rule 63    expression -> AJOUTER UV TEXT NUM EQUALS FLOAT
-Rule 64    expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT
-Rule 65    condition_modifier_uv -> NOM EQUALS TEXT
-Rule 66    expression -> SUPPRIMER UV TEXT
-Rule 67    expression -> AJOUTER MODULE TEXT UV EQUALS TEXT
-Rule 68    expression -> MODIFIER MODULE condition_modifier_module but_modifier_module
-Rule 69    condition_modifier_module -> NOM EQUALS TEXT
-Rule 70    but_modifier_module -> NOUVEAU EQUALS TEXT
-Rule 71    but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS TEXT
-Rule 72    expression -> SUPPRIMER MODULE TEXT
+Rule 1     expression -> SUPPRIMER PERSONNE NOM EQUALS noms facul2
+Rule 2     expression -> AFFICHER PERSONNE
+Rule 3     expression -> AFFICHER PERSONNE facul3
+Rule 4     facul3 -> NOM EQUALS noms facul2
+Rule 5     facul3 -> facul2
+Rule 6     facul2 -> PRENOM EQUALS prenoms facul
+Rule 7     facul2 -> facul
+Rule 8     expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
+Rule 9     noms -> ID
+Rule 10    noms -> ID noms
+Rule 11    prenoms -> ID
+Rule 12    prenoms -> ID prenoms
+Rule 13    condition_modif -> attribut EQUALS element
+Rule 14    condition_modif -> attribut EQUALS element ET condition_modif
+Rule 15    attribut -> NOM
+Rule 16    attribut -> PRENOM
+Rule 17    attribut -> ADRS
+Rule 18    attribut -> PROMOTION
+Rule 19    attribut -> MAIL
+Rule 20    attribut -> LIEUNAIS
+Rule 21    attribut -> NUMERO
+Rule 22    attribut -> DATENAIS
+Rule 23    element -> ID
+Rule 24    element -> TEXT
+Rule 25    element -> NUM
+Rule 26    element -> MAILXP
+Rule 27    element -> DATE
+Rule 28    element -> PROMOXP
+Rule 29    element -> SEX
+Rule 30    expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element
+Rule 31    facul -> date_naiss facul
+Rule 32    facul -> sexuality facul
+Rule 33    facul -> lieu_nais facul
+Rule 34    facul -> adresses facul
+Rule 35    facul -> type facul
+Rule 36    facul -> promotion facul
+Rule 37    facul -> login facul
+Rule 38    facul -> mail facul
+Rule 39    facul -> mdp facul
+Rule 40    facul -> numero facul
+Rule 41    facul -> <empty>
+Rule 42    date_naiss -> DATENAIS EQUALS DATE
+Rule 43    sexuality -> SEXE EQUALS SEX
+Rule 44    adresses -> ADRS EQUALS TEXT
+Rule 45    lieu_nais -> LIEUNAIS EQUALS TEXT
+Rule 46    type -> TYPE EQUALS NUM
+Rule 47    promotion -> PROMOTION EQUALS PROMOXP
+Rule 48    mdp -> MDPASS EQUALS TEXT
+Rule 49    numero -> NUMERO EQUALS NUM
+Rule 50    mail -> MAIL EQUALS MAILXP
+Rule 51    login -> LOGIN EQUALS ID
+Rule 52    expression -> AFFICHER GROUPE
+Rule 53    expression -> AFFICHER UV
+Rule 54    expression -> AFFICHER MODULE facul_uv
+Rule 55    facul_uv -> UV EQUALS TEXT
+Rule 56    expression -> AJOUTER GROUPE TEXT
+Rule 57    expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT
+Rule 58    condition_modifier_groupe -> NOM EQUALS TEXT
+Rule 59    expression -> SUPPRIMER GROUPE TEXT
+Rule 60    expression -> AJOUTER UV TEXT NUM EQUALS FLOAT
+Rule 61    expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT
+Rule 62    condition_modifier_uv -> NOM EQUALS TEXT
+Rule 63    expression -> SUPPRIMER UV TEXT
+Rule 64    expression -> AJOUTER MODULE TEXT UV EQUALS TEXT
+Rule 65    expression -> MODIFIER MODULE condition_modifier_module but_modifier_module
+Rule 66    condition_modifier_module -> NOM EQUALS TEXT
+Rule 67    but_modifier_module -> NOUVEAU EQUALS TEXT
+Rule 68    but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS TEXT
+Rule 69    expression -> SUPPRIMER MODULE TEXT
 
 Terminals, with rules where they appear
 
-ADRS                 : 18 48
-AFFICHER             : 3 4 56 57 58
-AJOUTER              : 1 9 63 67
-DATE                 : 31 46
-DATENAIS             : 26 46
-EQUALS               : 2 5 7 9 9 14 15 34 46 47 48 49 50 51 52 53 54 55 59 60 61 63 64 65 67 69 70 71 71
-ET                   : 15
-FLOAT                : 63
-GROUPE               : 1 56 60 62
-ID                   : 10 11 12 13 27 55
-LIEUNAIS             : 22 49
-LOGIN                : 24 55
-MAIL                 : 21 54
-MAILXP               : 30 54
-MDPASS               : 25 52
-MODIFIER             : 34 60 64 68
-MODULE               : 58 67 68 72
-NOM                  : 2 5 9 16 61 65 69
-NOUVEAU              : 34 60 64 70 71
-NUM                  : 29 50 53 63
-NUMERO               : 23 53
+ADRS                 : 17 44
+AFFICHER             : 2 3 52 53 54
+AJOUTER              : 8 56 60 64
+DATE                 : 27 42
+DATENAIS             : 22 42
+EQUALS               : 1 4 6 8 8 8 8 8 8 13 14 30 42 43 44 45 46 47 48 49 50 51 55 57 58 60 61 62 64 66 67 68 68
+ET                   : 14
+FLOAT                : 60
+GROUPE               : 52 56 57 59
+ID                   : 8 8 9 10 11 12 23 51
+LIEUNAIS             : 20 45
+LOGIN                : 8 51
+MAIL                 : 19 50
+MAILXP               : 26 50
+MDPASS               : 8 48
+MODIFIER             : 30 57 61 65
+MODULE               : 54 64 65 69
+NOM                  : 1 4 8 15 58 62 66
+NOUVEAU              : 30 57 61 67 68
+NUM                  : 25 46 49 60
+NUMERO               : 21 49
 PAR                  : 
-PERSONNE             : 2 3 4 9 34
-PRENOM               : 7 9 17
-PROMOTION            : 20 51
-PROMOXP              : 32 51
-SEX                  : 33 47
-SEXE                 : 19 47
-SUPPRIMER            : 2 62 66 72
-TEXT                 : 1 28 48 49 52 59 60 61 62 63 64 65 66 67 67 69 70 71 71 72
-TYPE                 : 50
-UV                   : 57 59 63 64 66 67 71
+PERSONNE             : 1 2 3 8 30
+PRENOM               : 6 8 16
+PROMOTION            : 18 47
+PROMOXP              : 28 47
+SEX                  : 8 29 43
+SEXE                 : 8 43
+SUPPRIMER            : 1 59 63 69
+TEXT                 : 8 24 44 45 48 55 56 57 58 59 60 61 62 63 64 64 66 67 68 68 69
+TYPE                 : 8 46
+UV                   : 53 55 60 61 63 64 68
 error                : 
 
 Nonterminals, with rules where they appear
 
-adresses             : 38
-attribut             : 14 15 34
-but_modifier_module  : 68
-condition_modif      : 15 34
-condition_modifier_groupe : 60
-condition_modifier_module : 68
-condition_modifier_uv : 64
-date_naiss           : 35
-element              : 14 15 34
+adresses             : 34
+attribut             : 13 14 30
+but_modifier_module  : 65
+condition_modif      : 14 30
+condition_modifier_groupe : 57
+condition_modifier_module : 65
+condition_modifier_uv : 61
+date_naiss           : 31
+element              : 13 14 30
 expression           : 0
-facul                : 7 8 9 35 36 37 38 39 40 41 42 43 44
-facul2               : 2 5 6
-facul3               : 4
-facul_uv             : 58
-lieu_nais            : 37
-login                : 41
-mail                 : 42
-mdp                  : 43
-noms                 : 2 5 9 11
-numero               : 44
-prenoms              : 7 9 13
-promotion            : 40
-sexuality            : 36
-type                 : 39
+facul                : 6 7 8 31 32 33 34 35 36 37 38 39 40
+facul2               : 1 4 5
+facul3               : 3
+facul_uv             : 54
+lieu_nais            : 33
+login                : 37
+mail                 : 38
+mdp                  : 39
+noms                 : 1 4 8 10
+numero               : 40
+prenoms              : 6 8 12
+promotion            : 36
+sexuality            : 32
+type                 : 35
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . expression
-    (1) expression -> . AJOUTER GROUPE TEXT
-    (2) expression -> . SUPPRIMER PERSONNE NOM EQUALS noms facul2
-    (3) expression -> . AFFICHER PERSONNE
-    (4) expression -> . AFFICHER PERSONNE facul3
-    (9) expression -> . AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms facul
-    (34) expression -> . MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element
-    (56) expression -> . AFFICHER GROUPE
-    (57) expression -> . AFFICHER UV
-    (58) expression -> . AFFICHER MODULE facul_uv
-    (60) expression -> . MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT
-    (62) expression -> . SUPPRIMER GROUPE TEXT
-    (63) expression -> . AJOUTER UV TEXT NUM EQUALS FLOAT
-    (64) expression -> . MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT
-    (66) expression -> . SUPPRIMER UV TEXT
-    (67) expression -> . AJOUTER MODULE TEXT UV EQUALS TEXT
-    (68) expression -> . MODIFIER MODULE condition_modifier_module but_modifier_module
-    (72) expression -> . SUPPRIMER MODULE TEXT
+    (1) expression -> . SUPPRIMER PERSONNE NOM EQUALS noms facul2
+    (2) expression -> . AFFICHER PERSONNE
+    (3) expression -> . AFFICHER PERSONNE facul3
+    (8) expression -> . AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
+    (30) expression -> . MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element
+    (52) expression -> . AFFICHER GROUPE
+    (53) expression -> . AFFICHER UV
+    (54) expression -> . AFFICHER MODULE facul_uv
+    (56) expression -> . AJOUTER GROUPE TEXT
+    (57) expression -> . MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT
+    (59) expression -> . SUPPRIMER GROUPE TEXT
+    (60) expression -> . AJOUTER UV TEXT NUM EQUALS FLOAT
+    (61) expression -> . MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT
+    (63) expression -> . SUPPRIMER UV TEXT
+    (64) expression -> . AJOUTER MODULE TEXT UV EQUALS TEXT
+    (65) expression -> . MODIFIER MODULE condition_modifier_module but_modifier_module
+    (69) expression -> . SUPPRIMER MODULE TEXT
 
-    AJOUTER         shift and go to state 2
-    SUPPRIMER       shift and go to state 4
-    AFFICHER        shift and go to state 3
-    MODIFIER        shift and go to state 5
+    SUPPRIMER       shift and go to state 1
+    AFFICHER        shift and go to state 2
+    AJOUTER         shift and go to state 5
+    MODIFIER        shift and go to state 3
 
-    expression                     shift and go to state 1
+    expression                     shift and go to state 4
 
 state 1
+
+    (1) expression -> SUPPRIMER . PERSONNE NOM EQUALS noms facul2
+    (59) expression -> SUPPRIMER . GROUPE TEXT
+    (63) expression -> SUPPRIMER . UV TEXT
+    (69) expression -> SUPPRIMER . MODULE TEXT
+
+    PERSONNE        shift and go to state 9
+    GROUPE          shift and go to state 7
+    UV              shift and go to state 8
+    MODULE          shift and go to state 6
+
+
+state 2
+
+    (2) expression -> AFFICHER . PERSONNE
+    (3) expression -> AFFICHER . PERSONNE facul3
+    (52) expression -> AFFICHER . GROUPE
+    (53) expression -> AFFICHER . UV
+    (54) expression -> AFFICHER . MODULE facul_uv
+
+    PERSONNE        shift and go to state 13
+    GROUPE          shift and go to state 12
+    UV              shift and go to state 10
+    MODULE          shift and go to state 11
+
+
+state 3
+
+    (30) expression -> MODIFIER . attribut PERSONNE condition_modif NOUVEAU EQUALS element
+    (57) expression -> MODIFIER . GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT
+    (61) expression -> MODIFIER . UV condition_modifier_uv NOUVEAU EQUALS TEXT
+    (65) expression -> MODIFIER . MODULE condition_modifier_module but_modifier_module
+    (15) attribut -> . NOM
+    (16) attribut -> . PRENOM
+    (17) attribut -> . ADRS
+    (18) attribut -> . PROMOTION
+    (19) attribut -> . MAIL
+    (20) attribut -> . LIEUNAIS
+    (21) attribut -> . NUMERO
+    (22) attribut -> . DATENAIS
+
+    GROUPE          shift and go to state 25
+    UV              shift and go to state 19
+    MODULE          shift and go to state 20
+    NOM             shift and go to state 16
+    PRENOM          shift and go to state 24
+    ADRS            shift and go to state 21
+    PROMOTION       shift and go to state 15
+    MAIL            shift and go to state 18
+    LIEUNAIS        shift and go to state 14
+    NUMERO          shift and go to state 23
+    DATENAIS        shift and go to state 22
+
+    attribut                       shift and go to state 17
+
+state 4
 
     (0) S' -> expression .
 
 
 
-state 2
-
-    (1) expression -> AJOUTER . GROUPE TEXT
-    (9) expression -> AJOUTER . PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms facul
-    (63) expression -> AJOUTER . UV TEXT NUM EQUALS FLOAT
-    (67) expression -> AJOUTER . MODULE TEXT UV EQUALS TEXT
-
-    GROUPE          shift and go to state 8
-    PERSONNE        shift and go to state 7
-    UV              shift and go to state 9
-    MODULE          shift and go to state 6
-
-
-state 3
-
-    (3) expression -> AFFICHER . PERSONNE
-    (4) expression -> AFFICHER . PERSONNE facul3
-    (56) expression -> AFFICHER . GROUPE
-    (57) expression -> AFFICHER . UV
-    (58) expression -> AFFICHER . MODULE facul_uv
-
-    PERSONNE        shift and go to state 12
-    GROUPE          shift and go to state 13
-    UV              shift and go to state 11
-    MODULE          shift and go to state 10
-
-
-state 4
-
-    (2) expression -> SUPPRIMER . PERSONNE NOM EQUALS noms facul2
-    (62) expression -> SUPPRIMER . GROUPE TEXT
-    (66) expression -> SUPPRIMER . UV TEXT
-    (72) expression -> SUPPRIMER . MODULE TEXT
-
-    PERSONNE        shift and go to state 16
-    GROUPE          shift and go to state 17
-    UV              shift and go to state 15
-    MODULE          shift and go to state 14
-
-
 state 5
 
-    (34) expression -> MODIFIER . attribut PERSONNE condition_modif NOUVEAU EQUALS element
-    (60) expression -> MODIFIER . GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT
-    (64) expression -> MODIFIER . UV condition_modifier_uv NOUVEAU EQUALS TEXT
-    (68) expression -> MODIFIER . MODULE condition_modifier_module but_modifier_module
-    (16) attribut -> . NOM
-    (17) attribut -> . PRENOM
-    (18) attribut -> . ADRS
-    (19) attribut -> . SEXE
-    (20) attribut -> . PROMOTION
-    (21) attribut -> . MAIL
-    (22) attribut -> . LIEUNAIS
-    (23) attribut -> . NUMERO
-    (24) attribut -> . LOGIN
-    (25) attribut -> . MDPASS
-    (26) attribut -> . DATENAIS
+    (8) expression -> AJOUTER . PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
+    (56) expression -> AJOUTER . GROUPE TEXT
+    (60) expression -> AJOUTER . UV TEXT NUM EQUALS FLOAT
+    (64) expression -> AJOUTER . MODULE TEXT UV EQUALS TEXT
 
-    GROUPE          shift and go to state 30
-    UV              shift and go to state 23
-    MODULE          shift and go to state 18
-    NOM             shift and go to state 22
-    PRENOM          shift and go to state 20
-    ADRS            shift and go to state 24
-    SEXE            shift and go to state 28
-    PROMOTION       shift and go to state 19
-    MAIL            shift and go to state 32
-    LIEUNAIS        shift and go to state 26
-    NUMERO          shift and go to state 27
-    LOGIN           shift and go to state 25
-    MDPASS          shift and go to state 21
-    DATENAIS        shift and go to state 29
+    PERSONNE        shift and go to state 29
+    GROUPE          shift and go to state 28
+    UV              shift and go to state 27
+    MODULE          shift and go to state 26
 
-    attribut                       shift and go to state 31
 
 state 6
 
-    (67) expression -> AJOUTER MODULE . TEXT UV EQUALS TEXT
+    (69) expression -> SUPPRIMER MODULE . TEXT
 
-    TEXT            shift and go to state 33
+    TEXT            shift and go to state 30
 
 
 state 7
 
-    (9) expression -> AJOUTER PERSONNE . NOM EQUALS noms PRENOM EQUALS prenoms facul
+    (59) expression -> SUPPRIMER GROUPE . TEXT
 
-    NOM             shift and go to state 34
+    TEXT            shift and go to state 31
 
 
 state 8
 
-    (1) expression -> AJOUTER GROUPE . TEXT
+    (63) expression -> SUPPRIMER UV . TEXT
 
-    TEXT            shift and go to state 35
+    TEXT            shift and go to state 32
 
 
 state 9
 
-    (63) expression -> AJOUTER UV . TEXT NUM EQUALS FLOAT
+    (1) expression -> SUPPRIMER PERSONNE . NOM EQUALS noms facul2
 
-    TEXT            shift and go to state 36
+    NOM             shift and go to state 33
 
 
 state 10
 
-    (58) expression -> AFFICHER MODULE . facul_uv
-    (59) facul_uv -> . UV EQUALS TEXT
+    (53) expression -> AFFICHER UV .
 
-    UV              shift and go to state 38
+    $end            reduce using rule 53 (expression -> AFFICHER UV .)
 
-    facul_uv                       shift and go to state 37
 
 state 11
 
-    (57) expression -> AFFICHER UV .
+    (54) expression -> AFFICHER MODULE . facul_uv
+    (55) facul_uv -> . UV EQUALS TEXT
 
-    $end            reduce using rule 57 (expression -> AFFICHER UV .)
+    UV              shift and go to state 34
 
+    facul_uv                       shift and go to state 35
 
 state 12
 
-    (3) expression -> AFFICHER PERSONNE .
-    (4) expression -> AFFICHER PERSONNE . facul3
-    (5) facul3 -> . NOM EQUALS noms facul2
-    (6) facul3 -> . facul2
-    (7) facul2 -> . PRENOM EQUALS prenoms facul
-    (8) facul2 -> . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (52) expression -> AFFICHER GROUPE .
 
-  ! reduce/reduce conflict for $end resolved using rule 3 (expression -> AFFICHER PERSONNE .)
-    $end            reduce using rule 3 (expression -> AFFICHER PERSONNE .)
-    NOM             shift and go to state 44
-    PRENOM          shift and go to state 57
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    $end            reduce using rule 52 (expression -> AFFICHER GROUPE .)
 
-  ! $end            [ reduce using rule 45 (facul -> .) ]
-
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    mdp                            shift and go to state 51
-    promotion                      shift and go to state 56
-    lieu_nais                      shift and go to state 46
-    facul3                         shift and go to state 43
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    date_naiss                     shift and go to state 59
-    adresses                       shift and go to state 48
-    facul2                         shift and go to state 50
-    facul                          shift and go to state 62
 
 state 13
 
-    (56) expression -> AFFICHER GROUPE .
+    (2) expression -> AFFICHER PERSONNE .
+    (3) expression -> AFFICHER PERSONNE . facul3
+    (4) facul3 -> . NOM EQUALS noms facul2
+    (5) facul3 -> . facul2
+    (6) facul2 -> . PRENOM EQUALS prenoms facul
+    (7) facul2 -> . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    $end            reduce using rule 56 (expression -> AFFICHER GROUPE .)
+  ! reduce/reduce conflict for $end resolved using rule 2 (expression -> AFFICHER PERSONNE .)
+    $end            reduce using rule 2 (expression -> AFFICHER PERSONNE .)
+    NOM             shift and go to state 38
+    PRENOM          shift and go to state 57
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+  ! $end            [ reduce using rule 41 (facul -> .) ]
+
+    login                          shift and go to state 36
+    mail                           shift and go to state 49
+    adresses                       shift and go to state 50
+    mdp                            shift and go to state 42
+    numero                         shift and go to state 37
+    promotion                      shift and go to state 39
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    facul                          shift and go to state 46
+    sexuality                      shift and go to state 56
+    facul3                         shift and go to state 58
+    facul2                         shift and go to state 59
+    type                           shift and go to state 60
 
 state 14
 
-    (72) expression -> SUPPRIMER MODULE . TEXT
+    (20) attribut -> LIEUNAIS .
 
-    TEXT            shift and go to state 64
+    PERSONNE        reduce using rule 20 (attribut -> LIEUNAIS .)
+    EQUALS          reduce using rule 20 (attribut -> LIEUNAIS .)
 
 
 state 15
 
-    (66) expression -> SUPPRIMER UV . TEXT
+    (18) attribut -> PROMOTION .
 
-    TEXT            shift and go to state 65
+    PERSONNE        reduce using rule 18 (attribut -> PROMOTION .)
+    EQUALS          reduce using rule 18 (attribut -> PROMOTION .)
 
 
 state 16
 
-    (2) expression -> SUPPRIMER PERSONNE . NOM EQUALS noms facul2
+    (15) attribut -> NOM .
 
-    NOM             shift and go to state 66
+    PERSONNE        reduce using rule 15 (attribut -> NOM .)
+    EQUALS          reduce using rule 15 (attribut -> NOM .)
 
 
 state 17
 
-    (62) expression -> SUPPRIMER GROUPE . TEXT
+    (30) expression -> MODIFIER attribut . PERSONNE condition_modif NOUVEAU EQUALS element
 
-    TEXT            shift and go to state 67
+    PERSONNE        shift and go to state 61
 
 
 state 18
 
-    (68) expression -> MODIFIER MODULE . condition_modifier_module but_modifier_module
-    (69) condition_modifier_module -> . NOM EQUALS TEXT
+    (19) attribut -> MAIL .
 
-    NOM             shift and go to state 69
+    PERSONNE        reduce using rule 19 (attribut -> MAIL .)
+    EQUALS          reduce using rule 19 (attribut -> MAIL .)
 
-    condition_modifier_module      shift and go to state 68
 
 state 19
 
-    (20) attribut -> PROMOTION .
+    (61) expression -> MODIFIER UV . condition_modifier_uv NOUVEAU EQUALS TEXT
+    (62) condition_modifier_uv -> . NOM EQUALS TEXT
 
-    EQUALS          reduce using rule 20 (attribut -> PROMOTION .)
-    PERSONNE        reduce using rule 20 (attribut -> PROMOTION .)
+    NOM             shift and go to state 63
 
+    condition_modifier_uv          shift and go to state 62
 
 state 20
 
-    (17) attribut -> PRENOM .
+    (65) expression -> MODIFIER MODULE . condition_modifier_module but_modifier_module
+    (66) condition_modifier_module -> . NOM EQUALS TEXT
 
-    EQUALS          reduce using rule 17 (attribut -> PRENOM .)
-    PERSONNE        reduce using rule 17 (attribut -> PRENOM .)
+    NOM             shift and go to state 65
 
+    condition_modifier_module      shift and go to state 64
 
 state 21
 
-    (25) attribut -> MDPASS .
+    (17) attribut -> ADRS .
 
-    EQUALS          reduce using rule 25 (attribut -> MDPASS .)
-    PERSONNE        reduce using rule 25 (attribut -> MDPASS .)
+    PERSONNE        reduce using rule 17 (attribut -> ADRS .)
+    EQUALS          reduce using rule 17 (attribut -> ADRS .)
 
 
 state 22
 
-    (16) attribut -> NOM .
+    (22) attribut -> DATENAIS .
 
-    EQUALS          reduce using rule 16 (attribut -> NOM .)
-    PERSONNE        reduce using rule 16 (attribut -> NOM .)
+    PERSONNE        reduce using rule 22 (attribut -> DATENAIS .)
+    EQUALS          reduce using rule 22 (attribut -> DATENAIS .)
 
 
 state 23
 
-    (64) expression -> MODIFIER UV . condition_modifier_uv NOUVEAU EQUALS TEXT
-    (65) condition_modifier_uv -> . NOM EQUALS TEXT
+    (21) attribut -> NUMERO .
 
-    NOM             shift and go to state 70
+    PERSONNE        reduce using rule 21 (attribut -> NUMERO .)
+    EQUALS          reduce using rule 21 (attribut -> NUMERO .)
 
-    condition_modifier_uv          shift and go to state 71
 
 state 24
 
-    (18) attribut -> ADRS .
+    (16) attribut -> PRENOM .
 
-    EQUALS          reduce using rule 18 (attribut -> ADRS .)
-    PERSONNE        reduce using rule 18 (attribut -> ADRS .)
+    PERSONNE        reduce using rule 16 (attribut -> PRENOM .)
+    EQUALS          reduce using rule 16 (attribut -> PRENOM .)
 
 
 state 25
 
-    (24) attribut -> LOGIN .
+    (57) expression -> MODIFIER GROUPE . condition_modifier_groupe NOUVEAU EQUALS TEXT
+    (58) condition_modifier_groupe -> . NOM EQUALS TEXT
 
-    EQUALS          reduce using rule 24 (attribut -> LOGIN .)
-    PERSONNE        reduce using rule 24 (attribut -> LOGIN .)
+    NOM             shift and go to state 67
 
+    condition_modifier_groupe      shift and go to state 66
 
 state 26
 
-    (22) attribut -> LIEUNAIS .
+    (64) expression -> AJOUTER MODULE . TEXT UV EQUALS TEXT
 
-    EQUALS          reduce using rule 22 (attribut -> LIEUNAIS .)
-    PERSONNE        reduce using rule 22 (attribut -> LIEUNAIS .)
+    TEXT            shift and go to state 68
 
 
 state 27
 
-    (23) attribut -> NUMERO .
+    (60) expression -> AJOUTER UV . TEXT NUM EQUALS FLOAT
 
-    EQUALS          reduce using rule 23 (attribut -> NUMERO .)
-    PERSONNE        reduce using rule 23 (attribut -> NUMERO .)
+    TEXT            shift and go to state 69
 
 
 state 28
 
-    (19) attribut -> SEXE .
+    (56) expression -> AJOUTER GROUPE . TEXT
 
-    EQUALS          reduce using rule 19 (attribut -> SEXE .)
-    PERSONNE        reduce using rule 19 (attribut -> SEXE .)
+    TEXT            shift and go to state 70
 
 
 state 29
 
-    (26) attribut -> DATENAIS .
+    (8) expression -> AJOUTER PERSONNE . NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    EQUALS          reduce using rule 26 (attribut -> DATENAIS .)
-    PERSONNE        reduce using rule 26 (attribut -> DATENAIS .)
+    NOM             shift and go to state 71
 
 
 state 30
 
-    (60) expression -> MODIFIER GROUPE . condition_modifier_groupe NOUVEAU EQUALS TEXT
-    (61) condition_modifier_groupe -> . NOM EQUALS TEXT
+    (69) expression -> SUPPRIMER MODULE TEXT .
 
-    NOM             shift and go to state 72
+    $end            reduce using rule 69 (expression -> SUPPRIMER MODULE TEXT .)
 
-    condition_modifier_groupe      shift and go to state 73
 
 state 31
 
-    (34) expression -> MODIFIER attribut . PERSONNE condition_modif NOUVEAU EQUALS element
+    (59) expression -> SUPPRIMER GROUPE TEXT .
 
-    PERSONNE        shift and go to state 74
+    $end            reduce using rule 59 (expression -> SUPPRIMER GROUPE TEXT .)
 
 
 state 32
 
-    (21) attribut -> MAIL .
+    (63) expression -> SUPPRIMER UV TEXT .
 
-    EQUALS          reduce using rule 21 (attribut -> MAIL .)
-    PERSONNE        reduce using rule 21 (attribut -> MAIL .)
+    $end            reduce using rule 63 (expression -> SUPPRIMER UV TEXT .)
 
 
 state 33
 
-    (67) expression -> AJOUTER MODULE TEXT . UV EQUALS TEXT
+    (1) expression -> SUPPRIMER PERSONNE NOM . EQUALS noms facul2
 
-    UV              shift and go to state 75
+    EQUALS          shift and go to state 72
 
 
 state 34
 
-    (9) expression -> AJOUTER PERSONNE NOM . EQUALS noms PRENOM EQUALS prenoms facul
+    (55) facul_uv -> UV . EQUALS TEXT
 
-    EQUALS          shift and go to state 76
+    EQUALS          shift and go to state 73
 
 
 state 35
 
-    (1) expression -> AJOUTER GROUPE TEXT .
+    (54) expression -> AFFICHER MODULE facul_uv .
 
-    $end            reduce using rule 1 (expression -> AJOUTER GROUPE TEXT .)
+    $end            reduce using rule 54 (expression -> AFFICHER MODULE facul_uv .)
 
 
 state 36
 
-    (63) expression -> AJOUTER UV TEXT . NUM EQUALS FLOAT
+    (37) facul -> login . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    NUM             shift and go to state 77
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+    login                          shift and go to state 36
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    mail                           shift and go to state 49
+    mdp                            shift and go to state 42
+    facul                          shift and go to state 74
+    sexuality                      shift and go to state 56
+    promotion                      shift and go to state 39
+    lieu_nais                      shift and go to state 53
+    numero                         shift and go to state 37
+    type                           shift and go to state 60
 
 state 37
 
-    (58) expression -> AFFICHER MODULE facul_uv .
+    (40) facul -> numero . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    $end            reduce using rule 58 (expression -> AFFICHER MODULE facul_uv .)
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    facul                          shift and go to state 75
+    numero                         shift and go to state 37
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    promotion                      shift and go to state 39
+    mdp                            shift and go to state 42
+    type                           shift and go to state 60
 
 state 38
 
-    (59) facul_uv -> UV . EQUALS TEXT
+    (4) facul3 -> NOM . EQUALS noms facul2
 
-    EQUALS          shift and go to state 78
+    EQUALS          shift and go to state 76
 
 
 state 39
 
-    (51) promotion -> PROMOTION . EQUALS PROMOXP
+    (36) facul -> promotion . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    EQUALS          shift and go to state 79
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    numero                         shift and go to state 37
+    facul                          shift and go to state 77
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    type                           shift and go to state 60
+    mdp                            shift and go to state 42
+    promotion                      shift and go to state 39
 
 state 40
 
-    (41) facul -> login . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (42) date_naiss -> DATENAIS . EQUALS DATE
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    EQUALS          shift and go to state 78
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 80
-    mdp                            shift and go to state 51
 
 state 41
 
-    (46) date_naiss -> DATENAIS . EQUALS DATE
+    (31) facul -> date_naiss . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
+
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
+
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    numero                         shift and go to state 37
+    facul                          shift and go to state 79
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    promotion                      shift and go to state 39
+    mdp                            shift and go to state 42
+    type                           shift and go to state 60
+
+state 42
+
+    (39) facul -> mdp . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
+
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
+
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    promotion                      shift and go to state 39
+    mdp                            shift and go to state 42
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    facul                          shift and go to state 80
+    numero                         shift and go to state 37
+    type                           shift and go to state 60
+
+state 43
+
+    (50) mail -> MAIL . EQUALS MAILXP
 
     EQUALS          shift and go to state 81
 
 
-state 42
+state 44
 
-    (52) mdp -> MDPASS . EQUALS TEXT
+    (47) promotion -> PROMOTION . EQUALS PROMOXP
 
     EQUALS          shift and go to state 82
 
 
-state 43
+state 45
 
-    (4) expression -> AFFICHER PERSONNE facul3 .
-
-    $end            reduce using rule 4 (expression -> AFFICHER PERSONNE facul3 .)
-
-
-state 44
-
-    (5) facul3 -> NOM . EQUALS noms facul2
+    (45) lieu_nais -> LIEUNAIS . EQUALS TEXT
 
     EQUALS          shift and go to state 83
 
 
-state 45
-
-    (42) facul -> mail . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
-
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
-
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 84
-    mdp                            shift and go to state 51
-
 state 46
 
-    (37) facul -> lieu_nais . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (7) facul2 -> facul .
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    $end            reduce using rule 7 (facul2 -> facul .)
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    date_naiss                     shift and go to state 59
-    adresses                       shift and go to state 48
-    lieu_nais                      shift and go to state 46
-    facul                          shift and go to state 85
-    mdp                            shift and go to state 51
 
 state 47
 
-    (48) adresses -> ADRS . EQUALS TEXT
+    (48) mdp -> MDPASS . EQUALS TEXT
 
-    EQUALS          shift and go to state 86
+    EQUALS          shift and go to state 84
 
 
 state 48
 
-    (38) facul -> adresses . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (46) type -> TYPE . EQUALS NUM
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    EQUALS          shift and go to state 85
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 87
-    mdp                            shift and go to state 51
 
 state 49
 
-    (49) lieu_nais -> LIEUNAIS . EQUALS TEXT
+    (38) facul -> mail . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
+
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
+
+    mail                           shift and go to state 49
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    mdp                            shift and go to state 42
+    facul                          shift and go to state 86
+    sexuality                      shift and go to state 56
+    promotion                      shift and go to state 39
+    lieu_nais                      shift and go to state 53
+    numero                         shift and go to state 37
+    type                           shift and go to state 60
+
+state 50
+
+    (34) facul -> adresses . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
+
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
+
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    numero                         shift and go to state 37
+    facul                          shift and go to state 87
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    promotion                      shift and go to state 39
+    mdp                            shift and go to state 42
+    type                           shift and go to state 60
+
+state 51
+
+    (51) login -> LOGIN . EQUALS ID
 
     EQUALS          shift and go to state 88
 
 
-state 50
-
-    (6) facul3 -> facul2 .
-
-    $end            reduce using rule 6 (facul3 -> facul2 .)
-
-
-state 51
-
-    (43) facul -> mdp . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
-
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
-
-    mdp                            shift and go to state 51
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    mail                           shift and go to state 45
-    login                          shift and go to state 40
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 89
-    numero                         shift and go to state 61
-
 state 52
 
-    (36) facul -> sexuality . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (44) adresses -> ADRS . EQUALS TEXT
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    EQUALS          shift and go to state 89
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 90
-    mdp                            shift and go to state 51
 
 state 53
 
-    (50) type -> TYPE . EQUALS NUM
+    (33) facul -> lieu_nais . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
+
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
+
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    numero                         shift and go to state 37
+    facul                          shift and go to state 90
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    promotion                      shift and go to state 39
+    mdp                            shift and go to state 42
+    type                           shift and go to state 60
+
+state 54
+
+    (49) numero -> NUMERO . EQUALS NUM
 
     EQUALS          shift and go to state 91
 
 
-state 54
+state 55
 
-    (53) numero -> NUMERO . EQUALS NUM
+    (43) sexuality -> SEXE . EQUALS SEX
 
     EQUALS          shift and go to state 92
 
 
-state 55
-
-    (54) mail -> MAIL . EQUALS MAILXP
-
-    EQUALS          shift and go to state 93
-
-
 state 56
 
-    (40) facul -> promotion . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (32) facul -> sexuality . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
     NUMERO          shift and go to state 54
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    promotion                      shift and go to state 56
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 94
-    adresses                       shift and go to state 48
-    mdp                            shift and go to state 51
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    numero                         shift and go to state 37
+    facul                          shift and go to state 93
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    promotion                      shift and go to state 39
+    mdp                            shift and go to state 42
+    type                           shift and go to state 60
 
 state 57
 
-    (7) facul2 -> PRENOM . EQUALS prenoms facul
+    (6) facul2 -> PRENOM . EQUALS prenoms facul
 
-    EQUALS          shift and go to state 95
+    EQUALS          shift and go to state 94
 
 
 state 58
 
-    (39) facul -> type . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (3) expression -> AFFICHER PERSONNE facul3 .
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    $end            reduce using rule 3 (expression -> AFFICHER PERSONNE facul3 .)
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 96
-    mdp                            shift and go to state 51
 
 state 59
 
-    (35) facul -> date_naiss . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (5) facul3 -> facul2 .
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    $end            reduce using rule 5 (facul3 -> facul2 .)
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 97
-    mdp                            shift and go to state 51
 
 state 60
 
-    (55) login -> LOGIN . EQUALS ID
+    (35) facul -> type . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    EQUALS          shift and go to state 98
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    adresses                       shift and go to state 50
+    login                          shift and go to state 36
+    numero                         shift and go to state 37
+    facul                          shift and go to state 95
+    sexuality                      shift and go to state 56
+    mail                           shift and go to state 49
+    promotion                      shift and go to state 39
+    mdp                            shift and go to state 42
+    type                           shift and go to state 60
 
 state 61
 
-    (44) facul -> numero . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (30) expression -> MODIFIER attribut PERSONNE . condition_modif NOUVEAU EQUALS element
+    (13) condition_modif -> . attribut EQUALS element
+    (14) condition_modif -> . attribut EQUALS element ET condition_modif
+    (15) attribut -> . NOM
+    (16) attribut -> . PRENOM
+    (17) attribut -> . ADRS
+    (18) attribut -> . PROMOTION
+    (19) attribut -> . MAIL
+    (20) attribut -> . LIEUNAIS
+    (21) attribut -> . NUMERO
+    (22) attribut -> . DATENAIS
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    NOM             shift and go to state 16
+    PRENOM          shift and go to state 24
+    ADRS            shift and go to state 21
+    PROMOTION       shift and go to state 15
+    MAIL            shift and go to state 18
+    LIEUNAIS        shift and go to state 14
+    NUMERO          shift and go to state 23
+    DATENAIS        shift and go to state 22
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    promotion                      shift and go to state 56
-    type                           shift and go to state 58
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    numero                         shift and go to state 61
-    date_naiss                     shift and go to state 59
-    facul                          shift and go to state 99
-    adresses                       shift and go to state 48
-    mdp                            shift and go to state 51
+    attribut                       shift and go to state 96
+    condition_modif                shift and go to state 97
 
 state 62
 
-    (8) facul2 -> facul .
+    (61) expression -> MODIFIER UV condition_modifier_uv . NOUVEAU EQUALS TEXT
 
-    $end            reduce using rule 8 (facul2 -> facul .)
+    NOUVEAU         shift and go to state 98
 
 
 state 63
 
-    (47) sexuality -> SEXE . EQUALS SEX
+    (62) condition_modifier_uv -> NOM . EQUALS TEXT
 
-    EQUALS          shift and go to state 100
+    EQUALS          shift and go to state 99
 
 
 state 64
 
-    (72) expression -> SUPPRIMER MODULE TEXT .
+    (65) expression -> MODIFIER MODULE condition_modifier_module . but_modifier_module
+    (67) but_modifier_module -> . NOUVEAU EQUALS TEXT
+    (68) but_modifier_module -> . NOUVEAU EQUALS TEXT UV EQUALS TEXT
 
-    $end            reduce using rule 72 (expression -> SUPPRIMER MODULE TEXT .)
+    NOUVEAU         shift and go to state 101
 
+    but_modifier_module            shift and go to state 100
 
 state 65
 
-    (66) expression -> SUPPRIMER UV TEXT .
+    (66) condition_modifier_module -> NOM . EQUALS TEXT
 
-    $end            reduce using rule 66 (expression -> SUPPRIMER UV TEXT .)
+    EQUALS          shift and go to state 102
 
 
 state 66
 
-    (2) expression -> SUPPRIMER PERSONNE NOM . EQUALS noms facul2
+    (57) expression -> MODIFIER GROUPE condition_modifier_groupe . NOUVEAU EQUALS TEXT
 
-    EQUALS          shift and go to state 101
+    NOUVEAU         shift and go to state 103
 
 
 state 67
 
-    (62) expression -> SUPPRIMER GROUPE TEXT .
-
-    $end            reduce using rule 62 (expression -> SUPPRIMER GROUPE TEXT .)
-
-
-state 68
-
-    (68) expression -> MODIFIER MODULE condition_modifier_module . but_modifier_module
-    (70) but_modifier_module -> . NOUVEAU EQUALS TEXT
-    (71) but_modifier_module -> . NOUVEAU EQUALS TEXT UV EQUALS TEXT
-
-    NOUVEAU         shift and go to state 102
-
-    but_modifier_module            shift and go to state 103
-
-state 69
-
-    (69) condition_modifier_module -> NOM . EQUALS TEXT
+    (58) condition_modifier_groupe -> NOM . EQUALS TEXT
 
     EQUALS          shift and go to state 104
 
 
+state 68
+
+    (64) expression -> AJOUTER MODULE TEXT . UV EQUALS TEXT
+
+    UV              shift and go to state 105
+
+
+state 69
+
+    (60) expression -> AJOUTER UV TEXT . NUM EQUALS FLOAT
+
+    NUM             shift and go to state 106
+
+
 state 70
 
-    (65) condition_modifier_uv -> NOM . EQUALS TEXT
+    (56) expression -> AJOUTER GROUPE TEXT .
 
-    EQUALS          shift and go to state 105
+    $end            reduce using rule 56 (expression -> AJOUTER GROUPE TEXT .)
 
 
 state 71
 
-    (64) expression -> MODIFIER UV condition_modifier_uv . NOUVEAU EQUALS TEXT
-
-    NOUVEAU         shift and go to state 106
-
-
-state 72
-
-    (61) condition_modifier_groupe -> NOM . EQUALS TEXT
+    (8) expression -> AJOUTER PERSONNE NOM . EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
     EQUALS          shift and go to state 107
 
 
+state 72
+
+    (1) expression -> SUPPRIMER PERSONNE NOM EQUALS . noms facul2
+    (9) noms -> . ID
+    (10) noms -> . ID noms
+
+    ID              shift and go to state 109
+
+    noms                           shift and go to state 108
+
 state 73
 
-    (60) expression -> MODIFIER GROUPE condition_modifier_groupe . NOUVEAU EQUALS TEXT
+    (55) facul_uv -> UV EQUALS . TEXT
 
-    NOUVEAU         shift and go to state 108
+    TEXT            shift and go to state 110
 
 
 state 74
 
-    (34) expression -> MODIFIER attribut PERSONNE . condition_modif NOUVEAU EQUALS element
-    (14) condition_modif -> . attribut EQUALS element
-    (15) condition_modif -> . attribut EQUALS element ET condition_modif
-    (16) attribut -> . NOM
-    (17) attribut -> . PRENOM
-    (18) attribut -> . ADRS
-    (19) attribut -> . SEXE
-    (20) attribut -> . PROMOTION
-    (21) attribut -> . MAIL
-    (22) attribut -> . LIEUNAIS
-    (23) attribut -> . NUMERO
-    (24) attribut -> . LOGIN
-    (25) attribut -> . MDPASS
-    (26) attribut -> . DATENAIS
+    (37) facul -> login facul .
 
-    NOM             shift and go to state 22
-    PRENOM          shift and go to state 20
-    ADRS            shift and go to state 24
-    SEXE            shift and go to state 28
-    PROMOTION       shift and go to state 19
-    MAIL            shift and go to state 32
-    LIEUNAIS        shift and go to state 26
-    NUMERO          shift and go to state 27
-    LOGIN           shift and go to state 25
-    MDPASS          shift and go to state 21
-    DATENAIS        shift and go to state 29
+    $end            reduce using rule 37 (facul -> login facul .)
 
-    attribut                       shift and go to state 110
-    condition_modif                shift and go to state 109
 
 state 75
 
-    (67) expression -> AJOUTER MODULE TEXT UV . EQUALS TEXT
+    (40) facul -> numero facul .
 
-    EQUALS          shift and go to state 111
+    $end            reduce using rule 40 (facul -> numero facul .)
 
 
 state 76
 
-    (9) expression -> AJOUTER PERSONNE NOM EQUALS . noms PRENOM EQUALS prenoms facul
-    (10) noms -> . ID
-    (11) noms -> . ID noms
+    (4) facul3 -> NOM EQUALS . noms facul2
+    (9) noms -> . ID
+    (10) noms -> . ID noms
 
-    ID              shift and go to state 113
+    ID              shift and go to state 109
 
-    noms                           shift and go to state 112
+    noms                           shift and go to state 111
 
 state 77
 
-    (63) expression -> AJOUTER UV TEXT NUM . EQUALS FLOAT
+    (36) facul -> promotion facul .
 
-    EQUALS          shift and go to state 114
+    $end            reduce using rule 36 (facul -> promotion facul .)
 
 
 state 78
 
-    (59) facul_uv -> UV EQUALS . TEXT
+    (42) date_naiss -> DATENAIS EQUALS . DATE
 
-    TEXT            shift and go to state 115
+    DATE            shift and go to state 112
 
 
 state 79
 
-    (51) promotion -> PROMOTION EQUALS . PROMOXP
+    (31) facul -> date_naiss facul .
 
-    PROMOXP         shift and go to state 116
+    $end            reduce using rule 31 (facul -> date_naiss facul .)
 
 
 state 80
 
-    (41) facul -> login facul .
+    (39) facul -> mdp facul .
 
-    $end            reduce using rule 41 (facul -> login facul .)
+    $end            reduce using rule 39 (facul -> mdp facul .)
 
 
 state 81
 
-    (46) date_naiss -> DATENAIS EQUALS . DATE
+    (50) mail -> MAIL EQUALS . MAILXP
 
-    DATE            shift and go to state 117
+    MAILXP          shift and go to state 113
 
 
 state 82
 
-    (52) mdp -> MDPASS EQUALS . TEXT
+    (47) promotion -> PROMOTION EQUALS . PROMOXP
 
-    TEXT            shift and go to state 118
+    PROMOXP         shift and go to state 114
 
 
 state 83
 
-    (5) facul3 -> NOM EQUALS . noms facul2
-    (10) noms -> . ID
-    (11) noms -> . ID noms
+    (45) lieu_nais -> LIEUNAIS EQUALS . TEXT
 
-    ID              shift and go to state 113
+    TEXT            shift and go to state 115
 
-    noms                           shift and go to state 119
 
 state 84
 
-    (42) facul -> mail facul .
+    (48) mdp -> MDPASS EQUALS . TEXT
 
-    $end            reduce using rule 42 (facul -> mail facul .)
+    TEXT            shift and go to state 116
 
 
 state 85
 
-    (37) facul -> lieu_nais facul .
+    (46) type -> TYPE EQUALS . NUM
 
-    $end            reduce using rule 37 (facul -> lieu_nais facul .)
+    NUM             shift and go to state 117
 
 
 state 86
 
-    (48) adresses -> ADRS EQUALS . TEXT
+    (38) facul -> mail facul .
 
-    TEXT            shift and go to state 120
+    $end            reduce using rule 38 (facul -> mail facul .)
 
 
 state 87
 
-    (38) facul -> adresses facul .
+    (34) facul -> adresses facul .
 
-    $end            reduce using rule 38 (facul -> adresses facul .)
+    $end            reduce using rule 34 (facul -> adresses facul .)
 
 
 state 88
 
-    (49) lieu_nais -> LIEUNAIS EQUALS . TEXT
+    (51) login -> LOGIN EQUALS . ID
 
-    TEXT            shift and go to state 121
+    ID              shift and go to state 118
 
 
 state 89
 
-    (43) facul -> mdp facul .
+    (44) adresses -> ADRS EQUALS . TEXT
 
-    $end            reduce using rule 43 (facul -> mdp facul .)
+    TEXT            shift and go to state 119
 
 
 state 90
 
-    (36) facul -> sexuality facul .
+    (33) facul -> lieu_nais facul .
 
-    $end            reduce using rule 36 (facul -> sexuality facul .)
+    $end            reduce using rule 33 (facul -> lieu_nais facul .)
 
 
 state 91
 
-    (50) type -> TYPE EQUALS . NUM
+    (49) numero -> NUMERO EQUALS . NUM
 
-    NUM             shift and go to state 122
+    NUM             shift and go to state 120
 
 
 state 92
 
-    (53) numero -> NUMERO EQUALS . NUM
+    (43) sexuality -> SEXE EQUALS . SEX
 
-    NUM             shift and go to state 123
+    SEX             shift and go to state 121
 
 
 state 93
 
-    (54) mail -> MAIL EQUALS . MAILXP
+    (32) facul -> sexuality facul .
 
-    MAILXP          shift and go to state 124
+    $end            reduce using rule 32 (facul -> sexuality facul .)
 
 
 state 94
 
-    (40) facul -> promotion facul .
+    (6) facul2 -> PRENOM EQUALS . prenoms facul
+    (11) prenoms -> . ID
+    (12) prenoms -> . ID prenoms
 
-    $end            reduce using rule 40 (facul -> promotion facul .)
+    ID              shift and go to state 122
 
+    prenoms                        shift and go to state 123
 
 state 95
 
-    (7) facul2 -> PRENOM EQUALS . prenoms facul
-    (12) prenoms -> . ID
-    (13) prenoms -> . ID prenoms
+    (35) facul -> type facul .
 
-    ID              shift and go to state 125
+    $end            reduce using rule 35 (facul -> type facul .)
 
-    prenoms                        shift and go to state 126
 
 state 96
 
-    (39) facul -> type facul .
+    (13) condition_modif -> attribut . EQUALS element
+    (14) condition_modif -> attribut . EQUALS element ET condition_modif
 
-    $end            reduce using rule 39 (facul -> type facul .)
+    EQUALS          shift and go to state 124
 
 
 state 97
 
-    (35) facul -> date_naiss facul .
+    (30) expression -> MODIFIER attribut PERSONNE condition_modif . NOUVEAU EQUALS element
 
-    $end            reduce using rule 35 (facul -> date_naiss facul .)
+    NOUVEAU         shift and go to state 125
 
 
 state 98
 
-    (55) login -> LOGIN EQUALS . ID
+    (61) expression -> MODIFIER UV condition_modifier_uv NOUVEAU . EQUALS TEXT
 
-    ID              shift and go to state 127
+    EQUALS          shift and go to state 126
 
 
 state 99
 
-    (44) facul -> numero facul .
+    (62) condition_modifier_uv -> NOM EQUALS . TEXT
 
-    $end            reduce using rule 44 (facul -> numero facul .)
+    TEXT            shift and go to state 127
 
 
 state 100
 
-    (47) sexuality -> SEXE EQUALS . SEX
+    (65) expression -> MODIFIER MODULE condition_modifier_module but_modifier_module .
 
-    SEX             shift and go to state 128
+    $end            reduce using rule 65 (expression -> MODIFIER MODULE condition_modifier_module but_modifier_module .)
 
 
 state 101
 
-    (2) expression -> SUPPRIMER PERSONNE NOM EQUALS . noms facul2
-    (10) noms -> . ID
-    (11) noms -> . ID noms
+    (67) but_modifier_module -> NOUVEAU . EQUALS TEXT
+    (68) but_modifier_module -> NOUVEAU . EQUALS TEXT UV EQUALS TEXT
 
-    ID              shift and go to state 113
+    EQUALS          shift and go to state 128
 
-    noms                           shift and go to state 129
 
 state 102
 
-    (70) but_modifier_module -> NOUVEAU . EQUALS TEXT
-    (71) but_modifier_module -> NOUVEAU . EQUALS TEXT UV EQUALS TEXT
+    (66) condition_modifier_module -> NOM EQUALS . TEXT
 
-    EQUALS          shift and go to state 130
+    TEXT            shift and go to state 129
 
 
 state 103
 
-    (68) expression -> MODIFIER MODULE condition_modifier_module but_modifier_module .
+    (57) expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU . EQUALS TEXT
 
-    $end            reduce using rule 68 (expression -> MODIFIER MODULE condition_modifier_module but_modifier_module .)
+    EQUALS          shift and go to state 130
 
 
 state 104
 
-    (69) condition_modifier_module -> NOM EQUALS . TEXT
+    (58) condition_modifier_groupe -> NOM EQUALS . TEXT
 
     TEXT            shift and go to state 131
 
 
 state 105
 
-    (65) condition_modifier_uv -> NOM EQUALS . TEXT
+    (64) expression -> AJOUTER MODULE TEXT UV . EQUALS TEXT
 
-    TEXT            shift and go to state 132
+    EQUALS          shift and go to state 132
 
 
 state 106
 
-    (64) expression -> MODIFIER UV condition_modifier_uv NOUVEAU . EQUALS TEXT
+    (60) expression -> AJOUTER UV TEXT NUM . EQUALS FLOAT
 
     EQUALS          shift and go to state 133
 
 
 state 107
 
-    (61) condition_modifier_groupe -> NOM EQUALS . TEXT
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS . noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
+    (9) noms -> . ID
+    (10) noms -> . ID noms
 
-    TEXT            shift and go to state 134
+    ID              shift and go to state 109
 
+    noms                           shift and go to state 134
 
 state 108
 
-    (60) expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU . EQUALS TEXT
+    (1) expression -> SUPPRIMER PERSONNE NOM EQUALS noms . facul2
+    (6) facul2 -> . PRENOM EQUALS prenoms facul
+    (7) facul2 -> . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    EQUALS          shift and go to state 135
+    PRENOM          shift and go to state 57
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+    login                          shift and go to state 36
+    mail                           shift and go to state 49
+    adresses                       shift and go to state 50
+    mdp                            shift and go to state 42
+    numero                         shift and go to state 37
+    promotion                      shift and go to state 39
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    facul                          shift and go to state 46
+    sexuality                      shift and go to state 56
+    facul2                         shift and go to state 135
+    type                           shift and go to state 60
 
 state 109
 
-    (34) expression -> MODIFIER attribut PERSONNE condition_modif . NOUVEAU EQUALS element
+    (9) noms -> ID .
+    (10) noms -> ID . noms
+    (9) noms -> . ID
+    (10) noms -> . ID noms
 
-    NOUVEAU         shift and go to state 136
+    PRENOM          reduce using rule 9 (noms -> ID .)
+    DATENAIS        reduce using rule 9 (noms -> ID .)
+    SEXE            reduce using rule 9 (noms -> ID .)
+    LIEUNAIS        reduce using rule 9 (noms -> ID .)
+    ADRS            reduce using rule 9 (noms -> ID .)
+    TYPE            reduce using rule 9 (noms -> ID .)
+    PROMOTION       reduce using rule 9 (noms -> ID .)
+    LOGIN           reduce using rule 9 (noms -> ID .)
+    MAIL            reduce using rule 9 (noms -> ID .)
+    MDPASS          reduce using rule 9 (noms -> ID .)
+    NUMERO          reduce using rule 9 (noms -> ID .)
+    $end            reduce using rule 9 (noms -> ID .)
+    ID              shift and go to state 109
 
+    noms                           shift and go to state 136
 
 state 110
 
-    (14) condition_modif -> attribut . EQUALS element
-    (15) condition_modif -> attribut . EQUALS element ET condition_modif
+    (55) facul_uv -> UV EQUALS TEXT .
 
-    EQUALS          shift and go to state 137
+    $end            reduce using rule 55 (facul_uv -> UV EQUALS TEXT .)
 
 
 state 111
 
-    (67) expression -> AJOUTER MODULE TEXT UV EQUALS . TEXT
+    (4) facul3 -> NOM EQUALS noms . facul2
+    (6) facul2 -> . PRENOM EQUALS prenoms facul
+    (7) facul2 -> . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    TEXT            shift and go to state 138
+    PRENOM          shift and go to state 57
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+    login                          shift and go to state 36
+    mail                           shift and go to state 49
+    adresses                       shift and go to state 50
+    mdp                            shift and go to state 42
+    numero                         shift and go to state 37
+    promotion                      shift and go to state 39
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    facul                          shift and go to state 46
+    sexuality                      shift and go to state 56
+    facul2                         shift and go to state 137
+    type                           shift and go to state 60
 
 state 112
 
-    (9) expression -> AJOUTER PERSONNE NOM EQUALS noms . PRENOM EQUALS prenoms facul
+    (42) date_naiss -> DATENAIS EQUALS DATE .
 
-    PRENOM          shift and go to state 139
+    DATENAIS        reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    SEXE            reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    LIEUNAIS        reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    ADRS            reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    TYPE            reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    PROMOTION       reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    LOGIN           reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    MAIL            reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    MDPASS          reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    NUMERO          reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
+    $end            reduce using rule 42 (date_naiss -> DATENAIS EQUALS DATE .)
 
 
 state 113
 
-    (10) noms -> ID .
-    (11) noms -> ID . noms
-    (10) noms -> . ID
-    (11) noms -> . ID noms
+    (50) mail -> MAIL EQUALS MAILXP .
 
-    PRENOM          reduce using rule 10 (noms -> ID .)
-    DATENAIS        reduce using rule 10 (noms -> ID .)
-    SEXE            reduce using rule 10 (noms -> ID .)
-    LIEUNAIS        reduce using rule 10 (noms -> ID .)
-    ADRS            reduce using rule 10 (noms -> ID .)
-    TYPE            reduce using rule 10 (noms -> ID .)
-    PROMOTION       reduce using rule 10 (noms -> ID .)
-    LOGIN           reduce using rule 10 (noms -> ID .)
-    MAIL            reduce using rule 10 (noms -> ID .)
-    MDPASS          reduce using rule 10 (noms -> ID .)
-    NUMERO          reduce using rule 10 (noms -> ID .)
-    $end            reduce using rule 10 (noms -> ID .)
-    ID              shift and go to state 113
+    DATENAIS        reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    SEXE            reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    LIEUNAIS        reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    ADRS            reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    TYPE            reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    PROMOTION       reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    LOGIN           reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    MAIL            reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    MDPASS          reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    NUMERO          reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
+    $end            reduce using rule 50 (mail -> MAIL EQUALS MAILXP .)
 
-    noms                           shift and go to state 140
 
 state 114
 
-    (63) expression -> AJOUTER UV TEXT NUM EQUALS . FLOAT
+    (47) promotion -> PROMOTION EQUALS PROMOXP .
 
-    FLOAT           shift and go to state 141
+    DATENAIS        reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    SEXE            reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    LIEUNAIS        reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    ADRS            reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    TYPE            reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    PROMOTION       reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    LOGIN           reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    MAIL            reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    MDPASS          reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    NUMERO          reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
+    $end            reduce using rule 47 (promotion -> PROMOTION EQUALS PROMOXP .)
 
 
 state 115
 
-    (59) facul_uv -> UV EQUALS TEXT .
+    (45) lieu_nais -> LIEUNAIS EQUALS TEXT .
 
-    $end            reduce using rule 59 (facul_uv -> UV EQUALS TEXT .)
+    DATENAIS        reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    SEXE            reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    LIEUNAIS        reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    ADRS            reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    TYPE            reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    PROMOTION       reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    LOGIN           reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    MAIL            reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    MDPASS          reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    NUMERO          reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    $end            reduce using rule 45 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
 
 
 state 116
 
-    (51) promotion -> PROMOTION EQUALS PROMOXP .
+    (48) mdp -> MDPASS EQUALS TEXT .
 
-    DATENAIS        reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    SEXE            reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    LIEUNAIS        reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    ADRS            reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    TYPE            reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    PROMOTION       reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    LOGIN           reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    MAIL            reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    MDPASS          reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    NUMERO          reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
-    $end            reduce using rule 51 (promotion -> PROMOTION EQUALS PROMOXP .)
+    DATENAIS        reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    SEXE            reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    LIEUNAIS        reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    ADRS            reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    TYPE            reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    PROMOTION       reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    LOGIN           reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    MAIL            reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    MDPASS          reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    NUMERO          reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
+    $end            reduce using rule 48 (mdp -> MDPASS EQUALS TEXT .)
 
 
 state 117
 
-    (46) date_naiss -> DATENAIS EQUALS DATE .
+    (46) type -> TYPE EQUALS NUM .
 
-    DATENAIS        reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    SEXE            reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    LIEUNAIS        reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    ADRS            reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    TYPE            reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    PROMOTION       reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    LOGIN           reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    MAIL            reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    MDPASS          reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    NUMERO          reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
-    $end            reduce using rule 46 (date_naiss -> DATENAIS EQUALS DATE .)
+    DATENAIS        reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    SEXE            reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    LIEUNAIS        reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    ADRS            reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    TYPE            reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    PROMOTION       reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    LOGIN           reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    MAIL            reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    MDPASS          reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    NUMERO          reduce using rule 46 (type -> TYPE EQUALS NUM .)
+    $end            reduce using rule 46 (type -> TYPE EQUALS NUM .)
 
 
 state 118
 
-    (52) mdp -> MDPASS EQUALS TEXT .
+    (51) login -> LOGIN EQUALS ID .
 
-    DATENAIS        reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    SEXE            reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    LIEUNAIS        reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    ADRS            reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    TYPE            reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    PROMOTION       reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    LOGIN           reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    MAIL            reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    MDPASS          reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    NUMERO          reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
-    $end            reduce using rule 52 (mdp -> MDPASS EQUALS TEXT .)
+    DATENAIS        reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    SEXE            reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    LIEUNAIS        reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    ADRS            reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    TYPE            reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    PROMOTION       reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    LOGIN           reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    MAIL            reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    MDPASS          reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    NUMERO          reduce using rule 51 (login -> LOGIN EQUALS ID .)
+    $end            reduce using rule 51 (login -> LOGIN EQUALS ID .)
 
 
 state 119
 
-    (5) facul3 -> NOM EQUALS noms . facul2
-    (7) facul2 -> . PRENOM EQUALS prenoms facul
-    (8) facul2 -> . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (44) adresses -> ADRS EQUALS TEXT .
 
-    PRENOM          shift and go to state 57
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    DATENAIS        reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    SEXE            reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    LIEUNAIS        reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    ADRS            reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    TYPE            reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    PROMOTION       reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    LOGIN           reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    MAIL            reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    MDPASS          reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    NUMERO          reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
+    $end            reduce using rule 44 (adresses -> ADRS EQUALS TEXT .)
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    facul2                         shift and go to state 142
-    mdp                            shift and go to state 51
-    promotion                      shift and go to state 56
-    lieu_nais                      shift and go to state 46
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    date_naiss                     shift and go to state 59
-    adresses                       shift and go to state 48
-    facul                          shift and go to state 62
 
 state 120
 
-    (48) adresses -> ADRS EQUALS TEXT .
+    (49) numero -> NUMERO EQUALS NUM .
 
-    DATENAIS        reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    SEXE            reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    LIEUNAIS        reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    ADRS            reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    TYPE            reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    PROMOTION       reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    LOGIN           reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    MAIL            reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    MDPASS          reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    NUMERO          reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
-    $end            reduce using rule 48 (adresses -> ADRS EQUALS TEXT .)
+    DATENAIS        reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    SEXE            reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    LIEUNAIS        reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    ADRS            reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    TYPE            reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    PROMOTION       reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    LOGIN           reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    MAIL            reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    MDPASS          reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    NUMERO          reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
+    $end            reduce using rule 49 (numero -> NUMERO EQUALS NUM .)
 
 
 state 121
 
-    (49) lieu_nais -> LIEUNAIS EQUALS TEXT .
+    (43) sexuality -> SEXE EQUALS SEX .
 
-    DATENAIS        reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    SEXE            reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    LIEUNAIS        reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    ADRS            reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    TYPE            reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    PROMOTION       reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    LOGIN           reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    MAIL            reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    MDPASS          reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    NUMERO          reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
-    $end            reduce using rule 49 (lieu_nais -> LIEUNAIS EQUALS TEXT .)
+    DATENAIS        reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    SEXE            reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    LIEUNAIS        reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    ADRS            reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    TYPE            reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    PROMOTION       reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    LOGIN           reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    MAIL            reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    MDPASS          reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    NUMERO          reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
+    $end            reduce using rule 43 (sexuality -> SEXE EQUALS SEX .)
 
 
 state 122
 
-    (50) type -> TYPE EQUALS NUM .
+    (11) prenoms -> ID .
+    (12) prenoms -> ID . prenoms
+    (11) prenoms -> . ID
+    (12) prenoms -> . ID prenoms
 
-    DATENAIS        reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    SEXE            reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    LIEUNAIS        reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    ADRS            reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    TYPE            reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    PROMOTION       reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    LOGIN           reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    MAIL            reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    MDPASS          reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    NUMERO          reduce using rule 50 (type -> TYPE EQUALS NUM .)
-    $end            reduce using rule 50 (type -> TYPE EQUALS NUM .)
+    DATENAIS        reduce using rule 11 (prenoms -> ID .)
+    SEXE            reduce using rule 11 (prenoms -> ID .)
+    LIEUNAIS        reduce using rule 11 (prenoms -> ID .)
+    ADRS            reduce using rule 11 (prenoms -> ID .)
+    TYPE            reduce using rule 11 (prenoms -> ID .)
+    PROMOTION       reduce using rule 11 (prenoms -> ID .)
+    LOGIN           reduce using rule 11 (prenoms -> ID .)
+    MAIL            reduce using rule 11 (prenoms -> ID .)
+    MDPASS          reduce using rule 11 (prenoms -> ID .)
+    NUMERO          reduce using rule 11 (prenoms -> ID .)
+    $end            reduce using rule 11 (prenoms -> ID .)
+    ID              shift and go to state 122
 
+    prenoms                        shift and go to state 138
 
 state 123
 
-    (53) numero -> NUMERO EQUALS NUM .
+    (6) facul2 -> PRENOM EQUALS prenoms . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
 
-    DATENAIS        reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    SEXE            reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    LIEUNAIS        reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    ADRS            reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    TYPE            reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    PROMOTION       reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    LOGIN           reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    MAIL            reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    MDPASS          reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    NUMERO          reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
-    $end            reduce using rule 53 (numero -> NUMERO EQUALS NUM .)
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
 
+    login                          shift and go to state 36
+    mail                           shift and go to state 49
+    adresses                       shift and go to state 50
+    mdp                            shift and go to state 42
+    numero                         shift and go to state 37
+    promotion                      shift and go to state 39
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    facul                          shift and go to state 139
+    sexuality                      shift and go to state 56
+    type                           shift and go to state 60
 
 state 124
 
-    (54) mail -> MAIL EQUALS MAILXP .
+    (13) condition_modif -> attribut EQUALS . element
+    (14) condition_modif -> attribut EQUALS . element ET condition_modif
+    (23) element -> . ID
+    (24) element -> . TEXT
+    (25) element -> . NUM
+    (26) element -> . MAILXP
+    (27) element -> . DATE
+    (28) element -> . PROMOXP
+    (29) element -> . SEX
 
-    DATENAIS        reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    SEXE            reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    LIEUNAIS        reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    ADRS            reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    TYPE            reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    PROMOTION       reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    LOGIN           reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    MAIL            reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    MDPASS          reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    NUMERO          reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
-    $end            reduce using rule 54 (mail -> MAIL EQUALS MAILXP .)
+    ID              shift and go to state 146
+    TEXT            shift and go to state 143
+    NUM             shift and go to state 141
+    MAILXP          shift and go to state 142
+    DATE            shift and go to state 147
+    PROMOXP         shift and go to state 145
+    SEX             shift and go to state 144
 
+    element                        shift and go to state 140
 
 state 125
 
-    (12) prenoms -> ID .
-    (13) prenoms -> ID . prenoms
-    (12) prenoms -> . ID
-    (13) prenoms -> . ID prenoms
+    (30) expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU . EQUALS element
 
-    DATENAIS        reduce using rule 12 (prenoms -> ID .)
-    SEXE            reduce using rule 12 (prenoms -> ID .)
-    LIEUNAIS        reduce using rule 12 (prenoms -> ID .)
-    ADRS            reduce using rule 12 (prenoms -> ID .)
-    TYPE            reduce using rule 12 (prenoms -> ID .)
-    PROMOTION       reduce using rule 12 (prenoms -> ID .)
-    LOGIN           reduce using rule 12 (prenoms -> ID .)
-    MAIL            reduce using rule 12 (prenoms -> ID .)
-    MDPASS          reduce using rule 12 (prenoms -> ID .)
-    NUMERO          reduce using rule 12 (prenoms -> ID .)
-    $end            reduce using rule 12 (prenoms -> ID .)
-    ID              shift and go to state 125
+    EQUALS          shift and go to state 148
 
-    prenoms                        shift and go to state 143
 
 state 126
 
-    (7) facul2 -> PRENOM EQUALS prenoms . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (61) expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS . TEXT
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    TEXT            shift and go to state 149
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    mdp                            shift and go to state 51
-    promotion                      shift and go to state 56
-    date_naiss                     shift and go to state 59
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    lieu_nais                      shift and go to state 46
-    adresses                       shift and go to state 48
-    facul                          shift and go to state 144
 
 state 127
 
-    (55) login -> LOGIN EQUALS ID .
+    (62) condition_modifier_uv -> NOM EQUALS TEXT .
 
-    DATENAIS        reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    SEXE            reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    LIEUNAIS        reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    ADRS            reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    TYPE            reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    PROMOTION       reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    LOGIN           reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    MAIL            reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    MDPASS          reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    NUMERO          reduce using rule 55 (login -> LOGIN EQUALS ID .)
-    $end            reduce using rule 55 (login -> LOGIN EQUALS ID .)
+    NOUVEAU         reduce using rule 62 (condition_modifier_uv -> NOM EQUALS TEXT .)
 
 
 state 128
 
-    (47) sexuality -> SEXE EQUALS SEX .
+    (67) but_modifier_module -> NOUVEAU EQUALS . TEXT
+    (68) but_modifier_module -> NOUVEAU EQUALS . TEXT UV EQUALS TEXT
 
-    DATENAIS        reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    SEXE            reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    LIEUNAIS        reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    ADRS            reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    TYPE            reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    PROMOTION       reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    LOGIN           reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    MAIL            reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    MDPASS          reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    NUMERO          reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
-    $end            reduce using rule 47 (sexuality -> SEXE EQUALS SEX .)
+    TEXT            shift and go to state 150
 
 
 state 129
 
-    (2) expression -> SUPPRIMER PERSONNE NOM EQUALS noms . facul2
-    (7) facul2 -> . PRENOM EQUALS prenoms facul
-    (8) facul2 -> . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (66) condition_modifier_module -> NOM EQUALS TEXT .
 
-    PRENOM          shift and go to state 57
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    NOUVEAU         reduce using rule 66 (condition_modifier_module -> NOM EQUALS TEXT .)
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    facul2                         shift and go to state 145
-    mdp                            shift and go to state 51
-    promotion                      shift and go to state 56
-    lieu_nais                      shift and go to state 46
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    date_naiss                     shift and go to state 59
-    adresses                       shift and go to state 48
-    facul                          shift and go to state 62
 
 state 130
 
-    (70) but_modifier_module -> NOUVEAU EQUALS . TEXT
-    (71) but_modifier_module -> NOUVEAU EQUALS . TEXT UV EQUALS TEXT
+    (57) expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS . TEXT
 
-    TEXT            shift and go to state 146
+    TEXT            shift and go to state 151
 
 
 state 131
 
-    (69) condition_modifier_module -> NOM EQUALS TEXT .
+    (58) condition_modifier_groupe -> NOM EQUALS TEXT .
 
-    NOUVEAU         reduce using rule 69 (condition_modifier_module -> NOM EQUALS TEXT .)
+    NOUVEAU         reduce using rule 58 (condition_modifier_groupe -> NOM EQUALS TEXT .)
 
 
 state 132
 
-    (65) condition_modifier_uv -> NOM EQUALS TEXT .
+    (64) expression -> AJOUTER MODULE TEXT UV EQUALS . TEXT
 
-    NOUVEAU         reduce using rule 65 (condition_modifier_uv -> NOM EQUALS TEXT .)
+    TEXT            shift and go to state 152
 
 
 state 133
 
-    (64) expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS . TEXT
+    (60) expression -> AJOUTER UV TEXT NUM EQUALS . FLOAT
 
-    TEXT            shift and go to state 147
+    FLOAT           shift and go to state 153
 
 
 state 134
 
-    (61) condition_modifier_groupe -> NOM EQUALS TEXT .
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms . PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    NOUVEAU         reduce using rule 61 (condition_modifier_groupe -> NOM EQUALS TEXT .)
+    PRENOM          shift and go to state 154
 
 
 state 135
 
-    (60) expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS . TEXT
+    (1) expression -> SUPPRIMER PERSONNE NOM EQUALS noms facul2 .
 
-    TEXT            shift and go to state 148
+    $end            reduce using rule 1 (expression -> SUPPRIMER PERSONNE NOM EQUALS noms facul2 .)
 
 
 state 136
 
-    (34) expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU . EQUALS element
+    (10) noms -> ID noms .
 
-    EQUALS          shift and go to state 149
+    PRENOM          reduce using rule 10 (noms -> ID noms .)
+    DATENAIS        reduce using rule 10 (noms -> ID noms .)
+    SEXE            reduce using rule 10 (noms -> ID noms .)
+    LIEUNAIS        reduce using rule 10 (noms -> ID noms .)
+    ADRS            reduce using rule 10 (noms -> ID noms .)
+    TYPE            reduce using rule 10 (noms -> ID noms .)
+    PROMOTION       reduce using rule 10 (noms -> ID noms .)
+    LOGIN           reduce using rule 10 (noms -> ID noms .)
+    MAIL            reduce using rule 10 (noms -> ID noms .)
+    MDPASS          reduce using rule 10 (noms -> ID noms .)
+    NUMERO          reduce using rule 10 (noms -> ID noms .)
+    $end            reduce using rule 10 (noms -> ID noms .)
 
 
 state 137
 
-    (14) condition_modif -> attribut EQUALS . element
-    (15) condition_modif -> attribut EQUALS . element ET condition_modif
-    (27) element -> . ID
-    (28) element -> . TEXT
-    (29) element -> . NUM
-    (30) element -> . MAILXP
-    (31) element -> . DATE
-    (32) element -> . PROMOXP
-    (33) element -> . SEX
+    (4) facul3 -> NOM EQUALS noms facul2 .
 
-    ID              shift and go to state 155
-    TEXT            shift and go to state 152
-    NUM             shift and go to state 151
-    MAILXP          shift and go to state 150
-    DATE            shift and go to state 157
-    PROMOXP         shift and go to state 154
-    SEX             shift and go to state 153
+    $end            reduce using rule 4 (facul3 -> NOM EQUALS noms facul2 .)
 
-    element                        shift and go to state 156
 
 state 138
 
-    (67) expression -> AJOUTER MODULE TEXT UV EQUALS TEXT .
+    (12) prenoms -> ID prenoms .
 
-    $end            reduce using rule 67 (expression -> AJOUTER MODULE TEXT UV EQUALS TEXT .)
+    DATENAIS        reduce using rule 12 (prenoms -> ID prenoms .)
+    SEXE            reduce using rule 12 (prenoms -> ID prenoms .)
+    LIEUNAIS        reduce using rule 12 (prenoms -> ID prenoms .)
+    ADRS            reduce using rule 12 (prenoms -> ID prenoms .)
+    TYPE            reduce using rule 12 (prenoms -> ID prenoms .)
+    PROMOTION       reduce using rule 12 (prenoms -> ID prenoms .)
+    LOGIN           reduce using rule 12 (prenoms -> ID prenoms .)
+    MAIL            reduce using rule 12 (prenoms -> ID prenoms .)
+    MDPASS          reduce using rule 12 (prenoms -> ID prenoms .)
+    NUMERO          reduce using rule 12 (prenoms -> ID prenoms .)
+    $end            reduce using rule 12 (prenoms -> ID prenoms .)
 
 
 state 139
 
-    (9) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM . EQUALS prenoms facul
+    (6) facul2 -> PRENOM EQUALS prenoms facul .
 
-    EQUALS          shift and go to state 158
+    $end            reduce using rule 6 (facul2 -> PRENOM EQUALS prenoms facul .)
 
 
 state 140
 
-    (11) noms -> ID noms .
+    (13) condition_modif -> attribut EQUALS element .
+    (14) condition_modif -> attribut EQUALS element . ET condition_modif
 
-    PRENOM          reduce using rule 11 (noms -> ID noms .)
-    DATENAIS        reduce using rule 11 (noms -> ID noms .)
-    SEXE            reduce using rule 11 (noms -> ID noms .)
-    LIEUNAIS        reduce using rule 11 (noms -> ID noms .)
-    ADRS            reduce using rule 11 (noms -> ID noms .)
-    TYPE            reduce using rule 11 (noms -> ID noms .)
-    PROMOTION       reduce using rule 11 (noms -> ID noms .)
-    LOGIN           reduce using rule 11 (noms -> ID noms .)
-    MAIL            reduce using rule 11 (noms -> ID noms .)
-    MDPASS          reduce using rule 11 (noms -> ID noms .)
-    NUMERO          reduce using rule 11 (noms -> ID noms .)
-    $end            reduce using rule 11 (noms -> ID noms .)
+    NOUVEAU         reduce using rule 13 (condition_modif -> attribut EQUALS element .)
+    ET              shift and go to state 155
 
 
 state 141
 
-    (63) expression -> AJOUTER UV TEXT NUM EQUALS FLOAT .
+    (25) element -> NUM .
 
-    $end            reduce using rule 63 (expression -> AJOUTER UV TEXT NUM EQUALS FLOAT .)
+    $end            reduce using rule 25 (element -> NUM .)
+    ET              reduce using rule 25 (element -> NUM .)
+    NOUVEAU         reduce using rule 25 (element -> NUM .)
 
 
 state 142
 
-    (5) facul3 -> NOM EQUALS noms facul2 .
+    (26) element -> MAILXP .
 
-    $end            reduce using rule 5 (facul3 -> NOM EQUALS noms facul2 .)
+    $end            reduce using rule 26 (element -> MAILXP .)
+    ET              reduce using rule 26 (element -> MAILXP .)
+    NOUVEAU         reduce using rule 26 (element -> MAILXP .)
 
 
 state 143
 
-    (13) prenoms -> ID prenoms .
+    (24) element -> TEXT .
 
-    DATENAIS        reduce using rule 13 (prenoms -> ID prenoms .)
-    SEXE            reduce using rule 13 (prenoms -> ID prenoms .)
-    LIEUNAIS        reduce using rule 13 (prenoms -> ID prenoms .)
-    ADRS            reduce using rule 13 (prenoms -> ID prenoms .)
-    TYPE            reduce using rule 13 (prenoms -> ID prenoms .)
-    PROMOTION       reduce using rule 13 (prenoms -> ID prenoms .)
-    LOGIN           reduce using rule 13 (prenoms -> ID prenoms .)
-    MAIL            reduce using rule 13 (prenoms -> ID prenoms .)
-    MDPASS          reduce using rule 13 (prenoms -> ID prenoms .)
-    NUMERO          reduce using rule 13 (prenoms -> ID prenoms .)
-    $end            reduce using rule 13 (prenoms -> ID prenoms .)
+    $end            reduce using rule 24 (element -> TEXT .)
+    ET              reduce using rule 24 (element -> TEXT .)
+    NOUVEAU         reduce using rule 24 (element -> TEXT .)
 
 
 state 144
 
-    (7) facul2 -> PRENOM EQUALS prenoms facul .
+    (29) element -> SEX .
 
-    $end            reduce using rule 7 (facul2 -> PRENOM EQUALS prenoms facul .)
+    $end            reduce using rule 29 (element -> SEX .)
+    ET              reduce using rule 29 (element -> SEX .)
+    NOUVEAU         reduce using rule 29 (element -> SEX .)
 
 
 state 145
 
-    (2) expression -> SUPPRIMER PERSONNE NOM EQUALS noms facul2 .
+    (28) element -> PROMOXP .
 
-    $end            reduce using rule 2 (expression -> SUPPRIMER PERSONNE NOM EQUALS noms facul2 .)
+    $end            reduce using rule 28 (element -> PROMOXP .)
+    ET              reduce using rule 28 (element -> PROMOXP .)
+    NOUVEAU         reduce using rule 28 (element -> PROMOXP .)
 
 
 state 146
 
-    (70) but_modifier_module -> NOUVEAU EQUALS TEXT .
-    (71) but_modifier_module -> NOUVEAU EQUALS TEXT . UV EQUALS TEXT
+    (23) element -> ID .
 
-    $end            reduce using rule 70 (but_modifier_module -> NOUVEAU EQUALS TEXT .)
-    UV              shift and go to state 159
+    $end            reduce using rule 23 (element -> ID .)
+    ET              reduce using rule 23 (element -> ID .)
+    NOUVEAU         reduce using rule 23 (element -> ID .)
 
 
 state 147
 
-    (64) expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT .
+    (27) element -> DATE .
 
-    $end            reduce using rule 64 (expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT .)
+    $end            reduce using rule 27 (element -> DATE .)
+    ET              reduce using rule 27 (element -> DATE .)
+    NOUVEAU         reduce using rule 27 (element -> DATE .)
 
 
 state 148
 
-    (60) expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT .
+    (30) expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS . element
+    (23) element -> . ID
+    (24) element -> . TEXT
+    (25) element -> . NUM
+    (26) element -> . MAILXP
+    (27) element -> . DATE
+    (28) element -> . PROMOXP
+    (29) element -> . SEX
 
-    $end            reduce using rule 60 (expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT .)
+    ID              shift and go to state 146
+    TEXT            shift and go to state 143
+    NUM             shift and go to state 141
+    MAILXP          shift and go to state 142
+    DATE            shift and go to state 147
+    PROMOXP         shift and go to state 145
+    SEX             shift and go to state 144
 
+    element                        shift and go to state 156
 
 state 149
 
-    (34) expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS . element
-    (27) element -> . ID
-    (28) element -> . TEXT
-    (29) element -> . NUM
-    (30) element -> . MAILXP
-    (31) element -> . DATE
-    (32) element -> . PROMOXP
-    (33) element -> . SEX
+    (61) expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT .
 
-    ID              shift and go to state 155
-    TEXT            shift and go to state 152
-    NUM             shift and go to state 151
-    MAILXP          shift and go to state 150
-    DATE            shift and go to state 157
-    PROMOXP         shift and go to state 154
-    SEX             shift and go to state 153
+    $end            reduce using rule 61 (expression -> MODIFIER UV condition_modifier_uv NOUVEAU EQUALS TEXT .)
 
-    element                        shift and go to state 160
 
 state 150
 
-    (30) element -> MAILXP .
+    (67) but_modifier_module -> NOUVEAU EQUALS TEXT .
+    (68) but_modifier_module -> NOUVEAU EQUALS TEXT . UV EQUALS TEXT
 
-    $end            reduce using rule 30 (element -> MAILXP .)
-    ET              reduce using rule 30 (element -> MAILXP .)
-    NOUVEAU         reduce using rule 30 (element -> MAILXP .)
+    $end            reduce using rule 67 (but_modifier_module -> NOUVEAU EQUALS TEXT .)
+    UV              shift and go to state 157
 
 
 state 151
 
-    (29) element -> NUM .
+    (57) expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT .
 
-    $end            reduce using rule 29 (element -> NUM .)
-    ET              reduce using rule 29 (element -> NUM .)
-    NOUVEAU         reduce using rule 29 (element -> NUM .)
+    $end            reduce using rule 57 (expression -> MODIFIER GROUPE condition_modifier_groupe NOUVEAU EQUALS TEXT .)
 
 
 state 152
 
-    (28) element -> TEXT .
+    (64) expression -> AJOUTER MODULE TEXT UV EQUALS TEXT .
 
-    $end            reduce using rule 28 (element -> TEXT .)
-    ET              reduce using rule 28 (element -> TEXT .)
-    NOUVEAU         reduce using rule 28 (element -> TEXT .)
+    $end            reduce using rule 64 (expression -> AJOUTER MODULE TEXT UV EQUALS TEXT .)
 
 
 state 153
 
-    (33) element -> SEX .
+    (60) expression -> AJOUTER UV TEXT NUM EQUALS FLOAT .
 
-    $end            reduce using rule 33 (element -> SEX .)
-    ET              reduce using rule 33 (element -> SEX .)
-    NOUVEAU         reduce using rule 33 (element -> SEX .)
+    $end            reduce using rule 60 (expression -> AJOUTER UV TEXT NUM EQUALS FLOAT .)
 
 
 state 154
 
-    (32) element -> PROMOXP .
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM . EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    $end            reduce using rule 32 (element -> PROMOXP .)
-    ET              reduce using rule 32 (element -> PROMOXP .)
-    NOUVEAU         reduce using rule 32 (element -> PROMOXP .)
+    EQUALS          shift and go to state 158
 
 
 state 155
 
-    (27) element -> ID .
+    (14) condition_modif -> attribut EQUALS element ET . condition_modif
+    (13) condition_modif -> . attribut EQUALS element
+    (14) condition_modif -> . attribut EQUALS element ET condition_modif
+    (15) attribut -> . NOM
+    (16) attribut -> . PRENOM
+    (17) attribut -> . ADRS
+    (18) attribut -> . PROMOTION
+    (19) attribut -> . MAIL
+    (20) attribut -> . LIEUNAIS
+    (21) attribut -> . NUMERO
+    (22) attribut -> . DATENAIS
 
-    $end            reduce using rule 27 (element -> ID .)
-    ET              reduce using rule 27 (element -> ID .)
-    NOUVEAU         reduce using rule 27 (element -> ID .)
+    NOM             shift and go to state 16
+    PRENOM          shift and go to state 24
+    ADRS            shift and go to state 21
+    PROMOTION       shift and go to state 15
+    MAIL            shift and go to state 18
+    LIEUNAIS        shift and go to state 14
+    NUMERO          shift and go to state 23
+    DATENAIS        shift and go to state 22
 
+    attribut                       shift and go to state 96
+    condition_modif                shift and go to state 159
 
 state 156
 
-    (14) condition_modif -> attribut EQUALS element .
-    (15) condition_modif -> attribut EQUALS element . ET condition_modif
+    (30) expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element .
 
-    NOUVEAU         reduce using rule 14 (condition_modif -> attribut EQUALS element .)
-    ET              shift and go to state 161
+    $end            reduce using rule 30 (expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element .)
 
 
 state 157
 
-    (31) element -> DATE .
+    (68) but_modifier_module -> NOUVEAU EQUALS TEXT UV . EQUALS TEXT
 
-    $end            reduce using rule 31 (element -> DATE .)
-    ET              reduce using rule 31 (element -> DATE .)
-    NOUVEAU         reduce using rule 31 (element -> DATE .)
+    EQUALS          shift and go to state 160
 
 
 state 158
 
-    (9) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS . prenoms facul
-    (12) prenoms -> . ID
-    (13) prenoms -> . ID prenoms
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS . prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
+    (11) prenoms -> . ID
+    (12) prenoms -> . ID prenoms
 
-    ID              shift and go to state 125
+    ID              shift and go to state 122
 
-    prenoms                        shift and go to state 162
+    prenoms                        shift and go to state 161
 
 state 159
 
-    (71) but_modifier_module -> NOUVEAU EQUALS TEXT UV . EQUALS TEXT
+    (14) condition_modif -> attribut EQUALS element ET condition_modif .
 
-    EQUALS          shift and go to state 163
+    NOUVEAU         reduce using rule 14 (condition_modif -> attribut EQUALS element ET condition_modif .)
 
 
 state 160
 
-    (34) expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element .
+    (68) but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS . TEXT
 
-    $end            reduce using rule 34 (expression -> MODIFIER attribut PERSONNE condition_modif NOUVEAU EQUALS element .)
+    TEXT            shift and go to state 162
 
 
 state 161
 
-    (15) condition_modif -> attribut EQUALS element ET . condition_modif
-    (14) condition_modif -> . attribut EQUALS element
-    (15) condition_modif -> . attribut EQUALS element ET condition_modif
-    (16) attribut -> . NOM
-    (17) attribut -> . PRENOM
-    (18) attribut -> . ADRS
-    (19) attribut -> . SEXE
-    (20) attribut -> . PROMOTION
-    (21) attribut -> . MAIL
-    (22) attribut -> . LIEUNAIS
-    (23) attribut -> . NUMERO
-    (24) attribut -> . LOGIN
-    (25) attribut -> . MDPASS
-    (26) attribut -> . DATENAIS
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms . LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    NOM             shift and go to state 22
-    PRENOM          shift and go to state 20
-    ADRS            shift and go to state 24
-    SEXE            shift and go to state 28
-    PROMOTION       shift and go to state 19
-    MAIL            shift and go to state 32
-    LIEUNAIS        shift and go to state 26
-    NUMERO          shift and go to state 27
-    LOGIN           shift and go to state 25
-    MDPASS          shift and go to state 21
-    DATENAIS        shift and go to state 29
+    LOGIN           shift and go to state 163
 
-    attribut                       shift and go to state 110
-    condition_modif                shift and go to state 164
 
 state 162
 
-    (9) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms . facul
-    (35) facul -> . date_naiss facul
-    (36) facul -> . sexuality facul
-    (37) facul -> . lieu_nais facul
-    (38) facul -> . adresses facul
-    (39) facul -> . type facul
-    (40) facul -> . promotion facul
-    (41) facul -> . login facul
-    (42) facul -> . mail facul
-    (43) facul -> . mdp facul
-    (44) facul -> . numero facul
-    (45) facul -> .
-    (46) date_naiss -> . DATENAIS EQUALS DATE
-    (47) sexuality -> . SEXE EQUALS SEX
-    (49) lieu_nais -> . LIEUNAIS EQUALS TEXT
-    (48) adresses -> . ADRS EQUALS TEXT
-    (50) type -> . TYPE EQUALS NUM
-    (51) promotion -> . PROMOTION EQUALS PROMOXP
-    (55) login -> . LOGIN EQUALS ID
-    (54) mail -> . MAIL EQUALS MAILXP
-    (52) mdp -> . MDPASS EQUALS TEXT
-    (53) numero -> . NUMERO EQUALS NUM
+    (68) but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS TEXT .
 
-    $end            reduce using rule 45 (facul -> .)
-    DATENAIS        shift and go to state 41
-    SEXE            shift and go to state 63
-    LIEUNAIS        shift and go to state 49
-    ADRS            shift and go to state 47
-    TYPE            shift and go to state 53
-    PROMOTION       shift and go to state 39
-    LOGIN           shift and go to state 60
-    MAIL            shift and go to state 55
-    MDPASS          shift and go to state 42
-    NUMERO          shift and go to state 54
+    $end            reduce using rule 68 (but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS TEXT .)
 
-    login                          shift and go to state 40
-    sexuality                      shift and go to state 52
-    mdp                            shift and go to state 51
-    promotion                      shift and go to state 56
-    lieu_nais                      shift and go to state 46
-    type                           shift and go to state 58
-    numero                         shift and go to state 61
-    mail                           shift and go to state 45
-    date_naiss                     shift and go to state 59
-    adresses                       shift and go to state 48
-    facul                          shift and go to state 165
 
 state 163
 
-    (71) but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS . TEXT
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN . EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    TEXT            shift and go to state 166
+    EQUALS          shift and go to state 164
 
 
 state 164
 
-    (15) condition_modif -> attribut EQUALS element ET condition_modif .
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS . ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    NOUVEAU         reduce using rule 15 (condition_modif -> attribut EQUALS element ET condition_modif .)
+    ID              shift and go to state 165
 
 
 state 165
 
-    (9) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms facul .
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID . MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    $end            reduce using rule 9 (expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms facul .)
+    MDPASS          shift and go to state 166
 
 
 state 166
 
-    (71) but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS TEXT .
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS . EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
 
-    $end            reduce using rule 71 (but_modifier_module -> NOUVEAU EQUALS TEXT UV EQUALS TEXT .)
+    EQUALS          shift and go to state 167
+
+
+state 167
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS . TEXT SEXE EQUALS SEX TYPE EQUALS ID facul
+
+    TEXT            shift and go to state 168
+
+
+state 168
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT . SEXE EQUALS SEX TYPE EQUALS ID facul
+
+    SEXE            shift and go to state 169
+
+
+state 169
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE . EQUALS SEX TYPE EQUALS ID facul
+
+    EQUALS          shift and go to state 170
+
+
+state 170
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS . SEX TYPE EQUALS ID facul
+
+    SEX             shift and go to state 171
+
+
+state 171
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX . TYPE EQUALS ID facul
+
+    TYPE            shift and go to state 172
+
+
+state 172
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE . EQUALS ID facul
+
+    EQUALS          shift and go to state 173
+
+
+state 173
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS . ID facul
+
+    ID              shift and go to state 174
+
+
+state 174
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID . facul
+    (31) facul -> . date_naiss facul
+    (32) facul -> . sexuality facul
+    (33) facul -> . lieu_nais facul
+    (34) facul -> . adresses facul
+    (35) facul -> . type facul
+    (36) facul -> . promotion facul
+    (37) facul -> . login facul
+    (38) facul -> . mail facul
+    (39) facul -> . mdp facul
+    (40) facul -> . numero facul
+    (41) facul -> .
+    (42) date_naiss -> . DATENAIS EQUALS DATE
+    (43) sexuality -> . SEXE EQUALS SEX
+    (45) lieu_nais -> . LIEUNAIS EQUALS TEXT
+    (44) adresses -> . ADRS EQUALS TEXT
+    (46) type -> . TYPE EQUALS NUM
+    (47) promotion -> . PROMOTION EQUALS PROMOXP
+    (51) login -> . LOGIN EQUALS ID
+    (50) mail -> . MAIL EQUALS MAILXP
+    (48) mdp -> . MDPASS EQUALS TEXT
+    (49) numero -> . NUMERO EQUALS NUM
+
+    $end            reduce using rule 41 (facul -> .)
+    DATENAIS        shift and go to state 40
+    SEXE            shift and go to state 55
+    LIEUNAIS        shift and go to state 45
+    ADRS            shift and go to state 52
+    TYPE            shift and go to state 48
+    PROMOTION       shift and go to state 44
+    LOGIN           shift and go to state 51
+    MAIL            shift and go to state 43
+    MDPASS          shift and go to state 47
+    NUMERO          shift and go to state 54
+
+    login                          shift and go to state 36
+    mail                           shift and go to state 49
+    adresses                       shift and go to state 50
+    mdp                            shift and go to state 42
+    numero                         shift and go to state 37
+    promotion                      shift and go to state 39
+    lieu_nais                      shift and go to state 53
+    date_naiss                     shift and go to state 41
+    facul                          shift and go to state 175
+    sexuality                      shift and go to state 56
+    type                           shift and go to state 60
+
+state 175
+
+    (8) expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul .
+
+    $end            reduce using rule 8 (expression -> AJOUTER PERSONNE NOM EQUALS noms PRENOM EQUALS prenoms LOGIN EQUALS ID MDPASS EQUALS TEXT SEXE EQUALS SEX TYPE EQUALS ID facul .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 12 resolved using rule (expression -> AFFICHER PERSONNE)
-WARNING: rejected rule (facul -> <empty>) in state 12
+WARNING: reduce/reduce conflict in state 13 resolved using rule (expression -> AFFICHER PERSONNE)
+WARNING: rejected rule (facul -> <empty>) in state 13

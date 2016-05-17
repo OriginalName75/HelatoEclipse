@@ -1,0 +1,135 @@
+
+{% load watchTag %}
+<html>
+<head>
+<title>Helato</title>
+
+<link href="/static/BDD/CSS/style2.css" type="text/css" media="all" title="Design" rel="stylesheet" />
+{% if filtre != 0 %}
+	
+	
+	<link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
+	
+
+<script src="/static/BDD/js/jquery.min.js"></script>
+<script src="/static/BDD/js/jquery-ui.js"></script>
+<link rel="stylesheet"  href="/static/BDD/CSS/jquery-ui.css" type="text/css" media="all">
+<!-- Custom styles for this template -->
+<script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
+{% endif %}
+</head>
+<body>
+<nav>
+<ul>
+<li><a href="/administration">Accueil</a></li>
+<li><a href="/watch/0/0">Personnes</a></li>
+<li><a href="/watch/1/0">Groupes</a></li>
+<li><a href="/watch/3/0">Modules</a></li>
+<li><a href="/watch/4/0">Calendrier</a></li>
+<li><a href="/watch/5/0">Salles</a></li>
+<li><a href="/watch/6/0">Notes</a></li>
+<li><a href="/watch/7/0">Cours</a></li>
+<li><a href="/deconnexion">Deco</a></li>
+</ul>
+</nav>	
+
+<div id="menu"><a href="/ajouter/{{ table }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Ajouter</a> 
+
+{% if filtre == 0 %}
+<a href="/watch/{{ table }}/1/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Filtrer</a>
+{% else %}
+<a href="/watch/{{ table }}/0/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Pas de filtre</a>
+{% endif %}
+
+
+
+{% if filtre > 0 %}
+<div id="filtre"><form action="/watch/{{ table }}/2/1/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Filtrer"/>
+</form>
+</filtre>
+{% endif %}
+
+
+</menu>
+<div id="page">
+{% if not allP %}
+{% if page > 1 %}
+<a href="/watch/{{ table }}/{{ filtre }}/{{ pagemoins }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">&#139;&#139;</a>
+{% endif %}
+Page {{ page }}
+{% if not pagemax %}
+<a href="/watch/{{ table }}/{{ filtre }}/{{ pageplus }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">&#155;&#155;</a>
+{% endif %}
+
+&nbsp;|&nbsp; Page : 
+{% for ii in pages %}
+	{% if ii > 1 %}-{%endif%}
+	<a href="/watch/{{ table }}/{{ filtre }}/{{ ii }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">{{ ii }}</a> 
+
+{% endfor %}
+
+&nbsp;|&nbsp;
+{% endif %}
+Afficher <a href="/watch/{{ table }}/{{ filtre }}/1/20/{{ nomClasser }}/{{ plusOuMoins }}">20</a>-
+<a href="/watch/{{ table }}/{{ filtre }}/1/50/{{ nomClasser }}/{{ plusOuMoins }}">50</a>-
+<a href="/watch/{{ table }}/{{ filtre }}/1/100/{{ nomClasser }}/{{ plusOuMoins }}">100</a>-
+<a href="/watch/{{ table }}/{{ filtre }}/1/200/{{ nomClasser }}/{{ plusOuMoins }}">200</a>-
+<a href="/watch/{{ table }}/{{ filtre }}/1/500/{{ nomClasser }}/{{ plusOuMoins }}">500</a>-
+
+<a href="/watch/{{ table }}/{{ filtre }}/1/10000/{{ nomClasser }}/{{ plusOuMoins }}">all</a>
+
+
+personnes par page
+
+</page>
+<table width="100%" border="1">
+	<tr>
+		{% for l in listAffich %}
+		<td><b>{{ l.0 }} <a href="/watch/{{ table }}/{{ filtre }}/1/{{ nbparpage }}/{{ l.1 }}/0">+</a>
+		<a href="/watch/{{ table }}/{{ filtre }}/1/{{ nbparpage }}/{{ l.1 }}/1">-</a></b></td>
+		{% endfor %}
+		<td>
+			-
+		</td>
+	</tr>
+
+{% for d in reponserecherche %}
+	
+	<tr>
+		{% for dd in listeliste %}
+			<td>
+				{% if dd.0 == 0 %}
+					{{ d|getS:dd.1 }}
+				{% elif dd.0 == 3 %}
+					 - 
+					{% for l in d|getS:dd.1|getSD:allllll %}
+						
+						 {{ l }}
+						  - 
+					{% empty %}
+						non atribué
+					{% endfor %}
+				{% elif dd.0 == 2 %}
+					{{ d|getSD:dd.1 }}
+				{% else %}
+					{{ d|getS:dd.1|getS:dd.2 }}
+				{% endif %}
+			</td>
+		{% endfor %}
+		<td>
+			<a href="/fiche/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">f</a>
+			<a href="/change/{{ table }}/{{ d.id }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">m</a> 
+			<a href="/delete/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/0">x</a>
+		</td>
+	</tr>
+{% empty %}
+Pas de personne
+{% endfor %}
+
+</table>
+
+</body>
+</html>

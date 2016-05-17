@@ -37,21 +37,21 @@ def select(table, plus=None, column=None, page=None, nbparpage=None, listFiltre=
     if page != None and int(page)<1:
         page=1
     if listFiltre == None:
-        n = table.objects.count()
+        n = table.objects.filter(isvisible=True).count()
         
         if plus == None or column == None or column=="error":
             if page == None or nbparpage == None or n <= nbparpage:
-                var = table.objects.all()
+                var = table.objects.filter(isvisible=True)
             else:
-                var = table.objects.all()[((page - 1) * nbparpage):(page * nbparpage)]    
+                var = table.objects.filter(isvisible=True)[((page - 1) * nbparpage):(page * nbparpage)]    
         else:    
             if page == None or nbparpage == None or n <= nbparpage:
-                var = table.objects.all().order_by(plus + column)
+                var = table.objects.filter(isvisible=True).order_by(plus + column)
             else:
-                var = table.objects.all().order_by(plus + column)[((page - 1) * nbparpage):(page * nbparpage)] 
+                var = table.objects.filter(isvisible=True).order_by(plus + column)[((page - 1) * nbparpage):(page * nbparpage)] 
     else:
         objets_q = [Q(x) for x in listFiltre]
-        n = table.objects.filter(reduce(operator.and_, objets_q)).count()
+        n = table.objects.filter(isvisible=True and reduce(operator.and_, objets_q)).count()
         if plus == None or column == None or column=="error":
             if page == None or nbparpage == None or n <= nbparpage:
                 var = table.objects.filter(reduce(operator.and_, objets_q))

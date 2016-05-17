@@ -504,7 +504,7 @@ def addModule(pers, nom, uv):
     save a module in the database
     
     """
-    if models.Module.objects.filter(nom=nom, uv=uv).count()>0:
+    if models.Module.objects.filter(nom=nom, theuv=uv).count()>0:
         return "Name already taken in this uv"
     txt = "Vous avez ajouté le module " + nom
     c = models.Module()
@@ -512,7 +512,7 @@ def addModule(pers, nom, uv):
     
     if uv != None:
         txt = txt + " dans l\'UV " + uv.nom
-        c.uv = uv
+        c.theuv = uv
     c.save()
     mod = models.Modification()
     mod.datemodif = timezone.now()
@@ -572,8 +572,8 @@ def addNote(pers, note, personne, module, prof):
     
     c = models.Note()
     c.lanote = note
-    c.personne = personne
-    c.module = module
+    c.personnenote = personne
+    c.themodule = module
     c.uploadDate = timezone.now()
     c.prof = prof
     c.save()
@@ -610,7 +610,7 @@ def addNote(pers, note, personne, module, prof):
     cm5.valchamp = c.uploadDate
     cm5.save()
     n = models.News()
-    n.txt = "Vous avez ajouté la note " + str(c.lanote) + " à la personne " + c.personne.filter + " au module " + c.module.nom  
+    n.txt = "Vous avez ajouté la note " + str(c.lanote) + " à la personne " + c.personnenote.filter + " au module " + c.themodule.nom  
     n.typeG = AJOUT
     n.type = NOTESTATUT
     n.uploadDate = timezone.now()   
@@ -618,12 +618,12 @@ def addNote(pers, note, personne, module, prof):
     n.personne.add(pers)
     
     n2 = models.News()
-    n2.txt = "Vous avez eu " + str(c.lanote) + " au module " + c.module.nom  +" (noté par " + prof.filter +")"
+    n2.txt = "Vous avez eu " + str(c.lanote) + " au module " + c.themodule.nom  +" (noté par " + prof.filter +")"
     n2.typeG = AJOUT
     n2.type = NOTESTATUT
     n2.uploadDate = timezone.now()   
     n2.save()
-    n2.personne.add(c.personne)
+    n2.personne.add(c.personnenote)
     return c
 
 def addSalle(pers, nom, capacite=None, typee=None):

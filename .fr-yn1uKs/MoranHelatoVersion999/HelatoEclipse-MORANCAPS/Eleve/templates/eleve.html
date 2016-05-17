@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <title>IWIMBDSL</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/CSS/style.css" />
+ </head>
+
+<p class="Logo">
+			<img src="/static/BDD/CSS/images/Logo.png" alt="Logo" no-repeat top left />
+</p>
+
+<nav>
+<ul>
+<li><a href="/menu/">Accueil</a></li>
+<li><a href="/donnees/">Mes donnees</a></li>
+<li><a href="/note/">Mes notes</a></li>
+<li><a href="/emploi/">Mon emploi du temps</a></li>
+<li><a href="/deconnexion">Deco</a></li>
+</ul>
+</nav>	
+
+
+<aside>
+	<h2>
+		{{user.last_name}}<br/>
+		{{user.first_name}}<br/><br/>
+		{{timenow}}
+	</h2>
+	
+	{% block aside %}
+	{% endblock %}
+	
+
+	
+</aside>	
+
+
+<br>
+
+<body>
+{% block body %}
+{% endblock %}
+</body>
+
+{% block navigation %}
+{% endblock %}

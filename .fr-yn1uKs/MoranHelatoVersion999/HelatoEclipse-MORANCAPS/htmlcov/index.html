@@ -1,0 +1,3731 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.debounce.min.js"></script>
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.index_ready);
+    </script>
+</head>
+<body class="indexfile">
+
+<div id="header">
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">43%</span>
+        </h1>
+
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+
+        <form id="filter_container">
+            <input id="filter" type="text" value="" placeholder="filter..." />
+        </form>
+    </div>
+</div>
+
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">n</span>
+        <span class="key">s</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        
+        <span class="key">c</span> &nbsp; change column sorting
+    </p>
+    </div>
+</div>
+
+<div id="index">
+    <table class="index">
+        <thead>
+            
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>50933</td>
+                <td>29095</td>
+                <td>13</td>
+                
+                <td class="right" data-ratio="21838 50933">43%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD___init___py.html">BDD/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_admin_py.html">BDD/admin.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_choices_py.html">BDD/choices.py</a></td>
+                <td>53</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="47 53">89%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_forms_py.html">BDD/forms.py</a></td>
+                <td>413</td>
+                <td>189</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="224 413">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_lookups_py.html">BDD/lookups.py</a></td>
+                <td>45</td>
+                <td>12</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="33 45">73%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_migrations_0001_initial_py.html">BDD/migrations/0001_initial.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_migrations___init___py.html">BDD/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_models_py.html">BDD/models.py</a></td>
+                <td>83</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="75 83">90%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_templatetags___init___py.html">BDD/templatetags/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_templatetags_watchTag_py.html">BDD/templatetags/watchTag.py</a></td>
+                <td>8</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 8">75%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_tests_py.html">BDD/tests.py</a></td>
+                <td>318</td>
+                <td>76</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="242 318">76%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="BDD_views_py.html">BDD/views.py</a></td>
+                <td>397</td>
+                <td>211</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="186 397">47%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Eleve___init___py.html">Eleve/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Eleve_admin_py.html">Eleve/admin.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Eleve_migrations___init___py.html">Eleve/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Eleve_models_py.html">Eleve/models.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Eleve_tests_py.html">Eleve/tests.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Eleve_views_py.html">Eleve/views.py</a></td>
+                <td>91</td>
+                <td>75</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 91">18%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions___init___py.html">Functions/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_addData_py.html">Functions/addData.py</a></td>
+                <td>226</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="205 226">91%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_data_py.html">Functions/data.py</a></td>
+                <td>507</td>
+                <td>344</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="163 507">32%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_delete_py.html">Functions/delete.py</a></td>
+                <td>45</td>
+                <td>40</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 45">11%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_generator_py.html">Functions/generator.py</a></td>
+                <td>182</td>
+                <td>157</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="25 182">14%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_modiData_py.html">Functions/modiData.py</a></td>
+                <td>286</td>
+                <td>273</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="13 286">5%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_news_py.html">Functions/news.py</a></td>
+                <td>143</td>
+                <td>52</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="91 143">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Functions_selectData_py.html">Functions/selectData.py</a></td>
+                <td>25</td>
+                <td>9</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 25">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Helato___init___py.html">Helato/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Helato_settings_py.html">Helato/settings.py</a></td>
+                <td>32</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 32">84%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="Helato_urls_py.html">Helato/urls.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select___init___py.html">ajax_select/__init__.py</a></td>
+                <td>12</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 12">83%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_admin_py.html">ajax_select/admin.py</a></td>
+                <td>16</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 16">63%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_apps_py.html">ajax_select/apps.py</a></td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 7">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_fields_py.html">ajax_select/fields.py</a></td>
+                <td>215</td>
+                <td>98</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="117 215">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_helpers_py.html">ajax_select/helpers.py</a></td>
+                <td>40</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 40">18%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_lookup_channel_py.html">ajax_select/lookup_channel.py</a></td>
+                <td>28</td>
+                <td>10</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 28">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_models_py.html">ajax_select/models.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_registry_py.html">ajax_select/registry.py</a></td>
+                <td>64</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="31 64">48%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_urls_py.html">ajax_select/urls.py</a></td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 3">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="ajax_select_views_py.html">ajax_select/views.py</a></td>
+                <td>44</td>
+                <td>35</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 44">20%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="language___init___py.html">language/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="language_connexion_py.html">language/connexion.py</a></td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 2">50%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="manage_py.html">manage.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest___init___py.html">/usr/local/lib/python2.7/dist-packages/_pytest/__init__.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest__code___init___py.html">/usr/local/lib/python2.7/dist-packages/_pytest/_code/__init__.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest__code__py2traceback_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/_code/_py2traceback.py</a></td>
+                <td>38</td>
+                <td>34</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 38">11%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest__code_code_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/_code/code.py</a></td>
+                <td>530</td>
+                <td>417</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="113 530">21%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest__code_source_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/_code/source.py</a></td>
+                <td>287</td>
+                <td>253</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="34 287">12%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest__pluggy_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/_pluggy.py</a></td>
+                <td>6</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 6">50%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_assertion___init___py.html">/usr/local/lib/python2.7/dist-packages/_pytest/assertion/__init__.py</a></td>
+                <td>85</td>
+                <td>64</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="21 85">25%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_assertion_util_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/assertion/util.py</a></td>
+                <td>224</td>
+                <td>202</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="22 224">10%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_cacheprovider_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/cacheprovider.py</a></td>
+                <td>137</td>
+                <td>109</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="28 137">20%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_capture_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/capture.py</a></td>
+                <td>316</td>
+                <td>233</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="83 316">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_config_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/config.py</a></td>
+                <td>771</td>
+                <td>500</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="271 771">35%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_doctest_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/doctest.py</a></td>
+                <td>162</td>
+                <td>129</td>
+                <td>11</td>
+                
+                <td class="right" data-ratio="33 162">20%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_genscript_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/genscript.py</a></td>
+                <td>81</td>
+                <td>62</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="19 81">23%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_helpconfig_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/helpconfig.py</a></td>
+                <td>95</td>
+                <td>79</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 95">17%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_hookspec_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/hookspec.py</a></td>
+                <td>48</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="48 48">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_junitxml_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/junitxml.py</a></td>
+                <td>212</td>
+                <td>156</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="56 212">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_main_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/main.py</a></td>
+                <td>515</td>
+                <td>388</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="127 515">25%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_mark_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/mark.py</a></td>
+                <td>160</td>
+                <td>96</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="64 160">40%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_monkeypatch_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/monkeypatch.py</a></td>
+                <td>124</td>
+                <td>102</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="22 124">18%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_nose_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/nose.py</a></td>
+                <td>42</td>
+                <td>31</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 42">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_pastebin_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/pastebin.py</a></td>
+                <td>61</td>
+                <td>51</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 61">16%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_pdb_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/pdb.py</a></td>
+                <td>79</td>
+                <td>58</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="21 79">27%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_python_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/python.py</a></td>
+                <td>1396</td>
+                <td>1145</td>
+                <td>2</td>
+                
+                <td class="right" data-ratio="251 1396">18%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_recwarn_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/recwarn.py</a></td>
+                <td>123</td>
+                <td>97</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="26 123">21%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_resultlog_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/resultlog.py</a></td>
+                <td>84</td>
+                <td>69</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="15 84">18%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_runner_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/runner.py</a></td>
+                <td>335</td>
+                <td>253</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="82 335">24%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_skipping_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/skipping.py</a></td>
+                <td>240</td>
+                <td>199</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="41 240">17%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_terminal_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/terminal.py</a></td>
+                <td>456</td>
+                <td>389</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="67 456">15%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_tmpdir_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/tmpdir.py</a></td>
+                <td>62</td>
+                <td>47</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="15 62">24%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_unittest_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/unittest.py</a></td>
+                <td>148</td>
+                <td>117</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="31 148">21%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_vendored_packages___init___py.html">/usr/local/lib/python2.7/dist-packages/_pytest/vendored_packages/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages__pytest_vendored_packages_pluggy_py.html">/usr/local/lib/python2.7/dist-packages/_pytest/vendored_packages/pluggy.py</a></td>
+                <td>413</td>
+                <td>177</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="236 413">57%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django___init___py.html">/usr/local/lib/python2.7/dist-packages/django/__init__.py</a></td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 9">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_apps___init___py.html">/usr/local/lib/python2.7/dist-packages/django/apps/__init__.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_apps_config_py.html">/usr/local/lib/python2.7/dist-packages/django/apps/config.py</a></td>
+                <td>84</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="63 84">75%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_apps_registry_py.html">/usr/local/lib/python2.7/dist-packages/django/apps/registry.py</a></td>
+                <td>186</td>
+                <td>73</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="113 186">61%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_conf___init___py.html">/usr/local/lib/python2.7/dist-packages/django/conf/__init__.py</a></td>
+                <td>87</td>
+                <td>29</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="58 87">67%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_conf_global_settings_py.html">/usr/local/lib/python2.7/dist-packages/django/conf/global_settings.py</a></td>
+                <td>136</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="136 136">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_conf_locale___init___py.html">/usr/local/lib/python2.7/dist-packages/django/conf/locale/__init__.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_conf_locale_fr___init___py.html">/usr/local/lib/python2.7/dist-packages/django/conf/locale/fr/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_conf_locale_fr_formats_py.html">/usr/local/lib/python2.7/dist-packages/django/conf/locale/fr/formats.py</a></td>
+                <td>14</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="14 14">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_conf_urls___init___py.html">/usr/local/lib/python2.7/dist-packages/django/conf/urls/__init__.py</a></td>
+                <td>48</td>
+                <td>15</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="33 48">69%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_conf_urls_static_py.html">/usr/local/lib/python2.7/dist-packages/django/conf/urls/static.py</a></td>
+                <td>11</td>
+                <td>3</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 11">73%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/__init__.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_actions_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/actions.py</a></td>
+                <td>36</td>
+                <td>26</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 36">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_apps_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/apps.py</a></td>
+                <td>13</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="13 13">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_checks_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/checks.py</a></td>
+                <td>400</td>
+                <td>211</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="189 400">47%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_decorators_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/decorators.py</a></td>
+                <td>12</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 12">8%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_exceptions_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/exceptions.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_filters_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/filters.py</a></td>
+                <td>197</td>
+                <td>132</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="65 197">33%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_helpers_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/helpers.py</a></td>
+                <td>225</td>
+                <td>161</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="64 225">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_migrations_0001_initial_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/migrations/0001_initial.py</a></td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 7">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_migrations___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_models_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/models.py</a></td>
+                <td>57</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="36 57">63%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_options_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/options.py</a></td>
+                <td>993</td>
+                <td>768</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="225 993">23%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_sites_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/sites.py</a></td>
+                <td>228</td>
+                <td>132</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="96 228">42%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_templatetags___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/templatetags/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_templatetags_admin_static_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/templatetags/admin_static.py</a></td>
+                <td>10</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 10">50%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_templatetags_admin_urls_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/templatetags/admin_urls.py</a></td>
+                <td>38</td>
+                <td>28</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 38">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/utils.py</a></td>
+                <td>298</td>
+                <td>240</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="58 298">19%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_validation_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/validation.py</a></td>
+                <td>258</td>
+                <td>214</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="44 258">17%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_admin_widgets_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/admin/widgets.py</a></td>
+                <td>238</td>
+                <td>164</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="74 238">31%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/__init__.py</a></td>
+                <td>110</td>
+                <td>37</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="73 110">66%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_admin_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/admin.py</a></td>
+                <td>102</td>
+                <td>50</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="52 102">51%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_apps_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/apps.py</a></td>
+                <td>12</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="12 12">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_backends_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/backends.py</a></td>
+                <td>80</td>
+                <td>52</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="28 80">35%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_checks_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/checks.py</a></td>
+                <td>16</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 16">31%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_context_processors_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/context_processors.py</a></td>
+                <td>31</td>
+                <td>14</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="17 31">55%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_decorators_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/decorators.py</a></td>
+                <td>38</td>
+                <td>10</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="28 38">74%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_forms_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/forms.py</a></td>
+                <td>178</td>
+                <td>100</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="78 178">44%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_hashers_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/hashers.py</a></td>
+                <td>244</td>
+                <td>107</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="137 244">56%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_management___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/management/__init__.py</a></td>
+                <td>88</td>
+                <td>41</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="47 88">53%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_middleware_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/middleware.py</a></td>
+                <td>50</td>
+                <td>29</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="21 50">42%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_migrations_0001_initial_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/migrations/0001_initial.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_migrations_0002_alter_permission_name_max_length_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/migrations/0002_alter_permission_name_max_length.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_migrations_0003_alter_user_email_max_length_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/migrations/0003_alter_user_email_max_length.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_migrations_0004_alter_user_username_opts_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/migrations/0004_alter_user_username_opts.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_migrations_0005_alter_user_last_login_null_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/migrations/0005_alter_user_last_login_null.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_migrations_0006_require_contenttypes_0002_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/migrations/0006_require_contenttypes_0002.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_migrations___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_models_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/models.py</a></td>
+                <td>249</td>
+                <td>84</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="165 249">66%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_signals_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/signals.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_tokens_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/tokens.py</a></td>
+                <td>34</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="12 34">35%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_auth_views_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/auth/views.py</a></td>
+                <td>163</td>
+                <td>117</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="46 163">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/__init__.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_admin_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/admin.py</a></td>
+                <td>55</td>
+                <td>32</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 55">42%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_apps_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/apps.py</a></td>
+                <td>12</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="12 12">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_checks_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/checks.py</a></td>
+                <td>10</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 10">40%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_fields_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/fields.py</a></td>
+                <td>310</td>
+                <td>246</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="64 310">21%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_forms_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/forms.py</a></td>
+                <td>38</td>
+                <td>28</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 38">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_management_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/management.py</a></td>
+                <td>37</td>
+                <td>17</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="20 37">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_migrations_0001_initial_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/migrations/0001_initial.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_migrations_0002_remove_content_type_name_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/migrations/0002_remove_content_type_name.py</a></td>
+                <td>13</td>
+                <td>7</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 13">46%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_migrations___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_models_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/models.py</a></td>
+                <td>116</td>
+                <td>59</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="57 116">49%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_contenttypes_views_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/contenttypes/views.py</a></td>
+                <td>53</td>
+                <td>45</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 53">15%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/__init__.py</a></td>
+                <td>3</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 3">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_api_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/api.py</a></td>
+                <td>37</td>
+                <td>20</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="17 37">46%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_apps_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/apps.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_constants_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/constants.py</a></td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 7">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_context_processors_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/context_processors.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_middleware_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/middleware.py</a></td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 11">91%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_storage___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/storage/__init__.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_storage_base_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/storage/base.py</a></td>
+                <td>84</td>
+                <td>47</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="37 84">44%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_storage_cookie_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/storage/cookie.py</a></td>
+                <td>83</td>
+                <td>60</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 83">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_storage_fallback_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/storage/fallback.py</a></td>
+                <td>29</td>
+                <td>18</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 29">38%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_storage_session_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/storage/session.py</a></td>
+                <td>23</td>
+                <td>10</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="13 23">57%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_messages_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/messages/utils.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/__init__.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_apps_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/apps.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_backends___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/backends/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_backends_base_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/backends/base.py</a></td>
+                <td>184</td>
+                <td>63</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="121 184">66%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_backends_db_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/backends/db.py</a></td>
+                <td>54</td>
+                <td>39</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="15 54">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_backends_file_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/backends/file.py</a></td>
+                <td>123</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="90 123">73%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_exceptions_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/exceptions.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_management___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/management/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_middleware_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/middleware.py</a></td>
+                <td>34</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="29 34">85%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_migrations_0001_initial_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/migrations/0001_initial.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_migrations___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/migrations/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_models_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/models.py</a></td>
+                <td>29</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="21 29">72%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sessions_serializers_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sessions/serializers.py</a></td>
+                <td>11</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 11">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sites___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sites/__init__.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sites_requests_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sites/requests.py</a></td>
+                <td>12</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 12">67%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_sites_shortcuts_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/sites/shortcuts.py</a></td>
+                <td>8</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 8">38%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_staticfiles___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/staticfiles/__init__.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_staticfiles_apps_py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/staticfiles/apps.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_staticfiles_management___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/staticfiles/management/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_contrib_staticfiles_templatetags___init___py.html">/usr/local/lib/python2.7/dist-packages/django/contrib/staticfiles/templatetags/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_cache___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/cache/__init__.py</a></td>
+                <td>72</td>
+                <td>23</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="49 72">68%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_cache_backends___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/cache/backends/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_cache_backends_base_py.html">/usr/local/lib/python2.7/dist-packages/django/core/cache/backends/base.py</a></td>
+                <td>108</td>
+                <td>57</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="51 108">47%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_cache_backends_db_py.html">/usr/local/lib/python2.7/dist-packages/django/core/cache/backends/db.py</a></td>
+                <td>133</td>
+                <td>110</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 133">17%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_cache_backends_locmem_py.html">/usr/local/lib/python2.7/dist-packages/django/core/cache/backends/locmem.py</a></td>
+                <td>109</td>
+                <td>82</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 109">25%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/__init__.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_compatibility___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/compatibility/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_compatibility_django_1_7_0_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/compatibility/django_1_7_0.py</a></td>
+                <td>11</td>
+                <td>7</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 11">36%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_compatibility_django_1_8_0_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/compatibility/django_1_8_0.py</a></td>
+                <td>10</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 10">40%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_messages_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/messages.py</a></td>
+                <td>54</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="33 54">61%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_model_checks_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/model_checks.py</a></td>
+                <td>28</td>
+                <td>19</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 28">32%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_registry_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/registry.py</a></td>
+                <td>51</td>
+                <td>15</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="36 51">71%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_security___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/security/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_security_base_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/security/base.py</a></td>
+                <td>48</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="26 48">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_security_csrf_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/security/csrf.py</a></td>
+                <td>16</td>
+                <td>7</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 16">56%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_checks_security_sessions_py.html">/usr/local/lib/python2.7/dist-packages/django/core/checks/security/sessions.py</a></td>
+                <td>36</td>
+                <td>20</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 36">44%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_exceptions_py.html">/usr/local/lib/python2.7/dist-packages/django/core/exceptions.py</a></td>
+                <td>87</td>
+                <td>47</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="40 87">46%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/__init__.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_base_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/base.py</a></td>
+                <td>119</td>
+                <td>80</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="39 119">33%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_images_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/images.py</a></td>
+                <td>43</td>
+                <td>34</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 43">21%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_locks_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/locks.py</a></td>
+                <td>57</td>
+                <td>46</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 57">19%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_move_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/move.py</a></td>
+                <td>37</td>
+                <td>31</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 37">16%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_storage_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/storage.py</a></td>
+                <td>166</td>
+                <td>115</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="51 166">31%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_temp_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/temp.py</a></td>
+                <td>35</td>
+                <td>28</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="7 35">20%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_uploadedfile_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/uploadedfile.py</a></td>
+                <td>60</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 60">45%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_uploadhandler_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/uploadhandler.py</a></td>
+                <td>78</td>
+                <td>30</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="48 78">62%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_files_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/core/files/utils.py</a></td>
+                <td>19</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 19">95%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_handlers___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/handlers/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_handlers_base_py.html">/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py</a></td>
+                <td>155</td>
+                <td>72</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="83 155">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_handlers_wsgi_py.html">/usr/local/lib/python2.7/dist-packages/django/core/handlers/wsgi.py</a></td>
+                <td>161</td>
+                <td>51</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="110 161">68%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_mail___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/mail/__init__.py</a></td>
+                <td>33</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 33">33%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_mail_message_py.html">/usr/local/lib/python2.7/dist-packages/django/core/mail/message.py</a></td>
+                <td>252</td>
+                <td>192</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="60 252">24%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_mail_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/core/mail/utils.py</a></td>
+                <td>9</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 9">56%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/__init__.py</a></td>
+                <td>165</td>
+                <td>82</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="83 165">50%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_base_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/base.py</a></td>
+                <td>252</td>
+                <td>120</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="132 252">52%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_color_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/color.py</a></td>
+                <td>29</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 29">93%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_commands___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/commands/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_commands_createcachetable_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/commands/createcachetable.py</a></td>
+                <td>61</td>
+                <td>40</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="21 61">34%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_commands_flush_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/commands/flush.py</a></td>
+                <td>59</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="48 59">81%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_commands_loaddata_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/commands/loaddata.py</a></td>
+                <td>181</td>
+                <td>70</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="111 181">61%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_commands_migrate_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/commands/migrate.py</a></td>
+                <td>198</td>
+                <td>76</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="122 198">62%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_commands_test_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/commands/test.py</a></td>
+                <td>49</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="43 49">88%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_management_sql_py.html">/usr/local/lib/python2.7/dist-packages/django/core/management/sql.py</a></td>
+                <td>155</td>
+                <td>115</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="40 155">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_paginator_py.html">/usr/local/lib/python2.7/dist-packages/django/core/paginator.py</a></td>
+                <td>90</td>
+                <td>57</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="33 90">37%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_serializers___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/serializers/__init__.py</a></td>
+                <td>108</td>
+                <td>23</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="85 108">79%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_serializers_base_py.html">/usr/local/lib/python2.7/dist-packages/django/core/serializers/base.py</a></td>
+                <td>90</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="57 90">63%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_serializers_json_py.html">/usr/local/lib/python2.7/dist-packages/django/core/serializers/json.py</a></td>
+                <td>79</td>
+                <td>38</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="41 79">52%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_serializers_python_py.html">/usr/local/lib/python2.7/dist-packages/django/core/serializers/python.py</a></td>
+                <td>96</td>
+                <td>64</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="32 96">33%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_serializers_pyyaml_py.html">/usr/local/lib/python2.7/dist-packages/django/core/serializers/pyyaml.py</a></td>
+                <td>40</td>
+                <td>36</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 40">10%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_serializers_xml_serializer_py.html">/usr/local/lib/python2.7/dist-packages/django/core/serializers/xml_serializer.py</a></td>
+                <td>212</td>
+                <td>165</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="47 212">22%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_servers___init___py.html">/usr/local/lib/python2.7/dist-packages/django/core/servers/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_servers_basehttp_py.html">/usr/local/lib/python2.7/dist-packages/django/core/servers/basehttp.py</a></td>
+                <td>106</td>
+                <td>76</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="30 106">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_signals_py.html">/usr/local/lib/python2.7/dist-packages/django/core/signals.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_signing_py.html">/usr/local/lib/python2.7/dist-packages/django/core/signing.py</a></td>
+                <td>90</td>
+                <td>55</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="35 90">39%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_urlresolvers_py.html">/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py</a></td>
+                <td>379</td>
+                <td>99</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="280 379">74%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_validators_py.html">/usr/local/lib/python2.7/dist-packages/django/core/validators.py</a></td>
+                <td>192</td>
+                <td>80</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="112 192">58%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_core_wsgi_py.html">/usr/local/lib/python2.7/dist-packages/django/core/wsgi.py</a></td>
+                <td>5</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 5">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/__init__.py</a></td>
+                <td>26</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="20 26">77%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_base_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/base.py</a></td>
+                <td>225</td>
+                <td>53</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="172 225">76%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_client_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/client.py</a></td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 6">83%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_creation_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/creation.py</a></td>
+                <td>285</td>
+                <td>199</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="86 285">30%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_features_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/features.py</a></td>
+                <td>97</td>
+                <td>18</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="79 97">81%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_introspection_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/introspection.py</a></td>
+                <td>75</td>
+                <td>35</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="40 75">53%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_operations_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/operations.py</a></td>
+                <td>179</td>
+                <td>83</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="96 179">54%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_schema_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/schema.py</a></td>
+                <td>416</td>
+                <td>244</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="172 416">41%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_base_validation_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/base/validation.py</a></td>
+                <td>14</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 14">43%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_signals_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/signals.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_base_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/base.py</a></td>
+                <td>218</td>
+                <td>94</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="124 218">57%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_client_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/client.py</a></td>
+                <td>7</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 7">71%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_creation_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/creation.py</a></td>
+                <td>47</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="26 47">55%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_features_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/features.py</a></td>
+                <td>48</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="37 48">77%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_introspection_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/introspection.py</a></td>
+                <td>120</td>
+                <td>100</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="20 120">17%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_operations_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/operations.py</a></td>
+                <td>126</td>
+                <td>50</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="76 126">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_schema_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/schema.py</a></td>
+                <td>112</td>
+                <td>32</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="80 112">71%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_sqlite3_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/sqlite3/utils.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_backends_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/db/backends/utils.py</a></td>
+                <td>128</td>
+                <td>82</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="46 128">36%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/__init__.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_autodetector_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/autodetector.py</a></td>
+                <td>538</td>
+                <td>494</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="44 538">8%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_executor_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/executor.py</a></td>
+                <td>129</td>
+                <td>60</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="69 129">53%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_graph_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/graph.py</a></td>
+                <td>141</td>
+                <td>44</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="97 141">69%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_loader_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/loader.py</a></td>
+                <td>197</td>
+                <td>83</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="114 197">58%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_migration_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/migration.py</a></td>
+                <td>82</td>
+                <td>34</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="48 82">59%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_operations___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/operations/__init__.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_operations_base_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/operations/base.py</a></td>
+                <td>31</td>
+                <td>9</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="22 31">71%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_operations_fields_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/operations/fields.py</a></td>
+                <td>163</td>
+                <td>67</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="96 163">59%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_operations_models_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/operations/models.py</a></td>
+                <td>292</td>
+                <td>167</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="125 292">43%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_operations_special_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/operations/special.py</a></td>
+                <td>118</td>
+                <td>76</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="42 118">36%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_optimizer_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/optimizer.py</a></td>
+                <td>99</td>
+                <td>75</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="24 99">24%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_questioner_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/questioner.py</a></td>
+                <td>103</td>
+                <td>77</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="26 103">25%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_recorder_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/recorder.py</a></td>
+                <td>37</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="33 37">89%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_state_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/state.py</a></td>
+                <td>310</td>
+                <td>132</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="178 310">57%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_topological_sort_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/topological_sort.py</a></td>
+                <td>15</td>
+                <td>13</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="2 15">13%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_migrations_writer_py.html">/usr/local/lib/python2.7/dist-packages/django/db/migrations/writer.py</a></td>
+                <td>314</td>
+                <td>270</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="44 314">14%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/__init__.py</a></td>
+                <td>35</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 35">77%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_aggregates_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/aggregates.py</a></td>
+                <td>87</td>
+                <td>32</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="55 87">63%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_base_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/base.py</a></td>
+                <td>828</td>
+                <td>520</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="308 828">37%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_constants_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/constants.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_deletion_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/deletion.py</a></td>
+                <td>167</td>
+                <td>103</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="64 167">38%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_expressions_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/expressions.py</a></td>
+                <td>582</td>
+                <td>328</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="254 582">44%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_fields___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/fields/__init__.py</a></td>
+                <td>1320</td>
+                <td>688</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="632 1320">48%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_fields_files_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/fields/files.py</a></td>
+                <td>253</td>
+                <td>174</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="79 253">31%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_fields_proxy_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/fields/proxy.py</a></td>
+                <td>10</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="4 10">40%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_fields_related_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/fields/related.py</a></td>
+                <td>1307</td>
+                <td>588</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="719 1307">55%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_fields_subclassing_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/fields/subclassing.py</a></td>
+                <td>24</td>
+                <td>15</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 24">38%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_lookups_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/lookups.py</a></td>
+                <td>337</td>
+                <td>133</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="204 337">61%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_manager_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/manager.py</a></td>
+                <td>151</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="130 151">86%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_options_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/options.py</a></td>
+                <td>387</td>
+                <td>105</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="282 387">73%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_query_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/query.py</a></td>
+                <td>918</td>
+                <td>547</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="371 918">40%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_query_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/query_utils.py</a></td>
+                <td>142</td>
+                <td>98</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="44 142">31%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_signals_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/signals.py</a></td>
+                <td>43</td>
+                <td>15</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="28 43">65%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_sql___init___py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/sql/__init__.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_sql_compiler_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/sql/compiler.py</a></td>
+                <td>647</td>
+                <td>276</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="371 647">57%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_sql_constants_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/sql/constants.py</a></td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 11">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_sql_datastructures_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/sql/datastructures.py</a></td>
+                <td>65</td>
+                <td>11</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="54 65">83%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_sql_query_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py</a></td>
+                <td>1072</td>
+                <td>572</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="500 1072">47%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_sql_subqueries_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/sql/subqueries.py</a></td>
+                <td>104</td>
+                <td>54</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="50 104">48%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_models_sql_where_py.html">/usr/local/lib/python2.7/dist-packages/django/db/models/sql/where.py</a></td>
+                <td>243</td>
+                <td>161</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="82 243">34%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_transaction_py.html">/usr/local/lib/python2.7/dist-packages/django/db/transaction.py</a></td>
+                <td>119</td>
+                <td>50</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="69 119">58%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_db_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/db/utils.py</a></td>
+                <td>217</td>
+                <td>75</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="142 217">65%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_dispatch___init___py.html">/usr/local/lib/python2.7/dist-packages/django/dispatch/__init__.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 1">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_dispatch_dispatcher_py.html">/usr/local/lib/python2.7/dist-packages/django/dispatch/dispatcher.py</a></td>
+                <td>140</td>
+                <td>33</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="107 140">76%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_dispatch_weakref_backports_py.html">/usr/local/lib/python2.7/dist-packages/django/dispatch/weakref_backports.py</a></td>
+                <td>40</td>
+                <td>18</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="22 40">55%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_forms___init___py.html">/usr/local/lib/python2.7/dist-packages/django/forms/__init__.py</a></td>
+                <td>6</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 6">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_forms_fields_py.html">/usr/local/lib/python2.7/dist-packages/django/forms/fields.py</a></td>
+                <td>723</td>
+                <td>420</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="303 723">42%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_forms_forms_py.html">/usr/local/lib/python2.7/dist-packages/django/forms/forms.py</a></td>
+                <td>354</td>
+                <td>142</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="212 354">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_forms_formsets_py.html">/usr/local/lib/python2.7/dist-packages/django/forms/formsets.py</a></td>
+                <td>223</td>
+                <td>160</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="63 223">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_forms_models_py.html">/usr/local/lib/python2.7/dist-packages/django/forms/models.py</a></td>
+                <td>676</td>
+                <td>501</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="175 676">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_forms_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/forms/utils.py</a></td>
+                <td>98</td>
+                <td>44</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="54 98">55%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_forms_widgets_py.html">/usr/local/lib/python2.7/dist-packages/django/forms/widgets.py</a></td>
+                <td>508</td>
+                <td>264</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="244 508">48%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_http___init___py.html">/usr/local/lib/python2.7/dist-packages/django/http/__init__.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_http_cookie_py.html">/usr/local/lib/python2.7/dist-packages/django/http/cookie.py</a></td>
+                <td>62</td>
+                <td>19</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="43 62">69%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_http_multipartparser_py.html">/usr/local/lib/python2.7/dist-packages/django/http/multipartparser.py</a></td>
+                <td>364</td>
+                <td>99</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="265 364">73%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_http_request_py.html">/usr/local/lib/python2.7/dist-packages/django/http/request.py</a></td>
+                <td>312</td>
+                <td>130</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="182 312">58%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_http_response_py.html">/usr/local/lib/python2.7/dist-packages/django/http/response.py</a></td>
+                <td>259</td>
+                <td>89</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="170 259">66%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_http_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/http/utils.py</a></td>
+                <td>15</td>
+                <td>7</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 15">53%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_middleware___init___py.html">/usr/local/lib/python2.7/dist-packages/django/middleware/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_middleware_cache_py.html">/usr/local/lib/python2.7/dist-packages/django/middleware/cache.py</a></td>
+                <td>72</td>
+                <td>60</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="12 72">17%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_middleware_clickjacking_py.html">/usr/local/lib/python2.7/dist-packages/django/middleware/clickjacking.py</a></td>
+                <td>11</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 11">82%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_middleware_common_py.html">/usr/local/lib/python2.7/dist-packages/django/middleware/common.py</a></td>
+                <td>74</td>
+                <td>43</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="31 74">42%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_middleware_csrf_py.html">/usr/local/lib/python2.7/dist-packages/django/middleware/csrf.py</a></td>
+                <td>84</td>
+                <td>29</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="55 84">65%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_middleware_security_py.html">/usr/local/lib/python2.7/dist-packages/django/middleware/security.py</a></td>
+                <td>28</td>
+                <td>8</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="20 28">71%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_shortcuts_py.html">/usr/local/lib/python2.7/dist-packages/django/shortcuts.py</a></td>
+                <td>76</td>
+                <td>43</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="33 76">43%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template___init___py.html">/usr/local/lib/python2.7/dist-packages/django/template/__init__.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_backends___init___py.html">/usr/local/lib/python2.7/dist-packages/django/template/backends/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_backends_base_py.html">/usr/local/lib/python2.7/dist-packages/django/template/backends/base.py</a></td>
+                <td>30</td>
+                <td>13</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="17 30">57%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_backends_django_py.html">/usr/local/lib/python2.7/dist-packages/django/template/backends/django.py</a></td>
+                <td>34</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="28 34">82%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_base_py.html">/usr/local/lib/python2.7/dist-packages/django/template/base.py</a></td>
+                <td>785</td>
+                <td>322</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="463 785">59%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_context_py.html">/usr/local/lib/python2.7/dist-packages/django/template/context.py</a></td>
+                <td>150</td>
+                <td>29</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="121 150">81%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_context_processors_py.html">/usr/local/lib/python2.7/dist-packages/django/template/context_processors.py</a></td>
+                <td>37</td>
+                <td>14</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 37">62%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_defaultfilters_py.html">/usr/local/lib/python2.7/dist-packages/django/template/defaultfilters.py</a></td>
+                <td>466</td>
+                <td>329</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="137 466">29%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_defaulttags_py.html">/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py</a></td>
+                <td>659</td>
+                <td>435</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="224 659">34%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_engine_py.html">/usr/local/lib/python2.7/dist-packages/django/template/engine.py</a></td>
+                <td>144</td>
+                <td>59</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="85 144">59%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_loader_py.html">/usr/local/lib/python2.7/dist-packages/django/template/loader.py</a></td>
+                <td>72</td>
+                <td>36</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="36 72">50%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_loader_tags_py.html">/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py</a></td>
+                <td>155</td>
+                <td>63</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="92 155">59%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_loaders___init___py.html">/usr/local/lib/python2.7/dist-packages/django/template/loaders/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_loaders_app_directories_py.html">/usr/local/lib/python2.7/dist-packages/django/template/loaders/app_directories.py</a></td>
+                <td>24</td>
+                <td>1</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 24">96%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_loaders_base_py.html">/usr/local/lib/python2.7/dist-packages/django/template/loaders/base.py</a></td>
+                <td>20</td>
+                <td>4</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 20">80%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_loaders_filesystem_py.html">/usr/local/lib/python2.7/dist-packages/django/template/loaders/filesystem.py</a></td>
+                <td>28</td>
+                <td>10</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 28">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_loaders_locmem_py.html">/usr/local/lib/python2.7/dist-packages/django/template/loaders/locmem.py</a></td>
+                <td>12</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 12">50%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_response_py.html">/usr/local/lib/python2.7/dist-packages/django/template/response.py</a></td>
+                <td>90</td>
+                <td>63</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="27 90">30%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_smartif_py.html">/usr/local/lib/python2.7/dist-packages/django/template/smartif.py</a></td>
+                <td>108</td>
+                <td>19</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="89 108">82%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_template_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/template/utils.py</a></td>
+                <td>70</td>
+                <td>9</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="61 70">87%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_templatetags___init___py.html">/usr/local/lib/python2.7/dist-packages/django/templatetags/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_test___init___py.html">/usr/local/lib/python2.7/dist-packages/django/test/__init__.py</a></td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 11">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_test_client_py.html">/usr/local/lib/python2.7/dist-packages/django/test/client.py</a></td>
+                <td>315</td>
+                <td>115</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="200 315">63%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_test_html_py.html">/usr/local/lib/python2.7/dist-packages/django/test/html.py</a></td>
+                <td>166</td>
+                <td>128</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="38 166">23%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_test_runner_py.html">/usr/local/lib/python2.7/dist-packages/django/test/runner.py</a></td>
+                <td>215</td>
+                <td>49</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="166 215">77%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_test_signals_py.html">/usr/local/lib/python2.7/dist-packages/django/test/signals.py</a></td>
+                <td>96</td>
+                <td>71</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="25 96">26%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_test_testcases_py.html">/usr/local/lib/python2.7/dist-packages/django/test/testcases.py</a></td>
+                <td>643</td>
+                <td>440</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="203 643">32%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_test_utils_py.html">/usr/local/lib/python2.7/dist-packages/django/test/utils.py</a></td>
+                <td>334</td>
+                <td>227</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="107 334">32%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils___init___py.html">/usr/local/lib/python2.7/dist-packages/django/utils/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils__os_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/_os.py</a></td>
+                <td>60</td>
+                <td>24</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="36 60">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_autoreload_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/autoreload.py</a></td>
+                <td>204</td>
+                <td>161</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="43 204">21%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_baseconv_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/baseconv.py</a></td>
+                <td>48</td>
+                <td>25</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="23 48">48%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_cache_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/cache.py</a></td>
+                <td>133</td>
+                <td>103</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="30 133">23%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_crypto_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/crypto.py</a></td>
+                <td>87</td>
+                <td>21</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="66 87">76%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_datastructures_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/datastructures.py</a></td>
+                <td>319</td>
+                <td>165</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="154 319">48%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_dateformat_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/dateformat.py</a></td>
+                <td>184</td>
+                <td>103</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="81 184">44%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_dateparse_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/dateparse.py</a></td>
+                <td>50</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="28 50">56%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_dates_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/dates.py</a></td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 9">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_datetime_safe_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/datetime_safe.py</a></td>
+                <td>58</td>
+                <td>42</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 58">28%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_deconstruct_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/deconstruct.py</a></td>
+                <td>25</td>
+                <td>9</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 25">64%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_decorators_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py</a></td>
+                <td>75</td>
+                <td>37</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="38 75">51%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_deprecation_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/deprecation.py</a></td>
+                <td>39</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="34 39">87%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_duration_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/duration.py</a></td>
+                <td>14</td>
+                <td>13</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 14">7%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_encoding_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/encoding.py</a></td>
+                <td>116</td>
+                <td>41</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="75 116">65%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_formats_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/formats.py</a></td>
+                <td>125</td>
+                <td>52</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="73 125">58%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_functional_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/functional.py</a></td>
+                <td>229</td>
+                <td>89</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="140 229">61%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_html_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/html.py</a></td>
+                <td>200</td>
+                <td>129</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="71 200">36%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_html_parser_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/html_parser.py</a></td>
+                <td>90</td>
+                <td>80</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 90">11%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_http_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/http.py</a></td>
+                <td>138</td>
+                <td>82</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="56 138">41%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_importlib_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py</a></td>
+                <td>29</td>
+                <td>18</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="11 29">38%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_ipv6_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/ipv6.py</a></td>
+                <td>108</td>
+                <td>99</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 108">8%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_itercompat_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/itercompat.py</a></td>
+                <td>6</td>
+                <td>5</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="1 6">17%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_log_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/log.py</a></td>
+                <td>67</td>
+                <td>27</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="40 67">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_lorem_ipsum_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/lorem_ipsum.py</a></td>
+                <td>31</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 31">29%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_lru_cache_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/lru_cache.py</a></td>
+                <td>106</td>
+                <td>19</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="87 106">82%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_module_loading_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/module_loading.py</a></td>
+                <td>101</td>
+                <td>34</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="67 101">66%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_numberformat_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/numberformat.py</a></td>
+                <td>34</td>
+                <td>24</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="10 34">29%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_regex_helper_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/regex_helper.py</a></td>
+                <td>188</td>
+                <td>90</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="98 188">52%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_safestring_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/safestring.py</a></td>
+                <td>63</td>
+                <td>23</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="40 63">63%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_six_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/six.py</a></td>
+                <td>442</td>
+                <td>196</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="246 442">56%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_synch_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/synch.py</a></td>
+                <td>56</td>
+                <td>39</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="17 56">30%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_termcolors_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/termcolors.py</a></td>
+                <td>57</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="35 57">61%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_text_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/text.py</a></td>
+                <td>242</td>
+                <td>170</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="72 242">30%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_timesince_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/timesince.py</a></td>
+                <td>30</td>
+                <td>22</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 30">27%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_timezone_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/timezone.py</a></td>
+                <td>147</td>
+                <td>64</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="83 147">56%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_translation___init___py.html">/usr/local/lib/python2.7/dist-packages/django/utils/translation/__init__.py</a></td>
+                <td>121</td>
+                <td>48</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="73 121">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_translation_trans_real_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/translation/trans_real.py</a></td>
+                <td>422</td>
+                <td>269</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="153 422">36%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_tree_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/tree.py</a></td>
+                <td>52</td>
+                <td>17</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="35 52">67%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_version_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/version.py</a></td>
+                <td>42</td>
+                <td>17</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="25 42">60%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_utils_xmlutils_py.html">/usr/local/lib/python2.7/dist-packages/django/utils/xmlutils.py</a></td>
+                <td>9</td>
+                <td>6</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="3 9">33%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_views___init___py.html">/usr/local/lib/python2.7/dist-packages/django/views/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_views_debug_py.html">/usr/local/lib/python2.7/dist-packages/django/views/debug.py</a></td>
+                <td>330</td>
+                <td>276</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="54 330">16%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_views_decorators___init___py.html">/usr/local/lib/python2.7/dist-packages/django/views/decorators/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_views_decorators_cache_py.html">/usr/local/lib/python2.7/dist-packages/django/views/decorators/cache.py</a></td>
+                <td>27</td>
+                <td>18</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="9 27">33%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_views_decorators_csrf_py.html">/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py</a></td>
+                <td>27</td>
+                <td>9</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="18 27">67%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_views_decorators_debug_py.html">/usr/local/lib/python2.7/dist-packages/django/views/decorators/debug.py</a></td>
+                <td>21</td>
+                <td>13</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="8 21">38%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_django_views_static_py.html">/usr/local/lib/python2.7/dist-packages/django/views/static.py</a></td>
+                <td>73</td>
+                <td>57</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="16 73">22%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py___init___py.html">/usr/local/lib/python2.7/dist-packages/py/__init__.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__apipkg_py.html">/usr/local/lib/python2.7/dist-packages/py/_apipkg.py</a></td>
+                <td>138</td>
+                <td>47</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="91 138">66%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__builtin_py.html">/usr/local/lib/python2.7/dist-packages/py/_builtin.py</a></td>
+                <td>188</td>
+                <td>146</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="42 188">22%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__io___init___py.html">/usr/local/lib/python2.7/dist-packages/py/_io/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__io_capture_py.html">/usr/local/lib/python2.7/dist-packages/py/_io/capture.py</a></td>
+                <td>266</td>
+                <td>214</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="52 266">20%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__path___init___py.html">/usr/local/lib/python2.7/dist-packages/py/_path/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__path_common_py.html">/usr/local/lib/python2.7/dist-packages/py/_path/common.py</a></td>
+                <td>244</td>
+                <td>183</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="61 244">25%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__path_local_py.html">/usr/local/lib/python2.7/dist-packages/py/_path/local.py</a></td>
+                <td>628</td>
+                <td>526</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="102 628">16%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_py__xmlgen_py.html">/usr/local/lib/python2.7/dist-packages/py/_xmlgen.py</a></td>
+                <td>170</td>
+                <td>119</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="51 170">30%</td>
+            </tr>
+            
+            <tr class="file">
+                <td class="name left"><a href="_usr_local_lib_python2_7_dist-packages_pytest_py.html">/usr/local/lib/python2.7/dist-packages/pytest.py</a></td>
+                <td>8</td>
+                <td>2</td>
+                <td>0</td>
+                
+                <td class="right" data-ratio="6 8">75%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <p id="no_rows">
+        No items found using the specified filter.
+    </p>
+</div>
+
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.3</a>,
+            created at 2016-03-11 15:48
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

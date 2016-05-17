@@ -35,9 +35,9 @@
 			{% for i in listeform %}
 			{% for q in lquery %}
             jQuery(function(){
-                jQuery("#id_form-{{ i }}-{{ q.0 }}").validate({
-                    expression: "var lolo={{i}};{{ q.1 }}",
-                    message: "&laquo; {{ q.2 }} "
+                jQuery("#id_form-{{ i }}-{{ q.nom_form }}").validate({
+                    expression: "var lolo={{i}};{{ q.quiry_code }}",
+                    message: "&laquo; {{ q.string }} "
                 });
             });
 			{% endfor %}
@@ -67,13 +67,14 @@
 		{{ form }}
 		<input type="submit" value="Les ajouter"/>
 	</form> 
-	{% if ajj != None %}
+	<br></br>
+	{% if AJJ != None %}
 		OU choisir des/un groupe(s) à noter<br><br>
 		<form action="/ajouter/{{ table }}/100/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 		{% csrf_token %}
 		{{ formAjj }}
 		<input type="submit" value="Les noter"/>
-	</form> 
+		</form> 
 	{% endif %}
 
 {% else %}

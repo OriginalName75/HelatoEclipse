@@ -1,0 +1,70 @@
+
+{% load watchTag %}	
+{% load staticfiles %}
+<html>
+<head>
+<title>Helato</title>
+<link href="/static/BDD/CSS/style2.css" type="text/css" media="all" title="Design" rel="stylesheet" />
+<link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
+
+<script src="/static/BDD/js/jquery.min.js"></script>
+<script src="/static/BDD/js/jquery-ui.js"></script>
+<link rel="stylesheet"  href="/static/BDD/CSS/jquery-ui.css" type="text/css" media="all">
+<!-- Custom styles for this template -->
+<script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
+
+</head>
+
+<nav>
+<ul>
+<li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+{% for l in links %}
+	<li><a href="{{ l.0 }}">{{ l.1 }}</a> &nbsp;&nbsp;&nbsp;</li>
+{% endfor %}
+<li><a href="/administration">Accueil</a></li>
+</ul>
+</nav>
+
+<body>
+
+<form action="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+	{% csrf_token %}
+	{{ form}}
+	<input type="submit" value="Change"/>
+</form>
+{% if changed %}
+	changed
+{% endif %}
+
+
+
+{% for dd in titrest %}
+
+		
+		
+		<tr>
+			<td>
+				
+				
+				<form action="/change/{{ table }}/{{ idP }}/{{ dd.0.2 }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+				{% csrf_token %}
+				<table>
+				
+					
+						{{ dd.0.0 }}
+					
+				
+				</table>
+					
+					<input type="submit" value="Modifier"/>
+				</form>
+				
+
+
+			</td>
+		</tr>
+
+{% endfor %}
+
+</body>
+</html>		

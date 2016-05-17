@@ -1,0 +1,15 @@
+<div style="background-color:black; height:300px">
+<font color="white" size="2">
+
+<form action="/lang" method="post">
+	{% csrf_token %}
+	&gt&gt&gt
+	{{ form}}
+<input type="hidden" value="Change"/ type="hidden">
+</form>
+{% for x in text %}
+	{{ x.0 }}</br>
+	{{ x.1 }}</br>
+{% endfor %}
+</font>
+</div>

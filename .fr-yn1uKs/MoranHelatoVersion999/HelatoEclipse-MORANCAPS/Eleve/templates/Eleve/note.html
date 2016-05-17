@@ -1,0 +1,26 @@
+{% extends "eleve.html" %}
+{% load watchTag %}
+
+{% block body %}
+
+<table>
+	<tr>
+		<td>Uv</td>
+		<td>Module</td>
+		<td>Note</td>
+	</tr>
+
+
+		{% for h in l2 %}
+	<tr>
+		<td>{{ h.0.uv }}</td>
+		<td>{{ h.0.nom }}</td>
+		<td>{{ h.1.note }}</td>
+		{% endfor %}	
+	</tr>
+
+		
+</table>
+
+{% endblock %}
+

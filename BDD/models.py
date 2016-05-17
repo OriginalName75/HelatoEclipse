@@ -26,21 +26,7 @@ from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     TYPENEWSG, AJOUT, TYMO, INCONNU_STATUT_MOD
 
 
-class PaternModel(mod.Model):
-    
-    def ajouterPlusieurs(self):
-        """
-        In the add view
-        
-        Ex: When the user wants to add marks for an entire group.
-        
-    :return: None by default ; But if it is overwritten, 
-  
-    :rtype: None by default ;
-    
-    
-    """
-        return None
+
 class Modification(mod.Model):
     """
         A modification is a table that stores the modifications applied to an other table.
@@ -91,7 +77,7 @@ class ChampsModifie(mod.Model):
     def __str__ (self):
         return self.nomchamp
 
-class Personne(PaternModel):
+class Personne(mod.Model):
     """
         It defines how a person is stocked in the database.
         
@@ -132,7 +118,33 @@ class Personne(PaternModel):
     isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.filter
-class horaireProf(PaternModel):
+    def links(self):
+        """ Print links in fiche and modifie view
+        :param table: it represent which kind of data it is (exemple: a groupe)
+        :type table: int 
+        
+        """
+        l = []
+        
+        l.append(['/watch/6/0', 'Lui ajouter des notes'])
+        l.append(['/watch/7/0', 'Lui ajouter des cours'])
+    
+        return l  
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('prenom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('login', "if (VAL.length > 3 && VAL) return true; else return false;"  , 'Ce champ doit avoir au moins 4 caracteres'))
+        l.append(QUIRY('numeroDeTel', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        l.append(QUIRY('promotion', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        l.append(QUIRY('mdp', "if (VAL.length > 5 && VAL) return true; else return false;"  , 'Au moins 6 caracteres'))
+        l.append(QUIRY('mdp2', "if ((VAL == jQuery('#id_form-'+lolo+'-mdp').val()) && VAL) return true; else return false;"  , 'Les mots de passe sont differents'))
+        l.append(QUIRY('mail', "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;"  , 'Ce n\'est pas un mail valide'))
+        l.append(QUIRY('dateDeNaissance', "if (!isValidDate(parseInt(VAL.split('/')[2]), parseInt(VAL.split('/')[0]), parseInt(VAL.split('/')[1]))) return false; else return true;"  , 'Ce n\'est pas une date valide'))
+    
+        return l
+class horaireProf(mod.Model):
     """ 
         Pas encore utilisé
     """
@@ -145,7 +157,7 @@ class horaireProf(PaternModel):
     isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.get_jdelaSemaine_display() + " : " + str(self.hminMatin) + "/" + str(self.hmaxMatin) + " + " + str(self.hminApresMidi) + "/" + str(self.hmaxApresMidi)
-class Groupe(PaternModel):
+class Groupe(mod.Model):
     """
         It defines how a group is stocked in the database.
         
@@ -182,7 +194,13 @@ class Groupe(PaternModel):
     isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.nom
-class UV(PaternModel):
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        
+        return l
+class UV(mod.Model):
     """
         It defines how an UV is stocked in the database.
         
@@ -198,7 +216,23 @@ class UV(PaternModel):
     nom = mod.CharField(max_length=30)  # nom de l'UV
     isvisible = mod.BooleanField(default = True)
     uploadDate = mod.DateTimeField(default=timezone.now()) 
-class Module(PaternModel):
+    def links(self):
+        """ Print links in fiche and modifie view
+        :param table: it represent which kind of data it is (exemple: a groupe)
+        :type table: int 
+        
+        """
+        l = []
+    
+        l.append(['/watch/3/0', 'Lui ajouter des modules'])
+        return l  
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        
+        return l
+class Module(mod.Model):
     """
         It defines how a module is stocked in the database.
         
@@ -213,14 +247,21 @@ class Module(PaternModel):
         save a module in the database 
     """  
     nom = mod.CharField(max_length=30)  # nom du module    
-    uv = mod.ForeignKey(UV)
+    theuv = mod.ForeignKey(UV)
     isvisible = mod.BooleanField(default = True)
+    uploadDate = mod.DateTimeField(default=timezone.now()) 
     def __str__ (self):
         
-        return "%s - %s" % (self.nom, self.uv.nom)
-    
+        return "%s - %s" % (self.nom, self.theuv.nom)
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('theuv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'))
+        
+        return l
  
-class Salle(PaternModel):
+class Salle(mod.Model):
     """
         It defines how a classroom is stocked in the database.
         
@@ -238,8 +279,15 @@ class Salle(PaternModel):
     type = mod.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE)
     isvisible = mod.BooleanField(default = True) 
     def __str__ (self):
-        return self.nom  
-class Note(PaternModel):
+        return self.nom
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('capacite', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        
+        return l  
+class Note(mod.Model):
     """
         It defines how a mark is stocked in the database.
         
@@ -259,22 +307,30 @@ class Note(PaternModel):
     """
    
     lanote = mod.IntegerField(default=0, blank=True, null=True)
-    personne = mod.ForeignKey(Personne) 
-    module = mod.ForeignKey(Module)
+    personnenote = mod.ForeignKey(Personne)
+    themodule = mod.ForeignKey(Module)
     prof= mod.ForeignKey(Personne, related_name="ANoter")
     uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
     isvisible = mod.BooleanField(default = True)
     def ajouterPlusieurs(self):
         """
-            See ajouterPlusieurs of PaternModel
+            See ajouterPlusieurs of mod.Model
         """
         from BDD.forms import chooseGroupe, notes, BaseNoteFormSet
         from Functions.data import ADDMANY
         return ADDMANY(chooseGroupe, notes, BaseNoteFormSet, ["groupes","module"], [Personne,Module],'groupe__in')
-    
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('note', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('note', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        l.append(QUIRY('personne', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('module', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        
+        return l
     def __str__ (self):
         return str(self.lanote)    
-class TypeCour(PaternModel):
+class TypeCour(mod.Model):
     """
         It defines a type of lesson.
         
@@ -300,8 +356,13 @@ class TypeCour(PaternModel):
     uploadDate = mod.DateTimeField(default=timezone.now()) 
     def __str__ (self):
         return self.nom
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        return l
     
-class Cour(PaternModel):
+class Cour(mod.Model):
     """
         It defines a lesson.
         
@@ -331,7 +392,17 @@ class Cour(PaternModel):
     isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.typeCour.nom
-
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('jour', "if ((VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('semaineMin', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'))
+        l.append(QUIRY('semaineMax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'))
+        l.append(QUIRY('hmin', "if (VAL && VAL>=0 && VAL<=10) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'))
+        l.append(QUIRY('hmax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'))
+        
+      
+        return l
 class News(mod.Model):
     """
         It defines a news.

@@ -434,7 +434,7 @@ class moduleFormSet(BaseFormSet):
         l = []
         for form in self.forms:
             nom = form.cleaned_data['nom']
-            uv = form.cleaned_data['uv']
+            uv = form.cleaned_data['theuv']
             for i in l:
                 if i[0] == nom and uv == i[1]:
                     raise forms.ValidationError("Les modules doivent etre deux a deux distinct par uv")
@@ -1049,7 +1049,7 @@ class changeModule(forms.Form):
                 
     """
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = AutoCompleteSelectField('uv', required=True, help_text=None)
+    theuv = AutoCompleteSelectField('theuv', required=True, help_text=None)
     def modif(self, idP, p):
         """
             changes the module selected regarding the form fields
@@ -1068,7 +1068,7 @@ class changeModule(forms.Form):
         """
         data = self.cleaned_data
         nom = data['nom']
-        uv = data['uv']
+        uv = data['theuv']
         modiData.modModule(idP, p, nom, uv)
 class fitrerModule(forms.Form):
     """
@@ -1086,7 +1086,7 @@ class fitrerModule(forms.Form):
                 
     """
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'UV', 'class':'form-control input-perso'}))
+    theuv = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'UV', 'class':'form-control input-perso'}))
 class fitrerP(forms.Form):
     """
         A form to filter persons
@@ -1487,7 +1487,7 @@ class AjouterModule(forms.Form):
                 
     """
     nom = forms.CharField(label="", required=True, max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = AutoCompleteSelectField('uv', required=True, help_text=None)
+    theuv = AutoCompleteSelectField('theuv', required=True, help_text=None)
     def clean(self):
         """
            Overwrite django clean() function. It adds additional requirements of the form
@@ -1496,7 +1496,7 @@ class AjouterModule(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if models.Module.objects.filter(nom=self.cleaned_data.get('nom'), uv=self.cleaned_data.get('uv')).exists():
+        if models.Module.objects.filter(nom=self.cleaned_data.get('nom'), theuv=self.cleaned_data.get('theuv')).exists():
             raise ValidationError(
                 "Ce module est deja cree pour cet uv"
             )
@@ -1518,5 +1518,5 @@ class AjouterModule(forms.Form):
         """
         data = self.cleaned_data
         nom = data['nom']
-        uv = data['uv']
+        uv = data['theuv']
         addData.addModule(p, nom, uv)

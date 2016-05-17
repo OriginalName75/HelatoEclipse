@@ -44,7 +44,7 @@ from language import connexion
 def index(request):
    
    
-            
+        
         if request.user.is_superuser or int(request.user.personne.type) == PROF_STATUT :
             return administration(request)
         else :
@@ -184,7 +184,11 @@ def fiche(request, table, idP, filtre=None, page=None, nbparpage=None, nomClasse
             return http.HttpResponseRedirect('/')
     listeliste = data.listinside(table)
     listetab = data.listTable(table)
-    links = data.links(table)
+    MODEL=data.table(table)()
+    if hasattr(MODEL,'links'):
+        links = MODEL.links()
+    else:
+        links=[]
     entier = 0
     soustable = data.soustable(table)
     titrest = []
@@ -256,15 +260,23 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
     nbajout = int(nbajout)
     table = int(table)
     MODEL=data.table(table)()
-    AJJ=MODEL.ajouterPlusieurs()
+    if hasattr(MODEL,'ajouterPlusieurs'):
+       
+        AJJ=MODEL.ajouterPlusieurs()
+        
+    else:
+        AJJ=None
     if not request.user.is_superuser and table != 6:  # case of teacher
         return http.HttpResponseRedirect('/')
     #ajj = data.ajouterA(table)
-    ficheAfter = data.ficheAfter(table)
+    ficheAfter = False
     if nbajout > 0 and nbajout != 100:
         
         listeform = range(0, nbajout)
-        lquery = data.quiry(table)
+        if hasattr(MODEL,'quiery'):
+            lquery = MODEL.quiery()
+        else:
+            lquery =[]
         table = int(table)
         envoi = False
         #===========================================================================
@@ -291,9 +303,6 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                         idP = form.save(request.user.personne)
                         
                     
-                    if not ficheAfter:
-                        
-                        return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
                 form = nbAjout()
                            
             else:
@@ -315,7 +324,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                 for x in AJJ.listFieldForm:
                     if i==0:
                         kwargs = {
-                            AJJ.Qcode: stock[i]
+                            AJJ.QCode: stock[i]
                         }
                         a = AJJ.listModel[i].objects.filter(**kwargs)
                         nb = a.count()
@@ -389,6 +398,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     return ajouter(request, table, 101, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
         else:
             if AJJ != None:
+                
                 formAjj = AJJ.formInit()
             form = nbAjout() 
             
@@ -468,10 +478,8 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
                 return http.HttpResponseRedirect('/')
         supr_salles(table, idP, request.user.personne)
         
-        if table == 0:
-            if hasattr(obj, "user"):
-                obj.user.delete()
-        obj.delete()
+        
+       
         supr = True
     
     
@@ -624,7 +632,9 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
     soustable = data.soustable(table)
     TABBLE = data.table(table)
     obj = TABBLE.objects.get(id=int(idP))
-    links = data.links(table)
+    MODEL=data.table(table)()
+    if hasattr(MODEL,'links'):
+        links = MODEL.links()
     titrest = []
     formseti = None
     ii = 0
