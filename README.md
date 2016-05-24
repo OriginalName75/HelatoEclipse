@@ -16,4 +16,12 @@ Then, in order to run the website locally you need to write in the main folder :
 
 python3 manage.py runserver
 
+Then on your browser : http://127.0.0.1:8000/
+
+Master login : Root
+Password : Dieu
+
+
+
+
 
