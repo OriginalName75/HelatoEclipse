@@ -1,0 +1,50 @@
+{% extends "eleve.html" %}
+{% load watchTag %}
+
+{% block body %}
+- Données </div>
+	
+	 <div class="tableTitle" style="overflow:auto;">
+<div class="table-title" >
+<table class="table-fill" >
+	<tr>
+		<td>Prenom</td>
+		<td>Nom</td>
+		<td>Sexe</td>
+		<td>Adresse</td>
+		<td>Promotion</td>
+		<td>Date De Naissance</td>
+		<td>Lieu De Naissance</td>
+		<td>Numero De Tel</td>
+	</tr>
+
+	<tr>
+		<td>{{user.first_name}}</td>
+		<td>{{user.last_name}}</td>
+		<td>{{user.personne.get_sexe_display}}</td>
+		<td>{{user.personne.adresse}}</td>
+		<td>{{user.personne.promotion}}</td>
+		<td>{{user.personne.dateDeNaissance}}</td>
+		<td>{{user.personne.lieuDeNaissance}}</td>
+		<td>{{user.personne.numeroDeTel}}</td>
+	</tr>
+</table>
+
+<br>
+<br>
+</div></div>
+<table>
+
+<tr><th>Vos groupes</th></tr>
+	
+		{% for j in l6 %}
+		{% for i in lg|index:j %}
+		<tr><td>{{i}}</td></tr>
+		{% endfor %}
+		{% endfor %}
+	</tr>
+</table>
+
+{% endblock %}
+
+

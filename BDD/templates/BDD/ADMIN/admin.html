@@ -2,13 +2,43 @@
 
 
 {% block body %}
+<div style="width:400px; height:450px; overflow:auto;">
+<center>
+{% for n in news %}
 
 <div id="news">
-
-{% for n in news %}
+<br>
 {{n|safe}}
 <br>
+<br>
+</div>
+<br>
+
 {% endfor %}
+</center>
 
 </div>
+{% endblock %}
+{% block lang %}
+
+<div style="background-color:black; height:500px; width:500px; overflow:auto;">
+<font color="white" size="2">
+
+<div id="formconsole">
+<form action="/administration" method="post">
+	{% csrf_token %}
+	&gt&gt&gt
+	{{ form}}
+
+</div>
+<input type="hidden" value="Change"/ type="hidden">
+</form>
+{% for x in text %}
+	{{ x.0 }}</br>
+	{{ x.1 }}</br>
+{% endfor %}
+</font>
+</div>
+
+
 {% endblock %}

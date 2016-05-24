@@ -46,6 +46,7 @@ MODIFIER = 1
 SUPRIMER = 2
 PERSONNESTATUT = 2
 CHOICESNB = []
+INCONNU_STATUT_MOD=0
 for i in range(1, 20):
     CHOICESNB.append((i, str(i)))
 
@@ -65,6 +66,7 @@ TYPENEWSG = ((AJOUT, 'ajout'), (MODIFIER, 'modifier'), (SUPRIMER, 'suprilmer'))
 
 Choix = [TYPENEWSG, TYPENEWS, TYPE, SEXE, SALLES, SEMAINEAAVECINCO, SEMAINE, VACANCETYPE]
 
+TYMO = ((AJOUT, 'Ajout'), (MODIFIER, 'Modifier'), (SUPRIMER, 'Supprimer'), (INCONNU_STATUT_MOD, 'mod statut inconnu'))
 
 
 def findchoice(i, TUPLES):

@@ -5,6 +5,7 @@
     It defines the specifications of each kind of data in templates.
     
     
+    
 @author: IWIMBDSL
 """
 from BDD import forms
@@ -15,83 +16,53 @@ from BDD.models import Personne, Cour, Groupe, UV, Module, Salle, Note, \
     TypeCour
 
 
-def ajouterA(t):
+class ADDMANY():
     """
-        For the modify view.
-        In addition to ask how many forms the user needs, it ask specific many to many relation ship.
-        Ex: to mark a group
         
-    :param t: it represent which kind of data it is (exemple: a groupe)
-    :type t: int 
-    
-    
-    """
-   
-    reponse = None
-    if t == 6:
-        reponse = [forms.chooseGroupe, [["groupes", 0, Personne, 'groupe__in', forms.notes, forms.BaseNoteFormSet], ["module", 1, Module]]]
-    return reponse
-def ficheAfter(t):
-    """
-        Depends of the type of data, after an add, the user will be redirected 
-        to the specification of the new object.
-        For now it is not for all.
+        :formInit: Before adding, ask which objects 
+        :tformInit: form
+        Ex (add marks) : the form ask which group is marked and which module the group is marked
+        :form: form to add an object
+        :tform: form
+        Ex (add marks) : a form which ask the mark of a person
+        :baseForm: BaseForm of :form:, to check errors.
+        :tbaseForm: Baseform 
+        :listFieldForm: names of the fields of formInit in the right order
+        :tlistFieldForm:  list of string
+        :listModel: list of the related Model in the right order
+        :tlistModel: list of Models
+        :QCode:  Qcode (Django)
+        :tQCode: string
         
-    :param t: it represent which kind of data it is (exemple: a groupe)
-    :type t: int 
-    
     """
-    reponse = True
-    
-    
-    return reponse
-def quiry(t):
-    """ 
-        Defines Javascript for forms verification in live.
-    
-    :param t: it represent which kind of data it is (exemple: a groupe)
-    :type t: int 
-    
+    def __init__(self, formInit, form, baseForm, listFieldForm, listModel, QCode):
+        self.formInit = formInit
+        self.form = form
+        self.baseForm = baseForm
+        self.listFieldForm = listFieldForm
+        self.listModel= listModel
+        self.QCode=QCode
+  
+class QUIRY():
     """
-    l = []
-    
-    if t == 5:
-        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['capacite', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
-    elif t == 1:
-        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-    elif t == 2:
-        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])    
-    elif t == 3:
-        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['uv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'])
-    elif t == 4:
-        l.append(['jour', "if ((VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['semaineMin', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'])
-        l.append(['semaineMax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'])
-        l.append(['hmin', "if (VAL && VAL>=0 && VAL<=10) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'])
-        l.append(['hmax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'])
-      
         
-    elif t == 7:
-        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-    elif t == 6:
-        l.append(['note', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['note', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
-        l.append(['personne', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['module', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-    elif t == 0:
-        l.append(['nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['prenom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'])
-        l.append(['login', "if (VAL.length > 3 && VAL) return true; else return false;"  , 'Ce champ doit avoir au moins 4 caracteres'])
-        l.append(['numeroDeTel', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
-        l.append(['promotion', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'])
-        l.append(['mdp', "if (VAL.length > 5 && VAL) return true; else return false;"  , 'Au moins 6 caractere plz'])
-        l.append(['mdp2', "if ((VAL == jQuery('#id_form-'+lolo+'-mdp').val()) && VAL) return true; else return false;"  , 'Les mots de passe sont differents'])
-        l.append(['mail', "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;"  , 'Ce n\'est pas un mail valide'])
-        l.append(['dateDeNaissance', "if (!isValidDate(parseInt(VAL.split('/')[2]), parseInt(VAL.split('/')[0]), parseInt(VAL.split('/')[1]))) return false; else return true;"  , 'Ce n\'est pas une date valide'])
-
-    return l
+        :nom_form: name of the form's field
+        :nom_form: string
+        
+        :quiry_code: quiry code.
+        :quiry_code: string
+        Ex "if (VAL) return true; else return false;"
+        :string: Error printed
+        :string: string 
+        
+        
+    """
+    def __init__(self, nom_form, quiry_code, string):
+        self.nom_form = nom_form
+        self.quiry_code = quiry_code
+        self.string = string
+       
+ 
 def formsoustable(table):
     """ 
         Defines the forms in the modify view for the many to many relations
@@ -111,7 +82,7 @@ def formsoustable(table):
         l.append([forms.addGroupeModule, 'groupes', 1, 'groupes', Groupe, 'groupes'])
     elif table == 4:
         pass
-        #l.append([forms.addSalle, 'salles', 1, 'salles', Salle, 'salles'])
+        # l.append([forms.addSalle, 'salles', 1, 'salles', Salle, 'salles'])
     elif table == 5:
         pass
     elif table == 6:
@@ -124,19 +95,7 @@ def formsoustable(table):
 
         
     return l
-def links(table):
-    """ Print links in fiche and modifie view
-    :param table: it represent which kind of data it is (exemple: a groupe)
-    :type table: int 
-    
-    """
-    l = []
-    if table == 0:
-        l.append(['/watch/6/0', 'Lui ajouter des notes'])
-        l.append(['/watch/7/0', 'Lui ajouter des cours'])
-    elif table == 2:
-        l.append(['/watch/3/0', 'Lui ajouter des modules'])
-    return l  
+
         
         
         
@@ -200,7 +159,7 @@ def listinside(t):
         listeliste.append([0, 'nom'])
     elif t == 3:
         listeliste.append([0, 'nom'])
-        listeliste.append([1, 'uv', 'nom'])
+        listeliste.append([1, 'theuv', 'nom'])
     elif t == 4:
         listeliste.append([0, 'typeCour'])
         listeliste.append([3, 'salles'])
@@ -212,9 +171,9 @@ def listinside(t):
         
         listeliste.append([0, 'uploadDate'])
     elif t == 6:
-        listeliste.append([0, 'note'])
-        listeliste.append([0, 'personne'])
-        listeliste.append([1, 'module', 'nom'])
+        listeliste.append([0, 'lanote'])
+        listeliste.append([0, 'personnenote'])
+        listeliste.append([1, 'themodule', 'nom'])
         listeliste.append([0, 'prof'])
         listeliste.append([0, 'uploadDate'])
     elif t == 7:
@@ -256,7 +215,7 @@ def listTable(t):
     elif t == 2:
         l.append(['Nom', 1])
     elif t == 4:
-        l.append(['Cour', 1])
+        l.append(['Cours', 1])
         l.append(['Salles', 2])
         l.append(['Jour', 3])
         l.append(['Debut seamaine', 4])
@@ -360,11 +319,11 @@ def changecond(table, cond, conditions, obj):
         
     elif table == 6:
         cond.append(('note', 0))
-        conditions.append(obj.note)
+        conditions.append(obj.lanote)
         cond.append(('personne', 0))
-        conditions.append(obj.personne.id)
+        conditions.append(obj.personnenote.id)
         cond.append(('module', 0))
-        conditions.append(obj.module.id)
+        conditions.append(obj.themodule.id)
         
     elif table == 7:
         cond.append(('nom', 0))
@@ -384,8 +343,8 @@ def changecond(table, cond, conditions, obj):
     elif table == 3:
         cond.append(('nom', 0))
         conditions.append(obj.nom)
-        cond.append(('uv', 0))
-        conditions.append(obj.uv.id)
+        cond.append(('theuv', 0))
+        conditions.append(obj.theuv.id)
         
     elif table == 0:
         cond.append(('nom', 0))
@@ -460,18 +419,18 @@ def classer(t, nomClasser):
             column = 'type'
     elif t == 6:
         if nomClasser == 1:
-            column = 'note'
+            column = 'lanote'
         elif nomClasser == 2:
-            column = 'personne'
+            column = 'personnenote'
         elif nomClasser == 3:
-            column = 'module'
+            column = 'themodule'
         else:
             column = 'uploadDate'
     elif t == 3:
         if nomClasser == 1:
             column = 'nom'
         else:
-            column = 'uv__nom'
+            column = 'theuv__nom'
     elif t == 7:
         if nomClasser == 1:
             column = 'nom'
@@ -529,11 +488,11 @@ def filtre(t):
         l.append(['hmax', 'hmax', None, 'hmax', 0])
     elif t == 3:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
-        l.append(['uv', 'uv', "", 'uv__nom', 3])
+        l.append(['theuv', 'theuv', "", 'theuv__nom', 3])
     elif t == 6:
-        l.append(['note', 'note', None, 'note', 0])
-        l.append(['personne', 'personne', "", 'personne__filter__icontains', 0])
-        l.append(['module', 'module', "", 'module__nom__icontains', 0])
+        l.append(['note', 'lanote', None, 'lanote', 0])
+        l.append(['personne', 'personnenote', "", 'personnenote__filter__icontains', 0])
+        l.append(['module', 'themodule', "", 'themodule__nom__icontains', 0])
     elif t == 7:
         l.append(['nom', 'nom', "", 'nom__icontains', 0])
         l.append(['isExam', 'isExam', "", 'isExam', 0])

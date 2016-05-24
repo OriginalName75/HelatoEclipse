@@ -1,0 +1,155 @@
+{% load watchTag %}
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+<head>
+<meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8">
+<title>IWIMBDSL</title>
+
+<link href="/static/BDD/deux/style3.css" type="text/css" media="all" title="Design" rel="stylesheet" /> 
+    
+    <link rel="stylesheet" href="/static/BDD/deux/jquery.mCustomScrollbar.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/BDD/deux/jquery.mCustomScrollbar.concat.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style2.css" />
+     <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style.css" />
+    <link href="/static/BDD/deux/cssmulti.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/boilerplate.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/cssplus.css" rel="stylesheet" type="text/css">
+    <script src="/static/BDD/deux/respond.min.js"></script>
+    <script>
+    (function($){
+        $(window).load(function(){
+            $(".content").table-title({
+   				 axis:"x"
+			});
+        });
+    })(jQuery);
+	
+</script>
+ </head>
+ <body>
+<div class="gridContainer clearfix">
+  <div id="LayoutDiv1">
+  <div class="toggle" style="border-radius: 5px;  background-image: url(3.png);background-repeat: repeat;">
+ <nav>
+<label for="drop" class="toggle">Menu</label>
+  <input type="checkbox" id="drop" />
+  <ul class="menu2">
+    <li><a href="#">Acceuil</a></li>
+    <li> 
+      <!-- First Tier Drop Down -->
+      <label for="drop-1" class="toggle">Base de donnée</label>
+      <a href="#">Service</a>
+      <input type="checkbox" id="drop-1"/>
+      <ul>
+       <li><a href="/watch/0/0">Personnes</a></li>
+		<li><a href="/watch/1/0">Groupes</a></li>
+		<li><a href="/watch/2/0">UV</a></li>
+		<li><a href="/watch/3/0">Modules</a></li>
+		<li><a href="/watch/4/0">Calendrier</a></li>
+		<li><a href="/watch/5/0">Salles</a></li>
+		<li><a href="/watch/6/0">Notes</a></li>
+		<li><a href="/watch/7/0">Cours</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Deco</a></li>
+    
+  </ul>
+</nav>
+  
+  </div>
+ 
+  <div style="margin: 0px -40px;">
+<ul class="menu">
+
+      <li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Modifier</a></li>
+{% for l in links %}
+	<li><a href="{{ l.0 }}">{{ l.1 }}</a></li>
+{% endfor %}
+<li><a href="/administration">Accueil</a></li>
+       
+    </ul></div></div>
+	<div id="LayoutDiv2"><img class="logoEnsta" src="/static/BDD/deux/Logo.png" alt="logoensta" align="right" style="margin:18px 0px; width:130px"></div>
+	
+
+<div id="LayoutDiv3">
+<div class="tableTitle" style="overflow:auto;">
+<div class="table-title" >
+
+<table class="table-fill">
+<tr>
+	{% for l in listetab %}
+		<td>
+			{{ l.0 }}
+		</td>
+	{% endfor %}
+</tr><tr>
+{% for dd in listeliste %}
+	<td>
+		{% if dd.0 == 0 %}
+			{{ obj|getS:dd.1 }}
+		{% elif dd.0 == 2 %}
+			{{ obj|getSD:dd.1 }}
+		{% elif dd.0 == 3 %}
+					 - 
+					{% for l in obj|getS:dd.1|getSD:allllll %}
+						
+						 {{ l }}
+						  - 
+					{% empty %}
+						non atribué
+					{% endfor %}
+		{% else %}
+			{{ obj|getS:dd.1|getS:dd.2 }}
+		{% endif %}
+	</td>
+{% endfor %}
+</tr></table>
+</div>
+</div>
+<div class="table-title" >
+<br/><br/>
+{% for dd in titrest %}
+	<table border="1">
+		<tr>
+			<th>
+				<b>{{ dd.1 }}</b>
+			</th>
+		</tr>
+		
+		{% for ddd in dd.2 %}
+			<tr>
+				<td>
+					{% if dd.0 == 0 %}
+						<a href="/fiche/{{ dd.4 }}/{{ ddd.id }}" target="_blank">
+							{{ ddd|getS:dd.3 }}
+						</a>
+					{% else %}
+						<a href="/fiche/{{ dd.3 }}/{{ ddd.id }}" target="_blank">
+							{{ ddd }}
+						</a>
+					{% endif %}
+				</td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td>
+					Pas de {{ dd.1 }}
+				</td>
+			</tr>
+		{% endfor %}
+		
+	</table>
+	<br><br>
+{% endfor %}
+</div>
+</div></div>
+</body>
+</html>
+

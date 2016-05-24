@@ -1,0 +1,166 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8">
+    <title>IWIMBDSL</title>
+    
+    <link rel="stylesheet" href="/static/BDD/deux/jquery.mCustomScrollbar.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/BDD/deux/jquery.mCustomScrollbar.concat.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style2.css" />
+     <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style.css" />
+    <link href="/static/BDD/deux/cssmulti.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/boilerplate.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/cssplus.css" rel="stylesheet" type="text/css">
+    <script src="/static/BDD/deux/respond.min.js"></script>
+    <script>
+    (function($){
+        $(window).load(function(){
+            $(".content").console({
+   				 axis:"y" // horizontal scrollbar
+			});
+        });
+    })(jQuery);
+    
+	
+</script>
+ </head>
+<body>
+
+	
+<div class="gridContainer clearfix">
+  <div id="LayoutDiv1">
+  <div class="toggle" style="border-radius: 5px;  background-image: url(3.png);background-repeat: repeat;">
+ <nav>
+<label for="drop" class="toggle">Menu</label>
+  <input type="checkbox" id="drop" />
+  <ul class="menu2">
+    <li><a href="#">Accueil</a></li>
+    <li> 
+      <!-- First Tier Drop Down -->
+      <label for="drop-1" class="toggle">Base de donnée</label>
+      <a href="#">Service</a>
+      <input type="checkbox" id="drop-1"/>
+      <ul>
+     {% if not isProf %}
+		<li><a href="/watch/0/0">Personnes</a></li>
+		<li><a href="/watch/1/0">Groupes</a></li>
+		<li><a href="/watch/2/0">UV</a></li>
+		<li><a href="/watch/3/0">Modules</a></li>
+		<li><a href="/watch/4/0">Calendrier</a></li>
+		<li><a href="/watch/5/0">Salles</a></li>
+		{% endif %}
+		<li><a href="/watch/6/0">Notes</a></li>
+		 {% if not isProf %}
+		<li><a href="/watch/7/0">Cours</a></li>
+		{% endif %}
+      </ul>
+    </li>
+    <li><a href="#">Deco</a></li>
+    
+  </ul>
+</nav>
+  
+  </div>
+ 
+  <div style="margin: 0px -40px;">
+<ul class="menu">
+
+      <li><a href="/administration">Accueil</a></li>
+      {% if not isProf %}
+		<li><a href="/watch/0/0">Personnes</a></li>
+		<li><a href="/watch/1/0">Groupes</a></li>
+		<li><a href="/watch/2/0">UV</a></li>
+		<li><a href="/watch/3/0">Modules</a></li>
+		<li><a href="/watch/4/0">Calendrier</a></li>
+		<li><a href="/watch/5/0">Salles</a></li>
+		{% endif %}
+		<li><a href="/watch/6/0">Notes</a></li>
+		 {% if not isProf %}
+		<li><a href="/watch/7/0">Cours</a></li>
+		{% endif %}
+		<li><a href="/deconnexion">Deco</a></li>
+       
+    </ul></div></div>
+  <div id="LayoutDiv2"><img class="logoEnsta" src="/static/BDD/deux/Logo.png" alt="logoensta" align="right" style="margin:18px 0px; width:130px"></div>
+  <div id="LayoutDiv3">
+  <div class="bgrepeat" data-mcs-theme="light">
+	
+		<div class="title2">{{user.last_name}} {{user.first_name}} - Accueil </div>
+	  <hr>
+      <div id="LayoutDiv5">
+      
+      <div class="mCustomScrollbar" data-mcs-theme="light">
+
+
+{% for n in news %}
+
+<div id="news">
+ 
+{{n|safe}}
+ 
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+
+</div>
+	
+	 </div>
+     
+		<div id="LayoutDiv6">
+
+	
+<div class="mCustomScrollbar">
+
+  <div class="consoleTitre">Console <a target="_blank" href="/help">(help)</a> :  </div>
+<div class="console"  data-mcs-theme="light">
+       
+
+<div id="formconsole">
+<font color="white" size="2">
+<form action="/administration" method="post">
+
+	{% csrf_token %}
+	<table border="0" width="100%"><tr><td width="20px">
+	&gt;&gt;&gt;
+</td><td><table border="0">
+	{{ form}}
+	</td></tr></table>
+</table>
+
+<input type="hidden" value="Change">
+</form>
+{% for x in text %}
+	{{ x.0 }}<br>
+	{{ x.1|safe }}<br>
+{% endfor %}
+</font>
+
+
+</div>
+
+  </div>
+  </div>
+ </div>
+  
+
+ 
+  
+</div></div>
+</div>
+
+</body>
+</html>
+

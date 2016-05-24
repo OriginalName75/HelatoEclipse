@@ -1,0 +1,38 @@
+<b>>>> clear</b> : <font color="green">supprime l'historique des commandes</font> <br>
+  <br>
+<h1>AFFICHER :</h1>
+<p>
+<b>>>> afficher</b> <i>TABLE</i> : <font color="green">Affiche tous les éléments de la table</font><br />
+<b>>>> afficher</b> <i>TABLE</i> <em>attribut</em>='a': <font color="green">Affiche  les éléments de la table dont les attributs valent a</font><br>
+<u><em>ex:</em></u><br />
+>>> afficher module : <font color="green">Affiche tous les modules</font> <br>
+>>> afficher uv : <font color="green">Affiche tous les modules</font> <br>
+>>> afficher groupe : <font color="green">Affiche tous les modules</font> <br>
+>>> afficher module uv='1.1'  :<font color="green">Affiche les modules qui appartiennent à l'UV '1.1'</font><br>
+>>> afficher personne sexe = homme :<font color="green">Affiche les personnes qui sont des hommes</font> <br>
+</p>
+<h1>AJOUTER:</h1>
+<p><br>
+<b>>>> ajouter</b> <i>TABLE</i> <em>attribut</em>='a': <font color="green">Ajouter les éléments dans la table avec les attributs valent a</font><br>
+<u><em>ex:</em></u><br />
+>>> ajouter personne nom = zhu prenom = lei login = jules12345 mdp = 'jules1' sexe = homme type = eleve numero = 06254534578 promotion = 2017 adresse = 'SECRET' lieu_naissance= 'China france' date_naissance=12/05/1988 mail=jules@ensta.fr : <font color="green">Ajoute une personne zhu lei avec toutes ses informations</font><br>
+>>> ajouter groupe 'sp2a'  : <font color="green">Ajoute un groupe 'sp2a'</font><br>
+>>> ajouter uv '4.9'  : <font color="green">Ajoute une UV '4.9'</font><br>
+>>> ajouter module 'langage c' uv='4.9'  : <font color="green">Ajoute un module 'langage C' dans l'UV '4.9'</font><br>
+<h1>MODIFIER :</h1>
+<p><br>
+<b>>>> modifier</b> <i>TABLE</i> <em>attribut</em>='a' nouveau <em>attribut</em>='b' : <font color="green">Modifie les elements d'une table qui ont les attributs avec les nouvelles valeurs</font><br>
+<b>>>> modifier</b> <i>TABLE</i> <em>attribut</em>='b' : <font color="green">Modifie les elements d'une table avec les nouvelles valeurs</font><br>
+<u><em>ex:</em></u><br />
+>>> modifier personne lieu_naissance='Brest' nouveau lieu_naissance='jules'  : <font color="green">Modifie les personnez qui ont les attributs 'a' avec la nouvelle valeur 'b'</font><br>
+>>> modifier module 'langage c' nom='Langage C++' uv='2.3' groupe='RAK'  : <font color="green">Modifie le module 'langage C' avec les nouvelles valeurs</font><br>
+>>> modifier uv nom='4.9' nouveau='9.4'  : <font color="green">Modifie l'UV '4.9' à '9.4'</font><br>
+>>> modifier groupe nom='CI2Apourtester' nouveau='CI2Ateste'  : <font color="green">Modifie le groupe 'CI2Apourtester' à 'CI2Ateste'</font><br>
+
+<h1>SUPPRIMER :</h1>
+<p><br>
+<b>>>> supprimer</b> <i>TABLE</i> <em>atribut</em>='a': <font color="green">Supprimer les éléments qui valent a</font><br>
+<u><em>ex:</em></u><br />
+>>> supprimer module 'Langage C++'  : <font color="green">Supprimer la module 'Langage C++'</font><br>
+>>> supprimer groupe 'CI2Ateste' : <font color="green">Supprimer le groupe 'CI2Ateste'</font><br>
+>>> supprimer uv '9.4' : <font color="green">Supprimer l'UV '9.4'</font><br>

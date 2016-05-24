@@ -1,0 +1,214 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#container {
+  margin: 0 auto;
+  max-width: 890px;
+
+}
+a:link
+{
+	
+   
+    padding-bottom: 3px;
+    text-decoration: none;
+     color:#C00;
+}
+a:visited
+{
+	  color: #800;
+    padding-bottom: 3px;
+    text-decoration: none;
+    
+}
+a:hover
+{
+    text-decoration: none;
+    color: #05e;
+}
+
+p { text-align: center; }
+ .toggle, [id^=drop] {
+ display: none;
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+ 
+}
+
+
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+nav ul {
+  border-radius: 5px;
+ 
+  float: right;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+background-image: url(3.png);
+background-repeat: repeat;
+}
+
+nav ul li {
+	
+  margin: 0px;
+  display: inline-block;
+  float: left;
+	
+	
+	
+	color: #0CF;
+}
+
+nav a {
+  display: block;
+ 
+  font-size: 20px;
+  line-height: 40px;
+  text-decoration: none;
+}
+
+
+
+
+
+nav ul ul {
+  display: none;
+  position: absolute;
+  top: 60px;
+}
+
+nav ul li:hover > ul { display: inherit; }
+
+nav ul ul li {
+
+  width: 170px;
+  float: none;
+  display: list-item;
+  position: relative;
+}
+
+nav ul ul ul li {
+	 
+  position: relative;
+  top: -60px;
+  left: 170px;
+}
+
+li > a:after { content: ' +'; }
+
+li > a:only-child:after { content: ''; }
+
+
+/* Media Queries
+--------------------------------------------- */
+
+@media all and (max-width : 768px) {
+
+
+
+nav {
+	margin: 0;
+	
+}
+
+.toggle + a,
+ .menu2 { display: none; }
+
+.toggle {
+  margin:10px 2px;
+  display: block;
+  
+  padding: 0 20px;
+  color: #006;
+  font-size: 20px;
+  padding: 2px 5px;
+  text-decoration: none;
+  border:none;
+  font-family:"Linux Libertine Slanted";
+}
+
+
+
+[id^=drop]:checked + ul { display: block; }
+
+nav ul li {
+  display: block;
+  width: 100%;
+}
+
+
+nav ul ul .toggle,
+ nav ul ul a { padding: 0 40px;}
+
+nav ul ul ul a { padding: 0 80px;   }
+
+nav a:hover,
+ nav ul ul ul a { 
+	
+	
+	background: none;
+	text-decoration:none;
+	box-shadow: inset 0px 5px #51C1F1;
+	color: #0CF;
+	
+	border-radius: 5px;
+
+ 
+ }
+.toggle nav ul li a {
+	margin: 0px 5px;
+	
+	color: #006;
+	
+
+	  
+}
+nav ul li ul li .toggle,
+ nav ul ul a {
+	
+	
+	color: #006;
+	
+
+	  
+	  }
+
+nav ul ul {
+	 
+  float: none;
+  position: static;
+
+}
+
+nav ul ul li:hover > ul,
+nav ul li:hover > ul { display: none; }
+
+nav ul ul li {
+  display: block;
+  width: 100%;
+
+}
+
+nav ul ul ul li { position: static;
+
+}
+}
+
+@media all and (max-width : 330px) {
+
+nav ul li {
+  display: block;
+  width: 94%;
+}
+
+}

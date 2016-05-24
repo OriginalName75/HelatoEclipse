@@ -1,0 +1,282 @@
+@charset "utf-8";
+/* Média fluide simple
+   Remarque : un média fluide exige que vous supprimiez les attributs de hauteur et de largeur du média du code HTML
+   http://www.alistapart.com/articles/fluid-images/ 
+*/
+img, object, embed, video {
+	max-width: 100%;
+}
+/* IE 6 ne prend pas en charge max-width ; la largeur par défaut est donc fixée à 100% */
+.ie6 img {
+	width:100%;
+}
+
+/*
+	Propriétés de grille fluide Dreamweaver
+	----------------------------------
+	dw-num-cols-mobile:		5;
+	dw-num-cols-tablet:		8;
+	dw-num-cols-desktop:	10;
+	dw-gutter-percentage:	25;
+	
+	Inspiré par "Responsive Web Design" par Ethan Marcotte 
+	http://www.alistapart.com/articles/responsive-web-design
+	
+	et le système Golden Grid par Joni Korpi
+	http://goldengridsystem.com/
+*/
+
+/* Disposition mobile : 480px et moins. */
+#news {
+	font-size:8px;
+}
+.title2 {
+	
+	font-size: 8px;
+
+}
+.bgrepeat {
+	height: 200px;
+}
+.mCustomScrollbar{
+	
+	height:180px;
+}
+.consoleTitre {
+	font-size: 8px;
+	margin-top:10px;
+}
+.console {
+	height:100px;
+	background-color: none;
+
+}
+.gridContainer {
+	margin-left: auto;
+	margin-right: auto;
+	width: 87.36%;
+	padding-left: 1.82%;
+	padding-right: 1.82%;
+}
+#LayoutDiv1 {
+  height: auto;
+  
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 79.1666%;
+	display: block;
+}
+#LayoutDiv2 {
+	clear: none;
+	float: left;
+	margin-left: 4.1666%;
+	width: 16.6666%;
+	display: block;
+}
+#LayoutDiv3 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+	
+}
+#LayoutDiv4 {
+	clear: both;
+	
+	float: left;
+	
+	margin-left: 0;
+	
+	width: 100%;
+	
+	display: block;
+	
+}
+#LayoutDiv5 {
+	clear: both;
+	
+	float: left;
+	
+	margin-left: 0;
+	
+	width: 100%;
+	
+	display: block;
+	
+}
+#LayoutDiv6 {
+
+
+	clear: both;
+	
+	float: left;
+	
+	margin-left: 0;
+	
+	width: 100%;
+	
+	display: block;
+	
+}
+
+/* Disposition tablette : 481px sur 768px. Hérite des styles de : Disposition mobile */
+
+@media only screen and (min-width: 481px) {
+#news {
+	font-size:12px;
+}
+.bgrepeat {
+	height: 300px;
+}
+.mCustomScrollbar{
+	
+	height:280px;
+}
+.consoleTitre {
+	font-size: 12px;
+	margin-top:10px;
+}
+.console {
+	
+	background-color: none;
+	
+	
+	height:100px;
+}
+.title2 {
+	margin:12px 0px;
+	font-size: 12px;
+}
+.gridContainer {
+	width: 90.675%;
+	padding-left: 1.1625%;
+	padding-right: 1.1625%;
+}
+#LayoutDiv1 {
+  height: auto;
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 74.3589%;
+	display: block;
+}
+#LayoutDiv2 {
+	clear: none;
+	float: left;
+	margin-left: 2.5641%;
+	width: 23.0769%;
+	display: block;
+}
+#LayoutDiv3 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#LayoutDiv4 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#LayoutDiv5 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#LayoutDiv6 {
+	
+	
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+}
+
+/* Disposition bureau : 769px à max. 1232px.  Hérite des styles de : Disposition mobile et disposition tablette */
+
+@media only screen and (min-width: 769px) {
+#news {
+	font-size:12px;
+}
+.bgrepeat {
+	height: 600px;
+}
+.mCustomScrollbar{
+	height: 560px;
+	font-size: 21px;
+}
+.consoleTitre {
+	font-size: 21px;
+	margin-top:0px;
+}
+.console {
+	background-color: none;	
+	height:auto;
+}
+.title2 {
+	
+	font-size: 22px;
+	margin:12px 0px;
+}
+
+
+.gridContainer {
+	width: 88.2%;
+	max-width: 1232px;
+	padding-left: 0.9%;
+	padding-right: 0.9%;
+	margin: auto;
+}
+#LayoutDiv1 {
+  height:120px;
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 79.5918%;
+	display: block;
+}
+#LayoutDiv2 {
+	clear: none;
+	float: left;
+	margin-left: 2.0408%;
+	width: 18.3673%;
+	display: block;
+}
+#LayoutDiv3 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#LayoutDiv4 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#LayoutDiv5 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+#LayoutDiv6 {
+	clear: none;
+	float: left;
+	margin-left: 2.0408%;
+	width: 69.3877%;
+	display: block;
+}
+}

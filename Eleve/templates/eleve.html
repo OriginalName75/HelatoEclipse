@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<head>
+<meta charset="utf-8">
+<title>IWIMBDSL</title>
+
+<link href="/static/BDD/deux/style3.css" type="text/css" media="all" title="Design" rel="stylesheet" /> 
+
+<link rel="stylesheet" href="/static/BDD/deux/jquery.mCustomScrollbar.css" />
+<meta name="viewport" content="width=device-width" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/BDD/deux/jquery.mCustomScrollbar.concat.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style2.css" />
+     <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style.css" />
+    
+    <link href="/static/BDD/deux/cssmulti2.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/boilerplate.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/cssplus.css" rel="stylesheet" type="text/css">
+    <script src="/static/BDD/deux/respond.min.js"></script>
+    
+
+<script type="text/javascript">
+
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+});
+</script>
+
+<script>
+    (function($){
+        $(window).load(function(){
+            $(".content").tableTitle({
+   				 axis:"x" 
+			});
+        });
+    })(jQuery);
+	
+</script>
+ </head>
+<body>
+<div class="gridContainer clearfix">
+  <div id="LayoutDiv1">
+  <div class="toggle" style="border-radius: 5px;  background-image: url(3.png);background-repeat: repeat;">
+ <nav>
+<label for="drop" class="toggle">Menu</label>
+  <input type="checkbox" id="drop" />
+  <ul class="menu2">
+          <li><a href="/menu/">Accueil</a></li>
+<li><a href="/donnees/">Mes donnees</a></li>
+<li><a href="/note/">Mes notes</a></li>
+<li><a href="/emploi/">Mon emploi du temps</a></li>
+<li><a href="/deconnexion">Deco</a></li>
+    
+  </ul>
+</nav>
+  
+  </div>
+ 
+  <div style="margin: 0px -40px;">
+<ul class="menu">
+
+      <li><a href="/menu/">Accueil</a></li>
+<li><a href="/donnees/">Mes donnees</a></li>
+<li><a href="/note/">Mes notes</a></li>
+<li><a href="/emploi/">Mon emploi du temps</a></li>
+<li><a href="/deconnexion">Deco</a></li>
+       
+    </ul></div></div>
+  <div id="LayoutDiv2"><img class="logoEnsta" src="/static/BDD/deux/Logo.png" alt="logoensta" align="right" style="margin:18px 0px; width:130px"></div>
+ <div id="LayoutDiv3" >
+
+		<div class="title2">{{user.last_name}} {{user.first_name}} 
+	
+	
+
+{% block body %}
+{% endblock %}
+</div>
+</body>
+
+{% block navigation %}
+{% endblock %}

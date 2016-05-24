@@ -1,0 +1,26 @@
+{% extends "eleve.html" %}
+
+
+{% block body %}
+- Accueil </div>
+<div class="bgrepeat" data-mcs-theme="light">
+ <div id="LayoutDiv5">
+      
+      <div class="mCustomScrollbar" data-mcs-theme="light">
+{% for n in news %}
+
+<div id="news">
+<br>
+{{n|safe}}
+<br>
+<br>
+</div>
+<br>
+
+{% endfor %}
+</center>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

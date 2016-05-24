@@ -1,9 +1,30 @@
 
 {% load watchTag %}	
 {% load staticfiles %}
-<html>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
 <head>
-<title>Helato</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width" />
+
+
+<title>IWIMBDSL</title>
+
+<link href="/static/BDD/deux/style3.css" type="text/css" media="all" title="Design" rel="stylesheet" /> 
+
+<link rel="stylesheet" href="/static/BDD/deux/jquery.mCustomScrollbar.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/BDD/deux/jquery.mCustomScrollbar.concat.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style2.css" />
+     <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style.css" />
+    <link href="/static/BDD/deux/cssmulti.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/boilerplate.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/cssplus.css" rel="stylesheet" type="text/css">
+    <script src="/static/BDD/deux/respond.min.js"></script>
 <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
 
 <script src="/static/BDD/js/jquery.min.js"></script>
@@ -14,37 +35,61 @@
 
 </head>
 <body>
-<p><a href="/">Back to Site</a>
-<a href="/administration">Back to administration</a>
-<a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back</a>
-</p>
+<div class="gridContainer clearfix">
+  <div id="LayoutDiv1">
+  <div class="toggle" style="border-radius: 5px;  background-image: url(3.png);background-repeat: repeat;">
+ <nav>
+<label for="drop" class="toggle">Menu</label>
+  <input type="checkbox" id="drop" />
+  <ul class="menu2">
+    <li><a href="#">Accueil</a></li>
+    <li> 
+      <!-- First Tier Drop Down -->
+      <label for="drop-1" class="toggle">Base de donnée</label>
+      <a href="#">Service</a>
+      <input type="checkbox" id="drop-1"/>
+      <ul>
+       <li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/administration">Accueil</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Deco</a></li>
+    
+  </ul>
+</nav>
+  
+  </div>
+ 
+  <div style="margin: 0px -40px;">
+<ul class="menu">
+<li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/administration">Accueil</a></li>
+       
+    </ul></div></div>
+  <div id="LayoutDiv2"><img class="logoEnsta" src="/static/BDD/deux/Logo.png" alt="logoensta" align="right" style="margin:18px 0px; width:130px"></div>
+ 
+ <div id="LayoutDiv3" >
 
-<form action="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+<form class="form-style-1" action="/change/{{ table }}/{{ idP }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 	{% csrf_token %}
 	{{ form}}
 	<input type="submit" value="Change"/>
 </form>
 {% if changed %}
-	changed
+	<br><br>changed
 {% endif %}
+<hr>
 
-{% for l in links %}
-	<a href="{{ l.0 }}">{{ l.1 }}</a> &nbsp;&nbsp;&nbsp;
-{% endfor %}
-<br/><br/>
+
 {% for dd in titrest %}
-	<table border="1 ">
-		<tr>
-			<td>
-				<b>{{ dd.2 }}</b>
-			</td>
-		</tr>
+
+		
 		
 		<tr>
 			<td>
 				
 				
-				<form action="/change/{{ table }}/{{ idP }}/{{ dd.0.2 }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+				<form class="form-style-1" action="/change/{{ table }}/{{ idP }}/{{ dd.0.2 }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 				{% csrf_token %}
 				<table>
 				
@@ -52,7 +97,7 @@
 						{{ dd.0.0 }}
 					
 				
-				</table>
+				</table><br>
 					
 					<input type="submit" value="Modifier"/>
 				</form>
@@ -61,8 +106,8 @@
 
 			</td>
 		</tr>
-	</table>
-{% endfor %}
 
+{% endfor %}
+</div>
 </body>
 </html>		

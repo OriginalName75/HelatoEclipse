@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     The ''generator'' module
     ======================
@@ -102,7 +103,7 @@ def module(n, clear=False):
             d = r.choice(DEUZE)
             nom = f + ' ' + d
             mod.nom = nom
-            mod.uv = u
+            mod.theuv = u
             mod.save()
             
 @transaction.atomic           

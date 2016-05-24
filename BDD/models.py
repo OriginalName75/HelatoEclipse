@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """
-    The ''models'' module
+    The ''mod'' module
     ======================
     
     It defines what is on the database
@@ -14,16 +15,69 @@
     
 @author: IWIMBDSL
 """
+
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import models as mod
 from django.utils import timezone
+from django.utils.datetime_safe import datetime
 
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, SEMAINE, LUNDI, TYPENEWS, \
-    TYPENEWSG, AJOUT
+    TYPENEWSG, AJOUT, TYMO, INCONNU_STATUT_MOD
 
 
-class Personne(models.Model):
+
+class Modification(mod.Model):
+    """
+        A modification is a table that stores the modifications applied to an other table.
+        
+        A Modification has a datemodif, a typetable, a typemod (to represent if the table were added, 
+        deleted or just modified) and an ipmod (which stored the id of the modified table)
+        
+        :example:
+        >> from BDD.choices import AJOUT
+        >> mod = mod.Modification()
+        >> mod.datemodif = timezone.now()
+        >> mod.typetable = 'Groupe'
+        >> mod.typemod = AJOUT
+        >> mod.ipmod = c.id
+        >> mod.save()
+        save the modification representing the add of a group
+    """
+    
+    datemodif = mod.DateTimeField(default=datetime.now)
+    typetable = mod.CharField(max_length=200, null=True)
+    typemod = mod.IntegerField(choices=TYMO, default=INCONNU_STATUT_MOD)
+    ipmod = mod.IntegerField (null=True)
+    
+    def __str__ (self):
+        return self.datemodif.strftime('%d/%m/%Y %H:%M:%S')
+
+class ChampsModifie(mod.Model):
+    """
+        A ChampsModifie is a table that stores one of the modifications applied to an other table.
+        
+        A ChampsModifie has a champs (which links it to the Modification it is associate with),
+        a nomchamp (type of the changed field), and a valchamp (value of this field).
+        
+        :example:
+        >> cm1 = mod.ChampsModifie()
+        >> cm1.champs = mod
+        >> cm1.nomchamp = 'nom'
+        >> cm1.valchamp = nomm
+        >> cm1.save()
+        save the modification representing the change of the name of the table represented by the Modification
+        mod from nomm
+    """
+    
+    champs = mod.ForeignKey(Modification)
+    nomchamp = mod.CharField(max_length=50)
+    valchamp = mod.CharField(max_length=1000, null=True)
+    
+    def __str__ (self):
+        return self.nomchamp
+
+class Personne(mod.Model):
     """
         It defines how a person is stocked in the database.
         
@@ -38,7 +92,7 @@ class Personne(models.Model):
         It has also a filter (which defines a person in a unique way), used in forms.
         
         :exemple:
-        >> from django.contrib.auth.models import User
+        >> from django.contrib.auth.mod import User
         >> from BDD.choices import HOMME_STATUT, ELEVE_STATUT
         >> user=User(first_name="Jimmy", last_name="Page", username="LedZep", password="123456", email="jimmy@ledzep.com")
         >> user.save()
@@ -51,33 +105,59 @@ class Personne(models.Model):
         
     """
     
-    sexe = models.IntegerField(choices=SEXE, default=INCONNU_STATUT)  # true = femme; false = homme
-    adresse = models.CharField(max_length=200, null=True)  # adresse de le personne
-    promotion = models.IntegerField(null=True)  # ex : 2017
-    type = models.IntegerField(choices=TYPE, default=INCONNU_STATUT_TYPE)
-    dateDeNaissance = models.DateField(null=True)  # date
-    lieuDeNaissance = models.CharField(max_length=200, null=True)  # lieu de la naissance
-    numeroDeTel = models.CharField(null=True, max_length=40)  # son 06
-    user = models.OneToOneField(User)  # l'authentification est gérée pas django
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
-    filter = models.CharField(max_length=200)  # adresse de le personne
-    
+    sexe = mod.IntegerField(choices=SEXE, default=INCONNU_STATUT)  # true = femme; false = homme
+    adresse = mod.CharField(max_length=200, null=True)  # adresse de le personne
+    promotion = mod.IntegerField(null=True)  # ex : 2017
+    type = mod.IntegerField(choices=TYPE, default=INCONNU_STATUT_TYPE)
+    dateDeNaissance = mod.DateField(null=True)  # date
+    lieuDeNaissance = mod.CharField(max_length=200, null=True)  # lieu de la naissance
+    numeroDeTel = mod.CharField(null=True, max_length=40)  # son 06
+    user = mod.OneToOneField(User)  # l'authentification est gérée pas django
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    filter = mod.CharField(max_length=200)  # adresse de le personne
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.filter
-class horaireProf(models.Model):
+    def links(self):
+        """ Print links in fiche and modifie view
+        :param table: it represent which kind of data it is (exemple: a groupe)
+        :type table: int 
+        
+        """
+        l = []
+        
+        l.append(['/watch/6/0', 'Lui ajouter des notes'])
+        l.append(['/watch/7/0', 'Lui ajouter des cours'])
+    
+        return l  
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('prenom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('login', "if (VAL.length > 3 && VAL) return true; else return false;"  , 'Ce champ doit avoir au moins 4 caracteres'))
+        l.append(QUIRY('numeroDeTel', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        l.append(QUIRY('promotion', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        l.append(QUIRY('mdp', "if (VAL.length > 5 && VAL) return true; else return false;"  , 'Au moins 6 caracteres'))
+        l.append(QUIRY('mdp2', "if ((VAL == jQuery('#id_form-'+lolo+'-mdp').val()) && VAL) return true; else return false;"  , 'Les mots de passe sont differents'))
+        l.append(QUIRY('mail', "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;"  , 'Ce n\'est pas un mail valide'))
+        l.append(QUIRY('dateDeNaissance', "if (!isValidDate(parseInt(VAL.split('/')[2]), parseInt(VAL.split('/')[0]), parseInt(VAL.split('/')[1]))) return false; else return true;"  , 'Ce n\'est pas une date valide'))
+    
+        return l
+class horaireProf(mod.Model):
     """ 
         Pas encore utilisé
     """
-    prof = models.ForeignKey(Personne)
-    jdelaSemaine = models.IntegerField(choices=SEMAINE, default=LUNDI)
-    hminMatin = models.IntegerField()
-    hmaxMatin = models.IntegerField()
-    hminApresMidi = models.IntegerField()
-    hmaxApresMidi = models.IntegerField()
-    
+    prof = mod.ForeignKey(Personne)
+    jdelaSemaine = mod.IntegerField(choices=SEMAINE, default=LUNDI)
+    hminMatin = mod.IntegerField()
+    hmaxMatin = mod.IntegerField()
+    hminApresMidi = mod.IntegerField()
+    hmaxApresMidi = mod.IntegerField()
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.get_jdelaSemaine_display() + " : " + str(self.hminMatin) + "/" + str(self.hmaxMatin) + " + " + str(self.hminApresMidi) + "/" + str(self.hmaxApresMidi)
-class Groupe(models.Model):
+class Groupe(mod.Model):
     """
         It defines how a group is stocked in the database.
         
@@ -104,17 +184,23 @@ class Groupe(models.Model):
         add a module in a group
         
     """
-    nom = models.CharField(max_length=30)  # nom du groupe
-    personnes = models.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
-    #########"   modif momo #########################
+    nom = mod.CharField(max_length=30)  # nom du groupe
+    personnes = mod.ManyToManyField(Personne, blank=True)  # un groupe a plusieurs oersonne et une personne a plusieur groupe
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
     
-    modules=models.ManyToManyField('Module', blank=True)
     
-    #########"   fin modif momo #########################
+    modules=mod.ManyToManyField('Module', blank=True)
+    
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.nom
-class UV(models.Model):
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        
+        return l
+class UV(mod.Model):
     """
         It defines how an UV is stocked in the database.
         
@@ -127,12 +213,31 @@ class UV(models.Model):
         save an UV in the database 
         
     """
-    nom = models.CharField(max_length=30)  # nom de l'UV
+    nom = mod.CharField(max_length=30)  # nom de l'UV
+    isvisible = mod.BooleanField(default = True)
+    uploadDate = mod.DateTimeField(default=timezone.now()) 
+    def links(self):
+        """ Print links in fiche and modifie view
+        :param table: it represent which kind of data it is (exemple: a groupe)
+        :type table: int 
         
+        """
+        l = []
     
+        l.append(['/watch/3/0', 'Lui ajouter des modules'])
+        return l  
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        
+        return l
     def __str__ (self):
-        return self.nom   
-class Module(models.Model):
+        
+        return "%s" %(self.nom)
+    
+    
+class Module(mod.Model):
     """
         It defines how a module is stocked in the database.
         
@@ -146,15 +251,22 @@ class Module(models.Model):
         >> m.save()
         save a module in the database 
     """  
-    nom = models.CharField(max_length=30)  # nom du module    
-    uv = models.ForeignKey(UV)
-    
+    nom = mod.CharField(max_length=30)  # nom du module    
+    theuv = mod.ForeignKey(UV)
+    isvisible = mod.BooleanField(default = True)
+    uploadDate = mod.DateTimeField(default=timezone.now()) 
     def __str__ (self):
         
-        return "%s - %s" % (self.nom, self.uv.nom)
-    
+        return "%s - %s" % (self.nom, self.theuv.nom)
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('theuv', "if (VAL) return true; else return false;"  , 'Choisissez un uv svp'))
+        
+        return l
  
-class Salle(models.Model):
+class Salle(mod.Model):
     """
         It defines how a classroom is stocked in the database.
         
@@ -167,12 +279,20 @@ class Salle(models.Model):
         save a classroom in the database 
     """
    
-    nom = models.CharField(max_length=30)
-    capacite = models.IntegerField(null=True)
-    type = models.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE) 
+    nom = mod.CharField(max_length=30)
+    capacite = mod.IntegerField(null=True)
+    type = mod.IntegerField(choices=SALLES, default=INCONNU_STATUT_SALLE)
+    isvisible = mod.BooleanField(default = True) 
     def __str__ (self):
-        return self.nom  
-class Note(models.Model):
+        return self.nom
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('capacite', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        
+        return l  
+class Note(mod.Model):
     """
         It defines how a mark is stocked in the database.
         
@@ -191,14 +311,31 @@ class Note(models.Model):
         save a mark in the database 
     """
    
-    note = models.IntegerField()
-    personne = models.ForeignKey(Personne) 
-    module = models.ForeignKey(Module)
-    prof= models.ForeignKey(Personne, related_name="ANoter")
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
+    lanote = mod.IntegerField(default=0, blank=True, null=True)
+    personnenote = mod.ForeignKey(Personne)
+    themodule = mod.ForeignKey(Module)
+    prof= mod.ForeignKey(Personne, related_name="ANoter")
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    isvisible = mod.BooleanField(default = True)
+    def ajouterPlusieurs(self):
+        """
+            See ajouterPlusieurs of mod.Model
+        """
+        from BDD.forms import chooseGroupe, notes, BaseNoteFormSet
+        from Functions.data import ADDMANY
+        return ADDMANY(chooseGroupe, notes, BaseNoteFormSet, ["groupes","module"], [Personne,Module],'groupe__in')
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('note', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('note', "if (!isNaN(VAL)) return true; else return false;"  , 'Ce n\'est pas un nombre'))
+        l.append(QUIRY('personne', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('module', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        
+        return l
     def __str__ (self):
-        return str(self.note)    
-class TypeCour(models.Model):
+        return str(self.lanote)    
+class TypeCour(mod.Model):
     """
         It defines a type of lesson.
         
@@ -216,13 +353,21 @@ class TypeCour(models.Model):
         >> t.save()
         save a type of lesson in the database 
     """
-    nom = models.CharField(max_length=30)
-    profs = models.ManyToManyField(Personne, blank=True)
-    groupe = models.ManyToManyField(Groupe, blank=True)
-    isExam = models.BooleanField()
+    nom = mod.CharField(max_length=30)
+    profs = mod.ManyToManyField(Personne, blank=True)
+    groupe = mod.ManyToManyField(Groupe, blank=True)
+    isExam = mod.BooleanField()
+    isvisible = mod.BooleanField(default = True)
+    uploadDate = mod.DateTimeField(default=timezone.now()) 
     def __str__ (self):
         return self.nom
-class Cour(models.Model):
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('nom', "if (VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        return l
+    
+class Cour(mod.Model):
     """
         It defines a lesson.
         
@@ -241,18 +386,29 @@ class Cour(models.Model):
         save a lesson in the database 
     """
     
-    typeCour = models.ForeignKey(TypeCour)
-    salles = models.ManyToManyField(Salle, blank=True)
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
-    semaineMin = models.IntegerField()
-    semaineMax = models.IntegerField()
-    jour = models.IntegerField(choices=SEMAINE, default=LUNDI)
-    hmin = models.IntegerField()
-    hmax = models.IntegerField()
+    typeCour = mod.ForeignKey(TypeCour)
+    salles = mod.ManyToManyField(Salle, blank=True)
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    semaineMin = mod.IntegerField()
+    semaineMax = mod.IntegerField()
+    jour = mod.IntegerField(choices=SEMAINE, default=LUNDI)
+    hmin = mod.IntegerField()
+    hmax = mod.IntegerField()
+    isvisible = mod.BooleanField(default = True)
     def __str__ (self):
         return self.typeCour.nom
-
-class News(models.Model):
+    def quiery(self):
+        from Functions.data import QUIRY
+        l=[]
+        l.append(QUIRY('jour', "if ((VAL) return true; else return false;"  , 'Ce champ est obligatoire'))
+        l.append(QUIRY('semaineMin', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'))
+        l.append(QUIRY('semaineMax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoire et >-1 et <53'))
+        l.append(QUIRY('hmin', "if (VAL && VAL>=0 && VAL<=10) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'))
+        l.append(QUIRY('hmax', "if (VAL && VAL>=0 && VAL<=52) return true; else return false;"  , 'Ce champ est obligatoireet >-1 et <11'))
+        
+      
+        return l
+class News(mod.Model):
     """
         It defines a news.
         
@@ -269,11 +425,13 @@ class News(models.Model):
         save a lesson in the database (the upload date is automatic)
     """
     
-    personne=models.ManyToManyField(Personne)
-    txt=models.CharField(max_length=100)
-    type = models.IntegerField(choices=TYPENEWS, default=INCONNU_STATUT_TYPE)
-    typeG= models.IntegerField(choices=TYPENEWSG, default=AJOUT)
-    uploadDate = models.DateTimeField(default=timezone.now())  # date de l'upload
+    personne=mod.ManyToManyField(Personne)
+    txt=mod.CharField(max_length=100)
+    type = mod.IntegerField(choices=TYPENEWS, default=INCONNU_STATUT_TYPE)
+    typeG= mod.IntegerField(choices=TYPENEWSG, default=AJOUT)
+    uploadDate = mod.DateTimeField(default=timezone.now())  # date de l'upload
+    isvisible = mod.BooleanField(default = True)
+    sens= mod.BooleanField(default = True)
     def __str__ (self):
         return self.txt
 

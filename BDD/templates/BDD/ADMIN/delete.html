@@ -1,19 +1,26 @@
-
+<link href="/static/BDD/CSS/style2.css" type="text/css" media="all" title="Design" rel="stylesheet" />
 <html>
 <head>
 <title>Helato</title>
 </head>
+
+<nav>
+<ul>
+<li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/administration">Accueil</a></li>
+</ul>
+</nav>
+
 <body>
-<p><a href="/">Back to Site</a>
-<a href="/administration">Back to administration</a>
-<a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back to personne</a>
-</p>
 <p>
 {% if not supr %}
-Voulez-vous supprimer {{ p.user.last_name }} {{ p.user.first_name }} ?</br>
-<a href="/delete/{{ table }}/{{ idP }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/1">oui</a> <a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">non</a>
+</br></br>
+Voulez-vous vraiment supprimer {{ p.user.last_name }} {{ p.user.first_name }} ?</br></br>
+
+<a href="/delete/{{ table }}/{{ idP }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/1"><img src="/static/BDD/CSS/images/Bouton_oui.png"></a> <a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}"><img src="/static/BDD/CSS/images/Bouton_non.png"></a>
 {% else %}
-Suprimé
+</br>
+Opération effectuée avec succès
 {% endif %}
 </p>
 </body>

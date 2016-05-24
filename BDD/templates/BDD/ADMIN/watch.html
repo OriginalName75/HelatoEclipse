@@ -1,10 +1,52 @@
-
 {% load watchTag %}
-<html>
+
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
 <head>
-<title>Helato</title>
+<meta charset="utf-8">
+<title>IWIMBDSL</title>
+
+<link href="/static/BDD/deux/style3.css" type="text/css" media="all" title="Design" rel="stylesheet" /> 
+
+<link rel="stylesheet" href="/static/BDD/deux/jquery.mCustomScrollbar.css" />
+<meta name="viewport" content="width=device-width" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/BDD/deux/jquery.mCustomScrollbar.concat.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style2.css" />
+     <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style.css" />
+    <link href="/static/BDD/deux/cssmulti.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/boilerplate.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/cssplus.css" rel="stylesheet" type="text/css">
+    <script src="/static/BDD/deux/respond.min.js"></script>
+    
+
+<script type="text/javascript">
+
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+});
+</script>
+
+<script>
+    (function($){
+        $(window).load(function(){
+            $(".content").tableTitle({
+   				 axis:"x" 
+			});
+        });
+    })(jQuery);
+	
+</script>
 {% if filtre != 0 %}
+	
+	
 	<link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
+	
 
 <script src="/static/BDD/js/jquery.min.js"></script>
 <script src="/static/BDD/js/jquery-ui.js"></script>
@@ -14,31 +56,79 @@
 {% endif %}
 </head>
 <body>
-<p><a href="/">Back to Site</a>
-<a href="/administration">Back to administration</a></p>
+<div class="gridContainer clearfix">
+  <div id="LayoutDiv1">
+  <div class="toggle" style="border-radius: 5px;  background-image: url(3.png);background-repeat: repeat;">
+ <nav>
+<label for="drop" class="toggle">Menu</label>
+  <input type="checkbox" id="drop" />
+  <ul class="menu2">
+    <li><a href="#">Accueil</a></li>
+    <li> 
+      <!-- First Tier Drop Down -->
+      <label for="drop-1" class="toggle">Base de donnée</label>
+      <a href="#">Service</a>
+      <input type="checkbox" id="drop-1"/>
+      <ul>
+       <li><a href="/watch/0/0">Personnes</a></li>
+		<li><a href="/watch/1/0">Groupes</a></li>
+		<li><a href="/watch/2/0">UV</a></li>
+		<li><a href="/watch/3/0">Modules</a></li>
+		<li><a href="/watch/4/0">Calendrier</a></li>
+		<li><a href="/watch/5/0">Salles</a></li>
+		<li><a href="/watch/6/0">Notes</a></li>
+		<li><a href="/watch/7/0">Cours</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Deco</a></li>
+    
+  </ul>
+</nav>
+  
+  </div>
+ 
+  <div style="margin: 0px -40px;">
+<ul class="menu">
 
-<p><a href="/ajouter/{{ table }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Ajouter</a> 
+      <li><a href="/administration">Accueil</a></li>
+		<li><a href="/watch/0/0">Personnes</a></li>
+		<li><a href="/watch/1/0">Groupes</a></li>
+		<li><a href="/watch/2/0">UV</a></li>
+		<li><a href="/watch/3/0">Modules</a></li>
+		<li><a href="/watch/4/0">Calendrier</a></li>
+		<li><a href="/watch/5/0">Salles</a></li>
+		<li><a href="/watch/6/0">Notes</a></li>
+		<li><a href="/watch/7/0">Cours</a></li>
+		<li><a href="/deconnexion">Deco</a></li>
+       
+    </ul></div></div>
+  <div id="LayoutDiv2"><img class="logoEnsta" src="/static/BDD/deux/Logo.png" alt="logoensta" align="right" style="margin:18px 0px; width:130px"></div>
+ <div id="LayoutDiv3" >
+
+ 
+<div class="yolo">
+<a style = "font-family:Linux Libertine Slanted;" href="/ajouter/{{ table }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Ajouter</a> 
 
 {% if filtre == 0 %}
-<a href="/watch/{{ table }}/1/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Filtre</a>
+<a style = "font-family:Linux Libertine Slanted;" href="/watch/{{ table }}/1/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Filtrer</a>
 {% else %}
-<a href="/watch/{{ table }}/0/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Pas de filtre</a>
+<a style = "font-family:Linux Libertine Slanted;" href="/watch/{{ table }}/0/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Pas de filtre</a>
 {% endif %}
 
 
 
 {% if filtre > 0 %}
-<form action="/watch/{{ table }}/2/1/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+<div id="filtre"><form class="form-style-1" action="/watch/{{ table }}/2/1/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 	{% csrf_token %}
 	{{ form }}
 	<input type="submit" value="Filtrer"/>
-</form>
-
+</form><br>
+</filtre>
 {% endif %}
 
 
-</p>
-<p>
+</div>
+<div id="page">
 {% if not allP %}
 {% if page > 1 %}
 <a href="/watch/{{ table }}/{{ filtre }}/{{ pagemoins }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">&#139;&#139;</a>
@@ -63,26 +153,36 @@ Afficher <a href="/watch/{{ table }}/{{ filtre }}/1/20/{{ nomClasser }}/{{ plusO
 <a href="/watch/{{ table }}/{{ filtre }}/1/200/{{ nomClasser }}/{{ plusOuMoins }}">200</a>-
 <a href="/watch/{{ table }}/{{ filtre }}/1/500/{{ nomClasser }}/{{ plusOuMoins }}">500</a>-
 
-<a href="/watch/{{ table }}/{{ filtre }}/1/10000/{{ nomClasser }}/{{ plusOuMoins }}">all</a>
+<a href="/watch/{{ table }}/{{ filtre }}/1/10000/{{ nomClasser }}/{{ plusOuMoins }}">toutes les</a>
 
 
 personnes par page
 
-</p>
-<table width="100%" border="1">
+</div><hr>
+<div class="tableTitle" style="overflow:auto; height:800px;">
+<div class="table-title" >
+<table class="table-fill" style="border: 2px solid;" >
+
 	<tr>
 		{% for l in listAffich %}
-		<td><b>{{ l.0 }} <a href="/watch/{{ table }}/{{ filtre }}/1/{{ nbparpage }}/{{ l.1 }}/0">+</a>
-		<a href="/watch/{{ table }}/{{ filtre }}/1/{{ nbparpage }}/{{ l.1 }}/1">-</a></b></td>
+		{% if plusOuMoins == 0 %}
+		<th class="text-left" onclick="document.location = '/watch/{{ table }}/{{ filtre }}/1/{{ nbparpage }}/{{ l.1 }}/1';">
+		{% else %}
+		<th class="text-left" onclick="document.location = '/watch/{{ table }}/{{ filtre }}/1/{{ nbparpage }}/{{ l.1 }}/0';">
+		{% endif %}
+			{{ l.0 }}
+			
+		</th>
 		{% endfor %}
-		<td>
+		<th class="text-left">
 			-
-		</td>
+		</th>
 	</tr>
+
 
 {% for d in reponserecherche %}
 	
-	<tr>
+	<tr onclick="document.location = '/fiche/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}';">
 		{% for dd in listeliste %}
 			<td>
 				{% if dd.0 == 0 %}
@@ -92,6 +192,7 @@ personnes par page
 					{% for l in d|getS:dd.1|getSD:allllll %}
 						
 						 {{ l }}
+						 
 						  - 
 					{% empty %}
 						non atribué
@@ -103,8 +204,7 @@ personnes par page
 				{% endif %}
 			</td>
 		{% endfor %}
-		<td>
-			<a href="/fiche/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">f</a>
+		<td width="40px">
 			<a href="/change/{{ table }}/{{ d.id }}/0/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">m</a> 
 			<a href="/delete/{{ table }}/{{ d.id }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}/0">x</a>
 		</td>
@@ -115,5 +215,7 @@ Pas de personne
 
 </table>
 
+</div></div>
+</div></div>
 </body>
 </html>

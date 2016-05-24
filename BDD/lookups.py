@@ -11,7 +11,7 @@ from ajax_select import register, LookupChannel
 from BDD.models import Personne, Groupe, Module, UV, Salle, TypeCour
 
 
-@register('uv')
+@register('theuv')
 class UVLookup(LookupChannel):
     """
        It customize UV research in a field form 
@@ -184,7 +184,7 @@ class ModuleLookup(LookupChannel):
         :rtype: string
         
         """
-        stri= item.uv.nom + " - " + item.nom
+        stri= item.theuv.nom + " - " + item.nom
         return u"<span class='tag'>%s</span>" % stri
 
 @register('groupes')

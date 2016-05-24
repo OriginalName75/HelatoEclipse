@@ -1,10 +1,28 @@
-
 {{ form.media }} 
-
 {% load staticfiles %}
-<html>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
 <head>
-<title>Helato</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<title>IWIMBDSL</title>
+
+<link href="/static/BDD/deux/style3.css" type="text/css" media="all" title="Design" rel="stylesheet" /> 
+
+<link rel="stylesheet" href="/static/BDD/deux/jquery.mCustomScrollbar.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/BDD/deux/jquery.mCustomScrollbar.concat.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style2.css" />
+     <link rel="stylesheet" type="text/css" media="all" href="/static/BDD/deux/style.css" />
+    <link href="/static/BDD/deux/cssmulti.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/boilerplate.css" rel="stylesheet" type="text/css">
+    <link href="/static/BDD/deux/cssplus.css" rel="stylesheet" type="text/css">
+    <script src="/static/BDD/deux/respond.min.js"></script>
+    
+
 <link href="/static/ajax_select/css/ajax_select.css" type="text/css" media="all" rel="stylesheet" />
 
 <script src="/static/BDD/js/jquery.min.js"></script>
@@ -47,25 +65,55 @@
 	   
 </head>
 <body>
-		 
+<div class="gridContainer clearfix">
+  <div id="LayoutDiv1">
+  <div class="toggle" style="border-radius: 5px;  background-image: url(3.png);background-repeat: repeat;">
+ <nav>
+<label for="drop" class="toggle">Menu</label>
+  <input type="checkbox" id="drop" />
+  <ul class="menu2">
+    <li><a href="#">Accueil</a></li>
+    <li> 
+      <!-- First Tier Drop Down -->
+      <label for="drop-1" class="toggle">Base de donnée</label>
+      <a href="#">Service</a>
+      <input type="checkbox" id="drop-1"/>
+      <ul>
+       <li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/administration">Accueil</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Deco</a></li>
+    
+  </ul>
+</nav>
+  
+  </div>
+ 
+  <div style="margin: 0px -40px;">
+<ul class="menu">
+<li><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Retour</a></li>
+<li><a href="/administration">Accueil</a></li>
        
-            
-            
-<p><a href="/">Back to Site</a></p>
-<p><a href="/watch/{{ table }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}">Back</a></p>
-<p><a href="/administration">Back to Administration</a></p>
+    </ul></div></div>
+  <div id="LayoutDiv2"><img class="logoEnsta" src="/static/BDD/deux/Logo.png" alt="logoensta" align="right" style="margin:18px 0px; width:130px"></div>
+ 
+ <div id="LayoutDiv3" >
+
+
+
 {% if nbajout == 0 or nbajout == 100 or envoi %}
 	{% if envoi %}
-		<p><big><big>envoyé !!!</big></big> des autres ?</p>
+		<p><big><big>Uploadé</big></big> des autres ?</p>
 	{% endif %}
-	<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+	<form class="form-style-1" action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 		{% csrf_token %}
 		{{ form }}
 		<input type="submit" value="Les ajouter"/>
 	</form> 
-	{% if ajj != None %}
-		OU choisir des/un groupe(s) à noter<br><br>
-		<form action="/ajouter/{{ table }}/100/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+	{% if AJJ != None %}
+		<br><br>OU choisir des/un groupe(s) à noter
+		<form class="form-style-1" action="/ajouter/{{ table }}/100/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 		{% csrf_token %}
 		{{ formAjj }}
 		<input type="submit" value="Les noter"/>
@@ -74,7 +122,7 @@
 
 {% else %}
 	{% if form.errors %}
-		<p><big><big>Essai encore ;p</big></big></p>
+		<p><big><big>Erreur</big></big></p>
 	{% endif %}
 	{% if nbajout > 100 %}
 	Noter pour : <br>
@@ -84,7 +132,7 @@
 		{% endfor %}
 		<hr>
 		{% for m in multi %}
-			<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+			<form class="form-style-1" action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 			{{ formset.management_form }}
 			{% csrf_token %}
 			{% for s in m %}
@@ -96,7 +144,7 @@
 		{% endfor %}
 	{% else %}
 	{{ formset.non_form_errors }}
-		<form action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
+		<form class="form-style-1" action="/ajouter/{{ table }}/{{ nbajout }}/{{ filtre }}/{{ page }}/{{ nbparpage }}/{{ nomClasser }}/{{ plusOuMoins }}" method="post">
 			{{ formset.management_form }}
 			{% for form in formset %}
 			{% csrf_token %}
@@ -108,6 +156,6 @@
 		</form> 
 	{% endif %}
 {% endif %}
-
+</div>
 </body>
 </html>

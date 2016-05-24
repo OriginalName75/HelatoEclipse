@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
     The ''forms'' module
     ======================
@@ -30,10 +31,35 @@ from django.forms.formsets import BaseFormSet
 from BDD.choices import SEXE, TYPE, INCONNU_STATUT, \
     INCONNU_STATUT_TYPE, SALLES, INCONNU_STATUT_SALLE, CHOICESNB, \
     SEMAINEAAVECINCO, SEMAINEINCONNU
-from BDD.models import UV, Personne, Module, Groupe, TypeCour, Salle
+from BDD import models
 from Functions import addData, modiData
 
+class langage(forms.Form):
+    """
+        Simulate a shell
+        
+        :Exemples:
+    
+        >> form=langage() 
+        >> form
+        return html code of a shell (without the design)
+        
+    """
+    txt=forms.CharField(label="", max_length=300)
+    txt.widget.attrs.update({'style' : 'width:100%; color:white; border: none; background-color:transparent', 'autofocus': 'autofocus'})
+   
+
 class semaine(forms.Form):
+    """
+        Select the a week (nuumbers only)
+        
+        :Exemples:
+    
+        >> form=semaine() 
+        >> form
+        return html code with a single field in order to select a week
+        
+    """
     nb = forms.IntegerField(label="Semaine :")
 
 class nbAjout(forms.Form):
@@ -408,7 +434,7 @@ class moduleFormSet(BaseFormSet):
         l = []
         for form in self.forms:
             nom = form.cleaned_data['nom']
-            uv = form.cleaned_data['uv']
+            uv = form.cleaned_data['theuv']
             for i in l:
                 if i[0] == nom and uv == i[1]:
                     raise forms.ValidationError("Les modules doivent etre deux a deux distinct par uv")
@@ -466,7 +492,7 @@ class chooseGroupe(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Personne
+        model = models.Personne
         fields = ['groupes']
 
     groupes = AutoCompleteSelectMultipleField('groupes', required=True, help_text=None)
@@ -482,7 +508,7 @@ class addGroupe(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Personne
+        model = models.Personne
         fields = ['groupes']
 
     groupes = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)
@@ -533,7 +559,7 @@ class addModule(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Groupe
+        model = models.Groupe
         fields = ['modules']
 
     modules = AutoCompleteSelectMultipleField('module', required=False, help_text=None)
@@ -569,7 +595,7 @@ class addSalle(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Salle
+        model = models.Salle
         fields = ['salles']
 
     salles = AutoCompleteSelectMultipleField('salles', required=False, help_text=None)
@@ -606,7 +632,7 @@ class addGroupeModule(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Module
+        model = models.Module
         fields = ['groupes']
 
     groupes = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)
@@ -657,7 +683,7 @@ class addTypeCour(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = TypeCour
+        model = models.TypeCour
         fields = ['groupe']
     
     groupe = AutoCompleteSelectMultipleField('groupes', required=False, help_text=None)    
@@ -692,7 +718,7 @@ class addPersonnetypeCour(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = TypeCour
+        model = models.TypeCour
         fields = ['profs']
     
     profs = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)   
@@ -727,7 +753,7 @@ class addPersonne(forms.ModelForm):
             Overwrite Django ModelForm to limit the number of field
             
         """
-        model = Personne
+        model = models.Personne
         fields = ['personnes']
     
     personnes = AutoCompleteSelectMultipleField('personnes', required=False, help_text=None)
@@ -1023,7 +1049,7 @@ class changeModule(forms.Form):
                 
     """
     nom = forms.CharField(required=True, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = AutoCompleteSelectField('uv', required=True, help_text=None)
+    theuv = AutoCompleteSelectField('theuv', label="uv", required=True, help_text=None)
     def modif(self, idP, p):
         """
             changes the module selected regarding the form fields
@@ -1042,7 +1068,7 @@ class changeModule(forms.Form):
         """
         data = self.cleaned_data
         nom = data['nom']
-        uv = data['uv']
+        uv = data['theuv']
         modiData.modModule(idP, p, nom, uv)
 class fitrerModule(forms.Form):
     """
@@ -1060,7 +1086,7 @@ class fitrerModule(forms.Form):
                 
     """
     nom = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'UV', 'class':'form-control input-perso'}))
+    theuv = forms.CharField(required=False, max_length=30, label="", widget=forms.TextInput(attrs={'placeholder': 'UV', 'class':'form-control input-perso'}))
 class fitrerP(forms.Form):
     """
         A form to filter persons
@@ -1292,7 +1318,7 @@ class AjouterGroupe(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if Groupe.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+        if models.Groupe.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
                 "Le nom de groupe est deja utlise"
             )
@@ -1362,7 +1388,7 @@ class AjouterSalle(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if Salle.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+        if models.Salle.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
                 "Le nom de la salle est deja utlise"
             )
@@ -1435,7 +1461,7 @@ class AjouterUV(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if UV.objects.filter(nom=self.cleaned_data.get('nom')).exists():
+        if models.UV.objects.filter(nom=self.cleaned_data.get('nom')).exists():
             raise ValidationError(
                 "Cet UV est deja cree"
             )
@@ -1461,7 +1487,7 @@ class AjouterModule(forms.Form):
                 
     """
     nom = forms.CharField(label="", required=True, max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Nom', 'class':'form-control input-perso'}))
-    uv = AutoCompleteSelectField('uv', required=True, help_text=None)
+    theuv = AutoCompleteSelectField('theuv', label="uv", required=True, help_text=None)
     def clean(self):
         """
            Overwrite django clean() function. It adds additional requirements of the form
@@ -1470,7 +1496,7 @@ class AjouterModule(forms.Form):
            clean() is used in the is_valid() function of a form
            
         """
-        if Module.objects.filter(nom=self.cleaned_data.get('nom'), uv=self.cleaned_data.get('uv')).exists():
+        if models.Module.objects.filter(nom=self.cleaned_data.get('nom'), theuv=self.cleaned_data.get('theuv')).exists():
             raise ValidationError(
                 "Ce module est deja cree pour cet uv"
             )
@@ -1492,5 +1518,5 @@ class AjouterModule(forms.Form):
         """
         data = self.cleaned_data
         nom = data['nom']
-        uv = data['uv']
+        uv = data['theuv']
         addData.addModule(p, nom, uv)

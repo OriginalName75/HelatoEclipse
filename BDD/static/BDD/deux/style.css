@@ -1,0 +1,40 @@
+body
+{
+    background-color: rgb(254,246,218);
+	
+}
+
+
+.bgrepeat {
+	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+	border-radius: 10px;
+	border: 2px solid #09C;
+	padding: 10px 20px;
+
+	
+	background-image: url(1.jpg);
+	background-repeat: repeat;
+	font-size: 20px;
+	color: #BBB;
+}
+#news {
+	text-align: left;
+	padding: 20px 5px;
+	color: #DFF;
+
+	
+	
+    border-bottom: 1px solid #111;
+	
+	
+}
+.mCustomScrollbar{
+	text-align: left;
+	
+	
+}
+
+/* narcisradu.ro */
+
+
+

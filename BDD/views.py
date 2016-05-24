@@ -28,26 +28,29 @@ from django.forms.formsets import formset_factory
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from BDD import forms
 from BDD.choices import PROF_STATUT
 from BDD.forms import nbAjout
 from BDD.models import Personne, News
 from Eleve.views import menu
 from Functions import  data
 from Functions import generator
+from Functions.Ctrlz import Ctrlz
 from Functions.delete import supr_salles
 from Functions.news import addN
 from Functions.selectData import select
+from language import connexion
 
 
 @login_required(login_url='/connexion')
-def index(request):
+def index(request, plus=0):
    
    
-            
-        if request.user.is_superuser or int(request.user.personne.type)==PROF_STATUT :
-            return administration(request)
+        
+        if request.user.is_superuser or int(request.user.personne.type) == PROF_STATUT :
+            return administration(request, plus)
         else :
-            return menu(request)
+            return menu(request, plus)
         
         
 
@@ -67,69 +70,111 @@ def administration(request, plus=0):
     :rtype: HttpResponse
     
     """
+    print(plus)
     PR = PROF_STATUT
-    plus=int(plus)
-    new=News.objects.filter(personne__id__icontains=request.user.personne.id).order_by('-id')
-    maxx=new.count()
-    ajou=0
-    news=[]
-    l=0
-    i=0
-    fff=0
-    plus2=0
-    nb=1
-    first=True
+    isProf= request.user.personne.type==PROF_STATUT
+    plus = int(plus)
+    new = News.objects.filter(personne__id__icontains=request.user.personne.id).order_by('-id')
+    maxx = new.count()
+    ajou = 0
+    news = []
+    l = 0
+    i = 0
+    fff = 0
+    plus2 = 0
+    nb = 1
+    first = True
     #===========================================================================
     #                                 NEWS                                     
     #===========================================================================
     
-    if maxx>0:
-        while l<10 and i<maxx:
-            obj=new[i]
-            t=obj.type*100+obj.typeG
-            if i<maxx-1:
-                obj2=new[i+1]
-                tapres=obj2.type*100+obj2.typeG
+    if maxx > 0:
+        while l < 10 and i < maxx:
+            obj = new[i]
+            t = obj.type * 100 + obj.typeG
+            if i < maxx - 1:
+                obj2 = new[i + 1]
+                tapres = obj2.type * 100 + obj2.typeG
             else:
-                tapres=-2
-            if t==tapres:
-                nb=nb+1
+                tapres = -2
+            if t == tapres:
+                nb = nb + 1
                 
-                txt=addN(obj, nb, not plus==plus2+1,plus2+1)
+                txt = addN(obj, nb, not plus == plus2 + 1, plus2 + 1)
                 if first:
-                    fff=ajou
+                    fff = ajou
                     news.append(txt)
-                    ajou=ajou+1
+                    ajou = ajou + 1
                     
                 else:
                     
-                    news[fff]=txt
+                    news[fff] = txt
               
-                first=False
-                if plus==plus2+1:
+                first = False
+                if plus == plus2 + 1:
                     
                     news.append(obj.txt)
-                    ajou=ajou+1
+                    ajou = ajou + 1
             else:
-                l=l+1   
-                if nb==1 or plus==plus2+1:
+                l = l + 1   
+                if nb == 1 or plus == plus2 + 1:
                     news.append(obj.txt)
-                    ajou=ajou+1
-                plus2=plus2+1
-                nbbbb=1
-                nb=1
-                first=True
-            i=i+1 
-            tavant=t
+                    ajou = ajou + 1
+                plus2 = plus2 + 1
+                nbbbb = 1
+                nb = 1
+                first = True
+            i = i + 1 
+            tavant = t
             
-    import datetime
-    timenow = datetime.datetime.now()
+    
+    
+    text=[]
+        
+        
+    if request.method == 'POST':
+        form = forms.langage(request.POST)  
+        if form.is_valid(): 
+            strr = form.cleaned_data['txt']
+            if strr!="clear":
+                
+                reponse = connexion.connect(strr, request.user.personne.id)
+                strr = ">>> " + strr
+                if not 'argg' in request.session or not request.session['argg']:
+                    request.session['argg'] = [strr]
+                else:
+                    saved_list = request.session['argg']
+                    saved_list.append(strr)
+                    request.session['argg'] = saved_list
+                
+                if not 'resp' in request.session or not request.session['resp']:
+                    request.session['resp'] = [reponse]
+                else:
+                    
+                    saved_list = request.session['resp']
+                    saved_list.append(reponse)
+                    request.session['resp'] = saved_list   
+            else:
+                request.session['argg'] = []
+                request.session['resp'] = []
+    ii=0
+    if not 'argg' in request.session or not request.session['argg']:  
+        request.session['argg'] = []
+                
+        request.session['resp'] =[]     
+    for x in request.session['argg']:
+        text.append([x,request.session['resp'][ii]])
+        ii=ii+1
+    text=reversed(text)    
+    
+    
+    form = forms.langage()    
      
     return render(request, 'BDD/ADMIN/admin.html', locals())    
 
 
 @login_required(login_url='/connexion')
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def fiche(request, table, idP, filtre=None, page=None, nbparpage=None, nomClasser=None, plusOuMoins=None):
     """
         It defines the variables used in the template fiche.html, which show specifications of an object in the database.
@@ -171,13 +216,24 @@ def fiche(request, table, idP, filtre=None, page=None, nbparpage=None, nomClasse
     """
     table = int(table)
     allllll = 'all'
+    isProf= request.user.personne.type==PROF_STATUT
     TABBLE = data.table(table)
-    if not TABBLE.objects.filter(id=int(idP)).count()>0:
+    if not TABBLE.objects.filter(id=int(idP)).count() > 0:
         return http.HttpResponseRedirect('/')
+    if not request.user.is_superuser and table != 6:
+        return http.HttpResponseRedirect('/')
+    
     obj = TABBLE.objects.get(id=int(idP))
+    if not request.user.is_superuser and table == 6:
+        if obj.prof.id!=request.user.personne.id:
+            return http.HttpResponseRedirect('/')
     listeliste = data.listinside(table)
     listetab = data.listTable(table)
-    links = data.links(table)
+    MODEL=data.table(table)()
+    if hasattr(MODEL,'links'):
+        links = MODEL.links()
+    else:
+        links=[]
     entier = 0
     soustable = data.soustable(table)
     titrest = []
@@ -245,18 +301,28 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
     
     """
     
-    
+    isProf= request.user.personne.type==PROF_STATUT
     nbajout = int(nbajout)
     table = int(table)
-   
-    if not request.user.is_superuser and table != 6: # case of teacher
-        return index(request)
-    ajj = data.ajouterA(table)
-    ficheAfter = data.ficheAfter(table)
+    MODEL=data.table(table)()
+    if hasattr(MODEL,'ajouterPlusieurs'):
+       
+       
+        AJJ=MODEL.ajouterPlusieurs()
+        
+    else:
+        AJJ=None
+    if not request.user.is_superuser and table != 6:  # case of teacher
+        return http.HttpResponseRedirect('/')
+    #ajj = data.ajouterA(table)
+    ficheAfter = False
     if nbajout > 0 and nbajout != 100:
         
         listeform = range(0, nbajout)
-        lquery = data.quiry(table)
+        if hasattr(MODEL,'quiery'):
+            lquery = MODEL.quiery()
+        else:
+            lquery =[]
         table = int(table)
         envoi = False
         #===========================================================================
@@ -283,9 +349,6 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                         idP = form.save(request.user.personne)
                         
                     
-                    if not ficheAfter:
-                        
-                        return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
                 form = nbAjout()
                            
             else:
@@ -302,43 +365,45 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
             multi = []
             i = 0
             
-            
-            for x in ajj[1]:
-                if x[1] == 0:
-                    kwargs = {
-                        x[3]: stock[i]
-                    }
-                    a = x[2].objects.filter(**kwargs)
-                    nb = a.count()
-                    Formset = formset_factory(x[4], extra=nb, formset=x[5])
-                    
-                    if request.method == 'POST' and first:
-                       
-                        formset = Formset(request.POST, request.FILES)
-                    
-                            
-                    else:
-                        formset = Formset()
-                    b = []
-                    ii = 0
-                    for aa in a:
-                        b.append([aa, formset[ii]])
-                        ii += 1
+            if AJJ!=None:
+                
+                for x in AJJ.listFieldForm:
+                    if i==0:
+                        kwargs = {
+                            AJJ.QCode: stock[i]
+                        }
+                        a = AJJ.listModel[i].objects.filter(**kwargs)
+                        nb = a.count()
+                        Formset = formset_factory(AJJ.form, extra=nb, formset=AJJ.baseForm)
                         
-                    multi.append(b)
+                        if request.method == 'POST' and first:
+                           
+                            formset = Formset(request.POST, request.FILES)
+                        
+                                
+                        else:
+                            formset = Formset()
+                        b = []
+                        ii = 0
+                        for aa in a:
+                            b.append([aa, formset[ii]])
+                            ii += 1
+                            
+                        multi.append(b)
+                        
+                        
+                    else:
+                        solo.append(AJJ.listModel[i].objects.get(id=stock[i]))
+                    i += 1
                     
-                    
-                else:
-                    solo.append(x[2].objects.get(id=stock[i]))
-                i += 1
             if request.method == 'POST' and first:
                 if formset.is_valid():
                     jj = 0
                     for f in formset:
                         if table == 6:
-                            f.save(request.user.personne,solo, [x[jj] for x in multi],request.user.personne)
+                            f.save(request.user.personne, solo, [x[jj] for x in multi], request.user.personne)
                         else:
-                            f.save(request.user.personne,solo, [x[jj] for x in multi])
+                            f.save(request.user.personne, solo, [x[jj] for x in multi])
                         jj += 1
                     nbajout = 0  
                     return http.HttpResponseRedirect('/watch/' + str(table) + '/' + str(filtre))
@@ -349,7 +414,7 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
             #      Normal nb ajout. no many to many relations. 
             #      print forms to know how much
             #===========================================================================
-            if ajj == None or nbajout < 100:
+            if AJJ == None or nbajout < 100:
                 
                 form = nbAjout(request.POST)
                 
@@ -358,27 +423,29 @@ def ajouter(request, table, nbajout, filtre, page, nbparpage, nomClasser, plusOu
                     
                     return ajouter(request, table, nb, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
                 else:
-                    if ajj != None:
-                        formAjj = ajj[0]()
+                    if AJJ != None:
+                        formAjj = AJJ.formInit()
             #===========================================================================
             #      Many to many relations,print the forms
             #      to know which many to many relations 
             #===========================================================================
             else:
-                formAjj = ajj[0](request.POST)
+                formAjj = AJJ.formInit(request.POST)
                 stock = []
                 if formAjj.is_valid():
-                    for x in ajj[1]:
-                        if x[1] == 0:
-                            stock.append(formAjj.cleaned_data[x[0]])
+                    i=0
+                    for x in AJJ.listFieldForm:
+                        if i == 0:
+                            stock.append(formAjj.cleaned_data[x])
                         else:
-                            stock.append(formAjj.cleaned_data[x[0]].id)
-                
+                            stock.append(formAjj.cleaned_data[x].id)
+                        i=i+1
                     request.session['stock'] = stock
                     return ajouter(request, table, 101, filtre, page, nbparpage, nomClasser, plusOuMoins, False)
         else:
-            if ajj != None:
-                formAjj = ajj[0]()
+            if AJJ != None:
+                
+                formAjj = AJJ.formInit()
             form = nbAjout() 
             
             
@@ -438,12 +505,12 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
     
     """
 
-    
+    isProf= request.user.personne.type==PROF_STATUT
     supr = False
     table = int(table)
     if not request.user.is_superuser and table != 6:
-        return index(request)
-    if not data.table(table).objects.filter(id=int(idP)).count()>0:
+        return http.HttpResponseRedirect('/')
+    if not data.table(table).objects.filter(id=int(idP)).count() > 0:
         return http.HttpResponseRedirect('/')
     p = data.table(table).objects.get(id=int(idP))
     #===========================================================================
@@ -451,13 +518,14 @@ def delete(request, table, idP, filtre, page, nbparpage, nomClasser, plusOuMoins
     #===========================================================================
     if int(supri) == 1:
         
-        obj = data.table(table).objects.filter(id=int(idP))
+        obj = data.table(table).objects.get(id=int(idP))
+        if not request.user.is_superuser and table == 6:
+            if request.user.personne.id != obj.personne.id:
+                return http.HttpResponseRedirect('/')
         supr_salles(table, idP, request.user.personne)
-        if not request.user.is_superuser and table==6:
-            if request.user.personne.id!= obj.personne.id:
-                return index(request)
         
-        obj.delete()
+        
+       
         supr = True
     
     
@@ -475,7 +543,7 @@ def randomP(request):
     if not hasattr(request.user, 'personne'):
         p = Personne()
         p.user = request.user
-        p.filter="Superadmin"
+        p.filter = "Superadmin"
         p.save()
         request.user.first_name = "Dieu"
         request.user.last_name = "Tout puissant"
@@ -496,25 +564,30 @@ def randomP(request):
     return HttpResponse(text)
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser)
-def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nor, which):
-    """
-        Not used yet. Was used before.
-        Can be used later.
-    
-    """
-    table = int(table)
-    
-    if int(nor) == 0:
-        return render(request, 'BDD/ADMIN/areusure.html', locals())  
-    else:
-        TABBLE = data.table(table)
-        obj = TABBLE.objects.get(id=int(idP))
-        l = data.soustable(table)
-        for ll in l:
-            gr = getattr(obj, ll[3]).get(id=int(what))
-            getattr(obj, ll[3]).remove(gr)
-        return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0)
-    
+def langage(request):
+    Ctrlz(5)
+    return render(request, 'BDD/ADMIN/lang.html', locals())
+# @login_required(login_url='/connexion')
+# @user_passes_test(lambda u: u.is_superuser)
+# def areusure(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, nor, which):
+#     """
+#         Not used yet. Was used before.
+#         Can be used later.
+#     
+#     """
+#     table = int(table)
+#     
+#     if int(nor) == 0:
+#         return render(request, 'BDD/ADMIN/areusure.html', locals())  
+#     else:
+#         TABBLE = data.table(table)
+#         obj = TABBLE.objects.get(id=int(idP))
+#         l = data.soustable(table)
+#         for ll in l:
+#             gr = getattr(obj, ll[3]).get(id=int(what))
+#             getattr(obj, ll[3]).remove(gr)
+#         return change(request, table, idP, 0, filtre, page, nbparpage, nomClasser, plusOuMoins, 0)
+#     
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusOuMoins, first=True):
@@ -561,15 +634,19 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
     .. warnings:: admin or teacher in a specific view can change ids in the url.
     
     """
-
+    isProf= request.user.personne.type==PROF_STATUT
 
     table = int(table)
+    if not data.table(table).objects.filter(id=int(idP)).count() > 0 or table > 7:
+        return http.HttpResponseRedirect('/')
     if not request.user.is_superuser and table != 6:
-        return index(request)
+        return http.HttpResponseRedirect('/')
     soustable = data.soustable(table)
     TABBLE = data.table(table)
     obj = TABBLE.objects.get(id=int(idP))
-    links = data.links(table)
+    MODEL=data.table(table)()
+    if hasattr(MODEL,'links'):
+        links = MODEL.links()
     titrest = []
     formseti = None
     ii = 0
@@ -596,7 +673,6 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
     else:
         
         stforms = data.formsoustable(table)
-    
         for frm in stforms:
             instance = TABBLE.objects.get(id=int(idP))
             frm[0] = frm[0](instance=instance)
@@ -631,7 +707,7 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
                 form.fields[cond[entier][0]].initial = l
             entier = entier + 1 
     taille = len(stforms)
-    print(taille)
+  
     for st in soustable:
         
         if ii < taille:
@@ -645,7 +721,12 @@ def change(request, table, idP, what, filtre, page, nbparpage, nomClasser, plusO
         else:
             break        
         ii = ii + 1  
-    return render(request, 'BDD/ADMIN/change.html', locals())       
+    return render(request, 'BDD/ADMIN/change.html', locals())   
+@login_required(login_url='/connexion')
+@user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
+def helpcustom(request):
+    
+    return render(request, 'BDD/ADMIN/help.html', locals())   
 @login_required(login_url='/connexion')
 @user_passes_test(lambda u: u.is_superuser or u.personne.type == PROF_STATUT)
 def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, plusOuMoins=None):
@@ -682,7 +763,7 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     
     
     """
-
+    isProf= request.user.personne.type==PROF_STATUT
 
     table = int(table)
     if not request.user.is_superuser and table != 6:
@@ -702,7 +783,7 @@ def watch(request, table, filtre, page=None, nbparpage=None, nomClasser=None, pl
     if plusOuMoins == None:
         plusOuMoins = 0   
     if nbparpage == None:
-        nbparpage = 40
+        nbparpage = 20
     else:
         nbparpage = int(nbparpage)       
     allP = False

@@ -1,8 +1,5 @@
-from random import choice
+# -*- coding: utf-8 -*-
 from django.conf import settings
-from django.utils.importlib import import_module
-
-
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import transaction
@@ -10,12 +7,14 @@ from django.test.client import Client
 from django.test.testcases import TestCase
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
-
+from django.utils.importlib import import_module
+import pytest
+from random import choice
 
 from BDD.choices import SEXE, TYPE, TYPENEWS, TYPENEWSG, GROUPESTATUT, \
     HOMME_STATUT, ELEVE_STATUT, LUNDI, SALLES, SEMAINE, ADMINISTRATEUR_STATUT, \
     PROF_STATUT, AJOUT, PERSONNESTATUT, MODIFIER, SUPRIMER
-from BDD.models import Personne, News, UV, Groupe
+from BDD.models import Personne, News, UV, Groupe, Note
 from Functions.addData import addPersonne, addCalendrier, addUV, addModule, \
     addCour, addSalle, addNote, addGroupe
 from Functions.data import table
@@ -24,6 +23,7 @@ from Functions.news import addN, manytomany
 
 
 # models test
+@pytest.mark.django_db(transaction=True)
 class test_add_data(TestCase):
     
 
@@ -37,7 +37,12 @@ class test_add_data(TestCase):
         
         self.alll = True
         self.client = Client()
+        self.client2 = Client()
+        self.client3 = Client()
         self.client.cookies[settings.SESSION_COOKIE_NAME] = store.session_key
+        self.client2.cookies[settings.SESSION_COOKIE_NAME] = store.session_key
+        self.client3.cookies[settings.SESSION_COOKIE_NAME] = store.session_key
+       
         self.user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
         self.user.is_superuser=True
         self.user.save()        
@@ -45,6 +50,7 @@ class test_add_data(TestCase):
         self.puser.type=ADMINISTRATEUR_STATUT
         self.puser.user = self.user
         self.puser.save()
+        
         
         self.userteacher = User.objects.create_user('john3', 'lennon3@thebeatles.com', 'john3password')
         self.puserteacher = Personne()
@@ -67,8 +73,11 @@ class test_add_data(TestCase):
         n.uploadDate = timezone.now()   
         n.save()
         n.personne.add(self.puser)     
-    def test_index(self):
+    def test_index_administration(self):
+        self.client.login(username='john4', password='john4password')
+        response = self.client.get(reverse('BDD.views.index'))
         
+        self.assertEqual(response.status_code, 200)
         self.client.login(username='john', password='johnpassword')
         response = self.client.get(reverse('BDD.views.index'))
         
@@ -86,40 +95,141 @@ class test_add_data(TestCase):
         self.createnews()
         
         
-        response = self.client.get(reverse('BDD.views.index'))
+        response = self.client.get(reverse('BDD.views.administration'))
         
         self.assertEqual(response.status_code, 200)
         
         
-        response = self.client.get(reverse('BDD.views.index', args=[1]))
+        response = self.client.get(reverse('BDD.views.administration', args=[1]))
         
         self.assertEqual(response.status_code, 200)
         self.createnews(g=MODIFIER)
         self.createnews(g=MODIFIER)
         self.createnews(g=SUPRIMER)
         self.createnews(g=SUPRIMER)
-        response = self.client.get(reverse('BDD.views.index', args=[0]))
+        response = self.client.get(reverse('BDD.views.administration', args=[0]))
         
         self.assertEqual(response.status_code, 200)
         for Staut in TYPENEWS:
             self.createnews(Staut[0])
             self.createnews(Staut[0])
-        response = self.client.get(reverse('BDD.views.index', args=[0]))
+        response = self.client.get(reverse('BDD.views.administration', args=[0]))
         
         self.assertEqual(response.status_code, 200)
+    
+        
+    def fiche(self):
+        response = self.client3.get(reverse('BDD.views.fiche',args=[0,10000, 0, 0, 0,0,0]))
+        self.assertEqual(response.status_code, 302) 
+        response = self.client2.get(reverse('BDD.views.fiche',args=[0,self.puser.id]))
+        self.assertEqual(response.status_code, 302) 
+        addNote(self.puser, 3, self.puser, self.modules[0], self.puser)
+        addNote(self.puser, 3, self.puser, self.modules[0], self.puser)
+        noteid=Note.objects.all().last().id
+        response = self.client2.get(reverse('BDD.views.fiche',args=[6,noteid]))
+        self.assertEqual(response.status_code, 302) 
+                                
+        if self.alll:
+            
+            for t in range(0,8):
+                tabble=table(t) 
+                for obj in tabble.objects.all():
+                    response = self.client3.get(reverse('BDD.views.fiche',args=[t,obj.id]))
+                    self.assertEqual(response.status_code, 200) 
+                    
+    
+    def ajouter(self):
+        response = self.client2.get(reverse('BDD.views.ajouter',args=[2,0, 0, 0, 0,0,0]))    
+        self.assertEqual(response.status_code, 302) 
+        NBAJOUT=[1,100,2]
+        if self.alll:
+            
+            for t in range(0,8):
+                for nb in NBAJOUT:
+                    response = self.client3.get(reverse('BDD.views.ajouter',args=[t,nb, 0, 0, 0,0,0]))
+                    self.assertEqual(response.status_code, 200) 
+                   
+                response = self.client3.post(reverse('BDD.views.ajouter',args=[t,0, 0, 0, 0,0,0]),{'nb':'3'})
+                self.assertEqual(response.status_code, 200) 
+                if t==0:
+                    PRENOM=[""]
+                    
+                    
+    def delete(self):   
+    
+        response = self.client3.get(reverse('BDD.views.delete',args=[0,10000, 0, 0, 0,0,0,0]))
+        self.assertEqual(response.status_code, 302) 
+        response = self.client2.get(reverse('BDD.views.delete',args=[0,10000, 0, 0, 0,0,0,0]))
+        self.assertEqual(response.status_code, 302) 
+        addNote(self.puser, 3, self.puser, self.modules[0], self.puser)
+        addNote(self.puser, 3, self.puser, self.modules[0], self.puser)
+        noteid=Note.objects.all().last().id
+        
+        
+
+        
+        response = self.client2.get(reverse('BDD.views.delete',args=[6,noteid, 0, 0, 0,0,0,1]))
+        self.assertEqual(response.status_code, 302) 
+                                
+        if self.alll:
+            
+            for t in range(0,8):
+                tabble=table(t) 
+                if t==0:
+                    minn=3
+                else:
+                    minn=0
+                for obj in tabble.objects.all()[minn:]:
+                    
+                    response = self.client3.get(reverse('BDD.views.delete',args=[t,obj.id, 0, 0, 0,0,0,1]))
+                    self.assertEqual(response.status_code, 200) 
+                    
+       
+                         
+    def change(self):
+        
+        response = self.client2.get(reverse('BDD.views.change',args=[0,10000, 0, 0, 0,0,0,0]))
+        self.assertEqual(response.status_code, 302) 
+        
+                                
+        if self.alll:
+            
+            for t in range(0,8):
+                tabble=table(t) 
+                for obj in tabble.objects.all():
+                    response = self.client3.get(reverse('BDD.views.change',args=[t,obj.id, 0, 0, 0,0,0,0]))
+                    self.assertEqual(response.status_code, 200) 
+                    response = self.client2.get(reverse('BDD.views.change',args=[t,obj.id, 0, 0, 0,0,0,0]))
+                    if t==6:
+                        self.assertEqual(response.status_code, 200) 
+                    else:
+                        self.assertEqual(response.status_code, 302)
+                        
+                    if t==0:
+                        NOM=["","lol"]
+                        PRENOM=["","lol"]
+                        
+                        argggs={'nom': '', 'prenom':'', 'login':'', 'mail':'', 'sexe':'1', 'adresse':'', 'promotion':'', 'typeP':'1', 'dateDeNaissance':'03/07/1901    ', 'lieuDeNaissance':'', 'numeroDeTel':''}
+       
+                                
+                
+                
     def watch(self):    
         allll=self.alll
-        
-        
+    
+        self.client2.login(username='john3', password='john3password')
         self.client.login(username='john3', password='john3password')
         response = self.client.get(reverse('BDD.views.watch',args=[1,2]))
         self.assertEqual(response.status_code, 200) 
+        response = self.client.post(reverse('BDD.views.watch',args=[6,2]),{'note': '6', 'personne':'', 'module':''})
+        self.assertEqual(response.status_code, 200) 
         self.client.login(username='john', password='johnpassword')
+        self.client3.login(username='john', password='johnpassword')
         response = self.client.get(reverse('BDD.views.watch',args=[1,2]))
         self.assertEqual(response.status_code, 200) 
         
         
-        response = self.client.post(reverse('BDD.views.watch',args=[0,1]),{'nom': 'a', 'prenom':'', 'login':'', 'mail':'', 'sexe':'0', 'adresse':'', 'typeP':'0', 'dateDeNaissance':'03/03/2000', 'lieuDeNaissance':'', 'numeroDeTel': ''})
+        response = self.client.post(reverse('BDD.views.watch',args=[0,1]),{'nom': '6', 'prenom':'', 'login':'', 'mail':'', 'sexe':'1', 'adresse':'', 'promotion':'', 'typeP':'1', 'dateDeNaissance':'03/07/1901    ', 'lieuDeNaissance':'', 'numeroDeTel':''})
         self.assertEqual(response.status_code, 200) 
         
         response = self.client.post(reverse('BDD.views.watch',args=[3,1]),{'nom': 'a', 'uv':'1'}) 
@@ -139,6 +249,8 @@ class test_add_data(TestCase):
             nomClasser=[x for x in range(0,3)]
             #nomClasser.append(None)
             nomClasser.append(100)
+        
+            
             plusoumoi=[1,0]
             for t in tables:
                 for f in filtres:
@@ -147,6 +259,9 @@ class test_add_data(TestCase):
                             for nc in nomClasser:
                                 for pm in plusoumoi:
                                     response = self.client.get(reverse('BDD.views.watch',args=[t,f,p,n,nc,pm]))
+                                    self.assertEqual(response.status_code, 200) 
+                                    
+                                    response = self.client2.get(reverse('BDD.views.watch',args=[t,f,p,n,nc,pm]))
                                     self.assertEqual(response.status_code, 200) 
                                 
             
@@ -178,6 +293,10 @@ class test_add_data(TestCase):
         self.Note()
         self.Groupe()
         self.watch()
+        self.change()
+        self.fiche()
+        self.delete()
+        self.ajouter()
         
     def personne(self, alll=False):
         self.listpers = []

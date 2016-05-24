@@ -1,0 +1,32 @@
+#image
+{	
+	margin-left: auto;
+ 	margin-right: auto;
+	margin-top: 50px;
+	width : 728;
+	height: 360;
+	background-image:url(http://jactiv.ouest-france.fr/sites/default/files/images/2015/06/15/ensta.jpg);
+	border-radius: 100px 0px 100px 0px;
+    
+}
+
+
+#connex
+{
+	margin-left: auto;
+ 	margin-right: auto;
+	width: 380;
+	height: 150;
+	margin-top: 5;
+	background-color: rgb(110,104,98); 
+	color: rgb(203,203,203);
+	border-radius: 50px 0px 50px 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+
+body
+{
+	background-color: rgb(254,246,218);
+}

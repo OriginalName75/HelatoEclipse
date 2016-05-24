@@ -15,7 +15,7 @@ from django.utils import timezone
 
 from BDD import models
 from BDD.choices import AJOUT, MODIFIER, SALLESTATUT, SUPRIMER, GROUPESTATUT, \
-    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT, COURTYPESTATUT
+    UVSTATUT, MODULESTATUT, CALENDRIERSTATUT, COURTYPESTATUT, NOTESTATUT
 
 
 def addN(obj, nb, plus, n):
@@ -41,16 +41,25 @@ def addN(obj, nb, plus, n):
     
     """
     if plus:
-        txt = "<a href=\"/f/" + str(n) + "\">+</a> "
+        txt = "<big><big><a style=\"text-decoration:none; color:#FFF; \" href=\"/f/" + str(n) + "\">+</a></big></big> "
     else:
-        txt = "<a href=\"/f/0\">-</a> "
+        txt = "<big><big><big><a style=\"text-decoration:none; color:#FFF; \" href=\"/f/0\">-</a></big></big></big> "
     
     if obj.typeG == AJOUT:
-        txt = txt + "Vous avez ajoute "
+        if obj.sens:
+            txt = txt + "Vous avez ajouté "
+        else:
+            txt = txt + "Vous avez été ajouté à "
     elif obj.typeG == MODIFIER:
-        txt = txt + "Vous avez modifie "
+        if obj.sens:
+            txt = txt + "Vous avez modifié "
+        else:
+            txt = txt + "Vous avez été modifié à "
     else:
-        txt = txt + "Vous avez suprime "
+        if obj.sens:
+            txt = txt + "Vous avez supprimé "
+        else:
+            txt = txt + "Vous avez été supprimé à "
     if obj.type == SALLESTATUT:
         txt = txt + str(nb) + " salles"
     elif  obj.type == GROUPESTATUT:
@@ -61,6 +70,9 @@ def addN(obj, nb, plus, n):
         txt = txt + str(nb) + " UV"
     elif  obj.type == CALENDRIERSTATUT:
         txt = txt + str(nb) + " cours"
+        
+    elif  obj.type == NOTESTATUT:
+        txt = txt + str(nb) + " notes"
     elif  obj.type == COURTYPESTATUT:
         txt = txt + str(nb) + " type de cours"
     else :
@@ -110,10 +122,11 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
             l.append(g)
             if STATUT != None:
                 n = models.News()
-                n.txt = "Vous avez ete ajoute a " + str(obj)
+                n.txt = "Vous avez été ajouté à/au " + str(obj)
                 n.typeG = AJOUT
                 n.type = STATUT
                 n.uploadDate = timezone.now()   
+                n.sens=False
                 n.save()
                 n.personne.add(g) 
     l2 = []
@@ -129,27 +142,29 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
             l2.append(g)
             if STATUT != None:
                 n = models.News()
-                n.txt = "Vous avez ete enleve de " + str(obj)
+                n.txt = "Vous avez été enlevé à/au/de " + str(obj)
                 n.typeG = SUPRIMER
                 n.type = STATUT
-                n.uploadDate = timezone.now()   
+                n.uploadDate = timezone.now()  
+                n.sens=False 
                 n.save()
+                
                 n.personne.add(g) 
     if len(l) > 2:
         if sens:
-            txt = txt + ". Vous l\'avez ajoute a " + str(len(l)) + " " + nom + "s. "    
+            txt = txt + ". Vous l\'avez ajouté à " + str(len(l)) + " " + nom + "s. "    
         else:
             txt = txt + ". Vous y avez ajoute " + str(len(l)) + " " + nom + "s. "  
             
         if txt2 != None:
-                txt2 = txt2 + ". Vous avez ete ajoute a " + str(len(l)) + " " + nom + "s. "        
+                txt2 = txt2 + ". Vous avez été ajouté à " + str(len(l)) + " " + nom + "s. "        
     elif len(l) > 0:
         if sens:
-            txt = txt + " Vous l\'avez ajoute "
+            txt = txt + " Vous l\'avez ajouté "
         else:
-            txt = txt + " Vous y avez ajoute "
+            txt = txt + " Vous y avez ajouté "
         if txt2 != None:
-            txt2 = txt2 + " Vous avez ete ajoute "
+            txt2 = txt2 + " Vous avez été ajouté "
         first = True
         for ggg in l:
             if not first:
@@ -157,11 +172,12 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
                 if txt2 != None:
                     txt2 = txt2 + " et " 
             if attrafiche != None:
-                if not (ggg is int) or not (ggg is str):
+                if not (type(ggg) is int) and not (type(ggg) is str):
+                   
                     ggg=ggg.id
                 att = getattr(model.objects.get(id=int(ggg)), attrafiche)
             else:
-                if not (ggg is int) or not (ggg is str):
+                if not (type(ggg) is int) and not (type(ggg) is str):
                     ggg=ggg.id
                 att = str(model.objects.get(id=int(ggg)))
             
@@ -171,18 +187,18 @@ def manytomany(newtable, txt, obj, model, many, nom, auoala, sens, attrafiche=No
             first = False
     if len(l2) > 2:
         if sens:
-            txt = txt + ". Vous l\'avez enleve a " + str(len(l)) + " " + nom + ". "   
+            txt = txt + ". Vous l\'avez enlevé à " + str(len(l)) + " " + nom + ". "   
         else:
-            txt = txt + ". Vous y avez enleve " + str(len(l)) + " " + nom + ". "   
+            txt = txt + ". Vous y avez enlevé " + str(len(l)) + " " + nom + ". "   
         if txt2 != None:
-            txt2 = txt2 + ". Vous avez ete enleve a " + str(len(l)) + " " + nom + "s. " 
+            txt2 = txt2 + ". Vous avez été enlevé à " + str(len(l)) + " " + nom + "s. " 
     elif len(l2) > 0:
         if sens:
-            txt = txt + " Vous l\'avez enleve "
+            txt = txt + " Vous l\'avez enlevé "
         else:
-            txt = txt + " Vous y avez enleve "
+            txt = txt + " Vous y avez enlevé "
         if txt2 != None:
-            txt2 = txt2 + " Vous avez ete enleve "
+            txt2 = txt2 + " Vous avez été enlevé "
         first = True
         for ggg in l2:
             if not first:
@@ -266,5 +282,5 @@ def day2(year, week, d):
         w = 1
     else:    
         w = 7 - doomsday
-    re = datetime.date(year, 1, w) + timedelta(days=(int(week) - 1) * 7 + int(d))
+    re = datetime.date(int(year), 1, int(w)) + timedelta(days=(int(week) - 1) * 7 + int(d))
     return re
